@@ -2,22 +2,23 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { NgnfComponent } from './ngnf/ngnf.component';
+import { HomeComponent } from './home/home.component';
 
-@NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
-})
-
-/* const appRoutes: Routes = [
-  { path: '/', component: NgnfComponent },
+const appRoutes: Routes = [
+  { path: '', component: NgnfComponent },
+  { path: 'dean', component: HomeComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
-  exports: [RouterModule]
+  declarations: [
+//    NgnfComponent,
+//    HomeComponent
+  ],
+  imports: [
+    RouterModule.forRoot(appRoutes)
+    // CommonModule,
+     ],
+     exports: [RouterModule]
 })
- */
 
 export class AppRoutingModule { }
