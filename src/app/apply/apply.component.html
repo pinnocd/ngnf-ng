@@ -1,0 +1,152 @@
+<mat-card>
+    <h1 style="text-align: center;">Application Form</h1>
+    <mat-card-title style="text-align: center;"><h2>To apply you should have:</h2></mat-card-title>
+    <table style="text-align: center;">
+        <tr style="text-align: left;">
+            <td style="width: 30%;"></td>
+            <td>
+                <ul style="list-style-type:disc;">
+                    <li>A clear idea and reason why you want to set up this project</li>
+                    <li>Understanding of what activities you will need to deliver to meet your aims and objectives</li>
+                    <li>A management committee of at least 3 people (chair, secretary, treasurer)</li>
+                    <li>Ideally a name for your project</li>
+                    <li>A constitution</li>
+                    <li>Minutes of committee or group meetings</li>
+                    <li>An organisation bank/building society account</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+    <h3 style="text-align: center;">(If you do not yet have all of the above in place, then don’t worry. Please contact us as we may be able to assist or provide advice)</h3>
+    <br>
+
+    <form #userForm="ngForm" (ngSubmit)="userForm.form.valid && onSubmit(userForm)">
+    <mat-tab-group>
+        <mat-tab label="Organisational Details">
+            <div class="form-group">
+                <table width=100%>
+                    <tr>
+                        <td style="width: 10%;">Name</td>
+                        <td style="width: 40%;">
+                            <input type="text" name="Orgname" class="form-control" [(ngModel)]="Org_model.name" #name="ngModel"
+                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                <p *ngIf="name.errors.required">Name is required</p>
+                            </div>
+                        </td>
+                        <td style="width: 10%;">Type of Organisation</td>
+                        <td>
+                            <select class="form-control" name="Ordtype" [(ngModel)]="OrgTypes">
+                            <option value="">Select an organisation type</option>
+                            <option *ngFor="let org of OrgTypes" [value]="org">
+                            {{org}}
+                            </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Registered Address</td>
+                        <td>
+                            <input type="text" style="width: 100%;height: 3cm" name="Orgaddress" class="form-control" [(ngModel)]="Org_model.address" #name="ngModel"
+                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                <p *ngIf="name.errors.required">Organisation Address is required</p>
+                            </div>
+                        </td>
+                        <td>Charitable Organisation?</td>
+                        <td>
+                            <input type="text" name="Orgcharity" class="form-control" [(ngModel)]="Org_model.charity" #name="ngModel"
+                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                <p *ngIf="name.errors.required">Org Charity is required</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Post Code</td>
+                        <td>
+                            <input type="text" name="Orgpostcode" class="form-control" [(ngModel)]="Org_model.postcode" #name="ngModel"
+                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                <p *ngIf="name.errors.required">The Post Code is required</p>
+                            </div>
+                        </td>
+                        <td>Charity Number</td>
+                        <td>
+                            <input type="text" name="Orgcharity_no" class="form-control" [(ngModel)]="Org_model.charity_no" #name="ngModel"
+                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                <p *ngIf="name.errors.required">Org Charity number is required</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>
+                            <input type="text" name="Orgemail" class="form-control" [(ngModel)]="Org_model.email" #name="ngModel"
+                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                <p *ngIf="name.errors.required">Email is required</p>
+                            </div>
+                        </td>
+                        <td>Organisation Start Date</td>
+                        <td>
+                            <input type="text" name="Orgstart_date" class="form-control" [(ngModel)]="Org_model.start_date" #name="ngModel"
+                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                <p *ngIf="name.errors.required">Org start date is required</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Website</td>
+                        <td>
+                            <input type="text" name="Orgwebsite" class="form-control" [(ngModel)]="Org_model.website" #name="ngModel"
+                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                <p *ngIf="name.errors.required">Website is required</p>
+                            </div>
+                        </td>
+                        <td>Is your organisation open to anyone?</td>
+                        <td>
+                            <input type="text" name="Orgopen" class="form-control" [(ngModel)]="Org_model.open" #name="ngModel"
+                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                <p *ngIf="name.errors.required">Org start date is required</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr  style="width: 100%;">
+                        <td>Additional Info</td>
+                        <td>
+                            <input type="text" style="width: 100%;height: 3cm" name="Orginfo" class="form-control" [(ngModel)]="Org_model.info" #name="ngModel">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="Contact Details">
+            Content 2 
+        </mat-tab>
+
+        <mat-tab label="General Project Information">
+            Content 3 
+        </mat-tab>
+
+        <mat-tab label="Background and Further project detail"> 
+            Content 4 
+        </mat-tab>
+
+        <mat-tab label="Finantial Information">
+            Content 3
+        </mat-tab>
+
+    </mat-tab-group>
+    <br>
+    <br>
+        <div class="form-group">
+            <button class="btn btn-danger btn-block">Submit</button>
+        </div>
+    </form>
+</mat-card>

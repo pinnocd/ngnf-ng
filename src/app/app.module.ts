@@ -1,5 +1,6 @@
 // Import Core angular Modules
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,6 +15,9 @@ import { MatButtonModule} from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTab } from '@angular/material/tabs';
 
 // All our new infrastructure apps
 import { AppRoutingModule } from './app-routing.module';
@@ -27,11 +31,12 @@ import { FeaturesComponent } from './features/features.component';
 import { ActionComponent } from './action/action.component';
 import { BenefitsComponent } from './benefits/benefits.component';
 import { NgnfComponent } from './ngnf/ngnf.component';
+import { ApplyComponent } from './apply/apply.component';
 
 // Define all routes necessary
 const appRoutes: Routes = [
   { path: '', component: NgnfComponent },
-  { path: 'apply', component: HomeComponent }
+  { path: 'apply', component: ApplyComponent }
 ];
 
 @NgModule({
@@ -43,10 +48,12 @@ const appRoutes: Routes = [
     ActionComponent,
     BenefitsComponent,
     TopBarComponent,
-    NgnfComponent
+    NgnfComponent,
+    ApplyComponent
     ],
   imports: [
       BrowserModule,
+      BrowserAnimationsModule,
       AppRoutingModule,
       HttpClientModule,
       FormsModule,
@@ -58,12 +65,15 @@ const appRoutes: Routes = [
       MatGridListModule,
       MatTableModule,
       MatSidenavModule,
+      MatListModule,
+      MatTabsModule,
       RouterModule.forRoot(appRoutes)
     ],
   exports: 
       [RouterModule],
   bootstrap: 
-      [AppComponent]
+      [AppComponent],
+  providers: []
 })
 
 export class AppModule { }
