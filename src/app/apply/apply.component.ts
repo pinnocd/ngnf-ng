@@ -15,11 +15,22 @@ export class Organisation {
   public info: string;
 }
 
-export class User {
+export class Contact {
   public name: string;
+  public dob: string;
+  public address: string;
+  public preaddress: string;
+  public landlineno: string;
+  public otherno: string;
   public email: string;
-  public password: string;
-  public hobbies: string;
+  public senname: string;
+  public sendob: string;
+  public senaddress: string;
+  public senpreaddress: string;
+  public senlandlineno: string;
+  public senotherno: string;
+  public senemail: string;
+
 }
 
 @Component({
@@ -29,6 +40,7 @@ export class User {
 })
 export class ApplyComponent {
   Org_model = new Organisation();
+  Con_model = new Contact();
 
   OrgTypes: string[] = [
     'Voluntary or community',

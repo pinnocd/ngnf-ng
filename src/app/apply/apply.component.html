@@ -22,6 +22,7 @@
 
     <form #userForm="ngForm" (ngSubmit)="userForm.form.valid && onSubmit(userForm)">
     <mat-tab-group>
+        <!-- Organisation Details Tab-->
         <mat-tab label="Organisational Details">
             <div class="form-group">
                 <table width=100%>
@@ -126,19 +127,122 @@
             </div>
         </mat-tab>
 
+        <!-- Contact Details Tab-->
         <mat-tab label="Contact Details">
-            Content 2 
+            <div class="form-group">
+                <table width=100%>
+                    <tr>
+                        <td style="width: 10%;">Contact Name</td>
+                        <td style="width: 40%;">
+                            <input type="text" name="Conname" class="form-control" [(ngModel)]="Con_model.name" #name="ngModel"
+                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                <p *ngIf="name.errors.required">Contact Name is required</p>
+                            </div>
+                        </td>
+                        <td style="width: 10%;">Email</td>
+                        <td>
+                            <input type="text" name="Conemail" class="form-control" [(ngModel)]="Con_model.email" #name="ngModel">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%;">Contact Address</td>
+                        <td>
+                            <input style="width: 100%;height: 3cm" type="text" name="Conaddress" class="form-control" [(ngModel)]="Con_model.address" #name="ngModel"
+                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                <p *ngIf="name.errors.required">Contact Address is required</p>
+                            </div>
+                        </td>
+                        <td style="width: 10%;">Previous Address</td>
+                        <td>
+                            <input style="width: 100%;height: 3cm" type="text" name="Conpreaddress" class="form-control" [(ngModel)]="Con_model.preaddress" #name="ngModel"
+                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                <p *ngIf="name.errors.required">Contact Previous Address is required</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%;">Land Line Number</td>
+                        <td>
+                            <input type="text" name="Conlandlineno" class="form-control" [(ngModel)]="Con_model.landlineno" #name="ngModel">
+                        </td>
+                        <td style="width: 10%;">Other Number</td>
+                        <td>
+                            <input type="text" name="Conotherno" class="form-control" [(ngModel)]="Con_model.otherno" #name="ngModel">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%;">D.O.B.</td>
+                        <td>
+                            <input type="text" name="Condob" class="form-control" [(ngModel)]="Con_model.dob" #name="ngModel">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%;">Senior Contact Name</td>
+                        <td style="width: 40%;">
+                            <input type="text" name="Consenname" class="form-control" [(ngModel)]="Con_model.senname" #name="ngModel"
+                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                <p *ngIf="name.errors.required">Senion Contact Name is required</p>
+                            </div>
+                        </td>
+                        <td style="width: 10%;">Senior Contact Email</td>
+                        <td>
+                            <input type="text" name="Consenemail" class="form-control" [(ngModel)]="Con_model.senemail" #name="ngModel">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%;">Senior Contact Address</td>
+                        <td>
+                            <input style="width: 100%;height: 3cm" type="text" name="Consenaddress" class="form-control" [(ngModel)]="Con_model.senaddress" #name="ngModel"
+                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                <p *ngIf="name.errors.required">Senior Contact Address is required</p>
+                            </div>
+                        </td>
+                        <td style="width: 10%;">Senior Previous Address</td>
+                        <td>
+                            <input style="width: 100%;height: 3cm" type="text" name="Consenpreaddress" class="form-control" [(ngModel)]="Con_model.senpreaddress" #name="ngModel"
+                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                <p *ngIf="name.errors.required">Senior Contact Previous Address is required</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%;">Senior Land Line Number</td>
+                        <td>
+                            <input type="text" name="Consenlandlineno" class="form-control" [(ngModel)]="Con_model.senlandlineno" #name="ngModel">
+                        </td>
+                        <td style="width: 10%;">Senior Other Number</td>
+                        <td>
+                            <input type="text" name="Consenotherno" class="form-control" [(ngModel)]="Con_model.senotherno" #name="ngModel">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%;">Senior D.O.B.</td>
+                        <td>
+                            <input type="text" name="Consendob" class="form-control" [(ngModel)]="Con_model.sendob" #name="ngModel">
+                        </td>
+                    </tr>
+                </table>
+            </div> 
         </mat-tab>
 
+        <!-- General Project Information Tab-->
         <mat-tab label="General Project Information">
             Content 3 
         </mat-tab>
 
+        <!-- Background Details Tab-->
         <mat-tab label="Background and Further project detail"> 
             Content 4 
         </mat-tab>
 
-        <mat-tab label="Finantial Information">
+        <!-- Financial Details Tab-->
+        <mat-tab label="Financial Information">
             Content 3
         </mat-tab>
 
