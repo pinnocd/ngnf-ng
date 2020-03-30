@@ -10,7 +10,7 @@
   }
   
   :root {
-    --brandcolour: #4D2D73;
+    --brandcolour: #4D2D73;   --brandtext: #FFFFFF;
   
     --tilecolour1: #A48BC2;   --tiletxtcol1: #FFFFFF ;
     --tilecolour2: #725497;   --tiletxtcol2: #15032B;
@@ -46,11 +46,28 @@
   }
 
   mat-tab{
-    font-size: 20px;
+    width: 100%;
+    font-size: 30px;
   }
-  
+
+  .mat-tab-label {
+    padding: 5px;
+    font-size: 20px;
+    background-color: var(--brandcolour);
+    color: white;
+  }
+
+  .mat-tab-labels, .mat-tab-label, .mat-tab-link {
+    background-color: transparent;
+  }
+
+  .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+    background: green;
+    height: 5px; 
+  }
+
   body {
-    margin: 0;
+    margin: 100;
   }
   
   .container {
@@ -105,6 +122,14 @@
     margin-bottom: 16px;
     border: 1px solid #BDBDBD;
   }
+
+  textarea {
+    font-size: 16px;
+    border-radius: 2px;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #BDBDBD;
+ }
   
   select {
     font-size: 18px;
@@ -128,10 +153,10 @@
     align-items: center;
     padding: 8px 16px;
     border-radius: 2px;
-    font-size: 14px;
+    font-size: 32px;
     cursor: pointer;
-    background-color: #1976d2;
-    color: white;
+    background-color: var(--brandcolour);
+    color: var(--brandtext);
     border: none;
   }
   
