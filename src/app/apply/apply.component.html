@@ -233,12 +233,98 @@
 
         <!-- General Project Information Tab-->
         <mat-tab label="General Project Information">
-            Content 3 
+            <div class="form-group">
+                <table width=100%>
+                    <tr>
+                        <td style="width: 10%;">Project Name</td>
+                        <td style="width: 40%;">
+                            <input type="text" name="Genname" class="form-control" [(ngModel)]="Gen_model.name" #name="ngModel"
+                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                <p *ngIf="name.errors.required">Project Name is required</p>
+                            </div>
+                        </td>
+                        <td style="width: 10%;">Start Date</td>
+                        <td>
+                            <input type="text" name="Constartdate" class="form-control" [(ngModel)]="Gen_model.startdate" #name="ngModel">
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td style="width: 10%;">Project Achievements</td>
+                        <td>
+                            <input style="width: 100%;height: 4cm" type="text" name="Genachieve" class="form-control" [(ngModel)]="Gen_model.achieve" #name="ngModel"
+                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                <p *ngIf="name.errors.required">General Achievement is required</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%;">Project Problems</td>
+                        <td>
+                            <input style="width: 100%;height: 4cm" type="text" name="Genproblem" class="form-control" [(ngModel)]="Gen_model.problem" #name="ngModel"
+                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                <p *ngIf="name.errors.required">General Problem data is required</p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <table width=100%>
+                    <tr>
+                        <td style="width: 30%;">Will your project involve working with children; young people under 18 or vulnerable adults?</td>
+                        <td style="width: 20%;">
+                            <input type="text" name="Genvulnerables" class="form-control" [(ngModel)]="Gen_model.vulnerables" #name="ngModel">
+                        </td>
+                        <td style="width: 30%;">If yes, do you have safeguarding procedures in place?</td>
+                        <td>
+                            <input type="text" name="Consafeguards" class="form-control" [(ngModel)]="Gen_model.safeguards" #name="ngModel">
+                        </td>
+                    </tr>
+                </table>
+            </div> 
         </mat-tab>
 
         <!-- Background Details Tab-->
         <mat-tab label="Background and Further project detail"> 
-            Content 4 
+            <div class="form-group">
+                <table>
+                    <tr>
+                        <td>
+                            Tell us why there is a need for your project?
+                            <br>
+                            Please include any primary research you have performed to evidence the need for your project. This can be questionnaires, surveys, discussion groups, statistical info etc.
+                            <input style="width: 100%;height: 4cm" type="text" name="Bacneed" class="form-control" [(ngModel)]="Bac_model.need" #name="ngModel">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            • Who are you specifically targeting?
+                            <input style="width: 100%;height: 4cm" type="text" name="Bactarget" class="form-control" [(ngModel)]="Bac_model.target" #name="ngModel">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            What activities will you undertake as part of this project?
+                            <input style="width: 100%;height: 4cm" type="text" name="Bacactivities" class="form-control" [(ngModel)]="Bac_model.activities" #name="ngModel">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Why do you consider that your organisation can deliver this project? 
+                            <input style="width: 100%;height: 4cm" type="text" name="Bacdeliver" class="form-control" [(ngModel)]="Bac_model.deliver" #name="ngModel">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            • Will service users or volunteers be involved in the day to day running of the project? If so then please provide more details.
+                            <input style="width: 100%;height: 4cm" type="text" name="Bacusers" class="form-control" [(ngModel)]="Bac_model.users" #name="ngModel">
+                        </td>
+                    </tr>
+                </table>
+            </div> 
         </mat-tab>
 
         <!-- Financial Details Tab-->

@@ -30,7 +30,23 @@ export class Contact {
   public senlandlineno: string;
   public senotherno: string;
   public senemail: string;
+}
 
+export class General {
+  public name: string;
+  public startdate: string;
+  public achieve: string;
+  public problem: string;
+  public vulnerables: string;
+  public safeguards: string;
+}
+
+export class Background {
+  public need: string;
+  public target: string;
+  public activities: string;
+  public deliver: string;
+  public users: string;
 }
 
 @Component({
@@ -41,6 +57,8 @@ export class Contact {
 export class ApplyComponent {
   Org_model = new Organisation();
   Con_model = new Contact();
+  Gen_model = new General();
+  Bac_model = new Background();
 
   OrgTypes: string[] = [
     'Voluntary or community',
