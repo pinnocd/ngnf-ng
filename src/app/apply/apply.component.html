@@ -3,13 +3,17 @@
     <mat-card-title style="text-align: center;"><h2>To apply you should have:</h2></mat-card-title>
     <table style="text-align: center;">
         <tr style="text-align: left;">
-            <td style="width: 30%;"></td>
+            <td style="width: 20%;"></td>
             <td>
                 <ul style="list-style-type:disc;">
                     <li>A clear idea and reason why you want to set up this project</li>
                     <li>Understanding of what activities you will need to deliver to meet your aims and objectives</li>
                     <li>A management committee of at least 3 people (chair, secretary, treasurer)</li>
                     <li>Ideally a name for your project</li>
+                </ul>
+            </td>
+            <td>
+                <ul style="list-style-type:disc;">
                     <li>A constitution</li>
                     <li>Minutes of committee or group meetings</li>
                     <li>An organisation bank/building society account</li>
@@ -295,7 +299,7 @@
                         <td>
                             Tell us why there is a need for your project?
                             <br>
-                            Please include any primary research you have performed to evidence the need for your project. This can be questionnaires, surveys, discussion groups, statistical info etc.
+                            • Please include any primary research you have performed to evidence the need for your project. This can be questionnaires, surveys, discussion groups, statistical info etc.
                             <input style="width: 100%;height: 4cm" type="text" name="Bacneed" class="form-control" [(ngModel)]="Bac_model.need" #name="ngModel">
                         </td>
                     </tr>
@@ -307,13 +311,13 @@
                     </tr>
                     <tr>
                         <td>
-                            What activities will you undertake as part of this project?
+                            • What activities will you undertake as part of this project?
                             <input style="width: 100%;height: 4cm" type="text" name="Bacactivities" class="form-control" [(ngModel)]="Bac_model.activities" #name="ngModel">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            Why do you consider that your organisation can deliver this project? 
+                            • Why do you consider that your organisation can deliver this project? 
                             <input style="width: 100%;height: 4cm" type="text" name="Bacdeliver" class="form-control" [(ngModel)]="Bac_model.deliver" #name="ngModel">
                         </td>
                     </tr>
@@ -329,7 +333,50 @@
 
         <!-- Financial Details Tab-->
         <mat-tab label="Financial Information">
-            Content 3
+            <div class="form-group">
+                <table style="width: 100%;">
+                    • Estimated cost of your project:
+                    <tr><td style="width: 50%;">Activity</td><td>Cost</td></tr>
+                    <tr><td style="width: 50%;"><input type="text" style="width: 100%"></td><td><input type="text"></td></tr>
+                    <tr><td style="width: 50%;"><input type="text" style="width: 100%"></td><td><input type="text"></td></tr>
+                    <tr><td style="width: 50%;"><input type="text" style="width: 100%"></td><td><input type="text"></td></tr>
+                    <tr><td style="width: 50%;"><input type="text" style="width: 100%"></td><td><input type="text"></td></tr>
+                    <tr><td style="width: 50%;"><input type="text" style="width: 100%"></td><td><input type="text"></td></tr>
+                    <br>
+                    <tr>
+                        <td style="width: 100%;">
+                            Your organisations bank details
+                            <br>
+                            (Please note that this information is for grant applications only and will not be used by NGNF for any other purpose) 
+                            <br>
+                            Organisation name on statements (must be the same as on governing documents)
+                            <input style="width: 70%;" type="text" name="Finorgname" class="form-control" [(ngModel)]="Fin_model.orgname" #name="ngModel">
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td style="width: 10%;">Bank or Building Society name and address</td>
+                        <td>
+                            <input style="width: 100%;height: 3cm" type="text" name="Finbank" class="form-control" [(ngModel)]="Fin_model.bank" #name="ngModel">
+                        </td>
+                        <td style="width: 20%;">What address does your bank have for your organisation in regard to this account</td>
+                        <td>
+                            <input style="width: 100%;height: 3cm" type="text" name="Finbankorgaddress" class="form-control" [(ngModel)]="Fin_model.bankorgaddress" #name="ngModel">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Account No.</td>
+                        <td>
+                            <input style="width: 100%;" type="text" name="Finaccount" class="form-control" [(ngModel)]="Fin_model.account" #name="ngModel">
+                        </td>
+                        <td>Sort Code</td>
+                        <td>
+                            <input style="width: 100%;" type="text" name="Finsortcode" class="form-control" [(ngModel)]="Fin_model.sortcode" #name="ngModel">
+                        </td>
+                    </tr>
+                </table>
+            </div> 
         </mat-tab>
 
     </mat-tab-group>

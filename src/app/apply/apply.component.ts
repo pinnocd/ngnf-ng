@@ -49,6 +49,14 @@ export class Background {
   public users: string;
 }
 
+export class Finance {
+  public orgname: string;
+  public bank: string;
+  public account: string;
+  public sortcode: string;
+  public bankorgaddress: string;
+}
+
 @Component({
   selector: 'app-apply',
   templateUrl: './apply.component.html',
@@ -59,6 +67,7 @@ export class ApplyComponent {
   Con_model = new Contact();
   Gen_model = new General();
   Bac_model = new Background();
+  Fin_model = new Finance();
 
   OrgTypes: string[] = [
     'Voluntary or community',
