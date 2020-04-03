@@ -32,11 +32,13 @@ import { ActionComponent } from './action/action.component';
 import { BenefitsComponent } from './benefits/benefits.component';
 import { NgnfComponent } from './ngnf/ngnf.component';
 import { ApplyComponent } from './apply/apply.component';
+import { ReportComponent } from './report/report.component';
 
 // Define all routes necessary
 const appRoutes: Routes = [
   { path: '', component: NgnfComponent },
-  { path: 'apply', component: ApplyComponent }
+  { path: 'apply', component: ApplyComponent },
+  { path: 'report', component: ReportComponent }
 ];
 
 @NgModule({
@@ -49,7 +51,8 @@ const appRoutes: Routes = [
     BenefitsComponent,
     TopBarComponent,
     NgnfComponent,
-    ApplyComponent
+    ApplyComponent,
+    ReportComponent
     ],
   imports: [
       BrowserModule,

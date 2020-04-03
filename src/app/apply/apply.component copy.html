@@ -24,7 +24,7 @@
     <h3 style="text-align: center;">(If you do not yet have all of the above in place, then don’t worry. Please contact us as we may be able to assist or provide advice)</h3>
     <br>
 
-    <form #userForm="ngForm" action="/api/post/addOrganisation.php" method="POST">
+    <form #userForm="ngForm" (ngSubmit)="userForm.form.valid && onSubmit(userForm)">
     <mat-tab-group >
         <!-- Organisation Details Tab-->
         <mat-tab label="Organisational Details">
@@ -41,7 +41,7 @@
                         </td>
                         <td style="width: 10%;">Type of Organisation</td>
                         <td>
-                            <select class="form-control" name="Orgtype" [(ngModel)]="OrgTypes">
+                            <select class="form-control" name="Ordtype" [(ngModel)]="OrgTypes">
                             <option value="">Select an organisation type</option>
                             <option *ngFor="let org of OrgTypes" [value]="org">
                             {{org}}
@@ -380,10 +380,6 @@
 
     </mat-tab-group>
     <br>
-
-    <div class="form-group" style="text-align: center;">
-        <input type="submit" value="insert">
-    </div>
     </form>
 </mat-card>
 <footer>

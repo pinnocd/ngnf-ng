@@ -17,6 +17,11 @@
     --tilecolour3: #4D2D73;   --tiletxtcol3: rgba(226, 223, 61, 0.959);
   }
   
+
+  td {
+    max-height: 3cm;
+  }
+
   /* Top Bar */
   app-top-bar {
     width: 100%;

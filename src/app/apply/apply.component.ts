@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Hero } from '../models/hero'
 
 export class Organisation {
   public name: string;

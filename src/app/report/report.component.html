@@ -1,0 +1,147 @@
+<mat-card>
+    <mat-card-title style="text-align: center;"><h1>Application Report</h1></mat-card-title>
+    <table name="AppTable" style="border: 1px solid black; padding: 20px;width: 100%;" >
+        <tr style="text-align: left;padding: 20px;">
+            <th>Appid</th>
+            <th>Organisation</th>
+            <th>Project</th>
+            <th>StartDate</th>
+            <th>Status</th>
+            <th>InsertDateTime</th>
+            </tr>
+        <tr name="AppRow" *ngFor="let App_model of App_models" on-click="selectApp(App_model)">
+            <td>{{ App_model.ApplicationId }}</td>
+            <td>{{ App_model.OrgName }}</td>
+            <td>{{ App_model.GenName }}</td>
+            <td>{{ App_model.GenStartDate }}</td>
+            <td>{{ App_model.Status }}</td>
+            <td>{{ App_model.InsertDateTime }}</td>
+        </tr> 
+    </table>
+    <br>
+    <br>
+
+    <!-- Organisational Details Section -->
+    <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Org_model of Org_models">
+        <caption><h2><b>Organisational Details</b></h2></caption>
+        <tr>
+            <td style="width: 10%;">Name of Organisation</td>            <td style="width: 30%;">{{ Org_model.OrgName }}</td>
+            <td style="width: 30%;">Type of Organisation</td>            <td>{{ Org_model.OrgType }}</td>
+        </tr>
+        <tr>
+            <td>Registered Address</td><td> {{ Org_model.OrgAddress }} </td>
+            <td>Are you a Registered Charity?</td><td> {{ Org_model.OrgCharity }} </td>
+        </tr>
+        <tr>
+            <td>Post Code</td><td> {{ Org_model.OrgPostcode }} </td>
+            <td>Charity Number</td><td>{{ Org_model.OrgCharityNo }}</td>
+        </tr>
+        <tr>
+            <td>Organisation Email</td><td>{{ Org_model.OrgEmail }}</td>
+            <td>When did your Organisation start?</td><td>{{ Org_model.OrgStartDate }}</td>
+        </tr>
+        <tr>
+            <td>Organisation Website</td><td>{{ Org_model.OrgWebsite }}</td>
+            <td>Is your organisation open to anyone?</td><td>{{ Org_model.OrgOpen }}</td>
+        </tr>
+        <tr>
+            <td></td><td></td><td>If you answered no then please provide more information</td><td>{{ Org_model.OrgInfo }}</td>
+        </tr>
+    </table>
+    <br>
+
+    <!-- Contact Details Section -->
+    <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Con_model of Con_models">
+        <caption><h2><b>Contact Details</b></h2></caption>
+        <tr>
+            <td style="width: 10%;">Contact Name</td>       <td style="width: 30%;">{{ Con_model.ConName }}</td>
+            <td style="width: 30%;">Email</td>              <td>{{ Con_model.ConEmail }}</td>
+        </tr>
+        <tr>
+            <td>Address</td><td> {{ Con_model.ConAddress }} </td>
+            <td>Previous Address</td><td> {{ Con_model.ConPreAddress }} </td>
+        </tr>
+        <tr>
+            <td>Land line Number</td><td> {{ Con_model.ConLandlineNo }} </td>
+            <td>Other Phone Number</td><td>{{ Con_model.ConOtherNo }}</td>
+        </tr>
+        <tr>
+            <td>D.O.B.</td><td>{{ Con_model.ConDOB }}</td>
+            <td></td><td></td>
+        </tr>
+        <tr>
+            <td>Senior Contact Name</td>    <td>{{ Con_model.ConSenName }}</td>
+            <td>Senior Email</td>           <td>{{ Con_model.ConSenEmail }}</td>
+        </tr>
+        <tr>
+            <td>Senior Address</td><td> {{ Con_model.ConSenAddress }} </td>
+            <td>Senior Previous Address</td><td> {{ Con_model.ConSenPreAddress }} </td>
+        </tr>
+        <tr>
+            <td>Senior Land line Number</td><td> {{ Con_model.ConSenLandlineNo }} </td>
+            <td>Senior Other Phone Number</td><td>{{ Con_model.ConSenOtherNo }}</td>
+        </tr>
+        <tr>
+            <td>Senior D.O.B.</td><td>{{ Con_model.ConSenDOB }}</td>
+            <td></td><td></td>
+        </tr>
+    </table>
+    <br>
+
+    <!-- General Project Information Section -->
+    <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Gen_model of Gen_models">
+        <caption><h2><b>General Project Information</b></h2></caption>
+        <tr>
+            <td style="width: 10%;">Project Name</td>       <td style="width: 30%;">{{ Gen_model.GenName }}</td>
+            <td style="width: 30%;">Start Date</td>         <td>{{ Gen_model.GenStartDate }}</td>
+        </tr>
+
+        <tr>
+            <td>Expected Achievements</td><td> {{ Gen_model.GenAchieve }} </td>
+            <td>Problems Solved</td><td>{{ Gen_model.GenProblem }}</td>
+        </tr>
+        <tr>
+            <td>Vulnerables Involved?</td><td>{{ Gen_model.GenVulnerables }}</td>
+            <td>Safeguards in Place?</td><td>{{ Gen_model.GenSafeguards }}</td>
+        </tr>
+    </table>
+    <br>
+
+    <!-- Background and Further Project Detail Section -->
+    <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Bac_model of Bac_models">
+        <caption><h2><b>Background and Further Project Detail</b></h2></caption>
+
+        <tr><td><h2>• The need for the project</h2></td></tr>
+        <tr><td>{{ Bac_model.BacNeed }}</td></tr>
+        <br>
+        <tr><td><h2>• Who are being targeted</h2></td></tr>
+        <tr><td>{{ Bac_model.BacTarget }}</td></tr>
+        <br>
+        <tr><td><h2>• Activities that will be undertake as part of this project</h2></td></tr>
+        <tr><td>{{ Bac_model.BacActivities }}</td></tr>
+        <br>
+        <tr><td><h2>• Project Deliverables</h2></td></tr>
+        <tr><td>{{ Bac_model.BacDeliver }}</td></tr>
+        <br>
+        <tr><td><h2>• Project Users</h2></td></tr>
+        <tr><td>{{ Bac_model.BacUsers }}</td></tr>
+    </table>
+    <br>
+
+    <!-- Financial Information -->
+    <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Fin_model of Fin_models">
+        <caption><h2><b>Financial Information</b></h2></caption>
+
+        <tr>
+            <td>Organisation name on statements</td><td>{{ Fin_model.FinOrgName }}</td>
+        </tr>
+        <tr>
+            <td>Bank or Building Society</td><td>{{ Fin_model.FinBank }}</td>
+            <td>Bank Address</td><td>{{ Fin_model.FinBankOrgAddress }}</td>
+        </tr>
+        <tr>
+            <td>Account Number</td><td>{{ Fin_model.FinAccount }}</td>
+            <td>Sort Code</td><td>{{ Fin_model.FinSortCode }}</td>
+        </tr>
+    </table>
+</mat-card>
