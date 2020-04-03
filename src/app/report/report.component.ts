@@ -60,7 +60,7 @@ export class ReportComponent implements OnInit {
 
     }
 
-  // An application has been selecte din the list, so refresh all data
+  // An application has been selected in the list, so refresh all data
   selectApp(app_model){
     console.log(app_model);
 

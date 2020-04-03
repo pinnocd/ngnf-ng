@@ -6,6 +6,6 @@ export class App_model {
       public    GenName: string,
       public    GenStartDate: Date,
       public    Status: string,
-      public    InsertDateTime:Date
+      public    InsertDateTime:Date,
     ) {}
 }

@@ -19,7 +19,12 @@
   
 
   td {
+    font-size: 13px;
     max-height: 3cm;
+  }
+
+  table {
+    font-size: 13px;
   }
 
   /* Top Bar */
@@ -57,7 +62,7 @@
 
   .mat-tab-label {
     padding: 5px;
-    font-size: 20px;
+    font-size: 16px;
     background-color: var(--brandcolour);
     color: white;
   }
@@ -97,7 +102,11 @@
   h3 {
     font-size: 16px;
   }
-  
+
+  h4 {
+    font-size: 13px;
+  }
+
   h1, h2, h3 {
     font-weight: lighter;
   }
@@ -121,33 +130,29 @@
   /* Input */
   
   input {
-    font-size: 16px;
+    font-size: 13px;
     border-radius: 2px;
-    padding: 8px;
-    margin-bottom: 16px;
+    padding: 4px;
     border: 1px solid #BDBDBD;
   }
 
   textarea {
-    font-size: 16px;
+    font-size: 13px;
     border-radius: 2px;
-    padding: 8px;
-    margin-bottom: 16px;
+    padding: 4px;
     border: 1px solid #BDBDBD;
  }
   
   select {
-    font-size: 18px;
+    font-size: 13px;
     border-radius: 2px;
-    padding: 8px;
-    margin-bottom: 16px;
+    padding: 4px;
     border: 1px solid #BDBDBD;
   }
   
   label {
     font-size: 12px;
     font-weight: bold;
-    margin-bottom: 4px;
     display: block;
     text-transform: uppercase;
   }
@@ -158,7 +163,7 @@
     align-items: center;
     padding: 8px 16px;
     border-radius: 2px;
-    font-size: 32px;
+    font-size: 20px;
     cursor: pointer;
     background-color: var(--brandcolour);
     color: var(--brandtext);
