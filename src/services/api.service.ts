@@ -13,8 +13,8 @@ import { Fin_model } from  '../models/Fin_model';
   providedIn: 'root'
 })
 export class ApiService {
-//  PHP_API_SERVER = "http://ec2-35-177-242-73.eu-west-2.compute.amazonaws.com";
-  PHP_API_SERVER = "http://localhost:8080";
+  PHP_API_SERVER = "http://ec2-35-177-242-73.eu-west-2.compute.amazonaws.com";
+//  PHP_API_SERVER = "http://localhost:8080";
 
   constructor(private httpClient: HttpClient) { }
 
