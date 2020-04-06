@@ -26,14 +26,14 @@
 
     <form #userForm="ngForm" action="/api/post/addOrganisation.php" method="POST">
     <mat-tab-group >
-        <!-- Organisation Details Tab-->
+        <!-- Organisation Details Tab -->
         <mat-tab label="Organisational Details">
             <div class="form-group">
                 <table width=100%>
-                    <tr>
+                    <tr> 
                         <td style="width: 10%;">Name of Organisation</td>
                         <td style="width: 40%;">
-                            <input type="text" style="width: 80%" name="Orgname" class="form-control" [(ngModel)]="Org_model.name" #name="ngModel"
+                            <input type="text" style="width: 80%" name="Orgname" class="form-control" [(ngModel)]="Org_model.OrgName" #name="ngModel"
                             [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
                             <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
                                 <p *ngIf="name.errors.required">Name is required</p>
@@ -52,7 +52,7 @@
                     <tr>
                         <td>Registered Address</td>
                         <td>
-                            <input type="textarea" style="width: 100%" name="Orgaddress" class="form-control" [(ngModel)]="Org_model.address" #name="ngModel"
+                            <input type="textarea" style="width: 100%" name="Orgaddress" class="form-control" [(ngModel)]="Org_model.OrgAddress" #name="ngModel"
                             [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
                             <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
                                 <p *ngIf="name.errors.required">Organisation Address is required</p>
@@ -60,7 +60,7 @@
                         </td>
                         <td>Are you a Registered Charity?</td>
                         <td>
-                            <input type="checkbox" name="Orgcharity" class="form-control" [(ngModel)]="Org_model.charity" #name="ngModel"
+                            <input type="checkbox" name="Orgcharity" class="form-control" [(ngModel)]="Org_model.OrgCharity" #name="ngModel"
                             [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
                             <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
                                 <p *ngIf="name.errors.required">Org Charity is required</p>
@@ -70,7 +70,7 @@
                     <tr>
                         <td>Post Code</td>
                         <td>
-                            <input type="text" name="Orgpostcode" class="form-control" [(ngModel)]="Org_model.postcode" #name="ngModel"
+                            <input type="text" name="Orgpostcode" class="form-control" [(ngModel)]="Org_model.OrgPostcode" #name="ngModel"
                             [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
                             <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
                                 <p *ngIf="name.errors.required">The Post Code is required</p>
@@ -78,7 +78,7 @@
                         </td>
                         <td>Charity Number</td>
                         <td>
-                            <input type="number" name="Orgcharity_no" class="form-control" [(ngModel)]="Org_model.charity_no" #name="ngModel"
+                            <input type="number" name="Orgcharity_no" class="form-control" [(ngModel)]="Org_model.OrgCharityNo" #name="ngModel"
                             [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
                             <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
                                 <p *ngIf="name.errors.required">Org Charity number is required</p>
@@ -88,7 +88,7 @@
                     <tr>
                         <td>Organisation Email</td>
                         <td>
-                            <input type="email" style="width: 80%" name="Orgemail" class="form-control" [(ngModel)]="Org_model.email" #name="ngModel"
+                            <input type="email" style="width: 80%" name="Orgemail" class="form-control" [(ngModel)]="Org_model.OrgEmail" #name="ngModel"
                             [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
                             <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
                                 <p *ngIf="name.errors.required">Email is required</p>
@@ -96,7 +96,7 @@
                         </td>
                         <td>When did your Organisation start?</td>
                         <td>
-                            <input type="date" name="Orgstart_date" class="form-control" [(ngModel)]="Org_model.start_date" #name="ngModel"
+                            <input type="date" name="Orgstart_date" class="form-control" [(ngModel)]="Org_model.OrgStartDate" #name="ngModel"
                             [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
                             <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
                                 <p *ngIf="name.errors.required">Org start date is required</p>
@@ -106,7 +106,7 @@
                     <tr>
                         <td>Organisation Website</td>
                         <td>
-                            <input type="url" style="width: 100%" name="Orgwebsite" class="form-control" [(ngModel)]="Org_model.website" #name="ngModel"
+                            <input type="url" style="width: 100%" name="Orgwebsite" class="form-control" [(ngModel)]="Org_model.OrgWebsite" #name="ngModel"
                             [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
                             <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
                                 <p *ngIf="name.errors.required">Website is required</p>
@@ -114,18 +114,14 @@
                         </td>
                         <td>Is your organisation open to anyone?</td>
                         <td>
-                            <input type="checkbox" name="Orgopen" class="form-control" [(ngModel)]="Org_model.open" #name="ngModel"
-                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
-                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                <p *ngIf="name.errors.required">Org start date is required</p>
-                            </div>
+                            <input type="checkbox" name="Orgopen" class="form-control" [(ngModel)]="Org_model.OrgOpen" #name="ngModel">
                         </td>
                     </tr>
                     <tr  style="width: 100%;">
                         <td></td><td></td>
                         <td style="vertical-align: top;">If you answered no then please provide more information</td>
                         <td>
-                            <textarea id="w3mission" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Orginfo" class="form-control" [(ngModel)]="Org_model.info" #name="ngModel">
+                            <textarea id="w3mission" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Orginfo" class="form-control" [(ngModel)]="Org_model.OrgInfo" #name="ngModel">
                                 At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
                             </textarea>
                         </td>
@@ -134,14 +130,14 @@
             </div>
         </mat-tab>
 
-        <!-- Contact Details Tab-->
+        <!-- Contact Details Tab -->
         <mat-tab label="Contact Details">
             <div class="form-group">
                 <table width=100%>
                     <tr>
                         <td style="width: 15%;">Who will be the main contact for the application?</td>
                         <td style="width: 35%;">
-                            <input type="text" name="Conname" style="width: 80%" class="form-control" [(ngModel)]="Con_model.name" #name="ngModel"
+                            <input type="text" name="Conname" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConName" #name="ngModel"
                             [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
                             <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
                                 <p *ngIf="name.errors.required">Contact Name is required</p>
@@ -149,13 +145,13 @@
                         </td>
                         <td style="width: 15%;">Email</td>
                         <td>
-                            <input type="email" name="Conemail" style="width: 80%" class="form-control" [(ngModel)]="Con_model.email" #name="ngModel">
+                            <input type="email" name="Conemail" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConEmail" #name="ngModel">
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 10%;">Address</td>
                         <td>
-                            <input style="width: 100%;" type="text" name="Conaddress" class="form-control" [(ngModel)]="Con_model.address" #name="ngModel"
+                            <input style="width: 100%;" type="text" name="Conaddress" class="form-control" [(ngModel)]="Con_model.ConAddress" #name="ngModel"
                             [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
                             <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
                                 <p *ngIf="name.errors.required">Contact Address is required</p>
@@ -163,7 +159,7 @@
                         </td>
                         <td style="width: 10%;">Please provide Previous Address if resident less than 3 years</td>
                         <td>
-                            <input style="width: 100%;" type="text" name="Conpreaddress" class="form-control" [(ngModel)]="Con_model.preaddress" #name="ngModel"
+                            <input style="width: 100%;" type="text" name="Conpreaddress" class="form-control" [(ngModel)]="Con_model.ConPreAddress" #name="ngModel"
                             [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
                             <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
                                 <p *ngIf="name.errors.required">Contact Previous Address is required</p>
@@ -173,23 +169,23 @@
                     <tr>
                         <td>Land Line Telephone Number</td>
                         <td>
-                            <input type="tel" name="Conlandlineno" class="form-control" [(ngModel)]="Con_model.landlineno" #name="ngModel">
+                            <input type="tel" name="Conlandlineno" class="form-control" [(ngModel)]="Con_model.ConLandlineNo" #name="ngModel">
                         </td>
                         <td>Other Telephone Number</td>
                         <td>
-                            <input type="tel" name="Conotherno" class="form-control" [(ngModel)]="Con_model.otherno" #name="ngModel">
+                            <input type="tel" name="Conotherno" class="form-control" [(ngModel)]="Con_model.ConOtherNo" #name="ngModel">
                         </td>
                     </tr>
                     <tr>
                         <td>D.O.B.</td>
                         <td>
-                            <input type="date" name="Condob" class="form-control" [(ngModel)]="Con_model.dob" #name="ngModel">
+                            <input type="date" name="Condob" class="form-control" [(ngModel)]="Con_model.ConDOB" #name="ngModel">
                         </td>
                     </tr>
                     <tr>
                         <td>Who is the senior contact? (normally someone who has the role of chair, treasurer, secretary etc)</td>
                         <td>
-                            <input type="text" name="Consenname" class="form-control" [(ngModel)]="Con_model.senname" #name="ngModel"
+                            <input type="text" name="Consenname" class="form-control" [(ngModel)]="Con_model.ConSenName" #name="ngModel"
                             [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
                             <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
                                 <p *ngIf="name.errors.required">Senion Contact Name is required</p>
@@ -197,13 +193,13 @@
                         </td>
                         <td>Senior Contact Email</td>
                         <td>
-                            <input type="email" name="Consenemail" style="width: 80%" class="form-control" [(ngModel)]="Con_model.senemail" #name="ngModel">
+                            <input type="email" name="Consenemail" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConSenEmail" #name="ngModel">
                         </td>
                     </tr>
                     <tr>
                         <td>Senior Contact Address</td>
                         <td>
-                            <input style="width: 100%;" type="text" name="Consenaddress" class="form-control" [(ngModel)]="Con_model.senaddress" #name="ngModel"
+                            <input style="width: 100%;" type="text" name="Consenaddress" class="form-control" [(ngModel)]="Con_model.ConSenAddress" #name="ngModel"
                             [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
                             <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
                                 <p *ngIf="name.errors.required">Senior Contact Address is required</p>
@@ -211,7 +207,7 @@
                         </td>
                         <td>Please provide Previous Address if resident less than 3 years</td>
                         <td>
-                            <input style="width: 100%;" type="text" name="Consenpreaddress" class="form-control" [(ngModel)]="Con_model.senpreaddress" #name="ngModel"
+                            <input style="width: 100%;" type="text" name="Consenpreaddress" class="form-control" [(ngModel)]="Con_model.ConSenPreAddress" #name="ngModel"
                             [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
                             <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
                                 <p *ngIf="name.errors.required">Senior Contact Previous Address is required</p>
@@ -221,31 +217,31 @@
                     <tr>
                         <td>Land Line Telephone Number</td>
                         <td>
-                            <input type="tel" name="Consenlandlineno" class="form-control" [(ngModel)]="Con_model.senlandlineno" #name="ngModel">
+                            <input type="tel" name="Consenlandlineno" class="form-control" [(ngModel)]="Con_model.ConSenLandlineNo" #name="ngModel">
                         </td>
                         <td style="width: 10%;">Other Telephone Number</td>
                         <td>
-                            <input type="tel" name="Consenotherno" class="form-control" [(ngModel)]="Con_model.senotherno" #name="ngModel">
+                            <input type="tel" name="Consenotherno" class="form-control" [(ngModel)]="Con_model.ConSenOtherNo" #name="ngModel">
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 10%;">D.O.B.</td>
                         <td>
-                            <input type="date" name="Consendob" class="form-control" [(ngModel)]="Con_model.sendob" #name="ngModel">
+                            <input type="date" name="Consendob" class="form-control" [(ngModel)]="Con_model.ConSenDOB" #name="ngModel">
                         </td>
                     </tr>
                 </table>
             </div> 
         </mat-tab>
 
-        <!-- General Project Information Tab-->
+        <!-- General Project Information Tab -->
         <mat-tab label="General Project Information">
             <div class="form-group">
                 <table width=100%>
                     <tr>
                         <td style="width: 15%;">What is the name of your project?</td>
                         <td style="width: 30%;">
-                            <input type="text" name="Genname" style="width: 90%;" class="form-control" [(ngModel)]="Gen_model.name" #name="ngModel"
+                            <input type="text" name="Genname" style="width: 90%;" class="form-control" [(ngModel)]="Gen_model.GenName" #name="ngModel"
                             [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
                             <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
                                 <p *ngIf="name.errors.required">Project Name is required</p>
@@ -253,18 +249,18 @@
                         </td>
                         <td style="width: 25%;">When do you think the start date of you project would be?</td>
                         <td>
-                            <input type="date" name="Constartdate"  class="form-control" [(ngModel)]="Gen_model.startdate" #name="ngModel">
+                            <input type="date" name="Constartdate"  class="form-control" [(ngModel)]="Gen_model.GenStartDate" #name="ngModel">
                         </td>
                     </tr>
                 </table>
                 <table>
                     <tr>
                         <td style="width: 50%;">What do you want this project to achieve? 
-                            <textarea id="Genachieve" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Genachieve" class="form-control" [(ngModel)]="Gen_model.achieve" #name="ngModel">
+                            <textarea id="Genachieve" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Genachieve" class="form-control" [(ngModel)]="Gen_model.GenAchieve" #name="ngModel">
                             </textarea>
                         </td>
                         <td>What problems do you believe your project will address?
-                            <textarea id="Genproblem" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Genproblem" class="form-control" [(ngModel)]="Gen_model.problem" #name="ngModel">
+                            <textarea id="Genproblem" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Genproblem" class="form-control" [(ngModel)]="Gen_model.GenProblem" #name="ngModel">
                             </textarea>
                         </td>
                     </tr>
@@ -273,18 +269,18 @@
                     <tr>
                         <td style="width: 25%;">Will your project involve working with children; young people under 18 or vulnerable adults?</td>
                         <td style="width: 20%;">
-                            <input type="checkbox" name="Genvulnerables" class="form-control" [(ngModel)]="Gen_model.vulnerables" #name="ngModel">
+                            <input type="checkbox" name="Genvulnerables" class="form-control" [(ngModel)]="Gen_model.GenVulnerables" #name="ngModel">
                         </td>
                         <td style="width: 20%;">If yes, do you have safeguarding procedures in place?</td>
                         <td>
-                            <input type="checkbox" name="Consafeguards" class="form-control" [(ngModel)]="Gen_model.safeguards" #name="ngModel">
+                            <input type="checkbox" name="Consafeguards" class="form-control" [(ngModel)]="Gen_model.GenSafeguards" #name="ngModel">
                         </td>
                     </tr>
                 </table>
             </div> 
         </mat-tab>
 
-        <!-- Background Details Tab-->
+        <!-- Background Details Tab -->
         <mat-tab label="Background and Further project detail"> 
             <div class="form-group">
                 <table>
@@ -294,35 +290,35 @@
                             <br>
                             <br>
                             • Please include any primary research you have performed to evidence the need for your project. This can be questionnaires, surveys, discussion groups, statistical info etc.
-                            <textarea id="Bacneed" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Bacneed" class="form-control" [(ngModel)]="Bac_model.need" #name="ngModel">
+                            <textarea id="Bacneed" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Bacneed" class="form-control" [(ngModel)]="Bac_model.BacNeed" #name="ngModel">
                             </textarea>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             • Who are you specifically targeting?
-                            <textarea id="Bactarget" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Bactarget" class="form-control" [(ngModel)]="Bac_model.target" #name="ngModel">
+                            <textarea id="Bactarget" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Bactarget" class="form-control" [(ngModel)]="Bac_model.BacTarget" #name="ngModel">
                             </textarea>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             • What activities will you undertake as part of this project?
-                            <textarea id="Bacactivities" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Bacactivities" class="form-control" [(ngModel)]="Bac_model.activities" #name="ngModel">
+                            <textarea id="Bacactivities" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Bacactivities" class="form-control" [(ngModel)]="Bac_model.BacActivities" #name="ngModel">
                             </textarea>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             • Why do you consider that your organisation can deliver this project? 
-                            <textarea id="Bacdeliver" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Bacdeliver" class="form-control" [(ngModel)]="Bac_model.deliver" #name="ngModel">
+                            <textarea id="Bacdeliver" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Bacdeliver" class="form-control" [(ngModel)]="Bac_model.BacDeliver" #name="ngModel">
                             </textarea>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             • Will service users or volunteers be involved in the day to day running of the project? If so then please provide more details.
-                            <textarea id="Bacusers" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Bacusers" class="form-control" [(ngModel)]="Bac_model.users" #name="ngModel">
+                            <textarea id="Bacusers" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Bacusers" class="form-control" [(ngModel)]="Bac_model.BacUsers" #name="ngModel">
                             </textarea>
                         </td>
                     </tr>
@@ -330,7 +326,7 @@
             </div> 
         </mat-tab>
 
-        <!-- Financial Details Tab-->
+        <!-- Financial Details Tab -->
         <mat-tab label="Financial Information">
             <div class="form-group">
                 <table style="width: 100%;">
@@ -349,7 +345,7 @@
                             (Please note that this information is for grant applications only and will not be used by NGNF for any other purpose) 
                             <br>
                             Organisation name on statements (must be the same as on governing documents)
-                            <input style="width: 50%;" type="text" name="Finorgname" class="form-control" [(ngModel)]="Fin_model.orgname" #name="ngModel">
+                            <input style="width: 50%;" type="text" name="Finorgname" class="form-control" [(ngModel)]="Fin_model.FinOrgName" #name="ngModel">
                         </td>
                     </tr>
                 </table>
@@ -357,21 +353,21 @@
                     <tr>
                         <td style="width: 15%;">Bank or Building Society name and address</td>
                         <td>
-                            <input style="width: 100%;" type="text" name="Finbank" class="form-control" [(ngModel)]="Fin_model.bank" #name="ngModel">
+                            <input style="width: 100%;" type="text" name="Finbank" class="form-control" [(ngModel)]="Fin_model.FinBank" #name="ngModel">
                         </td>
                         <td style="width: 20%;">What address does your bank have for your organisation in regard to this account</td>
                         <td>
-                            <input style="width: 100%;" type="text" name="Finbankorgaddress" class="form-control" [(ngModel)]="Fin_model.bankorgaddress" #name="ngModel">
+                            <input style="width: 100%;" type="text" name="Finbankorgaddress" class="form-control" [(ngModel)]="Fin_model.FinBankOrgAddress" #name="ngModel">
                         </td>
                     </tr>
                     <tr>
                         <td>Account No.</td>
                         <td>
-                            <input style="width: 100%;" type="number" name="Finaccount" class="form-control" [(ngModel)]="Fin_model.account" #name="ngModel">
+                            <input style="width: 100%;" type="number" name="Finaccount" class="form-control" [(ngModel)]="Fin_model.FinAccount" #name="ngModel">
                         </td>
                         <td>Sort Code</td>
                         <td>
-                            <input style="width: 100%;" type="text" name="Finsortcode" class="form-control" [(ngModel)]="Fin_model.sortcode" #name="ngModel">
+                            <input style="width: 100%;" type="text" name="Finsortcode" class="form-control" [(ngModel)]="Fin_model.FinSortCode" #name="ngModel">
                         </td>
                     </tr>
                 </table>
@@ -380,14 +376,10 @@
 
     </mat-tab-group>
     <br>
-
     <div class="form-group" style="text-align: center;">
-        <input type="submit" value="insert">
+        <button class="btn btn-danger btn-block" on-click="Submit_Data()">Submit</button>
     </div>
     </form>
 </mat-card>
 <footer>
-    <div class="form-group" style="text-align: center;">
-        <button class="btn btn-danger btn-block">Submit</button>
-    </div>
 </footer>

@@ -12,13 +12,14 @@ import { Fin_model } from  '../models/Fin_model';
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+
+export class ApiReadService {
   PHP_API_SERVER = "http://ec2-35-177-242-73.eu-west-2.compute.amazonaws.com";
 //  PHP_API_SERVER = "http://localhost:8080";
 
   constructor(private httpClient: HttpClient) { }
 
-  // ************************  READ Functions  ************************ 
+  // ************************  START READ Functions  ************************ 
   // Retrieve All Applications
   readApplications(): Observable<App_model[]>{
     return this.httpClient.get<App_model[]>(`${this.PHP_API_SERVER}/api/get/getApplications.php`);
@@ -59,17 +60,4 @@ export class ApiService {
     return this.httpClient.get<Fin_model[]>(`${this.PHP_API_SERVER}/api/get/getFin_model.php`, { params: params} );
   }
 
-
-  // ************************  CREATE Functions  ************************ 
-  createOrg(Org_model: Org_model): Observable<Org_model>{
-    return this.httpClient.post<Org_model>(`${this.PHP_API_SERVER}api/post/addOrg_model.php`, Org_model);
-  }
-
-  updateOrg_model(Org_model: Org_model){
-    return this.httpClient.put<Org_model>(`${this.PHP_API_SERVER}/api/update.php`, Org_model);   
-  }
-
-  deleteOrg_model(id: number){
-    return this.httpClient.delete<Org_model>(`${this.PHP_API_SERVER}/api/delete.php/?id=${id}`);
-  }
 }

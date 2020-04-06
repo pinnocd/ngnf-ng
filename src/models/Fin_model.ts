@@ -8,6 +8,6 @@ export class Fin_model {
         public      FinAccount: number,
         public      FinSortCode: string,
         public      FinBankOrgAddress: string
-        
-        ) {}
+
+    ) {}
 }
