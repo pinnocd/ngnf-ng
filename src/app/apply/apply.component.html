@@ -6,7 +6,7 @@
             <td style="width: 20%;"></td>
             <td>
                 <ul style="list-style-type:disc;">
-                    <li>A clear idea and reason why you want to set up this project</li>
+                    <li>An overview of your existing project and/or a clear idea why you want to set up this project</li>
                     <li>Understanding of what activities you will need to deliver to meet your aims and objectives</li>
                     <li>A management committee of at least 3 people (chair, secretary, treasurer)</li>
                     <li>Ideally a name for your project</li>
@@ -32,20 +32,17 @@
                 <table width=100%>
                     <tr> 
                         <td style="width: 10%;">Name of Organisation</td>
-                        <td style="width: 40%;">
-                            <input type="text" style="width: 80%" name="Orgname" class="form-control" [(ngModel)]="Org_model.OrgName" #name="ngModel"
-                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
-                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                <p *ngIf="name.errors.required">Name is required</p>
-                            </div>
+                        <td style="width: 30%;">
+                            <input type="text" style="width: 80%" name="Orgname" class="form-control" [(ngModel)]="Org_model.OrgName" #name="ngModel">
                         </td>
-                        <td style="width: 10%;">Type of Organisation</td>
+                        <td style="width: 15%;">Type of Organisation</td>
                         <td>
-                            <select class="form-control" name="Orgtype" [(ngModel)]="OrgTypes">
-                            <option value="">Select an organisation type</option>
-                            <option *ngFor="let org of OrgTypes" [value]="org">
-                            {{org}}
-                            </option>
+                            <select name="Orgtype" class="form-control" [(ngModel)]="Org_model.OrgType" #name="ngModel">
+                                <option value="C">Charity</option>
+                                <option value="H">Health body</option>
+                                <option value="P">Parish or town council</option>
+                                <option value="S">School</option>    
+                                <option value="V">Voluntary or Community</option>
                             </select>
                         </td>
                     </tr>
@@ -58,13 +55,13 @@
                                 <p *ngIf="name.errors.required">Organisation Address is required</p>
                             </div>
                         </td>
-                        <td>Are you a Registered Charity?</td>
-                        <td>
-                            <input type="checkbox" name="Orgcharity" class="form-control" [(ngModel)]="Org_model.OrgCharity" #name="ngModel"
-                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
-                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                <p *ngIf="name.errors.required">Org Charity is required</p>
-                            </div>
+                        <td>If you are a charity, please provide your charity number</td>
+                        <input type="number" name="Orgcharity_no" class="form-control" [(ngModel)]="Org_model.OrgCharityNo" #name="ngModel"
+                        [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                        <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                            <p *ngIf="name.errors.required">Org Charity number is required</p>
+                        </div>
+                    <td>
                         </td>
                     </tr>
                     <tr>
@@ -74,24 +71,6 @@
                             [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
                             <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
                                 <p *ngIf="name.errors.required">The Post Code is required</p>
-                            </div>
-                        </td>
-                        <td>Charity Number</td>
-                        <td>
-                            <input type="number" name="Orgcharity_no" class="form-control" [(ngModel)]="Org_model.OrgCharityNo" #name="ngModel"
-                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
-                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                <p *ngIf="name.errors.required">Org Charity number is required</p>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Organisation Email</td>
-                        <td>
-                            <input type="email" style="width: 80%" name="Orgemail" class="form-control" [(ngModel)]="Org_model.OrgEmail" #name="ngModel"
-                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
-                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                <p *ngIf="name.errors.required">Email is required</p>
                             </div>
                         </td>
                         <td>When did your Organisation start?</td>
@@ -104,6 +83,20 @@
                         </td>
                     </tr>
                     <tr>
+                        <td>Organisation Email</td>
+                        <td>
+                            <input type="email" style="width: 80%" name="Orgemail" class="form-control" [(ngModel)]="Org_model.OrgEmail" #name="ngModel"
+                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                <p *ngIf="name.errors.required">Email is required</p>
+                            </div>
+                        </td>
+                        <td>Is your organisation open to anyone?</td>
+                        <td>
+                            <input type="checkbox" name="Orgopen" class="form-control" [(ngModel)]="Org_model.OrgOpen" #name="ngModel">
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Organisation Website</td>
                         <td>
                             <input type="url" style="width: 100%" name="Orgwebsite" class="form-control" [(ngModel)]="Org_model.OrgWebsite" #name="ngModel"
@@ -112,13 +105,6 @@
                                 <p *ngIf="name.errors.required">Website is required</p>
                             </div>
                         </td>
-                        <td>Is your organisation open to anyone?</td>
-                        <td>
-                            <input type="checkbox" name="Orgopen" class="form-control" [(ngModel)]="Org_model.OrgOpen" #name="ngModel">
-                        </td>
-                    </tr>
-                    <tr  style="width: 100%;">
-                        <td></td><td></td>
                         <td style="vertical-align: top;">If you answered no then please provide more information</td>
                         <td>
                             <textarea id="w3mission" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Orginfo" class="form-control" [(ngModel)]="Org_model.OrgInfo" #name="ngModel">
@@ -338,6 +324,10 @@
                     <tr><td style="width: 50%;"><input type="text" style="width: 100%"></td><td><input type="text"></td></tr>
                     <tr><td style="width: 50%;"><input type="text" style="width: 100%"></td><td><input type="text"></td></tr>
                     <br>
+              </table>
+              <!--
+                <table>
+
                     <tr>
                         <td style="width: 100%;">
                             Your organisations bank details
@@ -348,8 +338,7 @@
                             <input style="width: 50%;" type="text" name="Finorgname" class="form-control" [(ngModel)]="Fin_model.FinOrgName" #name="ngModel">
                         </td>
                     </tr>
-                </table>
-                <table>
+  
                     <tr>
                         <td style="width: 15%;">Bank or Building Society name and address</td>
                         <td>
@@ -371,6 +360,7 @@
                         </td>
                     </tr>
                 </table>
+                -->
             </div> 
         </mat-tab>
 

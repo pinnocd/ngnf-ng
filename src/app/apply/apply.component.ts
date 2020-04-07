@@ -20,82 +20,83 @@ export class ApplyComponent {
   Bac_model = new Bac_class();
   Fin_model = new Fin_class();
 
-  OrgTypes: string[] = [
-    'Voluntary or community',
-    'School',    
-    'Health body',
-    'Parish or town council'
-  ];
-
   constructor(private apiService: ApiCreateService)  {
 
-    // Set up default sample data
-    this.Org_model.OrgName = "HUDDERSFIELD AFRICAN CARIBBEAN CULTURAL TRUST";
-    this.Org_model.OrgAddress = "5-7 STATION STREET, HUDDERSFIELD";
-    this.Org_model.OrgPostcode = "HD1 1LS";
-    this.Org_model.OrgEmail = "huddersfieldcmc@gmail.com";
-    this.Org_model.OrgWebsite = "http://hacct.co.uk/carnival2020.org";
-    this.Org_model.OrgType = "Voluntary or community";
-    this.Org_model.OrgCharity = true;
-    this.Org_model.OrgCharityNo = 1129873;
-    this.Org_model.OrgStartDate = new Date("09/02/2009");
-    this.Org_model.OrgOpen = true;
-    this.Org_model.OrgInfo = "n/a";
- 
-    this.Con_model.ConName = "SARA DEARNLEY";
-    this.Con_model.ConDOB = new Date("1974-02-02");
-    this.Con_model.ConAddress = "12 FULFORD AVE, FARTOWN, HUDDERSFIELD. HD2 2QS";
-    this.Con_model.ConPreAddress = "";
-    this.Con_model.ConLandlineNo = "";
-    this.Con_model.ConOtherNo = "07717 154575";
-    this.Con_model.ConEmail = "sara_dearnley@hotmail.com";
-    this.Con_model.ConSenName = "Paige Phillip";
-    this.Con_model.ConSenDOB = new Date("07/31/1993");
-    this.Con_model.ConSenAddress = "62 Blackhouse Road, Huddersfield, HD2 1AR";
-    this.Con_model.ConSenPreAddress = "";
-    this.Con_model.ConSenLandlineNo = "";
-    this.Con_model.ConSenOtherNo = "07715 902349";
-    this.Con_model.ConSenEmail = "paigephillip@hotmail.co.uk";
+    var msg = 'Would you like to have a sample application loaded?';
 
-    this.Gen_model.GenName = "Huddersfield Carnival 2020";
-    this.Gen_model.GenStartDate = new Date("03/01/2020");
-    this.Gen_model.GenAchieve = "To bring a refreshed Caribbean themed Carnival to the diverse community of Huddersfield. ";
-    this.Gen_model.GenProblem = "This project will provide activities for children and young people to keep them from engaging.";
-    this.Gen_model.GenVulnerables = '1';
-    this.Gen_model.GenSafeguards = '1';
+    if (confirm(msg)) {
 
-    this.Bac_model.BacNeed = "The need, vision and direction of the projectsappointment to the residents and visitors to the event but the economy has also felt a hit on the traditional carnival weekend. ";
-    this.Bac_model.BacTarget = "Our overall focus is to enhance participation in carnival. As part of our business plan we have broken down our target groups. please see additional pages";
-    this.Bac_model.BacActivities = "Weekly Steel Pan Playing classes for beginners and for children";
-    this.Bac_model.BacDeliver = "HACCT has deliver Huddersfield in the past with positive results.";
-    this.Bac_model.BacUsers = "The planning of Huddersfield Carnival 2020 is currently being carried project.";
+      // Set up default sample data
+      this.Org_model.OrgName = "Sample Organisation Name";
+      this.Org_model.OrgAddress = "43 Unknown St, Huddersfield";
+      this.Org_model.OrgPostcode = "HD1 1LS";
+      this.Org_model.OrgEmail = "sampleemail@gmail.com";
+      this.Org_model.OrgWebsite = "http://website.co.uk/";
+      this.Org_model.OrgType = "S";
+      this.Org_model.OrgCharity = true;
+      this.Org_model.OrgCharityNo = 1129873;
+      this.Org_model.OrgStartDate = new Date("09/02/2009");
+      this.Org_model.OrgOpen = true;
+      this.Org_model.OrgInfo = "n/a";
+  
+      this.Con_model.ConName = "Arthur Daley";
+      this.Con_model.ConDOB = new Date("31/07/1993");
+      this.Con_model.ConAddress = "12 Fulham Street, London, NW8 2QS";
+      this.Con_model.ConPreAddress = "";
+      this.Con_model.ConLandlineNo = "";
+      this.Con_model.ConOtherNo = "07710 000000";
+      this.Con_model.ConEmail = "contact@hotmail.com";
+      this.Con_model.ConSenName = "Senior Contact";
+      this.Con_model.ConSenDOB = new Date("02/11/1983");
+      this.Con_model.ConSenAddress = "62 Letsby Road, Sheffield, SH8 1AR";
+      this.Con_model.ConSenPreAddress = "";
+      this.Con_model.ConSenLandlineNo = "";
+      this.Con_model.ConSenOtherNo = "07715 987 543";
+      this.Con_model.ConSenEmail = "seniorcont@hotmail.co.uk";
 
-    this.Fin_model.FinOrgName = "Huddersfield African Caribbean Cultural Trust (HACCT)";
-    this.Fin_model.FinBank = "Royal Bank of Scotland, 27 Market Place, Huddersfield, HD1 2AD";
-    this.Fin_model.FinAccount = 12283929;
-    this.Fin_model.FinSortCode = "16-22-04";
-    this.Fin_model.FinBankOrgAddress = "5-7 Station Street, Huddersfield, HD1 1LS";
+      this.Gen_model.GenName = "Huddersfield School";
+      this.Gen_model.GenStartDate = new Date("03/01/2020");
+      this.Gen_model.GenAchieve = "Provide entertainment for the huddersfield community.";
+      this.Gen_model.GenProblem = "This project will provide activities for children and young people.";
+      this.Gen_model.GenVulnerables = '1';
+      this.Gen_model.GenSafeguards = '1';
+
+      this.Bac_model.BacNeed = "The need, vision and direction of the projects is to engage residents and visitors.";
+      this.Bac_model.BacTarget = "Our overall focus is to enhance participation in community eventy.";
+      this.Bac_model.BacActivities = "Weekly residential home visits for children";
+      this.Bac_model.BacDeliver = "Deliver Mansfield positive results.";
+      this.Bac_model.BacUsers = "Mainly volunteers but some professionals due to safeguards.";
+    }
   }
 
   Submit_Data() {
 
-    this.apiService.createApp().subscribe(ApplicationId => {
-      var AppId: number;
-      AppId = ApplicationId as number;
+    var msg = 'Are you sure you are happy to submit this application?';
 
-      console.log("The ApplicationId is " + AppId.toString());
+    if (confirm(msg)) {
 
-      this.Org_model.ApplicationId = AppId;
-      this.Con_model.ApplicationId = AppId;
-      this.Gen_model.ApplicationId = AppId;
-      this.Bac_model.ApplicationId = AppId;
-      this.Fin_model.ApplicationId = AppId;
+        this.apiService.createApp().subscribe(ApplicationId => {
+          var AppId: number;
+          AppId = ApplicationId as number;
 
-      this.apiService.createOrg_model(this.Org_model).subscribe(()=>{});
-      this.apiService.createCon_model(this.Con_model).subscribe(()=>{});
-      this.apiService.createGen_model(this.Gen_model).subscribe(()=>{});
-      this.apiService.createBac_model(this.Bac_model).subscribe(()=>{});
-      this.apiService.createFin_model(this.Fin_model).subscribe(()=>{});
-    })
+          console.log("The ApplicationId is " + AppId.toString());
+
+          console.log(this.Org_model);
+          this.Org_model.ApplicationId = AppId;
+          this.Con_model.ApplicationId = AppId;
+          this.Gen_model.ApplicationId = AppId;
+          this.Bac_model.ApplicationId = AppId;
+          this.Fin_model.ApplicationId = AppId;
+
+          this.apiService.createOrg_model(this.Org_model).subscribe(()=>{});
+          this.apiService.createCon_model(this.Con_model).subscribe(()=>{});
+          this.apiService.createGen_model(this.Gen_model).subscribe(()=>{});
+          this.apiService.createBac_model(this.Bac_model).subscribe(()=>{});
+          this.apiService.createFin_model(this.Fin_model).subscribe(()=>{});
+
+          alert("Your application has been recieved and will be processed in due course.");
+        }
+      )
+    }
   }
 }
