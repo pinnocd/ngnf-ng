@@ -7,7 +7,9 @@ export class Fin_model {
         public      FinBank: string,
         public      FinAccount: number,
         public      FinSortCode: string,
-        public      FinBankOrgAddress: string
+        public      FinBankOrgAddress: string,
+        public      FinActivity: string,
+        public      FinCost: number
 
     ) {}
 }

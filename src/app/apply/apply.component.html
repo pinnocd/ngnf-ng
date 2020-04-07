@@ -284,35 +284,35 @@
                             <br>
                             <br>
                             • Please include any primary research you have performed to evidence the need for your project. This can be questionnaires, surveys, discussion groups, statistical info etc.
-                            <textarea id="Bacneed" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Bacneed" class="form-control" [(ngModel)]="Bac_model.BacNeed" #name="ngModel">
+                            <textarea id="Bacneed" rows="4" cols="50" style="width: 100%;height: 2cm;" name="Bacneed" class="form-control" [(ngModel)]="Bac_model.BacNeed" #name="ngModel">
                             </textarea>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             • Who are you specifically targeting?
-                            <textarea id="Bactarget" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Bactarget" class="form-control" [(ngModel)]="Bac_model.BacTarget" #name="ngModel">
+                            <textarea id="Bactarget" rows="4" cols="50" style="width: 100%;height: 2cm;" name="Bactarget" class="form-control" [(ngModel)]="Bac_model.BacTarget" #name="ngModel">
                             </textarea>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             • What activities will you undertake as part of this project?
-                            <textarea id="Bacactivities" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Bacactivities" class="form-control" [(ngModel)]="Bac_model.BacActivities" #name="ngModel">
+                            <textarea id="Bacactivities" rows="4" cols="50" style="width: 100%;height: 2cm;" name="Bacactivities" class="form-control" [(ngModel)]="Bac_model.BacActivities" #name="ngModel">
                             </textarea>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             • Why do you consider that your organisation can deliver this project? 
-                            <textarea id="Bacdeliver" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Bacdeliver" class="form-control" [(ngModel)]="Bac_model.BacDeliver" #name="ngModel">
+                            <textarea id="Bacdeliver" rows="4" cols="50" style="width: 100%;height: 2cm;" name="Bacdeliver" class="form-control" [(ngModel)]="Bac_model.BacDeliver" #name="ngModel">
                             </textarea>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             • Will service users or volunteers be involved in the day to day running of the project? If so then please provide more details.
-                            <textarea id="Bacusers" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Bacusers" class="form-control" [(ngModel)]="Bac_model.BacUsers" #name="ngModel">
+                            <textarea id="Bacusers" rows="4" cols="50" style="width: 100%;height: 2cm;" name="Bacusers" class="form-control" [(ngModel)]="Bac_model.BacUsers" #name="ngModel">
                             </textarea>
                         </td>
                     </tr>
@@ -324,16 +324,23 @@
         <mat-tab label="Financial Information">
             <div class="form-group">
                 <table style="width: 100%;">
-                    • Estimated cost of your project:
-                    <tr><td style="width: 50%;">Activity</td><td>Cost</td></tr>
-                    <tr><td style="width: 50%;"><input type="text" style="width: 100%"></td><td><input type="text"></td></tr>
-                    <tr><td style="width: 50%;"><input type="text" style="width: 100%"></td><td><input type="text"></td></tr>
-                    <tr><td style="width: 50%;"><input type="text" style="width: 100%"></td><td><input type="text"></td></tr>
-                    <tr><td style="width: 50%;"><input type="text" style="width: 100%"></td><td><input type="text"></td></tr>
-                    <tr><td style="width: 50%;"><input type="text" style="width: 100%"></td><td><input type="text"></td></tr>
+                    • What is the estimated cost of your project:
                     <br>
-              </table>
-              <!--
+                    <br>
+                    <tr>
+                        <td style="width: 50%;" >Activity</td>
+                        <td>Cost</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" style="width: 100%;" name="Finactivity" class="form-control" [(ngModel)]="Fin_model.FinActivity" #name="ngModel">
+                        </td>
+                        <td>
+                            <input type="text" style="width: 10%;" name="Fincost" class="form-control" [(ngModel)]="Fin_model.FinCost" #name="ngModel">
+                        </td>
+                    </tr>
+                </table>
+                <!--
                 <table>
 
                     <tr>

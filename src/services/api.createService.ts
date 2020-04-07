@@ -13,8 +13,8 @@ import { Fin_model } from  '../models/Fin_model';
 })
 
 export class ApiCreateService {
-  PHP_API_SERVER = "http://ec2-35-177-242-73.eu-west-2.compute.amazonaws.com";
-//  PHP_API_SERVER = "http://localhost:8080";
+//  PHP_API_SERVER = "http://ec2-35-177-242-73.eu-west-2.compute.amazonaws.com";
+  PHP_API_SERVER = "http://localhost:8080";
 
   constructor(private httpClient: HttpClient) { }
 
@@ -105,9 +105,10 @@ export class ApiCreateService {
       .set('ApplicationId', Fin_model.ApplicationId.toString())
       .set('Finorgname', Fin_model.FinOrgName)
       .set('Finbank', Fin_model.FinBank)
-      .set('Finaccount', '' + Fin_model.FinAccount.toString())
       .set('Finsortcode', Fin_model.FinSortCode)
       .set('Finbankorgaddress', Fin_model.FinBankOrgAddress)
+      .set('Finactivity', Fin_model.FinActivity)
+      .set('Fincost', Fin_model.FinCost.toString())
 
     console.log(params);
 

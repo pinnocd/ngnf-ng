@@ -68,6 +68,9 @@ export class ApplyComponent {
       this.Bac_model.BacActivities = "Weekly residential home visits for children";
       this.Bac_model.BacDeliver = "Deliver Mansfield positive results.";
       this.Bac_model.BacUsers = "Mainly volunteers but some professionals due to safeguards.";
+
+      this.Fin_model.FinActivity = "Funding for the whole thing.";
+      this.Fin_model.FinCost = 100.50;
     }
   }
 

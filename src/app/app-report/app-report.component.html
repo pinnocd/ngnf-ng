@@ -163,7 +163,13 @@
     <!-- Financial Information -->
     <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Fin_model of Fin_models">
         <caption><h3><b>Financial Information</b></h3></caption>
-
+        <tr>
+            <td style="width: 15%;">Activity</td>
+            <td style="width: 35%;">{{ Fin_model.FinActivity }}</td>
+            <td style="width: 10%;">Cost</td>
+            <td>{{ Fin_model.FinCost }}</td>
+        </tr>
+        
         <tr>
             <td>Organisation name on statements</td><td>{{ Fin_model.FinOrgName }}</td>
         </tr>

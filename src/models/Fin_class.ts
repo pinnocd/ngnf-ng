@@ -6,5 +6,7 @@ export class Fin_class {
     public      FinAccount: number;
     public      FinSortCode: string;
     public      FinBankOrgAddress: string;
+    public      FinActivity: string;
+    public      FinCost: number;
 
 }

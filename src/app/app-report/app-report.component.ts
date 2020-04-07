@@ -10,7 +10,6 @@ import { Con_model } from  '../../models/Con_model';
 import { Gen_model } from  '../../models/Gen_model';
 import { Bac_model } from  '../../models/Bac_model';
 import { Fin_model } from  '../../models/Fin_model';
-import { RouterModule } from '@angular/router';
 
 /**
  * @title Basic use of `<table mat-table>`
@@ -100,5 +99,3 @@ export interface ApplData{
   Status: string;
   InsertDateTime: Date;
 }
-
-
