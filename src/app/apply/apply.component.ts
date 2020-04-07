@@ -20,6 +20,8 @@ export class ApplyComponent {
   Bac_model = new Bac_class();
   Fin_model = new Fin_class();
 
+  infoOpenState = false;
+
   constructor(private apiService: ApiCreateService)  {
 
     var msg = 'Would you like to have a sample application loaded?';

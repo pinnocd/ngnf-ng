@@ -20,8 +20,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatSelectModule} from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 // All our new infrastructure apps
 import { AppRoutingModule } from './app-routing.module';
@@ -82,6 +83,7 @@ const appRoutes: Routes = [
       FlexLayoutModule,
       MatSelectModule,
       MatInputModule,
+      MatExpansionModule,
       RouterModule.forRoot(appRoutes)
     ],
   exports: 
