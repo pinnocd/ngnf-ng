@@ -1,11 +1,13 @@
+<mat-toolbar  class="mat-elevation-z8" style="background-color: var(--brandcolour);">
+    <span>
+        <button mat-button class="mat-elevation-z8" routerLink="/" 
+            style="background-color: white;font-size: 20px;">NGNF</button>
+    </span>
+    <span fxFlex></span>
+    <button mat-button class="mat-elevation-z8" routerLink="/appReport"
+        style="background-color: white;font-size: 20px;">Applications</button>
 
-<mat-toolbar>
-    <top-link routerLink="/">NGNF</top-link>
-  
-    <span class = "filler"></span>
+    <button mat-button class="mat-elevation-z8"  routerLink="/apply"
+        style="background-color: white;font-size: 20px;">Apply</button>
 
-    <span flex></span>
-    <top-link routerLink="/report">Report<br>   </top-link>
-<br>
-    <top-link routerLink="/apply">Apply</top-link>
 </mat-toolbar>

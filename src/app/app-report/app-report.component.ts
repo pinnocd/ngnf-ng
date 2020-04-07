@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
 import { ApiReadService } from '../../services/api.readService';
 import { ApiDeleteService } from '../../services/api.deleteService';
 
@@ -9,19 +11,25 @@ import { Gen_model } from  '../../models/Gen_model';
 import { Bac_model } from  '../../models/Bac_model';
 import { Fin_model } from  '../../models/Fin_model';
 
+/**
+ * @title Basic use of `<table mat-table>`
+ */
 @Component({
-  selector: 'app-report',
-  templateUrl: './report.component.html',
-  styleUrls: ['./report.component.css']
+  selector: 'app-app-report',
+  styleUrls: ['app-report.component.css'],
+  templateUrl: 'app-report.component.html',
 })
 
+export class AppReportComponent implements OnInit {
+  displayedColumns: string[] = ['ApplicationId', 'OrgName', 'GenName', 'GenStartDate', 'Status', 'InsertDateTime', 'Delete'];
+  dataSource = new MatTableDataSource<ApplData>(ELEMENT_DATA);
+  
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-export class ReportComponent implements OnInit {  
-  
-  
-ngOnInit() {
-  this.loadAppList();
-}
+  ngOnInit() {
+    this.loadAppList();
+    this.dataSource.paginator = this.paginator;
+  }  
 
   App_models:  App_model[];
   Org_models:  Org_model[];
@@ -30,19 +38,15 @@ ngOnInit() {
   Bac_models:  Bac_model[];
   Fin_models:  Fin_model[];
 
-
   constructor(private apiService: ApiReadService, private apiDelService: ApiDeleteService) { }
 
   // Initial load of all applications
   loadAppList() {
-    this.apiService.readApplications().subscribe((App_models: App_model[])=>{
-      this.App_models = App_models;
-      console.log(this.App_models);
-      console.log('Initial Application list loaded');
-    })
+    // update data in data source when available
+    this.apiService.readApplications().subscribe(newData => this.dataSource.data = newData);
   }
 
-    // An application has been selected in the list, so refresh all data
+  // An application has been selected in the list, so refresh all data
   selectApp(app_model){
     console.log(app_model);
 
@@ -72,17 +76,29 @@ ngOnInit() {
     })
   }
 
-  deleteApp(app_model){
-    var msg = 'Are you absolutely sure you want to delete the ' + app_model.OrgName + ' application for project "' + app_model.GenName + '"?';
+  deleteApp(element){
+    var msg = 'Are you absolutely sure you want to delete the ' + element.OrgName + ' application for project "' + element.GenName + '"?';
 
-    if (confirm(msg)) {
-      this.apiDelService.deleteApplication(app_model.ApplicationId).subscribe(()=>{
-        console.log("Delete complete");
-      });
-    } 
-    else
-    { // No harm done then
-    }
-    this.loadAppList();
+     if (confirm(msg)) {
+       this.apiDelService.deleteApplication(element.ApplicationId).subscribe(()=>{
+       });
+     } 
+     else
+     { // No harm done then
+     }
+     this.loadAppList();
   }
 }
+
+var ELEMENT_DATA: ApplData[];
+
+export interface ApplData{
+  ApplicationId: number;
+  OrgName: string;
+  GenName: string;
+  GenStartDate: Date;
+  Status: string;
+  InsertDateTime: Date;
+}
+
+

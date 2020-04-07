@@ -17,7 +17,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatTab } from '@angular/material/tabs';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatMenuModule } from '@angular/material/menu';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 // All our new infrastructure apps
 import { AppRoutingModule } from './app-routing.module';
@@ -33,12 +35,14 @@ import { BenefitsComponent } from './benefits/benefits.component';
 import { NgnfComponent } from './ngnf/ngnf.component';
 import { ApplyComponent } from './apply/apply.component';
 import { ReportComponent } from './report/report.component';
+import { AppReportComponent } from './app-report/app-report.component';
 
 // Define all routes necessary
 const appRoutes: Routes = [
   { path: '', component: NgnfComponent },
   { path: 'apply', component: ApplyComponent },
-  { path: 'report', component: ReportComponent }
+  { path: 'report', component: ReportComponent },
+  { path: 'appReport', component: AppReportComponent }
 ];
 
 @NgModule({
@@ -52,7 +56,8 @@ const appRoutes: Routes = [
     TopBarComponent,
     NgnfComponent,
     ApplyComponent,
-    ReportComponent
+    ReportComponent,
+    AppReportComponent
     ],
   imports: [
       BrowserModule,
@@ -70,6 +75,9 @@ const appRoutes: Routes = [
       MatSidenavModule,
       MatListModule,
       MatTabsModule,
+      MatPaginatorModule,
+      MatMenuModule,
+      FlexLayoutModule,
       RouterModule.forRoot(appRoutes)
     ],
   exports: 

@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="mat-elevation-z8">
     <h2 style="text-align: center;">Application Form</h2>
     <mat-card-title style="text-align: center;"><h3>To apply you should have:</h3></mat-card-title>
     <table style="text-align: center;">
@@ -24,7 +24,7 @@
     <h4 style="text-align: center;">(If you do not yet have all of the above in place, then don’t worry. Please contact us as we may be able to assist or provide advice)</h4>
     <br>
 
-    <form #userForm="ngForm" action="/api/post/addOrganisation.php" method="POST">
+    <form #userForm="ngForm" class="mat-elevation-z8">
     <mat-tab-group >
         <!-- Organisation Details Tab -->
         <mat-tab label="Organisational Details">
@@ -379,6 +379,7 @@
     <div class="form-group" style="text-align: center;">
         <button class="btn btn-danger btn-block" on-click="Submit_Data()">Submit</button>
     </div>
+    <br>
     </form>
 </mat-card>
 <footer>
