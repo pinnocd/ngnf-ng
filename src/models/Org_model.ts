@@ -8,10 +8,12 @@ export class Org_model {
       public    OrgEmail: string, 
       public    OrgWebsite: string, 
       public    OrgType: string,
+      public    OrgTypeName: string,
       public    OrgCharity: boolean, 
       public    OrgCharityNo: number, 
       public    OrgStartDate: Date, 
       public    OrgOpen: boolean, 
       public    OrgInfo: string
+
     ) {}
 }

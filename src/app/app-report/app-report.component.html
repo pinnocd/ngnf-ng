@@ -58,11 +58,11 @@
             <td style="width: 10%;">Name of Organisation</td>            
             <td style="width: 40%;">{{ Org_model.OrgName }}</td>
             <td style="width: 20%;">Type of Organisation</td>            
-            <td> {{ Org_model.OrgType }} </td>
+            <td> {{ Org_model.OrgTypeName }} </td>
         </tr>
         <tr>
             <td>Registered Address</td><td> {{ Org_model.OrgAddress }} </td>
-            <td>Are you a Registered Charity?</td><td> {{ Org_model.OrgCharity }} </td>
+            <td>When did your Organisation start?</td><td>{{ Org_model.OrgStartDate }}</td>
         </tr>
         <tr>
             <td>Post Code</td><td> {{ Org_model.OrgPostcode }} </td>
@@ -70,14 +70,11 @@
         </tr>
         <tr>
             <td>Organisation Email</td><td>{{ Org_model.OrgEmail }}</td>
-            <td>When did your Organisation start?</td><td>{{ Org_model.OrgStartDate }}</td>
-        </tr>
-        <tr>
-            <td>Organisation Website</td><td>{{ Org_model.OrgWebsite }}</td>
             <td>Is your organisation open to anyone?</td><td>{{ Org_model.OrgOpen }}</td>
         </tr>
         <tr>
-            <td></td><td></td><td>If you answered no then please provide more information</td><td>{{ Org_model.OrgInfo }}</td>
+            <td>Organisation Website</td><td>{{ Org_model.OrgWebsite }}</td>
+            <td>If you answered no then please provide more information</td><td>{{ Org_model.OrgInfo }}</td>
         </tr>
     </table>
     <br>
@@ -133,8 +130,14 @@
             <td style="vertical-align: top;">Problems Solved</td><td style="vertical-align: top;">{{ Gen_model.GenProblem }}</td>
         </tr>
         <tr>
-            <td>Vulnerables Involved?</td><td>{{ Gen_model.GenVulnerables }}</td>
-            <td>Safeguards in Place?</td><td>{{ Gen_model.GenSafeguards }}</td>
+            <td>Vulnerables Involved?</td>
+            <td>
+                <input type="checkbox"  [(ngModel)]="Gen_model.GenVulnerables" disabled>
+            </td>
+            <td>Safeguards in Place?</td>
+            <td>
+                <input type="checkbox"  [(ngModel)]="Gen_model.GenSafeguards" disabled>
+            </td>
         </tr>
     </table>
     <br>

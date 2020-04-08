@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { ApiReadService } from '../../services/api.readService';
 import { ApiDeleteService } from '../../services/api.deleteService';
 
@@ -77,15 +77,15 @@ export class AppReportComponent implements OnInit {
   }
 
   deleteApp(element){
+
+    console.log(element.ApplicationId);
+    
     var msg = 'Are you absolutely sure you want to delete the ' + element.OrgName + ' application for project "' + element.GenName + '"?';
 
-     if (confirm(msg)) {
-       this.apiDelService.deleteApplication(element.ApplicationId).subscribe(()=>{
-       });
-     } 
-     else
-     { // No harm done then
-     }
+    if (confirm(msg)) {
+      this.apiDelService.deleteApplication(element.ApplicationId).subscribe(()=>{});
+      this.loadAppList();
+    } 
   }
 }
 

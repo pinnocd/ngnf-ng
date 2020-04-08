@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from  'rxjs';
+import * as myGlobals from 'globals';
 
 import { Org_model } from  '../models/Org_model';
 import { Con_model } from  '../models/Con_model';
@@ -13,15 +14,11 @@ import { Fin_model } from  '../models/Fin_model';
 })
 
 export class ApiCreateService {
-  PHP_API_SERVER = "http://ec2-35-177-242-73.eu-west-2.compute.amazonaws.com";
-//  PHP_API_SERVER = "http://localhost:8080";
-
   constructor(private httpClient: HttpClient) { }
-
 
   // Create an application row and return the application id for use in all other insertions
   createApp(){
-    return this.httpClient.get(`${this.PHP_API_SERVER}/api/post/addApp_model.php`)
+    return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/post/addApp_model.php`)
     }
 
   // Create an Org row based on the entered form data
@@ -42,7 +39,7 @@ export class ApiCreateService {
 
     console.log(params);
 
-    return this.httpClient.get<Org_model>(`${this.PHP_API_SERVER}/api/post/addOrg_model.php`, { params: params} );
+    return this.httpClient.get<Org_model>(`${myGlobals.PHP_API_SERVER}/api/post/addOrg_model.php`, { params: params} );
   }
 
   // Create a Con row based on the entered form data
@@ -66,7 +63,7 @@ export class ApiCreateService {
 
     console.log(params);
 
-    return this.httpClient.get<Con_model>(`${this.PHP_API_SERVER}/api/post/addCon_model.php`, { params: params} );
+    return this.httpClient.get<Con_model>(`${myGlobals.PHP_API_SERVER}/api/post/addCon_model.php`, { params: params} );
   }
 
   // Create a Gen row based on the entered form data
@@ -82,7 +79,7 @@ export class ApiCreateService {
       
     console.log(params);
 
-    return this.httpClient.get<Gen_model>(`${this.PHP_API_SERVER}/api/post/addGen_model.php`, { params: params} );
+    return this.httpClient.get<Gen_model>(`${myGlobals.PHP_API_SERVER}/api/post/addGen_model.php`, { params: params} );
   }
 
   // Create a Bac row based on the entered form data
@@ -96,7 +93,7 @@ export class ApiCreateService {
 
     console.log(params);
 
-    return this.httpClient.get<Bac_model>(`${this.PHP_API_SERVER}/api/post/addBac_model.php`, { params: params} );
+    return this.httpClient.get<Bac_model>(`${myGlobals.PHP_API_SERVER}/api/post/addBac_model.php`, { params: params} );
   }
 
   // Create a Fin row based on the entered form data
@@ -112,6 +109,6 @@ export class ApiCreateService {
 
     console.log(params);
 
-    return this.httpClient.get<Fin_model>(`${this.PHP_API_SERVER}/api/post/addFin_model.php`, { params: params} );
+    return this.httpClient.get<Fin_model>(`${myGlobals.PHP_API_SERVER}/api/post/addFin_model.php`, { params: params} );
   }
 }

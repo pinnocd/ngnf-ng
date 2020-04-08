@@ -86,7 +86,6 @@ export class ApplyComponent {
 
           console.log("The ApplicationId is " + AppId.toString());
 
-          console.log(this.Org_model);
           this.Org_model.ApplicationId = AppId;
           this.Con_model.ApplicationId = AppId;
           this.Gen_model.ApplicationId = AppId;

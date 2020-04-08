@@ -7,6 +7,7 @@ export class Org_class {
     public    OrgEmail: string;
     public    OrgWebsite: string;
     public    OrgType: string;
+    public    OrgTypeName: string;
     public    OrgCharity: boolean;
     public    OrgCharityNo: number;
     public    OrgStartDate: Date;
