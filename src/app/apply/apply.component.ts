@@ -60,8 +60,8 @@ export class ApplyComponent {
       this.Gen_model.GenStartDate = new Date("03/01/2020");
       this.Gen_model.GenAchieve = "Provide entertainment for the huddersfield community.";
       this.Gen_model.GenProblem = "This project will provide activities for children and young people.";
-      this.Gen_model.GenVulnerables = '1';
-      this.Gen_model.GenSafeguards = '1';
+      this.Gen_model.GenVulnerables = true;
+      this.Gen_model.GenSafeguards = false;
 
       this.Bac_model.BacNeed = "The need, vision and direction of the projects is to engage residents and visitors.";
       this.Bac_model.BacTarget = "Our overall focus is to enhance participation in community eventy.";

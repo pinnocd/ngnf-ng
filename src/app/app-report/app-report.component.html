@@ -70,7 +70,13 @@
         </tr>
         <tr>
             <td>Organisation Email</td><td>{{ Org_model.OrgEmail }}</td>
-            <td>Is your organisation open to anyone?</td><td>{{ Org_model.OrgOpen }}</td>
+            <td>Is your organisation open to anyone?</td>
+            <td>
+                <div [ngSwitch]="Org_model.OrgOpen">
+                    <ng-template [ngSwitchCase]="1">yes</ng-template>
+                    <ng-template ngSwitchDefault>no</ng-template>
+                </div>
+            </td>
         </tr>
         <tr>
             <td>Organisation Website</td><td>{{ Org_model.OrgWebsite }}</td>
@@ -132,11 +138,17 @@
         <tr>
             <td>Vulnerables Involved?</td>
             <td>
-                <input type="checkbox"  [(ngModel)]="Gen_model.GenVulnerables" disabled>
+                <div [ngSwitch]="Gen_model.GenVulnerables">
+                    <ng-template [ngSwitchCase]="1">yes</ng-template>
+                    <ng-template ngSwitchDefault>no</ng-template>
+                </div>                
             </td>
             <td>Safeguards in Place?</td>
             <td>
-                <input type="checkbox"  [(ngModel)]="Gen_model.GenSafeguards" disabled>
+                <div [ngSwitch]="Gen_model.GenSafeguards">
+                    <ng-template [ngSwitchCase]="1">yes</ng-template>
+                    <ng-template ngSwitchDefault>no</ng-template>
+                </div>                
             </td>
         </tr>
     </table>

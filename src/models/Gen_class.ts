@@ -5,7 +5,7 @@ export class Gen_class {
     public      GenStartDate: Date;
     public      GenAchieve: string;
     public      GenProblem: string;
-    public      GenVulnerables: string;
-    public      GenSafeguards: string;
+    public      GenVulnerables: boolean;
+    public      GenSafeguards: boolean;
 
 }
