@@ -28,12 +28,11 @@
                 </tr>
             </table>
             <h4 style="text-align: center;">(If you do not yet have all of the above in place, then don’t worry. Please contact us as we may be able to assist or provide advice)</h4>
-
         </mat-expansion-panel>
     </mat-accordion>
 
     <form #userForm="ngForm" class="mat-elevation-z8">
-    <mat-tab-group >
+    <mat-tab-group [(selectedIndex)]=selectedIndex>
         <!-- Organisation Details Tab -->
         <mat-tab label="Organisational Details">
             <div class="form-group">
@@ -121,6 +120,12 @@
                         </td>
                     </tr>
                 </table>
+                <br><br>
+                <mat-toolbar  class="mat-elevation-z8" style="background-color: var(--brandcolour);">
+                    <span fxFlex></span>
+                    <button mat-button class="mat-elevation-z8" (click)="selectedIndex = 1"
+                        style="background-color: white;font-size: 16px;">Next >>></button>
+                </mat-toolbar>
             </div>
         </mat-tab>
 
@@ -225,6 +230,16 @@
                         </td>
                     </tr>
                 </table>
+                <br><br>
+                <mat-toolbar  class="mat-elevation-z8" style="background-color: var(--brandcolour);">
+                    <span>
+                        <button mat-button class="mat-elevation-z8" (click)="selectedIndex = 0"
+                            style="background-color: white;font-size: 16px;"><<< Prev</button>
+                    </span>
+                    <span fxFlex></span>
+                    <button mat-button class="mat-elevation-z8" (click)="selectedIndex = 2"
+                        style="background-color: white;font-size: 16px;">Next >>></button>
+                </mat-toolbar>
             </div> 
         </mat-tab>
 
@@ -267,10 +282,20 @@
                         </td>
                         <td style="width: 20%;">If yes, do you have safeguarding procedures in place?</td>
                         <td>
-                            <input type="checkbox" name="Consafeguards" class="form-control" [(ngModel)]="Gen_model.GenSafeguards" #name="ngModel">
+                            <input type="checkbox" name="Gensafeguards" class="form-control" [(ngModel)]="Gen_model.GenSafeguards" #name="ngModel">
                         </td>
                     </tr>
                 </table>
+                <br><br>
+                <mat-toolbar  class="mat-elevation-z8" style="background-color: var(--brandcolour);">
+                    <span>
+                        <button mat-button class="mat-elevation-z8" (click)="selectedIndex = 1"
+                            style="background-color: white;font-size: 16px;"><<< Prev</button>
+                    </span>
+                    <span fxFlex></span>
+                    <button mat-button class="mat-elevation-z8" (click)="selectedIndex = 3"
+                        style="background-color: white;font-size: 16px;">Next >>></button>
+                </mat-toolbar>
             </div> 
         </mat-tab>
 
@@ -317,6 +342,16 @@
                         </td>
                     </tr>
                 </table>
+                <br><br>
+                <mat-toolbar  class="mat-elevation-z8" style="background-color: var(--brandcolour);">
+                    <span>
+                        <button mat-button class="mat-elevation-z8" (click)="selectedIndex = 2"
+                            style="background-color: white;font-size: 16px;"><<< Prev</button>
+                    </span>
+                    <span fxFlex></span>
+                    <button mat-button class="mat-elevation-z8" (click)="selectedIndex = 4"
+                        style="background-color: white;font-size: 16px;">Next >>></button>
+                </mat-toolbar>
             </div> 
         </mat-tab>
 
@@ -376,14 +411,20 @@
                     </tr>
                 </table>
                 -->
+                <br>
+                <mat-toolbar  class="mat-elevation-z8" style="background-color: var(--brandcolour);">
+                    <span>
+                        <button mat-button class="mat-elevation-z8" (click)="selectedIndex = 3"
+                            style="background-color: white;font-size: 16px;"><<< Prev</button>
+                    </span>
+                    <span fxFlex></span>
+                    <button mat-button class="mat-elevation-z8" (click)="Submit_Data()"
+                        style="background-color: white;font-size: 20px;">Submit</button>
+                </mat-toolbar>
             </div> 
         </mat-tab>
 
     </mat-tab-group>
-    <br>
-    <div class="form-group" style="text-align: center;">
-        <button class="btn btn-danger btn-block" on-click="Submit_Data()">Submit</button>
-    </div>
     <br>
     </form>
 </mat-card>

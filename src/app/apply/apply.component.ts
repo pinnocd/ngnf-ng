@@ -21,6 +21,7 @@ export class ApplyComponent {
   Fin_model = new Fin_class();
 
   infoOpenState = false;
+  selectedIndex = 0;
 
   constructor(private apiService: ApiCreateService)  {
 
@@ -99,6 +100,7 @@ export class ApplyComponent {
           this.apiService.createFin_model(this.Fin_model).subscribe(()=>{});
 
           alert("Your application has been recieved and will be processed in due course.");
+          this.selectedIndex = 0;
         }
       )
     }
