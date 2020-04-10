@@ -7,6 +7,6 @@
 <br>
 <div style="text-align: center;">
     <button style="margin:5px;" class="mat-raised-button"(click)="b1click()">{{ button1 }}</button>
-    <button style="margin:5px;" class="mat-raised-button mat-primary"(click)="b2click()">{{ button2 }}</button>
+    <button *ngIf="this.isBtn2Visible" style="margin:5px;" class="mat-raised-button mat-primary"(click)="b2click()">{{ button2 }}</button>
 </div>
 </mat-card>

@@ -50,19 +50,16 @@ export class ApplyComponent {
           this.Org_model.OrgType = "S";
           this.Org_model.OrgCharity = true;
           this.Org_model.OrgCharityNo = 1129873;
-          this.Org_model.OrgStartDate = new Date("09/02/2009");
           this.Org_model.OrgOpen = true;
           this.Org_model.OrgInfo = "n/a";
       
           this.Con_model.ConName = "Arthur Daley";
-          this.Con_model.ConDOB = new Date("31/07/1993");
           this.Con_model.ConAddress = "12 Fulham Street, London, NW8 2QS";
           this.Con_model.ConPreAddress = "";
           this.Con_model.ConLandlineNo = "";
           this.Con_model.ConOtherNo = "07710 000000";
           this.Con_model.ConEmail = "contact@hotmail.com";
           this.Con_model.ConSenName = "Senior Contact";
-          this.Con_model.ConSenDOB = new Date("02/11/1983");
           this.Con_model.ConSenAddress = "62 Letsby Road, Sheffield, SH8 1AR";
           this.Con_model.ConSenPreAddress = "";
           this.Con_model.ConSenLandlineNo = "";

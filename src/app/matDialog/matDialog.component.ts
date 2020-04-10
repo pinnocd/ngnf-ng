@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 /**
- * @title Basic use of `<table mat-table>`
+ * @title Popup dialog/alert box based on supplied MadDialogConfig data
  */
 
 @Component({
@@ -29,9 +29,8 @@ export class matDialogComponent {
       this.button1 = data.button1;
       this.button2 = data.button2;
 
-//      if (this.button2='')
-  //       {this.isBtn2Visible = false;}
-
+     if (this.button2 === "")
+         {this.isBtn2Visible = false;}
   }
 
   b1click() {
