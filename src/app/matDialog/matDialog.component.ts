@@ -18,6 +18,8 @@ export class matDialogComponent {
   button1: string;
   button2: string;
 
+  isBtn2Visible = true;
+
   constructor(
       private dialogRef: MatDialogRef<matDialogComponent>,
       @Inject(MAT_DIALOG_DATA) data) {
@@ -26,6 +28,9 @@ export class matDialogComponent {
       this.description = data.description;
       this.button1 = data.button1;
       this.button2 = data.button2;
+
+//      if (this.button2='')
+  //       {this.isBtn2Visible = false;}
 
   }
 
