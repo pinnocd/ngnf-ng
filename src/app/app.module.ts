@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from  '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from  '@angular/forms';
 
 // Add all fancy Taterial Modules
 import { MatSliderModule } from '@angular/material/slider';
@@ -18,7 +18,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
@@ -27,6 +29,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 // All our new infrastructure apps
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { matDialogComponent } from './matDialog/matDialog.component';
 
 // Project Modules
 import { TopBarComponent } from './top-bar/top-bar.component';
@@ -60,7 +63,8 @@ const appRoutes: Routes = [
     NgnfComponent,
     ApplyComponent,
     ReportComponent,
-    AppReportComponent
+    AppReportComponent,
+    matDialogComponent    
     ],
   imports: [
       BrowserModule,
@@ -68,6 +72,7 @@ const appRoutes: Routes = [
       AppRoutingModule,
       HttpClientModule,
       FormsModule,
+      ReactiveFormsModule,
       MatSliderModule,
       MatToolbarModule, 
       MatIconModule, 
@@ -79,6 +84,7 @@ const appRoutes: Routes = [
       MatListModule,
       MatTabsModule,
       MatPaginatorModule,
+      MatDialogModule,
       MatMenuModule,
       FlexLayoutModule,
       MatSelectModule,
@@ -90,6 +96,8 @@ const appRoutes: Routes = [
       [RouterModule],
   bootstrap: 
       [AppComponent],
+  entryComponents:
+      [matDialogComponent],
   providers: []
 })
 

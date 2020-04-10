@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ApiReadService } from '../../services/api.readService';
 import { ApiDeleteService } from '../../services/api.deleteService';
+import { matDialogComponent } from '../matDialog/matDialog.component';
 
 import { App_model } from  '../../models/App_model';
 import { Org_model } from  '../../models/Org_model';
@@ -11,9 +13,13 @@ import { Gen_model } from  '../../models/Gen_model';
 import { Bac_model } from  '../../models/Bac_model';
 import { Fin_model } from  '../../models/Fin_model';
 
+import { ApplData } from '../../interfaces/globalinterfaces';
+
 /**
  * @title Basic use of `<table mat-table>`
  */
+
+
 @Component({
   selector: 'app-app-report',
   styleUrls: ['app-report.component.css'],
@@ -38,7 +44,7 @@ export class AppReportComponent implements OnInit {
   Bac_models:  Bac_model[];
   Fin_models:  Fin_model[];
 
-  constructor(private apiService: ApiReadService, private apiDelService: ApiDeleteService) { }
+  constructor(private apiService: ApiReadService, private apiDelService: ApiDeleteService, public dialog: MatDialog) { }
 
   // Initial load of all applications
   loadAppList() {
@@ -76,26 +82,32 @@ export class AppReportComponent implements OnInit {
     })
   }
 
-  deleteApp(element){
+  deleteApp(element): void {
 
-    console.log(element.ApplicationId);
-    
-    var msg = 'Are you absolutely sure you want to delete the ' + element.OrgName + ' application for project "' + element.GenName + '"?';
+    const dialogConfig = new MatDialogConfig();
 
-    if (confirm(msg)) {
-      this.apiDelService.deleteApplication(element.ApplicationId).subscribe(()=>{});
-      this.loadAppList();
-    } 
-  }
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "600px";
+    dialogConfig.data = {
+      title: 'Please Confirm',
+      description: 'Are you absolutely sure you want to delete the ' + element.OrgName + ' application for project "' + element.GenName + '"?',
+      button1: 'Yes',
+      button2: 'No'
+    };
+
+    const diaret = this.dialog.open(matDialogComponent, dialogConfig);
+
+    diaret.afterClosed().subscribe(
+      data => { 
+        if (data) {
+          this.apiDelService.deleteApplication(element.ApplicationId).subscribe(()=>{});
+          this.loadAppList();
+        } 
+      }
+    );
+  }  
 }
 
 var ELEMENT_DATA: ApplData[];
 
-export interface ApplData{
-  ApplicationId: number;
-  OrgName: string;
-  GenName: string;
-  GenStartDate: Date;
-  Status: string;
-  InsertDateTime: Date;
-}
