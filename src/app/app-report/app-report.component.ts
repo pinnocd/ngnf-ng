@@ -14,6 +14,7 @@ import { Bac_model } from  '../../models/Bac_model';
 import { Fin_model } from  '../../models/Fin_model';
 
 import { ApplData } from '../../interfaces/globalinterfaces';
+import { listLazyRoutes } from '@angular/compiler/src/aot/lazy_routes';
 
 /**
  * @title Basic use of `<table mat-table>`
@@ -103,6 +104,11 @@ export class AppReportComponent implements OnInit {
         if (data) {
           this.apiDelService.deleteApplication(element.ApplicationId).subscribe(()=>{});
           this.loadAppList();
+          this.Org_models.length = 0;
+          this.Con_models.length = 0;
+          this.Gen_models.length = 0;
+          this.Bac_models.length = 0;
+          this.Fin_models.length = 0;        
         } 
       }
     );

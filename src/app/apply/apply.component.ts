@@ -50,16 +50,19 @@ export class ApplyComponent {
           this.Org_model.OrgType = "S";
           this.Org_model.OrgCharity = true;
           this.Org_model.OrgCharityNo = 1129873;
+          this.Org_model.OrgStartDate = new Date("");
           this.Org_model.OrgOpen = true;
           this.Org_model.OrgInfo = "n/a";
       
           this.Con_model.ConName = "Arthur Daley";
+          this.Con_model.ConDOB = new Date("");
           this.Con_model.ConAddress = "12 Fulham Street, London, NW8 2QS";
           this.Con_model.ConPreAddress = "";
           this.Con_model.ConLandlineNo = "";
           this.Con_model.ConOtherNo = "07710 000000";
           this.Con_model.ConEmail = "contact@hotmail.com";
           this.Con_model.ConSenName = "Senior Contact";
+          this.Con_model.ConSenDOB = new Date("");
           this.Con_model.ConSenAddress = "62 Letsby Road, Sheffield, SH8 1AR";
           this.Con_model.ConSenPreAddress = "";
           this.Con_model.ConSenLandlineNo = "";
@@ -67,7 +70,7 @@ export class ApplyComponent {
           this.Con_model.ConSenEmail = "seniorcont@hotmail.co.uk";
 
           this.Gen_model.GenName = "Huddersfield School";
-          this.Gen_model.GenStartDate = new Date("03/01/2020");
+          this.Gen_model.GenStartDate = new Date("");
           this.Gen_model.GenAchieve = "Provide entertainment for the huddersfield community.";
           this.Gen_model.GenProblem = "This project will provide activities for children and young people.";
           this.Gen_model.GenVulnerables = true;
@@ -103,32 +106,36 @@ export class ApplyComponent {
     diaret.afterClosed().subscribe(
       data => { 
         if (data) {
-          this.apiService.createApp().subscribe(ApplicationId => {
-              var AppId: number;
-              AppId = ApplicationId as number;
 
-              console.log("The ApplicationId is " + AppId.toString());
+          try{
+              this.apiService.createApp().subscribe(ApplicationId => {
+                  var AppId: number;
+                  AppId = ApplicationId as number;
 
-              this.Org_model.ApplicationId = AppId;
-              this.Con_model.ApplicationId = AppId;
-              this.Gen_model.ApplicationId = AppId;
-              this.Bac_model.ApplicationId = AppId;
-              this.Fin_model.ApplicationId = AppId;
+                  console.log("The ApplicationId is " + AppId.toString());
 
-              this.apiService.createOrg_model(this.Org_model).subscribe(()=>{});
-              this.apiService.createCon_model(this.Con_model).subscribe(()=>{});
-              this.apiService.createGen_model(this.Gen_model).subscribe(()=>{});
-              this.apiService.createBac_model(this.Bac_model).subscribe(()=>{});
-              this.apiService.createFin_model(this.Fin_model).subscribe(()=>{});
+                  this.Org_model.ApplicationId = AppId;
+                  this.Con_model.ApplicationId = AppId;
+                  this.Gen_model.ApplicationId = AppId;
+                  this.Bac_model.ApplicationId = AppId;
+                  this.Fin_model.ApplicationId = AppId;
 
-              dialogConfig.data = {
-                title: 'Confirmation', description: 'Your application has been recieved and will be processed in due course.'
-                , button1: 'OK', button2: '' 
-              };
-              this.dialog.open(matDialogComponent, dialogConfig);
-              this.selectedIndex = 0;
+                  this.apiService.createOrg_model(this.Org_model).subscribe(()=>{});
+                  this.apiService.createCon_model(this.Con_model).subscribe(()=>{});
+                  this.apiService.createGen_model(this.Gen_model).subscribe(()=>{});
+                  this.apiService.createBac_model(this.Bac_model).subscribe(()=>{});
+                  this.apiService.createFin_model(this.Fin_model).subscribe(()=>{});
+
+                  dialogConfig.data = {
+                    title: 'Confirmation', description: 'Thank you for your Application.  It has been recieved successfully and will be processed in due course.'
+                    , button1: 'OK', button2: '' 
+                  };
+                  this.dialog.open(matDialogComponent, dialogConfig);
+                  this.selectedIndex = 0;
+              })
+            } catch (e) {
+            alert("There was a problem saving your data, please contact admin@ngnf.co.uk");
           }
-          )
         }
       }
     )
