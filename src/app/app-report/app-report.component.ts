@@ -49,7 +49,7 @@ export class AppReportComponent implements OnInit {
   // Initial load of all applications
   loadAppList() {
     // update data in data source when available
-    this.apiService.readApplications().subscribe(newData => this.dataSource.data = newData);
+    this.apiService.readApplications(null).subscribe(newData => this.dataSource.data = newData);
   }
 
   // An application has been selected in the list, so refresh all data
