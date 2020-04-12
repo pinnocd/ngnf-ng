@@ -4,11 +4,23 @@
             style="background-color: white; font-size: 16px; margin:5px;">NGNF</button>
     </span>
     <span fxFlex></span>
-    <button mat-button class="mat-elevation-z8" routerLink="/appReport"
+    <button mat-button class="mat-elevation-z8" *ngIf="globals.applibtn" routerLink="/appReport"
         style="background-color: white; font-size: 16px; margin:5px;">Applications</button>
 
-    <button mat-button class="mat-elevation-z8"  routerLink="/apply"
+    <button mat-button class="mat-elevation-z8" *ngIf="globals.applybtn" routerLink="/apply"
         style="background-color: white; font-size: 16px; margin:5px;">Apply</button>
+
+    <button mat-button class="mat-elevation-z8" *ngIf="globals.loginbtn" routerLink="/login" routerLinkActive="active" 
+        style="background-color: white; font-size: 16px; margin:5px;">Login</button>
+
+    <button mat-button class="mat-elevation-z8" *ngIf="globals.logoutbtn" (click)="logout()" 
+        style="background-color: white; font-size: 16px; margin:5px;">Logout</button>
+
+    <button mat-button class="mat-elevation-z8" *ngIf="globals.loginbtn" routerLink="/registration" routerLinkActive="active" 
+        style="background-color: white; font-size: 16px; margin:5px;">Register</button>
+
+    <button mat-button class="mat-elevation-z8" *ngIf="globals.logoutbtn" routerLink="/myaccount" routerLinkActive="active" 
+        style="background-color: white; font-size: 16px; margin:5px;">Dashboard</button>
 
 </mat-toolbar>
 

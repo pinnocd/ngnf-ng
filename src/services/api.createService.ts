@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { ApiAdminService } from './api.adminService';
 import { Observable } from  'rxjs';
 import * as myGlobals from 'globals';
 
@@ -14,11 +15,14 @@ import { Fin_model } from  '../models/Fin_model';
 })
 
 export class ApiCreateService {
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private adminService: ApiAdminService) { }
 
   // Create an application row and return the application id for use in all other insertions
   createApp(){
-    return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/post/addApp_model.php`)
+    let params = new HttpParams()
+        .set('UserId', this.adminService.getToken());
+
+    return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/post/addApp_model.php`, { params: params})
     }
 
   // Create an Org row based on the entered form data

@@ -19,8 +19,9 @@ export class ApiReadService {
 
   // ************************  START READ Functions  ************************ 
   // Retrieve All Applications
-  readApplications(): Observable<App_model[]>{
-    return this.httpClient.get<App_model[]>(`${myGlobals.PHP_API_SERVER}/api/get/getApplications.php`);
+  readApplications(UserId): Observable<App_model[]>{
+    let params = new HttpParams().set('UserId', UserId);
+    return this.httpClient.get<App_model[]>(`${myGlobals.PHP_API_SERVER}/api/get/getApplications.php`, { params: params} );
   }
 
   // Retrieve All Organisation model data

@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ApiReadService } from '../../services/api.readService';
 import { ApiDeleteService } from '../../services/api.deleteService';
+import { ApiAdminService } from '../../services/api.adminService';
 import { matDialogComponent } from '../matDialog/matDialog.component';
 
 import { App_model } from  '../../models/App_model';
@@ -21,12 +22,12 @@ import { ApplData } from '../../interfaces/globalinterfaces';
 
 
 @Component({
-  selector: 'app-app-report',
-  styleUrls: ['app-report.component.css'],
-  templateUrl: 'app-report.component.html',
+  selector: 'app-dashboard',
+  styleUrls: ['dashboard.component.css'],
+  templateUrl: 'dashboard.component.html',
 })
 
-export class AppReportComponent implements OnInit {
+export class DashboardComponent implements OnInit {
   displayedColumns: string[] = ['ApplicationId', 'OrgName', 'GenName', 'GenStartDate', 'Status', 'InsertDateTime', 'Delete'];
   dataSource = new MatTableDataSource<ApplData>(ELEMENT_DATA);
   
@@ -44,12 +45,19 @@ export class AppReportComponent implements OnInit {
   Bac_models:  Bac_model[];
   Fin_models:  Fin_model[];
 
-  constructor(private apiService: ApiReadService, private apiDelService: ApiDeleteService, public dialog: MatDialog) { }
+  constructor(private apiService: ApiReadService, private apiDelService: ApiDeleteService,
+              private adminService: ApiAdminService, public dialog: MatDialog) { }
 
   // Initial load of all applications
   loadAppList() {
     // update data in data source when available
-    this.apiService.readApplications().subscribe(newData => this.dataSource.data = newData);
+    console.log(this.adminService.getToken());
+    var UserId: number;
+    UserId = parseInt(this.adminService.getToken());
+    this.apiService.readApplications(UserId)
+      .subscribe(newData => this.dataSource.data = newData)
+      ;
+
   }
 
   // An application has been selected in the list, so refresh all data
@@ -115,4 +123,3 @@ export class AppReportComponent implements OnInit {
 }
 
 var ELEMENT_DATA: ApplData[];
-

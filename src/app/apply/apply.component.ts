@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { matDialogComponent } from '../matDialog/matDialog.component';
 import { ApiCreateService } from '../../services/api.createService';
@@ -25,7 +26,7 @@ export class ApplyComponent {
   infoOpenState = false;
   selectedIndex = 0;
 
-  constructor(private apiService: ApiCreateService, public dialog: MatDialog )  {
+  constructor(private apiService: ApiCreateService, public dialog: MatDialog, private router: Router )  {
 
     const dialogConfig = new MatDialogConfig();
 
@@ -132,6 +133,8 @@ export class ApplyComponent {
                   };
                   this.dialog.open(matDialogComponent, dialogConfig);
                   this.selectedIndex = 0;
+                  this.router.navigate(['/myaccount']);
+
               })
             } catch (e) {
             alert("There was a problem saving your data, please contact admin@ngnf.co.uk");

@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from  '@angular/forms';
+import { AuthguardGuard } from './authguard.guard';
 
 // Add all fancy Taterial Modules
 import { MatSliderModule } from '@angular/material/slider';
@@ -42,13 +43,22 @@ import { NgnfComponent } from './ngnf/ngnf.component';
 import { ApplyComponent } from './apply/apply.component';
 import { ReportComponent } from './report/report.component';
 import { AppReportComponent } from './app-report/app-report.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 // Define all routes necessary
 const appRoutes: Routes = [
   { path: '', component: NgnfComponent },
-  { path: 'apply', component: ApplyComponent },
-  { path: 'report', component: ReportComponent },
-  { path: 'appReport', component: AppReportComponent }
+  { path: 'apply', component: ApplyComponent, canActivate: [AuthguardGuard] },
+  { path: 'report', component: ReportComponent, canActivate: [AuthguardGuard] },
+  { path: 'appReport', component: AppReportComponent, canActivate: [AuthguardGuard] },
+
+  { path: 'login', component: LoginComponent },
+//  { path: 'home', component: HomeComponent },
+  { path: 'registration', component: RegisterComponent },
+  { path: 'myaccount', component: DashboardComponent, canActivate: [AuthguardGuard] }
+
 ];
 
 @NgModule({
@@ -64,7 +74,10 @@ const appRoutes: Routes = [
     ApplyComponent,
     ReportComponent,
     AppReportComponent,
-    matDialogComponent    
+    matDialogComponent,
+    LoginComponent,
+    RegisterComponent,
+    DashboardComponent    
     ],
   imports: [
       BrowserModule,
