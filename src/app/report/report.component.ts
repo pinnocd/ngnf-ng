@@ -35,7 +35,7 @@ ngOnInit() {
 
   // Initial load of all applications
   loadAppList() {
-    this.apiService.readApplications().subscribe((App_models: App_model[])=>{
+    this.apiService.readAllApps().subscribe((App_models: App_model[])=>{
       this.App_models = App_models;
       console.log(this.App_models);
       console.log('Initial Application list loaded');
