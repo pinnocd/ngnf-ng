@@ -18,10 +18,15 @@ export class ApiReadService {
   constructor(private httpClient: HttpClient) { }
 
   // ************************  START READ Functions  ************************ 
-  // Retrieve All Applications
+  // Retrieve All Applications for the specific user
   readApplications(UserId): Observable<App_model[]>{
     let params = new HttpParams().set('UserId', UserId);
     return this.httpClient.get<App_model[]>(`${myGlobals.PHP_API_SERVER}/api/get/getApplications.php`, { params: params} );
+  }
+
+  // Retrieve All Applications for the specific user
+  readAllApps(): Observable<App_model[]>{
+    return this.httpClient.get<App_model[]>(`${myGlobals.PHP_API_SERVER}/api/get/getApplications.php`);
   }
 
   // Retrieve All Organisation model data
