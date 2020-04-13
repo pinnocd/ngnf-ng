@@ -14,5 +14,5 @@
         mysqli_stmt_execute($call);
 
         // retrieve returned value
-        return "SUCCESS";
+        return true;
 ?>
