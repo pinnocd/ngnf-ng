@@ -1,5 +1,5 @@
 <mat-card>
-    <mat-card-title style="text-align: center;"><h3><b>Application Report</b></h3></mat-card-title>
+    <mat-card-title style="text-align: center;"><h3><b>My Applications</b></h3></mat-card-title>
     
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource">
@@ -47,155 +47,405 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row class="table-row" *matRowDef="let row; columns: displayedColumns;" (click)="selectApp(row)"></tr>
         </table>
-      
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        <table>
+            <tr>
+                <td><button mat-button class="mat-elevation-z8" (click)="newApp()"
+                    style="background-color: white; font-size: 16px; margin:5px;">New Application</button>
+                </td>
+                <td><mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator></td>
+            </tr>
+        </table>
       </div>
+
+      <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title><h3>Help</h3></mat-panel-title>
+            </mat-expansion-panel-header>
+            <h3 style="text-align: center;">To apply you should have:</h3>
+            <table style="text-align: center;">
+                <tr style="text-align: left;">
+                    <td style="width: 20%;"></td>
+                    <td>
+                        <ul style="list-style-type:disc;">
+                            <li>An overview of your existing project and/or a clear idea why you want to set up this project</li>
+                            <li>Understanding of what activities you will need to deliver to meet your aims and objectives</li>
+                            <li>A management committee of at least 3 people (chair, secretary, treasurer)</li>
+                            <li>Ideally a name for your project</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul style="list-style-type:disc;">
+                            <li>A constitution</li>
+                            <li>Minutes of committee or group meetings</li>
+                            <li>An organisation bank/building society account</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+            <h4 style="text-align: center;">(If you do not yet have all of the above in place, then don’t worry. Please contact us as we may be able to assist or provide advice)</h4>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <form #userForm="ngForm" class="mat-elevation-z8">
+        <mat-tab-group [(selectedIndex)]=selectedIndex>
+            <!-- Organisation Details Tab -->
+            <mat-tab label="Organisational Details">
+                <div class="form-group">
+                    <table width=100%>
+                        <tr> 
+                            <td style="width: 10%;">Name of Organisation</td>
+                            <td style="width: 30%;">
+                                <input type="text" style="width: 80%" name="Orgname" class="form-control" [(ngModel)]="Org_model.OrgName" #name="ngModel">
+                            </td>
+                            <td style="width: 15%;">Type of Organisation</td>
+                            <td>
+                                <select name="Orgtype" class="form-control" [(ngModel)]="Org_model.OrgType" #name="ngModel">
+                                    <option value="C">Charity</option>
+                                    <option value="H">Health body</option>
+                                    <option value="P">Parish or town council</option>
+                                    <option value="S">School</option>    
+                                    <option value="V">Voluntary or Community</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Registered Address</td>
+                            <td>
+                                <input type="textarea" style="width: 100%" name="Orgaddress" class="form-control" [(ngModel)]="Org_model.OrgAddress" #name="ngModel"
+                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                    <p *ngIf="name.errors.required">Organisation Address is required</p>
+                                </div>
+                            </td>
+                            <td>If you are a charity, please provide your charity number</td>
+                            <input type="number" name="Orgcharity_no" class="form-control" [(ngModel)]="Org_model.OrgCharityNo" #name="ngModel"
+                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                <p *ngIf="name.errors.required">Org Charity number is required</p>
+                            </div>
+                        <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Post Code</td>
+                            <td>
+                                <input type="text" name="Orgpostcode" class="form-control" [(ngModel)]="Org_model.OrgPostcode" #name="ngModel"
+                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                    <p *ngIf="name.errors.required">The Post Code is required</p>
+                                </div>
+                            </td>
+                            <td>When did your Organisation start?</td>
+                            <td>
+                                <input type="date" name="Orgstart_date" class="form-control" [(ngModel)]="Org_model.OrgStartDate" #name="ngModel"
+                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                    <p *ngIf="name.errors.required">Org start date is required</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Organisation Email</td>
+                            <td>
+                                <input type="email" style="width: 80%" name="Orgemail" class="form-control" [(ngModel)]="Org_model.OrgEmail" #name="ngModel"
+                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                    <p *ngIf="name.errors.required">Email is required</p>
+                                </div>
+                            </td>
+                            <td>Is your organisation open to anyone?</td>
+                            <td>
+                                <input type="checkbox" name="Orgopen" class="form-control" [(ngModel)]="Org_model.OrgOpen" #name="ngModel">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Organisation Website</td>
+                            <td>
+                                <input type="url" style="width: 100%" name="Orgwebsite" class="form-control" [(ngModel)]="Org_model.OrgWebsite" #name="ngModel"
+                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                    <p *ngIf="name.errors.required">Website is required</p>
+                                </div>
+                            </td>
+                            <td style="vertical-align: top;">If you answered no then please provide more information</td>
+                            <td>
+                                <textarea id="w3mission" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Orginfo" class="form-control" [(ngModel)]="Org_model.OrgInfo" #name="ngModel">
+                                    At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
+                                </textarea>
+                            </td>
+                        </tr>
+                    </table>
+                    <br><br>
+                    <mat-toolbar  class="mat-elevation-z8" style="background-color: var(--brandcolour);">
+                        <span fxFlex></span>
+                        <button mat-button class="mat-elevation-z8" (click)="selectedIndex = 1"
+                            style="background-color: white;font-size: 16px;">Next >>></button>
+                    </mat-toolbar>
+                </div>
+            </mat-tab>
+
+            <!-- Contact Details Tab -->
+            <mat-tab label="Contact Details">
+                <div class="form-group">
+                    <table width=100%>
+                        <tr>
+                            <td style="width: 15%;">Who will be the main contact for the application?</td>
+                            <td style="width: 35%;">
+                                <input type="text" name="Conname" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConName" #name="ngModel"
+                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                    <p *ngIf="name.errors.required">Contact Name is required</p>
+                                </div>
+                            </td>
+                            <td style="width: 15%;">Email</td>
+                            <td>
+                                <input type="email" name="Conemail" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConEmail" #name="ngModel">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 10%;">Address</td>
+                            <td>
+                                <input style="width: 100%;" type="text" name="Conaddress" class="form-control" [(ngModel)]="Con_model.ConAddress" #name="ngModel"
+                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                    <p *ngIf="name.errors.required">Contact Address is required</p>
+                                </div>
+                            </td>
+                            <td style="width: 10%;">Please provide Previous Address if resident less than 3 years</td>
+                            <td>
+                                <input style="width: 100%;" type="text" name="Conpreaddress" class="form-control" [(ngModel)]="Con_model.ConPreAddress" #name="ngModel"
+                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                    <p *ngIf="name.errors.required">Contact Previous Address is required</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Land Line Telephone Number</td>
+                            <td>
+                                <input type="tel" name="Conlandlineno" class="form-control" [(ngModel)]="Con_model.ConLandlineNo" #name="ngModel">
+                            </td>
+                            <td>Other Telephone Number</td>
+                            <td>
+                                <input type="tel" name="Conotherno" class="form-control" [(ngModel)]="Con_model.ConOtherNo" #name="ngModel">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>D.O.B.</td>
+                            <td>
+                                <input type="date" name="Condob" class="form-control" [(ngModel)]="Con_model.ConDOB" #name="ngModel">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Who is the senior contact? (normally someone who has the role of chair, treasurer, secretary etc)</td>
+                            <td>
+                                <input type="text" name="Consenname" class="form-control" [(ngModel)]="Con_model.ConSenName" #name="ngModel"
+                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                    <p *ngIf="name.errors.required">Senion Contact Name is required</p>
+                                </div>
+                            </td>
+                            <td>Senior Contact Email</td>
+                            <td>
+                                <input type="email" name="Consenemail" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConSenEmail" #name="ngModel">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Senior Contact Address</td>
+                            <td>
+                                <input style="width: 100%;" type="text" name="Consenaddress" class="form-control" [(ngModel)]="Con_model.ConSenAddress" #name="ngModel"
+                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                    <p *ngIf="name.errors.required">Senior Contact Address is required</p>
+                                </div>
+                            </td>
+                            <td>Please provide Previous Address if resident less than 3 years</td>
+                            <td>
+                                <input style="width: 100%;" type="text" name="Consenpreaddress" class="form-control" [(ngModel)]="Con_model.ConSenPreAddress" #name="ngModel"
+                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                    <p *ngIf="name.errors.required">Senior Contact Previous Address is required</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Land Line Telephone Number</td>
+                            <td>
+                                <input type="tel" name="Consenlandlineno" class="form-control" [(ngModel)]="Con_model.ConSenLandlineNo" #name="ngModel">
+                            </td>
+                            <td style="width: 10%;">Other Telephone Number</td>
+                            <td>
+                                <input type="tel" name="Consenotherno" class="form-control" [(ngModel)]="Con_model.ConSenOtherNo" #name="ngModel">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 10%;">D.O.B.</td>
+                            <td>
+                                <input type="date" name="Consendob" class="form-control" [(ngModel)]="Con_model.ConSenDOB" #name="ngModel">
+                            </td>
+                        </tr>
+                    </table>
+                    <br><br>
+                    <mat-toolbar  class="mat-elevation-z8" style="background-color: var(--brandcolour);">
+                        <span>
+                            <button mat-button class="mat-elevation-z8" (click)="selectedIndex = 0"
+                                style="background-color: white;font-size: 16px;"><<< Prev</button>
+                        </span>
+                        <span fxFlex></span>
+                        <button mat-button class="mat-elevation-z8" (click)="selectedIndex = 2"
+                            style="background-color: white;font-size: 16px;">Next >>></button>
+                    </mat-toolbar>
+                </div> 
+            </mat-tab>
     
-        <!-- Organisational Details Section -->
-        <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Org_model of Org_models">
-            <caption><h3><b>Organisational Details</b></h3></caption>
-            <tr>
-                <td style="width: 10%;">Name of Organisation</td>            
-                <td style="width: 40%;">{{ Org_model.OrgName }}</td>
-                <td style="width: 20%;">Type of Organisation</td>            
-                <td> {{ Org_model.OrgTypeName }} </td>
-            </tr>
-            <tr>
-                <td>Registered Address</td><td> {{ Org_model.OrgAddress }} </td>
-                <td>When did your Organisation start?</td><td>{{ Org_model.OrgStartDate }}</td>
-            </tr>
-            <tr>
-                <td>Post Code</td><td> {{ Org_model.OrgPostcode }} </td>
-                <td>Charity Number</td><td>{{ Org_model.OrgCharityNo }}</td>
-            </tr>
-            <tr>
-                <td>Organisation Email</td><td>{{ Org_model.OrgEmail }}</td>
-                <td>Is your organisation open to anyone?</td>
-                <td>
-                    <div [ngSwitch]="Org_model.OrgOpen">
-                        <ng-template [ngSwitchCase]="1">yes</ng-template>
-                        <ng-template ngSwitchDefault>no</ng-template>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Organisation Website</td><td>{{ Org_model.OrgWebsite }}</td>
-                <td>If you answered no then please provide more information</td><td>{{ Org_model.OrgInfo }}</td>
-            </tr>
-        </table>
+            <!-- General Project Information Tab -->
+            <mat-tab label="General Project Information">
+                <div class="form-group">
+                    <table width=100%>
+                        <tr>
+                            <td style="width: 15%;">What is the name of your project?</td>
+                            <td style="width: 30%;">
+                                <input type="text" name="Genname" style="width: 90%;" class="form-control" [(ngModel)]="Gen_model.GenName" #name="ngModel"
+                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                    <p *ngIf="name.errors.required">Project Name is required</p>
+                                </div>
+                            </td>
+                            <td style="width: 25%;">When do you think the start date of you project would be?</td>
+                            <td>
+                                <input type="date" name="Constartdate"  class="form-control" [(ngModel)]="Gen_model.GenStartDate" #name="ngModel">
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td style="width: 50%;">What do you want this project to achieve? 
+                                <textarea id="Genachieve" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Genachieve" class="form-control" [(ngModel)]="Gen_model.GenAchieve" #name="ngModel">
+                                </textarea>
+                            </td>
+                            <td>What problems do you believe your project will address?
+                                <textarea id="Genproblem" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Genproblem" class="form-control" [(ngModel)]="Gen_model.GenProblem" #name="ngModel">
+                                </textarea>
+                            </td>
+                        </tr>
+                    </table>
+                    <table width=100%>
+                        <tr>
+                            <td style="width: 25%;">Will your project involve working with children; young people under 18 or vulnerable adults?</td>
+                            <td style="width: 20%;">
+                                <input type="checkbox" name="Genvulnerables" class="form-control" [(ngModel)]="Gen_model.GenVulnerables" #name="ngModel">
+                            </td>
+                            <td style="width: 20%;">If yes, do you have safeguarding procedures in place?</td>
+                            <td>
+                                <input type="checkbox" name="Gensafeguards" class="form-control" [(ngModel)]="Gen_model.GenSafeguards" #name="ngModel">
+                            </td>
+                        </tr>
+                    </table>
+                    <br><br>
+                    <mat-toolbar  class="mat-elevation-z8" style="background-color: var(--brandcolour);">
+                        <span>
+                            <button mat-button class="mat-elevation-z8" (click)="selectedIndex = 1"
+                                style="background-color: white;font-size: 16px;"><<< Prev</button>
+                        </span>
+                        <span fxFlex></span>
+                        <button mat-button class="mat-elevation-z8" (click)="selectedIndex = 3"
+                            style="background-color: white;font-size: 16px;">Next >>></button>
+                    </mat-toolbar>
+                </div> 
+            </mat-tab>
+    
+            <!-- Background Details Tab -->
+            <mat-tab label="Background and Further project detail"> 
+                <div class="form-group">
+                    <table>
+                        <tr>
+                            <td>
+                                Tell us why there is a need for your project?
+                                <br>
+                                <br>
+                                • Please include any primary research you have performed to evidence the need for your project. This can be questionnaires, surveys, discussion groups, statistical info etc.
+                                <textarea id="Bacneed" rows="4" cols="50" style="width: 100%;height: 2cm;" name="Bacneed" class="form-control" [(ngModel)]="Bac_model.BacNeed" #name="ngModel">
+                                </textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                • Who are you specifically targeting?
+                                <textarea id="Bactarget" rows="4" cols="50" style="width: 100%;height: 2cm;" name="Bactarget" class="form-control" [(ngModel)]="Bac_model.BacTarget" #name="ngModel">
+                                </textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                • What activities will you undertake as part of this project?
+                                <textarea id="Bacactivities" rows="4" cols="50" style="width: 100%;height: 2cm;" name="Bacactivities" class="form-control" [(ngModel)]="Bac_model.BacActivities" #name="ngModel">
+                                </textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                • Why do you consider that your organisation can deliver this project? 
+                                <textarea id="Bacdeliver" rows="4" cols="50" style="width: 100%;height: 2cm;" name="Bacdeliver" class="form-control" [(ngModel)]="Bac_model.BacDeliver" #name="ngModel">
+                                </textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                • Will service users or volunteers be involved in the day to day running of the project? If so then please provide more details.
+                                <textarea id="Bacusers" rows="4" cols="50" style="width: 100%;height: 2cm;" name="Bacusers" class="form-control" [(ngModel)]="Bac_model.BacUsers" #name="ngModel">
+                                </textarea>
+                            </td>
+                        </tr>
+                    </table>
+                    <br><br>
+                    <mat-toolbar  class="mat-elevation-z8" style="background-color: var(--brandcolour);">
+                        <span>
+                            <button mat-button class="mat-elevation-z8" (click)="selectedIndex = 2"
+                                style="background-color: white;font-size: 16px;"><<< Prev</button>
+                        </span>
+                        <span fxFlex></span>
+                        <button mat-button class="mat-elevation-z8" (click)="selectedIndex = 4"
+                            style="background-color: white;font-size: 16px;">Next >>></button>
+                    </mat-toolbar>
+                </div> 
+            </mat-tab>
+    
+            <!-- Financial Details Tab -->
+            <mat-tab label="Financial Information">
+                <div class="form-group">
+                    <table style="width: 100%;">
+                        • What is the estimated cost of your project:
+                        <br>
+                        <br>
+                        <tr>
+                            <td style="width: 50%;" >Activity</td>
+                            <td>Cost</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" style="width: 100%;" name="Finactivity" class="form-control" [(ngModel)]="Fin_model.FinActivity" #name="ngModel">
+                            </td>
+                            <td>
+                                <input type="text" style="width: 10%;" name="Fincost" class="form-control" [(ngModel)]="Fin_model.FinCost" #name="ngModel">
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <mat-toolbar  class="mat-elevation-z8" style="background-color: var(--brandcolour);">
+                        <span>
+                            <button mat-button class="mat-elevation-z8" (click)="selectedIndex = 3"
+                                style="background-color: white;font-size: 16px;"><<< Prev</button>
+                        </span>
+                        <span fxFlex></span>
+                        <button mat-button class="mat-elevation-z8" (click)="Submit_Data()"
+                            style="background-color: white;font-size: 20px;">Submit</button>
+                    </mat-toolbar>
+                </div> 
+            </mat-tab>
+    
+        </mat-tab-group>
         <br>
+    </form>
     
-        <!-- Contact Details Section -->
-        <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Con_model of Con_models">
-            <caption><h3><b>Contact Details</b></h3></caption>
-            <tr>
-                <td style="width: 10%;">Contact Name</td>       <td style="width: 40%;">{{ Con_model.ConName }}</td>
-                <td style="width: 10%;">Email</td>              <td>{{ Con_model.ConEmail }}</td>
-            </tr>
-            <tr>
-                <td>Address</td><td> {{ Con_model.ConAddress }} </td>
-                <td>Previous Address</td><td> {{ Con_model.ConPreAddress }} </td>
-            </tr>
-            <tr>
-                <td>Land line Number</td><td> {{ Con_model.ConLandlineNo }} </td>
-                <td>Other Phone Number</td><td>{{ Con_model.ConOtherNo }}</td>
-            </tr>
-            <tr>
-                <td>D.O.B.</td><td>{{ Con_model.ConDOB }}</td>
-                <td></td><td></td>
-            </tr>
-            <tr>
-                <td>Senior Contact Name</td>    <td>{{ Con_model.ConSenName }}</td>
-                <td>Senior Email</td>           <td>{{ Con_model.ConSenEmail }}</td>
-            </tr>
-            <tr>
-                <td>Senior Address</td><td> {{ Con_model.ConSenAddress }} </td>
-                <td>Senior Previous Address</td><td> {{ Con_model.ConSenPreAddress }} </td>
-            </tr>
-            <tr>
-                <td>Senior Land line Number</td><td> {{ Con_model.ConSenLandlineNo }} </td>
-                <td>Senior Other Phone Number</td><td>{{ Con_model.ConSenOtherNo }}</td>
-            </tr>
-            <tr>
-                <td>Senior D.O.B.</td><td>{{ Con_model.ConSenDOB }}</td>
-                <td></td><td></td>
-            </tr>
-        </table>
-        <br>
-    
-        <!-- General Project Information Section -->
-        <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Gen_model of Gen_models">
-            <caption><h3><b>General Project Information</b></h3></caption>
-            <tr>
-                <td style="width: 10%;">Project Name</td>       <td style="width: 30%;">{{ Gen_model.GenName }}</td>
-                <td style="width: 10%;">Start Date</td>         <td>{{ Gen_model.GenStartDate }}</td>
-            </tr>
-    
-            <tr>
-                <td style="vertical-align: top;">Expected Achievements</td><td style="vertical-align: top;"> {{ Gen_model.GenAchieve }} </td>
-                <td style="vertical-align: top;">Problems Solved</td><td style="vertical-align: top;">{{ Gen_model.GenProblem }}</td>
-            </tr>
-            <tr>
-                <td>Vulnerables Involved?</td>
-                <td>
-                    <div [ngSwitch]="Gen_model.GenVulnerables">
-                        <ng-template [ngSwitchCase]="1">yes</ng-template>
-                        <ng-template ngSwitchDefault>no</ng-template>
-                    </div>                
-                </td>
-                <td>Safeguards in Place?</td>
-                <td>
-                    <div [ngSwitch]="Gen_model.GenSafeguards">
-                        <ng-template [ngSwitchCase]="1">yes</ng-template>
-                        <ng-template ngSwitchDefault>no</ng-template>
-                    </div>                
-                </td>
-            </tr>
-        </table>
-        <br>
-    
-        <!-- Background and Further Project Detail Section -->
-        <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Bac_model of Bac_models">
-            <caption><h3><b>Background and Further Project Detail</b></h3></caption>
-    
-            <tr><td><h4>• The need for the project</h4></td></tr>
-            <tr><td>{{ Bac_model.BacNeed }}</td></tr>
-            <br>
-            <tr><td><h4>• Who are being targeted</h4></td></tr>
-            <tr><td>{{ Bac_model.BacTarget }}</td></tr>
-            <br>
-            <tr><td><h4>• Activities that will be undertake as part of this project</h4></td></tr>
-            <tr><td>{{ Bac_model.BacActivities }}</td></tr>
-            <br>
-            <tr><td><h4>• Project Deliverables</h4></td></tr>
-            <tr><td>{{ Bac_model.BacDeliver }}</td></tr>
-            <br>
-            <tr><td><h4>• Project Users</h4></td></tr>
-            <tr><td>{{ Bac_model.BacUsers }}</td></tr>
-        </table>
-        <br>
-    
-        <!-- Financial Information -->
-        <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Fin_model of Fin_models">
-            <caption><h3><b>Financial Information</b></h3></caption>
-            <tr>
-                <td style="width: 15%;">Activity</td>
-                <td style="width: 35%;">{{ Fin_model.FinActivity }}</td>
-                <td style="width: 10%;">Cost</td>
-                <td>{{ Fin_model.FinCost }}</td>
-            </tr>
-            
-            <tr>
-                <td>Organisation name on statements</td><td>{{ Fin_model.FinOrgName }}</td>
-            </tr>
-            <tr>
-                <td>Bank or Building Society</td><td>{{ Fin_model.FinBank }}</td>
-                <td>Bank Address</td><td>{{ Fin_model.FinBankOrgAddress }}</td>
-            </tr>
-            <tr>
-                <td>Account Number</td><td>{{ Fin_model.FinAccount }}</td>
-                <td>Sort Code</td><td>{{ Fin_model.FinSortCode }}</td>
-            </tr>
-        </table>
-    
-    </mat-card>
+</mat-card>

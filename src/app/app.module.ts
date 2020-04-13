@@ -50,8 +50,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 // Define all routes necessary
 const appRoutes: Routes = [
   { path: '', component: NgnfComponent },
-  { path: 'apply', component: ApplyComponent, canActivate: [AuthguardGuard] },
-  { path: 'report', component: ReportComponent, canActivate: [AuthguardGuard] },
+//  { path: 'apply', component: ApplyComponent, canActivate: [AuthguardGuard] },
+//  { path: 'report', component: ReportComponent, canActivate: [AuthguardGuard] },
   { path: 'appReport', component: AppReportComponent, canActivate: [AuthguardGuard] },
 
   { path: 'login', component: LoginComponent },
