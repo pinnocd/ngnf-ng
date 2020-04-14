@@ -3,10 +3,8 @@
 ---
 
 #### Development servers
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png
 
-
-##### ![alt text](https://angular.io/assets/images/logos/angular/angular.png)[Angular UI](https://github.com/angular/angular-cli) version 9.1.0
+##### ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png)[Angular UI](https://github.com/angular/angular-cli) version 9.1.0
 * Run `ng serve` from the root folder.
 * Navigate to `http://localhost:4200/`. 
 * The app will automatically reload if you change any of the source files.
