@@ -12,12 +12,12 @@
 
 ##### <img width="25" height="15" src="/src/assets/images/php.png">  [PHP Server](https://www.php.net/ChangeLog-7.php) version 7.4.4.
 * Run `php -S localhost:8080 -t ./ngnf-php` from the root folder.
-* The api we be accessable from `localhost:8080/`.
+* The api we be accessible from `localhost:8080/`.
 
 
 ##### <img width="30" height="17" src="/src/assets/images/MySQL.png">  [MySQL Database Server](https://dev.mysql.com/doc/relnotes/mysql/5.7/en/news-5-7-22.html) version 5.7
-* Copy `./ngnf-php/config/database_demo.php` to `database.php` and add dayabase connection details.
-* MySQL database scripts stored in `./ngnf-ng/ngnf-mysql/`.
+* Copy `./ngnf-php/config/database_demo.php` to `database.php` and add your database connection details.
+* MySQL database scripts are stored in `./ngnf-ng/ngnf-mysql/`.
 
 
 ---
