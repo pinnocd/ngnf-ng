@@ -1,11 +1,5 @@
-### NGNF <img width="30" height="30" src="/src/assets/images/favicon.ico">
-<div style="width:100%;">
-<table>
-<tr>
-<td>Left</td>
-<td style="align:right">Right</>
-</tr>
-</table>
+### <img width="30" height="30" src="/src/assets/images/favicon.ico">  NGNF
+
 ---
 
 #### Development servers
@@ -21,7 +15,7 @@
 * The api we be accessable from `localhost:8080/`
 
 
-##### <img width="30" height="15" src="/src/assets/images/MySQL.png"> [MySQL Database Server](https://dev.mysql.com/doc/relnotes/mysql/5.7/en/news-5-7-22.html) version 5.7
+##### <img width="30" height="17" src="/src/assets/images/MySQL.png"> [MySQL Database Server](https://dev.mysql.com/doc/relnotes/mysql/5.7/en/news-5-7-22.html) version 5.7
 * Copy `./ngnf-php/config/database_demo.php` `database.php` and add dayabase connection details.
 * MySQL database scripts stored in `./ngnf-ng/ngnf-mysql/`.
 
