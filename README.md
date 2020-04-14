@@ -1,9 +1,10 @@
 ### NGNF
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
 
 ---
 
 #### Development servers
+[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png
+[logo]: https://angular.io/assets/images/logos/angular/angular.png
 ##### [Angular UI](https://github.com/angular/angular-cli) version 9.1.0
 * Run `ng serve` from the root folder.
 * Navigate to `http://localhost:4200/`. 
