@@ -5,11 +5,11 @@ header("Access-Control-Allow-Methods: PUT, GET, POST, DELETE");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 header("Content-Type: application/json; charset=UTF-8");
 
-define('DB_HOST', '**** DATABASE HOST ****');
-define('DB_USER', '**** DATABASE USER ****');
-define('DB_PASS', '**** DATABASE PASS ****');
-define('DB_NAME', '**** DATABASE NAME ****');
-define('DB_PORT', '**** DATABASE PORT ****');
+define('DB_HOST', 'ngnf-mysql.cp842gttjsxj.eu-west-2.rds.amazonaws.com');
+define('DB_USER', 'dbuser');
+define('DB_PASS', 'Gone5w4zfrQhMPoVZ5Dv');
+define('DB_NAME', 'ngnf');
+define('DB_PORT', '3306');
 
 function connect()
 {
