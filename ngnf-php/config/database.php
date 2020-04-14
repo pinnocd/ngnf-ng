@@ -5,6 +5,11 @@ header("Access-Control-Allow-Methods: PUT, GET, POST, DELETE");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 header("Content-Type: application/json; charset=UTF-8");
 
+define('DB_HOST', '**** DATABASE HOST ****');
+define('DB_USER', '**** DATABASE USER ****');
+define('DB_PASS', '**** DATABASE PASS ****');
+define('DB_NAME', '**** DATABASE NAME ****');
+define('DB_PORT', '**** DATABASE PORT ****');
 
 function connect()
 {
