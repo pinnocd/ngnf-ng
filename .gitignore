@@ -1,7 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # PHP config filefor connecting to MySQL
-/ngnf-php/config/*
+/ngnf-php/config/database.php
 
 # compiled output
 /dist
