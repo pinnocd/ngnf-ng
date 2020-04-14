@@ -1,6 +1,6 @@
 ### NGNF <img width="30" height="30" src="/src/assets/images/favicon.ico">
 
-<table>
+<table width="100%">
 <tr>
 <td>Left</td>
 <td>Right</>
