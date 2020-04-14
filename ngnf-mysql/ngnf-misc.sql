@@ -22,3 +22,11 @@ SELECT * FROM Users;
 SELECT * FROM Statuses;
 SELECT * FROM OrgTypes;
 
+/* DDE Calls */
+SHOW TABLES;
+SHOW CREATE PROCEDURE add_Application;
+SHOW PROCEDURE STATUS WHERE Db = 'ngnf';
+SELECT VERSION();
+DROP PROCEDURE del_Application2;
+
+
