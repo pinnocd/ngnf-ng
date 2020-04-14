@@ -1,9 +1,9 @@
 ### NGNF <img width="30" height="30" src="/src/assets/images/favicon.ico">
-
-<table width="100%">
+<div style="width:100%;">
+<table>
 <tr>
 <td>Left</td>
-<td>Right</>
+<td style="align:right">Right</>
 </tr>
 </table>
 ---
