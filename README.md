@@ -1,10 +1,16 @@
 ### NGNF <img width="30" height="30" src="/src/assets/images/favicon.ico">
 
+<table>
+<tr>
+<td>Left</td>
+<td>Right</>
+</tr>
+</table>
 ---
 
 #### Development servers
 
-##### <img width="15" height="15" src="/src/assets/images/Angular.png"> [Angular UI](https://github.com/angular/angular-cli) version 9.1.0
+##### <img width="20" height="20" src="/src/assets/images/Angular.png"> [Angular UI](https://github.com/angular/angular-cli) version 9.1.0
 * Run `ng serve` from the root folder.
 * Navigate to `http://localhost:4200/`. 
 * The app will automatically reload if you change any of the source files.
@@ -15,7 +21,7 @@
 * The api we be accessable from `localhost:8080/`
 
 
-##### <img width="30" height="15" src="/src/assets/images/MySQL.png">[MySQL Database Server](https://dev.mysql.com/doc/relnotes/mysql/5.7/en/news-5-7-22.html) version 5.7
+##### <img width="30" height="15" src="/src/assets/images/MySQL.png"> [MySQL Database Server](https://dev.mysql.com/doc/relnotes/mysql/5.7/en/news-5-7-22.html) version 5.7
 * Copy `./ngnf-php/config/database_demo.php` `database.php` and add dayabase connection details.
 * MySQL database scripts stored in `./ngnf-ng/ngnf-mysql/`.
 
