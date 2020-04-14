@@ -1,26 +1,26 @@
 ### NGNF
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
 
-===================================================================================
+---
 
 #### Development servers
-##### Angular UI
+##### [Angular UI](https://github.com/angular/angular-cli) version 9.1.0
 * Run `ng serve` from the root folder.
 * Navigate to `http://localhost:4200/`. 
 * The app will automatically reload if you change any of the source files.
 
 
-##### PHP Server
+##### [PHP Server](https://www.php.net/ChangeLog-7.php) version 7.4.4.
 * Run `php -S localhost:8080 -t ./ngnf-php` from the root folder.
 * The api we be accessable from `localhost:8080/`
 
 
-##### MySQL Database Server
+##### [MySQL Database Server](https://dev.mysql.com/doc/relnotes/mysql/5.7/en/news-5-7-22.html) version 5.7
 * Copy `./ngnf-php/config/database_demo.php` `database.php` and add dayabase connection details.
 * MySQL database scripts stored in `./ngnf-ng/ngnf-mysql/`.
 
 
-===================================================================================
+---
 
 #### Code scaffolding
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
