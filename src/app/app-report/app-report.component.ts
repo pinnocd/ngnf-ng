@@ -4,6 +4,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ApiReadService } from '../../services/api.readService';
 import { ApiDeleteService } from '../../services/api.deleteService';
+import { ApiUpdateService } from '../../services/api.updateService';
+import { ApiAdminService } from '../../services/api.adminService';
 import { matDialogComponent } from '../matDialog/matDialog.component';
 
 import { App_model } from  '../../models/App_model';
@@ -27,8 +29,10 @@ import { ApplData } from '../../interfaces/globalinterfaces';
 })
 
 export class AppReportComponent implements OnInit {
-  displayedColumns: string[] = ['ApplicationId', 'OrgName', 'GenName', 'GenStartDate', 'Status', 'InsertDateTime', 'Delete'];
+  displayedColumns: string[] = ['ApplicationId', 'User', 'OrgName', 'GenName', 'GenStartDate', 'Status', 'InsertDateTime', 
+                                'Accept', 'Reject', 'Progress', 'Succeed', 'Fail'];
   dataSource = new MatTableDataSource<ApplData>(ELEMENT_DATA);
+  username = '';
   
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -44,46 +48,50 @@ export class AppReportComponent implements OnInit {
   Bac_models:  Bac_model[];
   Fin_models:  Fin_model[];
 
-  constructor(private apiService: ApiReadService, private apiDelService: ApiDeleteService, public dialog: MatDialog) { }
+  constructor(private readService: ApiReadService, private deleteService: ApiDeleteService, private adminService: ApiAdminService,
+              private updateService: ApiUpdateService, public dialog: MatDialog) { }
 
   // Initial load of all applications
   loadAppList() {
     // update data in data source when available
-    this.apiService.readAllApps().subscribe(newData => this.dataSource.data = newData);
+    this.readService.readAllApps().subscribe(newData => this.dataSource.data = newData);
+
+    let token = this.adminService.getToken();
+    this.username = token.split('|')[3];
   }
 
   // An application has been selected in the list, so refresh all data
   selectApp(app_model){
     console.log(app_model);
 
-    this.apiService.readOrg_model(app_model.ApplicationId).subscribe((Org_models: Org_model[])=>{
+    this.readService.readOrg_model(app_model.ApplicationId).subscribe((Org_models: Org_model[])=>{
       this.Org_models = Org_models;
       console.log(this.Org_models);
     })
 
-    this.apiService.readCon_model(app_model.ApplicationId).subscribe((Con_models: Con_model[])=>{
+    this.readService.readCon_model(app_model.ApplicationId).subscribe((Con_models: Con_model[])=>{
       this.Con_models = Con_models;
       console.log(this.Con_models);
     })
 
-    this.apiService.readGen_model(app_model.ApplicationId).subscribe((Gen_models: Gen_model[])=>{
+    this.readService.readGen_model(app_model.ApplicationId).subscribe((Gen_models: Gen_model[])=>{
       this.Gen_models = Gen_models;
       console.log(this.Gen_models);
     })
 
-    this.apiService.readBac_model(app_model.ApplicationId).subscribe((Bac_models: Bac_model[])=>{
+    this.readService.readBac_model(app_model.ApplicationId).subscribe((Bac_models: Bac_model[])=>{
       this.Bac_models = Bac_models;
       console.log(this.Bac_models);
     })
 
-    this.apiService.readFin_model(app_model.ApplicationId).subscribe((Fin_models: Fin_model[])=>{
+    this.readService.readFin_model(app_model.ApplicationId).subscribe((Fin_models: Fin_model[])=>{
       this.Fin_models = Fin_models;
       console.log(this.Fin_models);
     })
   }
 
-  deleteApp(element): void {
 
+  confirmAction(element, action: string){
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -91,17 +99,22 @@ export class AppReportComponent implements OnInit {
     dialogConfig.width = "600px";
     dialogConfig.data = {
       title: 'Please Confirm',
-      description: 'Are you absolutely sure you want to delete the ' + element.OrgName + ' application for project "' + element.GenName + '"?',
+      description: 'Are you absolutely sure you want to ' + action + ' the "' + element.OrgName + '" application for project "' + element.GenName + '"?',
       button1: 'Yes',
       button2: 'No'
     };
 
-    const diaret = this.dialog.open(matDialogComponent, dialogConfig);
+    return this.dialog.open(matDialogComponent, dialogConfig);
+  }
 
-    diaret.afterClosed().subscribe(
+
+  deleteApp(element) {
+    let conf = this.confirmAction(element, 'Delete')
+
+    conf.afterClosed().subscribe(
       data => { 
         if (data) {
-          this.apiDelService.deleteApplication(element.ApplicationId).subscribe(()=>{});
+          this.deleteService.deleteApplication(element.ApplicationId).subscribe(()=>{});
           this.loadAppList();
           this.Org_models.length = 0;
           this.Con_models.length = 0;
@@ -111,8 +124,40 @@ export class AppReportComponent implements OnInit {
         } 
       }
     );
-  }  
+  }
+  
+  updateApp(element, action: string) {
+    let conf = this.confirmAction(element, action)
+    var status: string;
+
+    switch  (action) {
+      case 'Accept': status = "A"; break;
+      case 'Progress': status = "I"; break;
+      case 'Succeed': status = "C"; break;
+      case 'Fail': status = "F"; break;
+      case 'Reject': status = "R"; break;
+      default:
+              console.log("No such action exists!");
+              break;
+    }
+
+  console.log(status);
+      conf.afterClosed().subscribe(
+        data => { 
+          if (data) {
+            this.updateService.updateApplication(element.ApplicationId, status).subscribe(()=>{});
+            this.loadAppList();
+          } 
+        }
+      );
+    }
+
+    // 'S', 'Submitted'
+      // 'A', 'Accepted'
+        // 'I', 'Progress'
+          // 'C', 'Successful'
+          // 'F', 'Failed'
+      // 'R', 'Rejected'
 }
 
 var ELEMENT_DATA: ApplData[];
-

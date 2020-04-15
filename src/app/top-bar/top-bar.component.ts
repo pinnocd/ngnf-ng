@@ -11,35 +11,37 @@ import { Globals } from 'globals';
 })
 export class TopBarComponent implements OnInit {
 
-  constructor( private dataService: ApiAdminService, public globals: Globals, private router: Router ) { 
+  constructor( private adminService: ApiAdminService, public globals: Globals, private router: Router ) { 
     globals.loginbtn = true;
-    dataService.getLoggedInName.subscribe(name => this.changeName(name));
+    adminService.getLoggedInName.subscribe(name => this.changeName(name));
 
-    if(this.dataService.isLoggedIn())
+    if(this.adminService.isLoggedIn())
     {
-      console.log("loggedin");
       globals.loginbtn=false;
       globals.logoutbtn=true
-      globals.applybtn=false;
+
     }
     else{
       globals.loginbtn=true;
       globals.logoutbtn=false
-      globals.applybtn=false;
     }
   }
   
   private changeName( name: boolean ): void {
-    this.globals.logoutbtn = name;
-    this.globals.loginbtn = !name;
-    this.globals.applybtn = false;
-  }
+      this.globals.logoutbtn = name;
+      this.globals.loginbtn = !name;
+      this.globals.adminuser =  this.adminService.isAdminUser();
+    }
+
   logout()
   {
-    this.dataService.deleteToken();
- //   window.location.href = window.location.href;
-    this.router.navigate(['']);
-  }
+      this.adminService.deleteToken();
+      this.globals.logoutbtn = false;
+      this.globals.loginbtn = true;
+      this.globals.adminuser = false;
+      this.router.navigate(['']);
+    }
+
   ngOnInit(): void {
   }
 }

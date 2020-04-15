@@ -19,8 +19,11 @@ export class ApiCreateService {
 
   // Create an application row and return the application id for use in all other insertions
   createApp(){
+    let token = this.adminService.getToken();
+    let userId = token.substring(0, token.length - 1);
+
     let params = new HttpParams()
-        .set('UserId', this.adminService.getToken());
+        .set('UserId', userId);
 
     return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/post/addApp_model.php`, { params: params})
     }

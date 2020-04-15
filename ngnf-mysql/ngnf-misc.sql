@@ -22,6 +22,8 @@ SELECT * FROM Users;
 SELECT * FROM Statuses;
 SELECT * FROM OrgTypes;
 
+UPDATE Users SET usertype = 'A' WHERE id IN (2, 4, 5);
+
 /* DDE Calls */
 SHOW TABLES;
 SHOW CREATE PROCEDURE add_Application;

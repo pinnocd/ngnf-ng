@@ -1,5 +1,5 @@
 <mat-card>
-<mat-card-title style="text-align: center;"><h3><b>Application Report</b></h3></mat-card-title>
+<mat-card-title style="text-align: center;"><h3><b>{{ username }}'s Application Report</b></h3></mat-card-title>
 
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
@@ -7,6 +7,12 @@
       <ng-container matColumnDef="ApplicationId">
         <th mat-header-cell *matHeaderCellDef> App. Id </th>
         <td mat-cell *matCellDef="let element"> {{ element.ApplicationId }} </td>
+      </ng-container>
+  
+      <!-- Name -->
+      <ng-container matColumnDef="User">
+        <th mat-header-cell *matHeaderCellDef> User Name </th>
+        <td mat-cell *matCellDef="let element"> {{ element.User }} </td>
       </ng-container>
   
       <!-- Name Column -->
@@ -42,6 +48,31 @@
       <ng-container matColumnDef="Delete">
         <th mat-header-cell *matHeaderCellDef> Delete? </th>
         <td mat-cell *matCellDef="let element"><button mat-button (click)="deleteApp(element)">Delete</button></td>
+      </ng-container>
+
+      <ng-container matColumnDef="Accept">
+        <th mat-header-cell *matHeaderCellDef> Accept? </th>
+        <td mat-cell *matCellDef="let element"><button *ngIf="element.Status=='Submitted'" mat-button (click)="updateApp(element, 'Accept')">Accept</button></td>
+      </ng-container>
+
+      <ng-container matColumnDef="Reject">
+        <th mat-header-cell *matHeaderCellDef> Reject? </th>
+        <td mat-cell *matCellDef="let element"><button mat-button *ngIf="element.Status=='Submitted'" (click)="updateApp(element, 'Reject')">Reject</button></td>
+      </ng-container>
+
+      <ng-container matColumnDef="Progress">
+        <th mat-header-cell *matHeaderCellDef> Progress? </th>
+        <td mat-cell *matCellDef="let element"><button mat-button *ngIf="element.Status=='Accepted'" (click)="updateApp(element, 'Progress')">Progress</button></td>
+      </ng-container>
+
+      <ng-container matColumnDef="Succeed">
+        <th mat-header-cell *matHeaderCellDef> Succeed? </th>
+        <td mat-cell *matCellDef="let element"><button mat-button *ngIf="element.Status=='In Progress'" (click)="updateApp(element, 'Succeed')">Succeed</button></td>
+      </ng-container>
+
+      <ng-container matColumnDef="Fail">
+        <th mat-header-cell *matHeaderCellDef> Fail? </th>
+        <td mat-cell *matCellDef="let element"><button mat-button *ngIf="element.Status=='In Progress'" (click)="updateApp(element, 'Fail')">Fail</button></td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

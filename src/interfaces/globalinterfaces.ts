@@ -7,6 +7,7 @@
   
 export interface ApplData{
     ApplicationId: number;
+    User: string;
     OrgName: string;
     GenName: string;
     GenStartDate: Date;

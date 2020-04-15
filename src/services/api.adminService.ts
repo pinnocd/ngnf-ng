@@ -2,6 +2,8 @@ import { Injectable, Output, EventEmitter  } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { User_model } from  '../models/User_class';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { matDialogComponent } from '../app/matDialog/matDialog.component';
 import * as myGlobals from 'globals';
 
 @Injectable({
@@ -10,10 +12,9 @@ import * as myGlobals from 'globals';
 
 export class ApiAdminService {
 
-    constructor(private httpClient : HttpClient, private router: Router) { }
+    constructor(private httpClient : HttpClient, private router: Router, public dialog: MatDialog) { }
 
     @Output() getLoggedInName: EventEmitter<any> = new EventEmitter();
-
 
     redirectUrl: string;
     baseUrl:string = myGlobals.PHP_API_SERVER;
@@ -25,8 +26,6 @@ export class ApiAdminService {
         .set('email', User_model.email)
         .set('pwd', User_model.password);
 
-        console.log(params);
-
         return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/admin/register.php`, { params: params} );
     }
 
@@ -36,20 +35,29 @@ export class ApiAdminService {
         .set('email', User_model.email)
         .set('pwd', User_model.password);
 
-        console.log(params);
-
         this.httpClient.get<User_model>(`${myGlobals.PHP_API_SERVER}/api/admin/login.php`, { params: params} )
             .subscribe((Users) => {
                 // Check the user actually logged in
                 if (Users[0]) {
-                    console.log(Users[0].id);
-                    this.setToken(Users[0].id);
+                    let userToken = Users[0].id + '|' + Users[0].usertype + '|' + Users[0].email + '|' + Users[0].name;
+                    this.setToken(userToken);
                     this.getLoggedInName.emit(true);
                     this.router.navigate(['/myaccount']);
 
                     return true;    
                 } else {
-                    alert("Calling the Fraud Squad");
+                    const dialogConfig = new MatDialogConfig();
+
+                    dialogConfig.disableClose = true;
+                    dialogConfig.autoFocus = true;
+                    dialogConfig.width = "600px";
+                                    
+                    dialogConfig.data = {
+                        title: 'Attention!', description: 'The credentials provided are incorrect.  Please retry or register a new account.'
+                        , button1: 'OK', button2: '' 
+                      };
+                      this.dialog.open(matDialogComponent, dialogConfig);
+    
                 }
             });
     }
@@ -75,5 +83,12 @@ export class ApiAdminService {
         }
             return false;
         }
+    
+    isAdminUser() {
+        const usertoken = this.getToken();
+
+        // Example token = 2|A|dean_pinnock@yahoo.com|Dean Pinnock
+        return usertoken.split('|')[1]==="A";
+    }
 }
   

@@ -1,5 +1,5 @@
 <mat-card>
-    <mat-card-title style="text-align: center;"><h3><b>My Applications</b></h3></mat-card-title>
+    <mat-card-title style="text-align: center;"><h3><b>{{ username }}'s Applications</b></h3></mat-card-title>
     
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource">
@@ -7,6 +7,12 @@
           <ng-container matColumnDef="ApplicationId">
             <th mat-header-cell *matHeaderCellDef> App. Id </th>
             <td mat-cell *matCellDef="let element"> {{ element.ApplicationId }} </td>
+          </ng-container>
+      
+          <!-- User Name -->
+          <ng-container matColumnDef="User">
+            <th mat-header-cell *matHeaderCellDef> User Name </th>
+            <td mat-cell *matCellDef="let element"> {{ element.User }} </td>
           </ng-container>
       
           <!-- Name Column -->

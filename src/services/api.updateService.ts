@@ -10,8 +10,11 @@ export class ApiUpdateService {
   constructor(private httpClient: HttpClient) { }
 
   // 
-  updateApp(){
-    return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/update/updApp_model.php`)
-    }
+  updateApplication(ApplicationId, Status){
+    let params = new HttpParams()
+                      .set('ApplicationId', ApplicationId)
+                      .set('Status', Status);
 
+    return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/update/updApp.php`, { params: params} )
+    }
 }

@@ -6,11 +6,12 @@
     $UserId  = $_REQUEST['UserId'] ?? '';
 
     $Applications = [];
-    $sql = "SELECT 		  app.ApplicationId, org.OrgName, gen.GenName, gen.GenStartDate, s.StatusName, app.UserId, app.InsertDateTime 
+    $sql = "SELECT 		  app.ApplicationId, org.OrgName, gen.GenName, gen.GenStartDate, s.StatusName, app.UserId, u.name, app.InsertDateTime 
             FROM 		    Applications app
             LEFT JOIN	  Org_model org ON org.ApplicationId = app.ApplicationId
             LEFT JOIN 	Gen_model gen ON gen.ApplicationId = app.ApplicationId
             LEFT JOIN   Statuses  s   ON s.StatusCode  =  app.Status
+            LEFT JOIN   Users u       ON u.id = app.UserId
             WHERE       1=1 ";
     if ($ApplicationId) {
             $sql .= " AND  app.ApplicationId = $ApplicationId";}
@@ -29,6 +30,7 @@
         $Applications[$i]['GenStartDate']   = $row['GenStartDate'];
         $Applications[$i]['Status'] 	      = $row['StatusName'];
         $Applications[$i]['UserId'] 	      = $row['UserId'];
+        $Applications[$i]['User'] 	        = $row['name'];
         $Applications[$i]['InsertDateTime'] = $row['InsertDateTime'];
         
         $i++;

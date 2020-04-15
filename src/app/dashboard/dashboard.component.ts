@@ -34,7 +34,7 @@ import { ApplData } from '../../interfaces/globalinterfaces';
 })
 
 export class DashboardComponent implements OnInit {
-  displayedColumns: string[] = ['ApplicationId', 'OrgName', 'GenName', 'GenStartDate', 'Status', 'InsertDateTime', 'Delete'];
+  displayedColumns: string[] = ['ApplicationId', 'User', 'OrgName', 'GenName', 'GenStartDate', 'Status', 'InsertDateTime', 'Delete'];
   dataSource = new MatTableDataSource<ApplData>(ELEMENT_DATA);
   
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -57,6 +57,7 @@ export class DashboardComponent implements OnInit {
   Fin_model = new Fin_class();
 
   selectedIndex = 0;
+  username = '';
 
   constructor(private apiService: ApiReadService, private apiDelService: ApiDeleteService,
               private adminService: ApiAdminService, private createService: ApiCreateService,
@@ -65,13 +66,21 @@ export class DashboardComponent implements OnInit {
   // Initial load of all applications
   loadAppList() {
     // update data in data source when available
-    console.log(this.adminService.getToken());
-    var UserId: number;
-    UserId = parseInt(this.adminService.getToken());
-    this.apiService.readApplications(UserId)
+    let token = this.adminService.getToken();
+
+    // Example token = 2|A|dean_pinnock@yahoo.com|Dean Pinnock
+    this.username = token.split('|')[3];
+
+    let userId = token.split('|')[0];
+    let userType = token.split('|')[1];
+
+    // Admin users see everything so blank the id.
+    if (userType === "A")
+      {userId = "";}
+
+    this.apiService.readApplications(userId)
       .subscribe(newData => this.dataSource.data = newData)
       ;
-
   }
 
   // An application has been selected in the list, so refresh all data
