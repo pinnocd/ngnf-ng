@@ -56,6 +56,7 @@ export class DashboardComponent implements OnInit {
   Fin_Model:  Fin_model[];
   Fin_model = new Fin_class();
 
+  selectedRowIndex: number = -1;
   selectedIndex = 0;
   username = '';
 

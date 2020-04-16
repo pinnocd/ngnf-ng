@@ -49,6 +49,8 @@ export class AppReportComponent implements OnInit {
   Bac_models:  Bac_model[];
   Fin_models:  Fin_model[];
 
+  selectedRowIndex: number = -1;
+
   constructor(private readService: ApiReadService, private deleteService: ApiDeleteService, private adminService: ApiAdminService,
               private updateService: ApiUpdateService, public dialog: MatDialog) { }
 

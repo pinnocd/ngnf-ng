@@ -15,6 +15,8 @@
     --tilecolour1: #A48BC2;   --tiletxtcol1: #FFFFFF ;
     --tilecolour2: #725497;   --tiletxtcol2: #15032B;
     --tilecolour3: #4D2D73;   --tiletxtcol3: rgba(226, 223, 61, 0.959);
+
+    --selectedrowcol:rgb(217, 197, 241);
   }
   
 
@@ -69,6 +71,11 @@
     height: 30px !important;
   }
 
+  .selectedrow{
+    height: 30px !important;
+    background:var(--selectedrowcol); 
+  }
+
   .mat-tab-label {
     padding: 5px;
     font-size: 16px;
@@ -82,7 +89,7 @@
   }
 
   .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
-    background: green;
+    background: var(--brandcolour);
     height: 5px; 
   }
 
@@ -168,7 +175,7 @@
   }
   
   /* Button */
-  .button, button, mat-button {
+  .button, button {
     display: inline-flex;
     align-items: center;
     padding: 8px 16px;
@@ -179,7 +186,23 @@
     color: red;
     border: none;
   }
+
+  .mat-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    color: red !important;
+    background-color: var(--tilecolour1);
+    border: 2px;
+  }
   
+  .mat-raised-button {
+    font-size: 12px;
+    height: 30px;
+  }
+
   .button:hover, button:hover {
     opacity: 0.8;
     font-weight: normal;
