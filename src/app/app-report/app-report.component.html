@@ -62,17 +62,17 @@
 
       <ng-container matColumnDef="Progress">
         <th mat-header-cell *matHeaderCellDef> Progress? </th>
-        <td mat-cell *matCellDef="let element"><button mat-button *ngIf="element.Status=='Accepted'" (click)="updateApp(element, 'Progress')">Progress</button></td>
+        <td mat-cell *matCellDef="let element"><button mat-button *ngIf="element.Status=='Accepted'" (click)="updateApp(element, 'Under Review')">Progress</button></td>
       </ng-container>
 
       <ng-container matColumnDef="Succeed">
         <th mat-header-cell *matHeaderCellDef> Succeed? </th>
-        <td mat-cell *matCellDef="let element"><button mat-button *ngIf="element.Status=='In Progress'" (click)="updateApp(element, 'Succeed')">Succeed</button></td>
+        <td mat-cell *matCellDef="let element"><button mat-button *ngIf="element.Status=='Under Review'" (click)="updateApp(element, 'Succeed')">Succeed</button></td>
       </ng-container>
 
       <ng-container matColumnDef="Fail">
         <th mat-header-cell *matHeaderCellDef> Fail? </th>
-        <td mat-cell *matCellDef="let element"><button mat-button *ngIf="element.Status=='In Progress'" (click)="updateApp(element, 'Fail')">Fail</button></td>
+        <td mat-cell *matCellDef="let element"><button mat-button *ngIf="element.Status=='Under Review'" (click)="updateApp(element, 'Fail')">Fail</button></td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

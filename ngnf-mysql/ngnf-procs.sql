@@ -8,11 +8,10 @@ CREATE PROCEDURE add_Application(
 	IN  	UserId			INT,
 	OUT		ApplicationId 	INT)
 BEGIN
-	INSERT INTO Applications (Status, UserId) VALUES ( 'N', UserId );
+	INSERT INTO Applications (Status, UserId, InsertBy) VALUES ( 'N', UserId, USER() );
 	SELECT LAST_INSERT_ID() INTO ApplicationId;
 END
 ;
-
 CREATE PROCEDURE del_Application(
  	IN		AppId 	INT)
 BEGIN

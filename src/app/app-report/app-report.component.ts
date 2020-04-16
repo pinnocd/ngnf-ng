@@ -33,6 +33,7 @@ export class AppReportComponent implements OnInit {
                                 'Accept', 'Reject', 'Progress', 'Succeed', 'Fail'];
   dataSource = new MatTableDataSource<ApplData>(ELEMENT_DATA);
   username = '';
+  userid = '';
   
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -58,6 +59,9 @@ export class AppReportComponent implements OnInit {
 
     let token = this.adminService.getToken();
     this.username = token.split('|')[3];
+    this.userid = token.split('|')[0];
+
+    console.log(this.userid);
   }
 
   // An application has been selected in the list, so refresh all data
@@ -145,7 +149,7 @@ export class AppReportComponent implements OnInit {
       conf.afterClosed().subscribe(
         data => { 
           if (data) {
-            this.updateService.updateApplication(element.ApplicationId, status).subscribe(()=>{});
+            this.updateService.updateApplication(element.ApplicationId, status, this.userid).subscribe(()=>{});
             this.loadAppList();
           } 
         }
