@@ -5,6 +5,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ApiReadService } from '../../services/api.readService';
 import { ApiDeleteService } from '../../services/api.deleteService';
 import { ApiCreateService } from '../../services/api.createService';
+import { ApiUpdateService } from '../../services/api.updateService';
 import { ApiAdminService } from '../../services/api.adminService';
 import { matDialogComponent } from '../matDialog/matDialog.component';
 
@@ -34,7 +35,7 @@ import { ApplData } from '../../interfaces/globalinterfaces';
 })
 
 export class DashboardComponent implements OnInit {
-  displayedColumns: string[] = ['ApplicationId', 'User', 'OrgName', 'GenName', 'GenStartDate', 'Status', 'InsertDateTime', 'Delete'];
+  displayedColumns: string[] = ['ApplicationId', 'User', 'OrgName', 'GenName', 'GenStartDate', 'Status', 'InsertDateTime', 'Submit', 'Delete'];
   dataSource = new MatTableDataSource<ApplData>(ELEMENT_DATA);
   
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -59,13 +60,16 @@ export class DashboardComponent implements OnInit {
   selectedRowIndex: number = -1;
   selectedIndex = 0;
   username = '';
+  ApplicationId = 0;
 
-  constructor(private apiService: ApiReadService, private apiDelService: ApiDeleteService,
+  constructor(private readService: ApiReadService,  private deleteService: ApiDeleteService,
               private adminService: ApiAdminService, private createService: ApiCreateService,
-              public dialog: MatDialog) { }
+              private updateService: ApiUpdateService, public dialog: MatDialog) { }
 
   // Initial load of all applications
   loadAppList() {
+    this.ApplicationId = 0;
+
     // update data in data source when available
     let token = this.adminService.getToken();
 
@@ -79,7 +83,7 @@ export class DashboardComponent implements OnInit {
     if (userType === "A")
       {userId = "";}
 
-    this.apiService.readApplications(userId)
+    this.readService.readApplications(userId)
       .subscribe(newData => this.dataSource.data = newData)
       ;
   }
@@ -88,7 +92,9 @@ export class DashboardComponent implements OnInit {
   selectApp(app_model){
     console.log(app_model);
 
-    this.apiService.readOrg_model(app_model.ApplicationId).subscribe((Org_model: Org_model[])=>{
+    this.ApplicationId = app_model.ApplicationId;
+
+    this.readService.readOrg_model(app_model.ApplicationId).subscribe((Org_model: Org_model[])=>{
       this.Org_Model = Org_model;
 
       this.Org_model.OrgName = this.Org_Model[0].OrgName;
@@ -106,7 +112,7 @@ export class DashboardComponent implements OnInit {
       console.log(this.Org_Model);
     })
 
-    this.apiService.readCon_model(app_model.ApplicationId).subscribe((Con_model: Con_model[])=>{
+    this.readService.readCon_model(app_model.ApplicationId).subscribe((Con_model: Con_model[])=>{
       this.Con_Model = Con_model;
 
       this.Con_model.ConName = this.Con_Model[0].ConName;
@@ -127,7 +133,7 @@ export class DashboardComponent implements OnInit {
       console.log(this.Con_model);
     })
 
-    this.apiService.readGen_model(app_model.ApplicationId).subscribe((Gen_model: Gen_model[])=>{
+    this.readService.readGen_model(app_model.ApplicationId).subscribe((Gen_model: Gen_model[])=>{
       this.Gen_Model = Gen_model;
 
       this.Gen_model.GenName = this.Gen_Model[0].GenName;
@@ -140,7 +146,7 @@ export class DashboardComponent implements OnInit {
       console.log(this.Gen_model);
     })
 
-    this.apiService.readBac_model(app_model.ApplicationId).subscribe((Bac_model: Bac_model[])=>{
+    this.readService.readBac_model(app_model.ApplicationId).subscribe((Bac_model: Bac_model[])=>{
       this.Bac_Model = Bac_model;
 
       this.Bac_model.BacNeed = this.Bac_Model[0].BacNeed;
@@ -152,7 +158,7 @@ export class DashboardComponent implements OnInit {
       console.log(this.Bac_model);
     })
 
-    this.apiService.readFin_model(app_model.ApplicationId).subscribe((Fin_model: Fin_model[])=>{
+    this.readService.readFin_model(app_model.ApplicationId).subscribe((Fin_model: Fin_model[])=>{
       this.Fin_Model = Fin_model;
 
       this.Fin_model.FinActivity = this.Fin_Model[0].FinActivity;
@@ -160,6 +166,40 @@ export class DashboardComponent implements OnInit {
 
       console.log(this.Fin_model);
     })
+  }
+
+  submitData(element) {
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "600px";
+    dialogConfig.data = {
+      title: 'Please Confirm',
+      description: 'Are you sure you want to submit your ' + element.OrgName + ' application for project "' + element.GenName + '" to be reviewed?',
+      button1: 'Yes',
+      button2: 'No'
+    };
+
+    const diaret = this.dialog.open(matDialogComponent, dialogConfig);
+
+    diaret.afterClosed().subscribe(
+      data => { 
+        if (data) {
+          this.updateService.updateApplication(element.ApplicationId, 'S').subscribe(()=>{
+            dialogConfig.data = {
+              title: 'Confirmation', description: 'Thank you for submitting your Application.  We will process it in due course.'
+              , button1: 'OK', button2: '' 
+            };
+
+            this.dialog.open(matDialogComponent, dialogConfig);
+
+          });
+          this.loadAppList();
+        } 
+      }
+    );
   }
 
   deleteApp(element): void {
@@ -181,19 +221,33 @@ export class DashboardComponent implements OnInit {
     diaret.afterClosed().subscribe(
       data => { 
         if (data) {
-          this.apiDelService.deleteApplication(element.ApplicationId).subscribe(()=>{});
-          this.loadAppList();
-          this.Org_Model.length = 0;
-          this.Con_Model.length = 0;
-          this.Gen_Model.length = 0;
-          this.Bac_Model.length = 0;
-          this.Fin_Model.length = 0;        
-        } 
-      }
+          try {
+              this.deleteService.deleteApplication(element.ApplicationId).subscribe(()=>{
+                  dialogConfig.data = {
+                    title: 'Confirmation', description: 'Your Application has been successfully deleted.'
+                    , button1: 'OK', button2: '' 
+                  };
+
+                  this.dialog.open(matDialogComponent, dialogConfig);
+
+              });
+              this.loadAppList();
+              this.Org_Model.length = 0;
+              this.Con_Model.length = 0;
+              this.Gen_Model.length = 0;
+              this.Bac_Model.length = 0;
+              this.Fin_Model.length = 0;        
+            } 
+           catch (e) {
+           }
+          }
+        }
     );
   }  
 
   newApp(){
+    this.ApplicationId = 0;
+
     this.Org_model = new Org_class();
     this.Con_model = new Con_class();
     this.Gen_model = new Gen_class();
@@ -263,7 +317,7 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  Submit_Data() {
+  Save_Data() {
 
     const dialogConfig = new MatDialogConfig();
 
@@ -271,7 +325,7 @@ export class DashboardComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = "600px";
     dialogConfig.data = {
-      title: 'Please Confirm', description: 'Are you sure you are happy to submit this application?', button1: 'Yes Please', button2: 'No Thanks' 
+      title: 'Please Confirm', description: 'Are you sure you are happy to save this application data?', button1: 'Yes Please', button2: 'No Thanks' 
     };
   
     const diaret = this.dialog.open(matDialogComponent, dialogConfig);
@@ -280,41 +334,73 @@ export class DashboardComponent implements OnInit {
       data => { 
         if (data) {
 
-          try{
-              this.createService.createApp().subscribe(ApplicationId => {
-                  var AppId: number;
-                  AppId = ApplicationId as number;
+          if (this.ApplicationId === 0) {
+              try{
+                  this.createService.createApp().subscribe(ApplicationId => {
+                      var AppId: number;
+                      AppId = ApplicationId as number;
 
-                  console.log("The ApplicationId is " + AppId.toString());
+                      console.log("The ApplicationId is " + AppId.toString());
 
-                  this.Org_model.ApplicationId = AppId;
-                  this.Con_model.ApplicationId = AppId;
-                  this.Gen_model.ApplicationId = AppId;
-                  this.Bac_model.ApplicationId = AppId;
-                  this.Fin_model.ApplicationId = AppId;
+                      this.Org_model.ApplicationId = AppId;
+                      this.Con_model.ApplicationId = AppId;
+                      this.Gen_model.ApplicationId = AppId;
+                      this.Bac_model.ApplicationId = AppId;
+                      this.Fin_model.ApplicationId = AppId;
 
-                  this.createService.createOrg_model(this.Org_model).subscribe(()=>{});
-                  this.createService.createCon_model(this.Con_model).subscribe(()=>{});
-                  this.createService.createGen_model(this.Gen_model).subscribe(()=>{});
-                  this.createService.createBac_model(this.Bac_model).subscribe(()=>{});
-                  this.createService.createFin_model(this.Fin_model).subscribe(()=>{});
+                      this.createService.createOrg_model(this.Org_model).subscribe(()=>{});
+                      this.createService.createCon_model(this.Con_model).subscribe(()=>{});
+                      this.createService.createGen_model(this.Gen_model).subscribe(()=>{});
+                      this.createService.createBac_model(this.Bac_model).subscribe(()=>{});
+                      this.createService.createFin_model(this.Fin_model).subscribe(()=>{});
 
-                  dialogConfig.data = {
-                    title: 'Confirmation', description: 'Thank you for your Application.  It has been recieved successfully and will be processed in due course.'
-                    , button1: 'OK', button2: '' 
-                  };
-                  this.dialog.open(matDialogComponent, dialogConfig);
-                  this.selectedIndex = 0;
-                  this.loadAppList();
-              })
-            } catch (e) {
-            alert("There was a problem saving your data, please contact admin@ngnf.co.uk");
+                      dialogConfig.data = {
+                        title: 'Confirmation', description: 'Your Application was successfully saved.'
+                        , button1: 'OK', button2: '' 
+                      };
+                      this.dialog.open(matDialogComponent, dialogConfig);
+                      this.selectedIndex = 0;
+                      this.loadAppList();
+                  })
+                } catch (e) {
+                alert("There was a problem saving your data, please contact admin@ngnf.co.uk");
+              }
+              } else {
+                try{
+                  this.createService.createApp().subscribe(ApplicationId => {
+                      var AppId: number;
+                      AppId = this.ApplicationId;
+
+                      console.log("The ApplicationId is " + AppId.toString());
+
+                      this.Org_model.ApplicationId = AppId;
+                      this.Con_model.ApplicationId = AppId;
+                      this.Gen_model.ApplicationId = AppId;
+                      this.Bac_model.ApplicationId = AppId;
+                      this.Fin_model.ApplicationId = AppId;
+
+                      this.updateService.updateOrg_model(this.Org_model).subscribe(()=>{});
+                      this.updateService.updateCon_model(this.Con_model).subscribe(()=>{});
+                      this.updateService.updateGen_model(this.Gen_model).subscribe(()=>{});
+                      this.updateService.updateBac_model(this.Bac_model).subscribe(()=>{});
+                      this.updateService.updateFin_model(this.Fin_model).subscribe(()=>{});
+
+                      dialogConfig.data = {
+                        title: 'Confirmation', description: 'Your Application data was successfully updated.'
+                        , button1: 'OK', button2: '' 
+                      };
+                      this.dialog.open(matDialogComponent, dialogConfig);
+                      this.selectedIndex = 0;
+                      this.loadAppList();
+                  })
+                } catch (e) {
+                  alert("There was a problem updating your data, please contact admin@ngnf.co.uk");
+                }
+              }
           }
-        }
       }
     )
   }
 }
-
 
 var ELEMENT_DATA: ApplData[];
