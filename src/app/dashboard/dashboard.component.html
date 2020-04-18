@@ -453,7 +453,7 @@
                                 style="background-color: white;font-size: 16px;"><<< Prev</button>
                         </span>
                         <span fxFlex></span>
-                        <button mat-button class="mat-elevation-z8" (click)="Save_Data()"
+                        <button mat-button class="mat-elevation-z8" *ngIf="this.AppStatus=='New'" this.AppStatus (click)="Save_Data()"
                             style="background-color: white;font-size: 20px;">Save</button>
                     </mat-toolbar>
                 </div> 

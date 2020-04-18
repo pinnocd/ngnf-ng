@@ -61,6 +61,7 @@ export class DashboardComponent implements OnInit {
   selectedIndex = 0;
   username = '';
   ApplicationId = 0;
+  AppStatus:string = "";
 
   constructor(private readService: ApiReadService,  private deleteService: ApiDeleteService,
               private adminService: ApiAdminService, private createService: ApiCreateService,
@@ -69,6 +70,7 @@ export class DashboardComponent implements OnInit {
   // Initial load of all applications
   loadAppList() {
     this.ApplicationId = 0;
+    this.AppStatus = "";
 
     // update data in data source when available
     let token = this.adminService.getToken();
@@ -93,6 +95,7 @@ export class DashboardComponent implements OnInit {
     console.log(app_model);
 
     this.ApplicationId = app_model.ApplicationId;
+    this.AppStatus = app_model.Status;
 
     this.readService.readOrg_model(app_model.ApplicationId).subscribe((Org_model: Org_model[])=>{
       this.Org_Model = Org_model;
@@ -247,6 +250,7 @@ export class DashboardComponent implements OnInit {
 
   newApp(){
     this.ApplicationId = 0;
+    this.AppStatus = "New";
 
     this.Org_model = new Org_class();
     this.Con_model = new Con_class();
