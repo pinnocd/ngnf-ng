@@ -3,16 +3,24 @@
 
     // Set up default sample data
     $ApplicationId  = $_REQUEST['ApplicationId'] ?? '';
+    $debug          = $_REQUEST['degug'] ?? '';
 
-    echo  'ApplicationId = ', $ApplicationId;
+    $sql =  "\n\nCALL del_Application($ApplicationId)";
 
-    //try {
-        $sql =  "\n\nCALL del_Application($ApplicationId)";
+    if ($debug) {
+        echo  'ApplicationId = ', $ApplicationId;
         echo $sql;
+    }
 
-        $call = mysqli_prepare($con, $sql);
-        mysqli_stmt_execute($call);
+    $call = mysqli_prepare($con, $sql);
 
-        // retrieve returned value
-        return true;
+    if($result = mysqli_stmt_execute($call))
+    {
+        return json_encode($result);
+    } else {
+        echo $sql,"\n";
+        echo '***** Unable to cal lthe procedure, please check logs and retry *****';
+        echo json_encode("failure");
+    };
+
 ?>

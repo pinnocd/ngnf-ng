@@ -3,7 +3,7 @@
 
     // Set up default sample data
     $ApplicationId  = $_REQUEST['ApplicationId'] ?? '';
-    $UserId  = $_REQUEST['UserId'] ?? '';
+    $UserId         = $_REQUEST['UserId'] ?? '';
 
     $Applications = [];
     $sql = "SELECT 		  app.ApplicationId, org.OrgName, gen.GenName, gen.GenStartDate, s.StatusName, app.UserId, u.name, app.InsertDateTime 
@@ -40,7 +40,10 @@
     }
     else
     {
-      http_response_code(404);
+      echo $sql,"\n";
+      echo '***** Unable to retrieve the data, please check logs and retry *****';
+      echo json_encode("failure");
     }
-    ?>
+
+?>
 

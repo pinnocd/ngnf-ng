@@ -9,31 +9,33 @@
     $Gen_problem        = $_REQUEST['Genproblem'] ?? '';
     $Gen_vulnerables    = $_REQUEST['Genvulnerables'] ?? '';
     $Gen_safeguards	    = $_REQUEST['Gensafeguards'] ?? '';
-
-    echo 
-        'ApplicationId = ', $ApplicationId, '
-        Gen_name = ', $Gen_name, '
-        Gen_startdate = ', $Gen_startdate, '
-        Gen_achieve = ', $Gen_achieve, '
-        Gen_problem = ', $Gen_problem, '
-        Gen_vulnerables = ', $Gen_vulnerables, '
-        Gen_safeguards = ', $Gen_safeguards, '
-        ';
-    echo "\n\n";
+    $debug              = $_REQUEST['debug'];
+    
+    if ($debug){
+        echo 
+            'ApplicationId = ', $ApplicationId, '
+            Gen_name = ', $Gen_name, '
+            Gen_startdate = ', $Gen_startdate, '
+            Gen_achieve = ', $Gen_achieve, '
+            Gen_problem = ', $Gen_problem, '
+            Gen_vulnerables = ', $Gen_vulnerables, '
+            Gen_safeguards = ', $Gen_safeguards, '
+            ';
+        echo "\n\n";
+    }
   
     $sql =  "INSERT INTO Gen_model (ApplicationId, GenName, GenStartDate, GenAchieve, GenProblem, GenVulnerables, GenSafeguards, InsertBy)
             VALUES ( $ApplicationId, '$Gen_name', '$Gen_startdate', '$Gen_achieve', '$Gen_problem', $Gen_vulnerables, $Gen_safeguards, USER())";
 
-    echo $sql;
-    echo "\n\n";
-
     if(!mysqli_query($con, $sql))
     {
+        echo $sql;
+        echo "\n\n";
         echo '***** Unable to insert the data, please check logs and retry *****';
     }
     else
     {
-        echo json_encode($ApplicationId);
+        echo json_encode("success");        
     }
 
 ?>

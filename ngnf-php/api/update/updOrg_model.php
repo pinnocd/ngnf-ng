@@ -15,20 +15,23 @@
     $Org_open 		= $_REQUEST['Orgopen'] ?? 'null';
     $Org_info 		= $_REQUEST['Orginfo'] ?? '';
     $UserId         = $_REQUEST['UserId'] ?? '';
+    $debug          = $_REQUEST['debug'];
 
-    echo 
-        'ApplicationId = ', $ApplicationId, '
-        Org_name = ', $Org_name, '
-        Org_address = ',  $Org_address, '
-        Org_postcode = ',  $Org_postcode, '
-        Org_email = ',  $Org_email, '
-        Org_website = ',  $Org_website, '
-        Org_type = ', $Org_type, '
-        Org_charity = ', $Org_charity, '
-        Org_charity_no = ', $Org_charity_no, '
-        Org_start_date = ', $Org_start_date, '
-        Org_open = ', $Org_open, '
-        Org_info = ', $Org_info ;
+    if ($debug){
+        echo 
+            'ApplicationId = ', $ApplicationId, '
+            Org_name = ', $Org_name, '
+            Org_address = ',  $Org_address, '
+            Org_postcode = ',  $Org_postcode, '
+            Org_email = ',  $Org_email, '
+            Org_website = ',  $Org_website, '
+            Org_type = ', $Org_type, '
+            Org_charity = ', $Org_charity, '
+            Org_charity_no = ', $Org_charity_no, '
+            Org_start_date = ', $Org_start_date, '
+            Org_open = ', $Org_open, '
+            Org_info = ', $Org_info ;
+    }
 
     $sql =  "UPDATE Org_model SET 
                 OrgName ='$Org_name', 
@@ -46,15 +49,15 @@
                 UpdateBy='$UserId'
             WHERE ApplicationId = $ApplicationId";
 
-    echo $sql,"\n";
-
     if(!mysqli_query($con, $sql))
     {
-    echo '***** Unable to update the data, please check logs and retry *****';
+        echo $sql;
+        echo "\n\n";
+        echo '***** Unable to update the data, please check logs and retry *****';
     }
     else
     {
-    echo '***** Data Successfully updated *****';
+        echo json_encode("successS");
     }
 
 ?>

@@ -355,7 +355,7 @@ export class DashboardComponent implements OnInit {
                       this.createService.createFin_model(this.Fin_model).subscribe(()=>{});
 
                       dialogConfig.data = {
-                        title: 'Confirmation', description: 'Your Application was successfully saved.'
+                        title: 'Confirmation', description: 'Your Application was successfully created.'
                         , button1: 'OK', button2: '' 
                       };
                       this.dialog.open(matDialogComponent, dialogConfig);
@@ -367,34 +367,27 @@ export class DashboardComponent implements OnInit {
               }
               } else {
                 try{
-                  this.createService.createApp().subscribe(ApplicationId => {
-                      var AppId: number;
-                      AppId = this.ApplicationId;
+                    this.Org_model.ApplicationId = this.ApplicationId;
+                    this.Con_model.ApplicationId = this.ApplicationId;
+                    this.Gen_model.ApplicationId = this.ApplicationId;
+                    this.Bac_model.ApplicationId = this.ApplicationId;
+                    this.Fin_model.ApplicationId = this.ApplicationId;
 
-                      console.log("The ApplicationId is " + AppId.toString());
+                    this.updateService.updateOrg_model(this.Org_model).subscribe(()=>{});
+                    this.updateService.updateCon_model(this.Con_model).subscribe(()=>{});
+                    this.updateService.updateGen_model(this.Gen_model).subscribe(()=>{});
+                    this.updateService.updateBac_model(this.Bac_model).subscribe(()=>{});
+                    this.updateService.updateFin_model(this.Fin_model).subscribe(()=>{});
 
-                      this.Org_model.ApplicationId = AppId;
-                      this.Con_model.ApplicationId = AppId;
-                      this.Gen_model.ApplicationId = AppId;
-                      this.Bac_model.ApplicationId = AppId;
-                      this.Fin_model.ApplicationId = AppId;
-
-                      this.updateService.updateOrg_model(this.Org_model).subscribe(()=>{});
-                      this.updateService.updateCon_model(this.Con_model).subscribe(()=>{});
-                      this.updateService.updateGen_model(this.Gen_model).subscribe(()=>{});
-                      this.updateService.updateBac_model(this.Bac_model).subscribe(()=>{});
-                      this.updateService.updateFin_model(this.Fin_model).subscribe(()=>{});
-
-                      dialogConfig.data = {
-                        title: 'Confirmation', description: 'Your Application data was successfully updated.'
-                        , button1: 'OK', button2: '' 
-                      };
-                      this.dialog.open(matDialogComponent, dialogConfig);
-                      this.selectedIndex = 0;
-                      this.loadAppList();
-                  })
+                    dialogConfig.data = {
+                      title: 'Confirmation', description: 'Your Application data was successfully updated.'
+                      , button1: 'OK', button2: '' 
+                    };
+                    this.dialog.open(matDialogComponent, dialogConfig);
+                    this.selectedIndex = 0;
+                    this.loadAppList();
                 } catch (e) {
-                  alert("There was a problem updating your data, please contact admin@ngnf.co.uk");
+                    alert("There was a problem updating your data, please contact admin@ngnf.co.uk");
                 }
               }
           }

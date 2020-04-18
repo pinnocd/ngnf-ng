@@ -14,40 +14,38 @@
     $Org_start_date	= $_REQUEST['Orgstart_date'] ?? '';
     $Org_open 		= $_REQUEST['Orgopen'] ?? 'null';
     $Org_info 		= $_REQUEST['Orginfo'] ?? '';
+    $debug          = $_REQUEST['debug'];
 
-    echo 
-        'ApplicationId = ', $ApplicationId, '
-        Org_name = ', $Org_name, '
-        Org_address = ',  $Org_address, '
-        Org_postcode = ',  $Org_postcode, '
-        Org_email = ',  $Org_email, '
-        Org_website = ',  $Org_website, '
-        Org_type = ', $Org_type, '
-        Org_charity = ', $Org_charity, '
-        Org_charity_no = ', $Org_charity_no, '
-        Org_start_date = ', $Org_start_date, '
-        Org_open = ', $Org_open, '
-        Org_info = ', $Org_info ;
+    if ($debug){
+        echo 
+            'ApplicationId = ', $ApplicationId, '
+            Org_name = ', $Org_name, '
+            Org_address = ',  $Org_address, '
+            Org_postcode = ',  $Org_postcode, '
+            Org_email = ',  $Org_email, '
+            Org_website = ',  $Org_website, '
+            Org_type = ', $Org_type, '
+            Org_charity = ', $Org_charity, '
+            Org_charity_no = ', $Org_charity_no, '
+            Org_start_date = ', $Org_start_date, '
+            Org_open = ', $Org_open, '
+            Org_info = ', $Org_info ;
+        echo "\n\n";
+        }
 
-    echo "\n\n";
     $sql =  "INSERT INTO Org_model (ApplicationId, OrgName, OrgAddress, OrgPostcode, OrgEmail, OrgWebsite, OrgType,
                                     OrgCharity, OrgCharityNo, OrgStartDate, OrgOpen, OrgInfo, InsertBy) 
             VALUES ( $ApplicationId, '$Org_name', '$Org_address', '$Org_postcode', '$Org_email', '$Org_website', '$Org_type', 
                                     $Org_charity, $Org_charity_no, '$Org_start_date', $Org_open, '$Org_info', USER())";
 
-    echo $sql;
-    echo "\n\n";
-
     if(!mysqli_query($con, $sql))
     {
+        echo $sql;
+        echo "\n\n";
         echo '***** Unable to insert the data, please check logs and retry *****';
     }
     else
     {
-        echo '***** Data Successfully inserted *****';
+        echo json_encode("success");        
     }
-
-    return $sql;
-?>
-
 ?>

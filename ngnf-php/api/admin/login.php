@@ -8,8 +8,9 @@
 
     if(!$result = mysqli_query($con, $sql))
     {
+        echo $sql,"\n";
         echo '***** Unable to retrieve login data, please check logs and retry *****';
-        http_response_code(404);
+        echo json_encode("failure");
     }
     else
     {
@@ -19,6 +20,5 @@
         $rows[] = $row;
         }
         echo json_encode($rows);
-
     }
 ?>

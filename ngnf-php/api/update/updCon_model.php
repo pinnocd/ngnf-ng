@@ -18,24 +18,27 @@
     $Con_senotherno	    = $_REQUEST['Consenotherno'] ?? '';
     $Con_senemail 	    = $_REQUEST['Consenemail'] ?? '';
     $UserId             = $_REQUEST['UserId'] ?? '';
+    $debug              = $_REQUEST['debug'];
 
-    echo 
-        'ApplicationId = ', $ApplicationId, '
-        Con_name = ', $Con_name, '
-        Con_dob = ',  $Con_dob, '
-        Con_address = ',  $Con_address, '
-        Con_preaddress = ',  $Con_preaddress, '
-        Con_landlineno = ',  $Con_landlineno, '
-        Con_otherno = ',  $Con_otherno, '
-        Con_email = ',  $Con_email, '
-        Con_senname = ', $Con_senname, '
-        Con_sendob = ',  $Con_sendob, '
-        Con_senaddress = ',  $Con_senaddress, '
-        Con_senpreaddress = ',  $Con_senpreaddress, '
-        Con_senlandlineno = ',  $Con_senlandlineno, '
-        Con_senotherno = ',  $Con_senotherno, '
-        Con_senemail = ',  $Con_senemail;
-    echo "\n\n";
+    if ($debug){
+        echo 
+            'ApplicationId = ', $ApplicationId, '
+            Con_name = ', $Con_name, '
+            Con_dob = ',  $Con_dob, '
+            Con_address = ',  $Con_address, '
+            Con_preaddress = ',  $Con_preaddress, '
+            Con_landlineno = ',  $Con_landlineno, '
+            Con_otherno = ',  $Con_otherno, '
+            Con_email = ',  $Con_email, '
+            Con_senname = ', $Con_senname, '
+            Con_sendob = ',  $Con_sendob, '
+            Con_senaddress = ',  $Con_senaddress, '
+            Con_senpreaddress = ',  $Con_senpreaddress, '
+            Con_senlandlineno = ',  $Con_senlandlineno, '
+            Con_senotherno = ',  $Con_senotherno, '
+            Con_senemail = ',  $Con_senemail;
+        echo "\n\n";
+    }
 
     $sql =  "UPDATE Con_model SET 
                 ConName = '$Con_name', 
@@ -56,17 +59,15 @@
                 UpdateBy='$UserId'
             WHERE ApplicationId = $ApplicationId";
 
-    echo $sql;
-    echo "\n\n";
-
     if(!mysqli_query($con, $sql))
     {
+        echo $sql;
+        echo "\n\n";
         echo '***** Unable to insert the data, please check logs and retry *****';
     }
     else
     {
-        echo '***** Data Successfully inserted *****';
+        echo json_encode("success");        
     }
 
-  header("refresh:5; url=index.html");
 ?>

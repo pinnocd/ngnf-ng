@@ -40,7 +40,8 @@
     }
     else
     {
-      http_response_code(404);
+      echo $sql,"\n";
+      echo '***** Unable to retrieve the data, please check logs and retry *****';
+      echo json_encode("failure");
     }
-    ?>
-
+?>

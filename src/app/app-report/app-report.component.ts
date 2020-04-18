@@ -109,24 +109,6 @@ export class AppReportComponent implements OnInit {
     return this.dialog.open(matDialogComponent, dialogConfig);
   }
 
-
-  // deleteApp(element) {
-  //   let conf = this.confirmAction(element, 'Delete')
-
-  //   conf.afterClosed().subscribe(
-  //     data => { 
-  //       if (data) {
-  //         this.deleteService.deleteApplication(element.ApplicationId).subscribe(()=>{});
-  //         this.loadAppList();
-  //         this.Org_models.length = 0;
-  //         this.Con_models.length = 0;
-  //         this.Gen_models.length = 0;
-  //         this.Bac_models.length = 0;
-  //         this.Fin_models.length = 0;        
-  //       } 
-  //     }
-  //   );
-  // }
   
   updateApp(element, action: string) {
     let conf = this.confirmAction(element, action)
@@ -134,7 +116,7 @@ export class AppReportComponent implements OnInit {
 
     switch  (action) {
       case 'Accept': status = "A"; break;
-      case 'Progress': status = "I"; break;
+      case 'Progress': status = "U"; break;
       case 'Succeed': status = "C"; break;
       case 'Fail': status = "F"; break;
       case 'Reject': status = "R"; break;
@@ -146,8 +128,10 @@ export class AppReportComponent implements OnInit {
     conf.afterClosed().subscribe(
       data => { 
         if (data) {
-          this.updateService.updateApplication(element.ApplicationId, status).subscribe(()=>{});
-          this.loadAppList();
+          this.updateService.updateApplication(element.ApplicationId, status).subscribe(()=>{
+            alert("status successfully changed");
+            this.loadAppList();
+          });
         } 
       }
     );
