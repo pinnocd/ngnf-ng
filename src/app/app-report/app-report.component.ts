@@ -17,11 +17,6 @@ import { Fin_model } from  '../../models/Fin_model';
 
 import { ApplData } from '../../interfaces/globalinterfaces';
 
-/**
- * @title Basic use of `<table mat-table>`
- */
-
-
 @Component({
   selector: 'app-app-report',
   styleUrls: ['app-report.component.css'],
@@ -129,20 +124,25 @@ export class AppReportComponent implements OnInit {
       data => { 
         if (data) {
           this.updateService.updateApplication(element.ApplicationId, status).subscribe(()=>{
-            alert("status successfully changed");
+            const dialogConfig = new MatDialogConfig();
+
+            dialogConfig.disableClose = true;
+            dialogConfig.autoFocus = true;
+            dialogConfig.width = "600px";
+            dialogConfig.data = {
+              title: 'Confirmation',
+              description: 'The status was successfully changed',
+              button1: 'OK',
+              button2: ''
+            };
+        
+            this.dialog.open(matDialogComponent, dialogConfig);
             this.loadAppList();
           });
         } 
       }
     );
   }
-
-    // 'S', 'Submitted'
-      // 'A', 'Accepted'
-        // 'I', 'Progress'
-          // 'C', 'Successful'
-          // 'F', 'Failed'
-      // 'R', 'Rejected'
 }
 
 var ELEMENT_DATA: ApplData[];
