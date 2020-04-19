@@ -2,9 +2,8 @@
     require '../../config/database.php';
 
     $email  = $_REQUEST['email'] ?? '';
-    $pwd    = $_REQUEST['pwd'] ?? '';
 
-    $sql = "SELECT id, name, password, email, usertype FROM Users where email='$email' and password='$pwd'";
+    $sql = "SELECT id, name, password, email, usertype FROM Users where email='$email'";
 
     if(!$result = mysqli_query($con, $sql))
     {

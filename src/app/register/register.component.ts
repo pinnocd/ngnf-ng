@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { first } from 'rxjs/operators';
 import { ApiAdminService } from '../../services/api.adminService';
 import { User_class } from '../../models/User_class';
 
@@ -10,17 +9,13 @@ import { User_class } from '../../models/User_class';
   styleUrls: ['./register.component.css']
   })
 
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
     User_Model = new User_class();
 
     constructor( private adminService: ApiAdminService, private router:Router ) {
     }
 
-    ngOnInit() {
-    }
-
-
-    RegisterUser(){
+    registerUser(){
         try {
             this.adminService.registerUser(this.User_Model).subscribe(
               () => {

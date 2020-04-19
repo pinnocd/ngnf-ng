@@ -248,7 +248,7 @@ export class DashboardComponent implements OnInit {
     );
   }  
 
-  newApp(){
+  insertApp(){
     this.ApplicationId = 0;
     this.AppStatus = "New";
 
@@ -321,7 +321,7 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  Save_Data() {
+  saveData() {
 
     const dialogConfig = new MatDialogConfig();
 

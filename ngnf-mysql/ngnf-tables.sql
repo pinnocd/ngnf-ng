@@ -111,7 +111,7 @@ CREATE TABLE Users (
 	id			INT 		PRIMARY KEY		AUTO_INCREMENT,
     name		VARCHAR(20),
     email		VARCHAR(30),
-    password	VARCHAR(30),
+    password	VARCHAR(64),
     usertype	VARCHAR(1)
 	)
 ;

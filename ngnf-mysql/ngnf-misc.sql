@@ -24,6 +24,9 @@ SELECT * FROM OrgTypes;
 
 UPDATE Users SET usertype = 'A' WHERE id IN (2, 4, 5);
 
+ALTER TABLE Users MODIFY password VARCHAR(64);
+
+
 /* DDE Calls */
 SHOW TABLES;
 SHOW CREATE PROCEDURE add_Application;

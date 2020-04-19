@@ -1,11 +1,11 @@
 <?php
     require '../../config/database.php';
 
-    $name   = $_REQUEST['name'] ?? '';
-    $email  = $_REQUEST['email'] ?? '';
-    $pwd    = $_REQUEST['pwd'] ?? '';
+    $name       = $_REQUEST['name'] ?? '';
+    $email      = $_REQUEST['email'] ?? '';
+    $password   = $_REQUEST['password'] ?? '';
 
-    $sql = "INSERT INTO Users( name, password, email, usertype ) VALUES ('$name','$pwd','$email', 'P')";
+    $sql = "INSERT INTO Users( name, password, email, usertype ) VALUES ('$name','$password','$email', 'P')";
 
     if(!mysqli_query($con, $sql))
     {

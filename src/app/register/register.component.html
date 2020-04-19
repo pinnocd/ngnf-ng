@@ -13,12 +13,12 @@
             <p>Email</p>
             <input type="text" style="width: 20%" name="email" class="form-control" [(ngModel)]="User_Model.email">
             <p>Password</p>
-            <input type="text" style="width: 20%" name="password" class="form-control" 
+            <input type="password" style="width: 20%" name="password" class="form-control" 
                     [(ngModel)]="User_Model.password" minlength="8" required>
             <br>
             <br>
             <button style="margin:5px;background-color: var(--brandcolour); color: white;" 
-                class="mat-raised-button" (click)="RegisterUser()">Sign up</button>
+                class="mat-raised-button" (click)="registerUser()">Sign up</button>
             <br>
         </div>
     </form>

@@ -64,7 +64,7 @@
         </table>
         <table>
             <tr>
-                <td><button mat-button class="mat-elevation-z8" (click)="newApp()"
+                <td><button mat-button class="mat-elevation-z8" (click)="insertApp()"
                     style="background-color: white; font-size: 16px; margin:5px;">New Application</button>
                 </td>
                 <td><mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator></td>
@@ -453,7 +453,7 @@
                                 style="background-color: white;font-size: 16px;"><<< Prev</button>
                         </span>
                         <span fxFlex></span>
-                        <button mat-button class="mat-elevation-z8" *ngIf="this.AppStatus=='New'" this.AppStatus (click)="Save_Data()"
+                        <button mat-button class="mat-elevation-z8" *ngIf="this.AppStatus=='New'" this.AppStatus (click)="saveData()"
                             style="background-color: white;font-size: 20px;">Save</button>
                     </mat-toolbar>
                 </div> 
