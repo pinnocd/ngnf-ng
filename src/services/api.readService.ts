@@ -9,6 +9,7 @@ import { Con_model } from  '../models/Con_model';
 import { Gen_model } from  '../models/Gen_model';
 import { Bac_model } from  '../models/Bac_model';
 import { Fin_model } from  '../models/Fin_model';
+import { User_model } from '../models/User_class';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,11 @@ export class ApiReadService {
   // Retrieve All Applications for the specific user
   readAllApps(): Observable<App_model[]>{
     return this.httpClient.get<App_model[]>(`${myGlobals.PHP_API_SERVER}/api/get/getApplications.php`);
+  }
+
+  // Retrieve All Applications for the specific user
+  readAllUsers(): Observable<User_model[]>{
+    return this.httpClient.get<User_model[]>(`${myGlobals.PHP_API_SERVER}/api/get/getUsers.php`);
   }
 
   // Retrieve All Organisation model data

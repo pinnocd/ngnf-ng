@@ -25,6 +25,7 @@ export class TopBarComponent implements OnInit {
       globals.loginbtn=true;
       globals.logoutbtn=false
     }
+    this.globals.adminuser =  this.adminService.isAdminUser();
   }
   
   private changeName( name: boolean ): void {

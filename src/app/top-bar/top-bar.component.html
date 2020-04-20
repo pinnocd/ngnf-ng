@@ -3,9 +3,18 @@
         <button mat-button class="mat-elevation-z8" routerLink="/" 
             style="background-color: white; font-size: 16px; margin:5px;">NGNF</button>
     </span>
+    
     <span fxFlex></span>
-    <button mat-button class="mat-elevation-z8" *ngIf="globals.adminuser" routerLink="/appReport"
+
+    <button mat-button class="mat-elevation-z8"  [matMenuTriggerFor]="menu" *ngIf="globals.adminuser"
         style="background-color: white; font-size: 16px; margin:5px;">Admin</button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink="/appReport"
+            style="background-color: white; font-size: 16px; margin:5px;">Application Admin</button>
+
+            <button mat-menu-item routerLink="/userAdmin"
+            style="background-color: white; font-size: 16px; margin:5px;">User Admin</button>
+        </mat-menu>
 
     <button mat-button class="mat-elevation-z8" *ngIf="globals.loginbtn" routerLink="/login" routerLinkActive="active" 
         style="background-color: white; font-size: 16px; margin:5px;">Login</button>

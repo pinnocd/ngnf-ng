@@ -32,7 +32,15 @@ export class ApiUpdateService {
         return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/update/updApp.php`, { params: params} )
     }
 
-    // update an Org row based on the entered form data
+    updateUser(UserId, UserType){
+      let params = new HttpParams()
+                        .set('UserId', UserId)
+                        .set('UserType', UserType);
+
+      return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/update/updUser.php`, { params: params} )
+  }
+
+  // update an Org row based on the entered form data
     updateOrg_model(Org_model: Org_model): Observable<Org_model>{
         let params = new HttpParams()
           .set('ApplicationId', Org_model.ApplicationId.toString())

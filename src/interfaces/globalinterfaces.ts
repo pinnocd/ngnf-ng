@@ -15,3 +15,10 @@ export interface ApplData{
     InsertDateTime: Date;
   }
 
+export interface UserData{
+    id: number;
+    name: string;
+    email: string;
+    usertype: string;
+  }
+

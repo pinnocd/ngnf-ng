@@ -3,7 +3,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ApiReadService } from '../../services/api.readService';
-import { ApiDeleteService } from '../../services/api.deleteService';
 import { ApiUpdateService } from '../../services/api.updateService';
 import { ApiAdminService } from '../../services/api.adminService';
 import { matDialogComponent } from '../matDialog/matDialog.component';
@@ -45,7 +44,7 @@ export class AppReportComponent implements OnInit {
 
   selectedRowIndex: number = -1;
 
-  constructor(private readService: ApiReadService, private deleteService: ApiDeleteService, private adminService: ApiAdminService,
+  constructor(private readService: ApiReadService, private adminService: ApiAdminService,
               private updateService: ApiUpdateService, public dialog: MatDialog) { }
 
   // Initial load of all applications

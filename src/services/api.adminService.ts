@@ -78,18 +78,22 @@ export class ApiAdminService {
                         this.getLoggedInName.emit(true);
                         this.router.navigate(['/myaccount']);
                         return true;
+
                     } else {
                         this.showError('Attention!', 'Incorrect password, please retry or register a new account.');
                         return true;
+
                     }
                 } else {
                     this.showError('Attention!', 'Unable to retrieve the account, please retry or register a new account.');
                     return true;
+
                 }
             });
         } catch (e) {
             this.showError('Attention!', 'Incorrect email, please retry or register a new account.');
             return true;
+
         }
     }
 

@@ -8,11 +8,11 @@
     $debug          = $_REQUEST['degug'];
 
     $sql =  "UPDATE Applications SET Status ='$Status', UpdateDateTime=NOW() , UpdateBy='$UserId' 
-            WHERE ApplicationId = $ApplicationId\n\n";
+            WHERE ApplicationId = $ApplicationId";
 
     if ($debug) {
         echo 
-            "ApplicationId = ", $ApplicationId, 
+            "\nApplicationId = ", $ApplicationId, 
             "\nStatus = ", $Status, "\n",
             "UserId = ", $UserId, "\n";
 

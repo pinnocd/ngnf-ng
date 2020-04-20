@@ -46,19 +46,16 @@ import { AppReportComponent } from './app-report/app-report.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserAdminComponent } from './user-admin/user-admin.component';
 
 // Define all routes necessary
 const appRoutes: Routes = [
   { path: '', component: NgnfComponent },
-//  { path: 'apply', component: ApplyComponent, canActivate: [AuthguardGuard] },
-//  { path: 'report', component: ReportComponent, canActivate: [AuthguardGuard] },
-  { path: 'appReport', component: AppReportComponent, canActivate: [AuthguardGuard] },
-
   { path: 'login', component: LoginComponent },
-//  { path: 'home', component: HomeComponent },
   { path: 'registration', component: RegisterComponent },
+  { path: 'appReport', component: AppReportComponent, canActivate: [AuthguardGuard] },
+  { path: 'userAdmin', component: UserAdminComponent, canActivate: [AuthguardGuard] },
   { path: 'myaccount', component: DashboardComponent, canActivate: [AuthguardGuard] }
-
 ];
 
 @NgModule({
@@ -77,7 +74,8 @@ const appRoutes: Routes = [
     matDialogComponent,
     LoginComponent,
     RegisterComponent,
-    DashboardComponent    
+    DashboardComponent,
+    UserAdminComponent    
     ],
   imports: [
       BrowserModule,
