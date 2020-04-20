@@ -112,7 +112,8 @@ CREATE TABLE Users (
     name		VARCHAR(20),
     email		VARCHAR(30),
     password	VARCHAR(64),
-    usertype	VARCHAR(1)
+    usertype	VARCHAR(1),
+    UNIQUE KEY unique_email (email)
 	)
 ;
 

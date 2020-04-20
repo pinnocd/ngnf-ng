@@ -32,7 +32,32 @@ export class ApiAdminService {
                         .set('email', User_model.email)
                         .set('password', hash);
     
-        return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/admin/register.php`, { params: params} );
+        try {
+            this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/admin/register.php`, { params: params} )
+                .subscribe((ret) => {
+                    switch (ret) {
+                        case User_model.name:
+                            // Account successfully created, so jump to login
+                            this.showError('Success!', 'Your account has been successfully created, please login.');
+                            this.router.navigate(['/login']);
+                            break;
+                        
+                        case 1062:
+                            this.showError('Attention!', 'Your email address is already being used.  Please retry with another.');
+                            break;
+
+                        default :
+                            this.showError('Attention!', 'Unable to register your account, please retry with different credentials.');
+                            break;
+
+                    }
+                });
+            }
+            catch (e) {
+                this.showError('Attention!', 'Unable to register your account, please retry.');
+                return true;
+
+            }
     }
 
     //  Log the user in based on the email and password
@@ -54,22 +79,22 @@ export class ApiAdminService {
                         this.router.navigate(['/myaccount']);
                         return true;
                     } else {
-                        this.showError('Incorrect password, please retry or register a new account.');
+                        this.showError('Attention!', 'Incorrect password, please retry or register a new account.');
                         return true;
                     }
                 } else {
-                    this.showError('Unable to retrieve the account, please retry or register a new account.');
+                    this.showError('Attention!', 'Unable to retrieve the account, please retry or register a new account.');
                     return true;
                 }
             });
         } catch (e) {
-            this.showError('Incorrect email, please retry or register a new account.');
+            this.showError('Attention!', 'Incorrect email, please retry or register a new account.');
             return true;
         }
     }
 
 
-    showError(message:string){
+    showError(title:string, message:string){
         const dialogConfig = new MatDialogConfig();
 
         dialogConfig.disableClose = true;
@@ -77,7 +102,7 @@ export class ApiAdminService {
         dialogConfig.width = "600px";
                         
         dialogConfig.data = {
-            title: 'Attention!', description: message, button1: 'OK', button2: '' 
+            title: title, description: message, button1: 'OK', button2: '' 
           };
         this.dialog.open(matDialogComponent, dialogConfig);
     }

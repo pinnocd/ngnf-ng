@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { ApiAdminService } from '../../services/api.adminService';
 import { User_class } from '../../models/User_class';
 
@@ -12,19 +11,14 @@ import { User_class } from '../../models/User_class';
 export class RegisterComponent {
     User_Model = new User_class();
 
-    constructor( private adminService: ApiAdminService, private router:Router ) {
+    constructor( private adminService: ApiAdminService ) {
     }
 
     registerUser(){
         try {
-            this.adminService.registerUser(this.User_Model).subscribe(
-              () => {
-                console.log("Account successfully created so force a login");
-                this.router.navigate(['login']);
-              }
-            )
+            this.adminService.registerUser(this.User_Model)
         } catch (e) {
-            alert("There was a problem saving your data, please contact admin@ngnf.co.uk");
+          alert("There was a problem saving your data, please contact admin@ngnf.co.uk");
         }      
     }
 }
