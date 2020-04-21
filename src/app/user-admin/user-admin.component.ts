@@ -52,7 +52,7 @@ export class UserAdminComponent implements OnInit {
 
     switch  (action) {
       case 'Promote': usertype = "A"; break;
-      case 'Demote': usertype = "P"; break;
+      case 'Demote': usertype = "R"; break;
       default:
               console.log("No such action exists!");
               break;

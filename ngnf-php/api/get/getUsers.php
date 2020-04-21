@@ -3,7 +3,12 @@
 
     // Set up default sample data
     $Users = [];
-    $sql = "SELECT id, name, email, usertype FROM Users";
+    $sql = "SELECT id, name, email, CASE usertype 
+                                        WHEN 'R' THEN 'Regular'
+                                        WHEN 'A' THEN 'Admin'
+                                        ELSE usertype
+                                    END as usertype
+            FROM Users";
 
     if($result = mysqli_query($con, $sql))
     {

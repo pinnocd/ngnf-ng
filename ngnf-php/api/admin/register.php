@@ -6,7 +6,7 @@
     $password   = $_REQUEST['password'] ?? '';
     $debug      = $_REQUEST['debug'];
 
-    $sql = "INSERT INTO Users( name, password, email, usertype ) VALUES ('$name','$password','$email', 'P')";
+    $sql = "INSERT INTO Users( name, password, email, usertype ) VALUES ('$name','$password','$email', 'R')";
     
     if (!mysqli_query($con, $sql)) {
         if ($debug){
