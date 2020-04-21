@@ -136,8 +136,12 @@ export class ApiAdminService {
     isAdminUser() {
         const usertoken = this.getToken();
 
-        // Example token = 2|A|dean_pinnock@yahoo.com|Dean Pinnock
-        return usertoken.split('|')[1]==="A";
+        if (usertoken){
+            // Example token = 2|A|dean_pinnock@yahoo.com|Dean Pinnock
+            return usertoken.split('|')[1]==="A";
+        } else {
+            return false;
+        }
     }
 }
   

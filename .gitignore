@@ -3,6 +3,9 @@
 # PHP config filefor connecting to MySQL
 /ngnf-php/config/database.php
 
+# ignore build script
+buildngs3.sh
+
 # compiled output
 /dist
 /tmp
