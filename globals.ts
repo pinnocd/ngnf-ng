@@ -17,7 +17,7 @@ export class Globals {
 
 
 export const    PHP_API_SERVER = 
-                    "https://d21we6cqlbpthq.cloudfront.net";
+                    "https://d3en7m4sk97aoa.cloudfront.net";
 //                  "http://ec2-35-177-242-73.eu-west-2.compute.amazonaws.com";
 //                  "http://localhost:8080";
 
