@@ -7,6 +7,8 @@ export class App_model {
       public    GenName: string,
       public    GenStartDate: Date,
       public    Status: string,
+      public    ProposalWriter: string,
+      public    SeniorApprover: string,
       public    InsertDateTime:Date,
     ) {}
 }

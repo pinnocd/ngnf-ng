@@ -15,7 +15,7 @@
     $Org_open 		= $_REQUEST['Orgopen'] ?? 'null';
     $Org_info 		= $_REQUEST['Orginfo'] ?? '';
     $UserId         = $_REQUEST['UserId'] ?? '';
-    $debug          = $_REQUEST['debug'];
+    $debug          = $_REQUEST['debug']; 
 
     if ($debug){
         echo 

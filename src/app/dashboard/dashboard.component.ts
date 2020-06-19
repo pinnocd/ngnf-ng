@@ -22,6 +22,7 @@ import { Fin_model } from  '../../models/Fin_model';
 import { Fin_class } from  '../../models/Fin_class';
 
 import { ApplData } from '../../interfaces/globalinterfaces';
+import { isNull } from 'util';
 
 /**
  * @title Basic use of `<table mat-table>`
@@ -62,6 +63,7 @@ export class DashboardComponent implements OnInit {
   username = '';
   ApplicationId = 0;
   AppStatus:string = "";
+  pWriter = "";
 
   constructor(private readService: ApiReadService,  private deleteService: ApiDeleteService,
               private adminService: ApiAdminService, private createService: ApiCreateService,
@@ -81,11 +83,19 @@ export class DashboardComponent implements OnInit {
     let userId = token.split('|')[0];
     let userType = token.split('|')[1];
 
-    // Admin users see everything so blank the id.
-    if (userType === "A")
-      {userId = "";}
+    switch (userType) {
+      case 'A':
+        // Admin users see everything so blank the id.
+        userId = ""; 
+        break;
+      case 'P': 
+        // Proposal Writer so set the value
+        this.pWriter = userId;
+        userId = ""; 
+        break;
+    }
 
-    this.readService.readApplications(userId)
+    this.readService.readApplications(userId, this.pWriter)
       .subscribe(newData => this.dataSource.data = newData)
       ;
   }
@@ -190,7 +200,7 @@ export class DashboardComponent implements OnInit {
     diaret.afterClosed().subscribe(
       data => { 
         if (data) {
-          this.updateService.updateApplication(element.ApplicationId, 'S').subscribe(()=>{
+          this.updateService.updateApplication(element.ApplicationId, 'S', '').subscribe(()=>{
             dialogConfig.data = {
               title: 'Confirmation', description: 'Thank you for submitting your Application.  We will process it in due course.'
               , button1: 'OK', button2: '' 
@@ -235,13 +245,15 @@ export class DashboardComponent implements OnInit {
 
               });
               this.loadAppList();
-              this.Org_Model.length = 0;
-              this.Con_Model.length = 0;
-              this.Gen_Model.length = 0;
-              this.Bac_Model.length = 0;
-              this.Fin_Model.length = 0;        
+              // this.Org_Model.length = 0;
+              // this.Con_Model.length = 0;
+              // this.Gen_Model.length = 0;
+              // this.Bac_Model.length = 0;
+              // this.Fin_Model.length = 0;        
             } 
            catch (e) {
+              console.log(e);
+              alert("There was a problem deleting your application, please contact admin@ngnf.co.uk");
            }
           }
         }
@@ -273,48 +285,56 @@ export class DashboardComponent implements OnInit {
       data => { 
         if (data) {
           // Set up default sample data
-          this.Org_model.OrgName = "Sample Organisation Name";
+          this.Org_model.OrgName = "BLM";
           this.Org_model.OrgAddress = "43 Unknown St, Huddersfield";
           this.Org_model.OrgPostcode = "HD1 1LS";
-          this.Org_model.OrgEmail = "sampleemail@gmail.com";
-          this.Org_model.OrgWebsite = "http://website.co.uk/";
-          this.Org_model.OrgType = "S";
+          this.Org_model.OrgEmail = "sampleemail@blm.com";
+          this.Org_model.OrgWebsite = "http://www.blm.co.uk/";
+          this.Org_model.OrgType = "C";
           this.Org_model.OrgCharity = true;
           this.Org_model.OrgCharityNo = 1129873;
           this.Org_model.OrgStartDate = new Date("");
           this.Org_model.OrgOpen = true;
           this.Org_model.OrgInfo = "n/a";
       
-          this.Con_model.ConName = "Arthur Daley";
+          this.Con_model.ConName = "Garza Cullors Tometi";
           this.Con_model.ConDOB = new Date("");
           this.Con_model.ConAddress = "12 Fulham Street, London, NW8 2QS";
           this.Con_model.ConPreAddress = "";
           this.Con_model.ConLandlineNo = "";
           this.Con_model.ConOtherNo = "07710 000000";
-          this.Con_model.ConEmail = "contact@hotmail.com";
-          this.Con_model.ConSenName = "Senior Contact";
+          this.Con_model.ConEmail = "contact@blm.com";
+          this.Con_model.ConSenName = "";
           this.Con_model.ConSenDOB = new Date("");
-          this.Con_model.ConSenAddress = "62 Letsby Road, Sheffield, SH8 1AR";
+          this.Con_model.ConSenAddress = "";
           this.Con_model.ConSenPreAddress = "";
           this.Con_model.ConSenLandlineNo = "";
-          this.Con_model.ConSenOtherNo = "07715 987 543";
-          this.Con_model.ConSenEmail = "seniorcont@hotmail.co.uk";
+          this.Con_model.ConSenOtherNo = "";
+          this.Con_model.ConSenEmail = "";
 
-          this.Gen_model.GenName = "Huddersfield School";
+          this.Gen_model.GenName = "Womens Projects";
           this.Gen_model.GenStartDate = new Date("");
-          this.Gen_model.GenAchieve = "Provide entertainment for the huddersfield community.";
-          this.Gen_model.GenProblem = "This project will provide activities for children and young people.";
+          this.Gen_model.GenAchieve = "•	Members will have a better mental health situation as they have hope that they have an organisation who they can contact for support and assistance. " +
+          "•	Individuals who have a long term illness e.g. arthritis, heart condition, depression, diabetes and other Covid-19 compromising underlying medical conditions, will worry less about where to get food, toiletries, and some over the counter (OTC)  medication, eg. paracetamol, rub-ins or creams which can be purchased for them on request. " +
+          "•	Families of lonely members will have peace of mind that their family members are being taken care of during this period and they will not have to travel long distance to ensure their parents are keeping well." +
+          "•	Creativity of the youths will be gingered up as we plan to get them involved in quizzes, competitive art/game activities to get their minds off Covid-19 and its connotations." +
+          "•	BLM group also engages in offering spiritual needs and people in distress often call us for prayers as they find our group more accessible than the regular church they attend." +
+          "•	Pastors in the group will network and come up with ideas on how to support their members appropriately during this period. They also minster to women at the risk of becoming homeless, and sign post them to professional advice e.g. to Crisis, Shelter, Council." +
+          "•	We respond promptly to requests for prayers and offer group or one to one prayer sessions. In this present situation prayers will be offered using the telephone or via online digital apps – ZOOM for group prayers, WhatsApp groups for communication and relaying information. " +
+          "•	To enable this we are going to offer training to up skill members on how to use the internet and engage in online meetings, prayer activities and meeting other requests.";
+          this.Gen_model.GenProblem = "";
           this.Gen_model.GenVulnerables = true;
-          this.Gen_model.GenSafeguards = false;
+          this.Gen_model.GenSafeguards = true;
 
-          this.Bac_model.BacNeed = "The need, vision and direction of the projects is to engage residents and visitors.";
-          this.Bac_model.BacTarget = "Our overall focus is to enhance participation in community eventy.";
+          this.Bac_model.BacNeed = "BLM is a registered women’s charity group set up with the aim of meeting the needs of battered women and women in crisis; physically, mentally and spiritually. We are committed to upholding the dignity of womanhood universally, irrespective of nationality, race, or denomination. The group also promotes the dignity of womanhood and the relevance of women in things temporal and spiritual. It provides relief to widows, single mothers and women in distress, uplifting and empowering them. Our values are to Engage, Enable and Empower women." +
+          "We have 44 core women members in this group. Some of them are bereaved, including some bereaved due to Covid-19, and many of them and their families are now suffering from mental health related issues. Some belong to Covid-19 vulnerable group due to having underlying health issues e.g. diabetes, stress, heart disease, blood pressure; and are afraid to leave their homes even for shopping. Some of them are over 65 years, and the majority are from the Black ethnic minority group, who are most vulnerable to death from Covid-19 related complications.";
+          this.Bac_model.BacTarget = "Our overall focus is to enhance participation in community events.";
           this.Bac_model.BacActivities = "Weekly residential home visits for children";
           this.Bac_model.BacDeliver = "Deliver Mansfield positive results.";
           this.Bac_model.BacUsers = "Mainly volunteers but some professionals due to safeguards.";
 
-          this.Fin_model.FinActivity = "Funding for the whole thing.";
-          this.Fin_model.FinCost = 100.50;
+          this.Fin_model.FinActivity = "";
+          this.Fin_model.FinCost = 0;
         } 
       }
     );
@@ -367,15 +387,20 @@ export class DashboardComponent implements OnInit {
                       this.loadAppList();
                   })
                 } catch (e) {
-                alert("There was a problem saving your data, please contact admin@ngnf.co.uk");
+                  console.log(e);
+                  alert("There was a problem saving your data, please contact admin@ngnf.co.uk");
               }
               } else {
                 try{
+                  console.log(this.Org_model);
                     this.Org_model.ApplicationId = this.ApplicationId;
                     this.Con_model.ApplicationId = this.ApplicationId;
                     this.Gen_model.ApplicationId = this.ApplicationId;
                     this.Bac_model.ApplicationId = this.ApplicationId;
                     this.Fin_model.ApplicationId = this.ApplicationId;
+
+                    // Further tweeks
+                    if (!this.Fin_model.FinCost){this.Fin_model.FinCost = 0;}
 
                     this.updateService.updateOrg_model(this.Org_model).subscribe(()=>{});
                     this.updateService.updateCon_model(this.Con_model).subscribe(()=>{});
@@ -391,6 +416,7 @@ export class DashboardComponent implements OnInit {
                     this.selectedIndex = 0;
                     this.loadAppList();
                 } catch (e) {
+                    console.log(e);
                     alert("There was a problem updating your data, please contact admin@ngnf.co.uk");
                 }
               }

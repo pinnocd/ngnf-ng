@@ -11,16 +11,19 @@
         echo  'ApplicationId = ', $ApplicationId;
         echo $sql;
     }
-
     $call = mysqli_prepare($con, $sql);
 
-    if($result = mysqli_stmt_execute($call))
-    {
-        return json_encode($result);
+    $return = mysqli_stmt_execute($call);
+
+    if($return){
+        echo json_encode(1);
+
     } else {
         echo $sql,"\n";
-        echo '***** Unable to cal lthe procedure, please check logs and retry *****';
+        echo '***** Unable to call the procedure, please check logs and retry *****';
         echo json_encode("failure");
+
     };
 
 ?>
+

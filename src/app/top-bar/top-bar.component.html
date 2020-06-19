@@ -6,13 +6,13 @@
     
     <span fxFlex></span>
 
-    <button mat-button class="mat-elevation-z8"  [matMenuTriggerFor]="menu" *ngIf="globals.adminuser"
+    <button mat-button class="mat-elevation-z8"  [matMenuTriggerFor]="menu" *ngIf="globals.staffuser"
         style="background-color: white; font-size: 16px; margin:5px;">Admin</button>
         <mat-menu #menu="matMenu">
             <button mat-menu-item routerLink="/appReport"
             style="background-color: white; font-size: 16px; margin:5px;">Application Admin</button>
 
-            <button mat-menu-item routerLink="/userAdmin"
+            <button mat-menu-item routerLink="/userAdmin" *ngIf="globals.adminuser"
             style="background-color: white; font-size: 16px; margin:5px;">User Admin</button>
         </mat-menu>
 

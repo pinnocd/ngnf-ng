@@ -26,7 +26,7 @@ export class UserAdminComponent implements OnInit {
 
   // Initial load of all users
   loadUserList() {
-    this.readService.readAllUsers().subscribe(nData => this.userData.data = nData);
+    this.readService.readAllUsers('').subscribe(nData => this.userData.data = nData);
 
   }
 
@@ -50,14 +50,30 @@ export class UserAdminComponent implements OnInit {
     let conf = this.confirmAction(element, action)
     var usertype: string;
 
-    switch  (action) {
-      case 'Promote': usertype = "A"; break;
-      case 'Demote': usertype = "R"; break;
-      default:
-              console.log("No such action exists!");
-              break;
-    }
+    console.log(element);
 
+    switch (action) {
+      case 'Promote': 
+        if (element.usertype === 'Client') {
+          usertype = "P"; 
+        }
+        else {
+          usertype = "A";
+        } 
+        break;
+      case 'Demote': 
+      if (element.usertype === 'Admin') {
+        usertype = "P";
+      }
+      else {
+        usertype = "C";
+      } 
+      break;
+      default:
+          console.log("No such action exists!");
+          break;
+    }
+  
     conf.afterClosed().subscribe(
       data => { 
         if (data) {

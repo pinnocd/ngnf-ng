@@ -1,14 +1,21 @@
 <?php
     require '../../config/database.php';
 
+    $PWriter = $_REQUEST['PWriter'] ?? '';
+
     // Set up default sample data
     $Users = [];
     $sql = "SELECT id, name, email, CASE usertype 
-                                        WHEN 'R' THEN 'Regular'
+                                        WHEN 'C' THEN 'Client'
+                                        WHEN 'P' THEN 'Proposal Writer'
                                         WHEN 'A' THEN 'Admin'
                                         ELSE usertype
                                     END as usertype
-            FROM Users";
+            FROM    Users ";
+            
+            if ($PWriter) {
+                    $sql .= " WHERE  usertype IN ('P', 'A')";}
+        
 
     if($result = mysqli_query($con, $sql))
     {

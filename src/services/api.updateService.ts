@@ -23,11 +23,13 @@ export class ApiUpdateService {
         userId = token.split('|')[0];
      }
 
-    updateApplication(ApplicationId, Status){
+    updateApplication(ApplicationId, Status, ProposalWriter){
         let params = new HttpParams()
                           .set('ApplicationId', ApplicationId)
                           .set('Status', Status)
-                          .set('UserId', userId);
+                          .set('UserId', userId)
+                          .set('ProposalWriter', ProposalWriter )
+                          .set('SeniorApprover', userId );
 
         return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/update/updApp.php`, { params: params} )
     }

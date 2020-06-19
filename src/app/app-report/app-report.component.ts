@@ -14,7 +14,7 @@ import { Gen_model } from  '../../models/Gen_model';
 import { Bac_model } from  '../../models/Bac_model';
 import { Fin_model } from  '../../models/Fin_model';
 
-import { ApplData } from '../../interfaces/globalinterfaces';
+import { ApplData, AppActions } from '../../interfaces/globalinterfaces';
 
 @Component({
   selector: 'app-app-report',
@@ -23,14 +23,36 @@ import { ApplData } from '../../interfaces/globalinterfaces';
 })
 
 export class AppReportComponent implements OnInit {
-  displayedColumns: string[] = ['ApplicationId', 'User', 'OrgName', 'GenName', 'GenStartDate', 'Status', 'InsertDateTime', 
-                                'Accept', 'Reject', 'Progress', 'Succeed', 'Fail'];
+  displayedColumns: string[] = ['ApplicationId', 'User', 'OrgName', 'GenName', 'GenStartDate', 'Status', 
+           'ProposalWriter', 'SeniorApprover', 'InsertDateTime', 'Action'];
   dataSource = new MatTableDataSource<ApplData>(ELEMENT_DATA);
-  username = '';
-  
+ 
+  appActions: AppActions[];
+
+  userName = '';
+  userId = '';
+  userType = '';
+  pWriter = '';
+  staffType = 'Senior Approver';
+
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   ngOnInit() {
+    let token = this.adminService.getToken();
+    this.userId = token.split('|')[0];
+    this.userType = token.split('|')[1];
+    this.userName = token.split('|')[3];
+
+    this.appActions = [{ActionCode: 'P', ActionDesc: 'Progress'}];
+
+    console.log(this.appActions);
+
+    // If the user is a proposal writer, limit their application list
+    if (this.userType==="P") {
+      this.pWriter = this.userId;
+      this.staffType = 'Proposal Writer';
+    }
+
     this.loadAppList();
     this.dataSource.paginator = this.paginator;
   }  
@@ -50,15 +72,49 @@ export class AppReportComponent implements OnInit {
   // Initial load of all applications
   loadAppList() {
     // update data in data source when available
-    this.readService.readAllApps().subscribe(newData => this.dataSource.data = newData);
+    this.readService.readApplications("", this.pWriter).subscribe(newData => this.dataSource.data = newData);
 
-    let token = this.adminService.getToken();
-    this.username = token.split('|')[3];
   }
 
   // An application has been selected in the list, so refresh all data
   selectApp(app_model){
     console.log(app_model);
+
+    // Load the action drop down with the relevant options
+    if (this.userType==="P") {
+      // if we have an Assigned app, allow to Progress, otherwise nothing
+      if (app_model.Status==="Assigned") {
+        this.appActions = [{ActionCode: 'P', ActionDesc: 'Progress'}];
+      }
+      else {
+        this.appActions = [];
+      }
+    }
+    else {
+      // Admin users have more options
+      switch (app_model.Status) {
+        case 'Submitted':
+          this.appActions = [{ActionCode: 'A', ActionDesc: 'Assign'},
+                            {ActionCode: 'R', ActionDesc: 'Reject'}];
+          break;
+
+        case 'Assigned':
+          this.appActions = [ {ActionCode: 'P', ActionDesc: 'Progress'}];
+          break;
+
+        case 'In Progress':
+          this.appActions = [ {ActionCode: 'F', ActionDesc: 'Fail'},
+                            {ActionCode: 'C', ActionDesc: 'Succeed'}];
+          break;
+
+        default :
+          this.appActions = [];
+      }
+    }
+
+    //   // Remove all Admin specific actions (Reject, Assign, suCceed, Fail)
+    //   this.statuses.splice(this.statuses.findIndex((s: StatusData) => s.StatusCode === 'R'), 1);
+
 
     this.readService.readOrg_model(app_model.ApplicationId).subscribe((Org_models: Org_model[])=>{
       this.Org_models = Org_models;
@@ -89,40 +145,68 @@ export class AppReportComponent implements OnInit {
 
   confirmAction(element, action: string){
     const dialogConfig = new MatDialogConfig();
+    var description: string;
+    var title: string;
+    var button1: string;
+    var button2: string;
+  
+    if (action==="Assign"){
+      description = 'Please select a Proposal Writer to assign the "' + element.OrgName + '" application for project "' + element.GenName + '"?';
+      title = 'Please Select';
+      button1 = 'Select';
+      button2 = 'Cancel';
+    }
+    else {
+      description = 'Are you absolutely sure you want to ' + action + ' the "' + element.OrgName + '" application for project "' + element.GenName + '"?';
+      title= 'Please Confirm';
+      button1 = 'Yes';
+      button2 = 'No';
+    }
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "600px";
     dialogConfig.data = {
-      title: 'Please Confirm',
-      description: 'Are you absolutely sure you want to ' + action + ' the "' + element.OrgName + '" application for project "' + element.GenName + '"?',
-      button1: 'Yes',
-      button2: 'No'
+      title: title, 
+      action: action,
+      description: description,
+      button1: button1,
+      button2: button2
     };
 
     return this.dialog.open(matDialogComponent, dialogConfig);
   }
 
-  
-  updateApp(element, action: string) {
-    let conf = this.confirmAction(element, action)
+  selectAction(element, action) {
+    console.log(action);
+    console.log(element);
+    console.log(action.source.value);
+
     var status: string;
 
-    switch  (action) {
-      case 'Accept': status = "A"; break;
-      case 'Progress': status = "U"; break;
-      case 'Succeed': status = "C"; break;
-      case 'Fail': status = "F"; break;
-      case 'Reject': status = "R"; break;
+    switch  (action.source.value) {
+      case 'A':
+        status = 'Assign'; break;
+      case 'P': 
+        status = 'Progress'; break;
+      case 'C':
+        status = 'Succeed'; break;
+      case 'F':
+        status = 'Fail'; break;
+      case 'R':
+        status = 'Reject'; break;
       default:
-              console.log("No such action exists!");
-              break;
+        console.log("No such action exists!");
     }
+
+    let conf = this.confirmAction(element, status)
 
     conf.afterClosed().subscribe(
       data => { 
         if (data) {
-          this.updateService.updateApplication(element.ApplicationId, status).subscribe(()=>{
+          console.log(data);
+
+          this.updateService.updateApplication(element.ApplicationId, action.source.value, data).subscribe(()=>{
             const dialogConfig = new MatDialogConfig();
 
             dialogConfig.disableClose = true;
@@ -136,12 +220,13 @@ export class AppReportComponent implements OnInit {
             };
         
             this.dialog.open(matDialogComponent, dialogConfig);
-            this.loadAppList();
           });
         } 
       }
     );
+    this.loadAppList();
   }
 }
+
 
 var ELEMENT_DATA: ApplData[];

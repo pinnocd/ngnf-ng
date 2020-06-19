@@ -25,13 +25,15 @@ export class TopBarComponent implements OnInit {
       globals.loginbtn=true;
       globals.logoutbtn=false
     }
-    this.globals.adminuser =  this.adminService.isAdminUser();
+    this.globals.adminuser = this.adminService.isAdminUser();
+    this.globals.staffuser = this.adminService.isStaff();
   }
   
   private changeName( name: boolean ): void {
       this.globals.logoutbtn = name;
       this.globals.loginbtn = !name;
-      this.globals.adminuser =  this.adminService.isAdminUser();
+      this.globals.adminuser = this.adminService.isAdminUser();
+      this.globals.staffuser = this.adminService.isStaff();
     }
 
   logout()
@@ -40,6 +42,7 @@ export class TopBarComponent implements OnInit {
       this.globals.logoutbtn = false;
       this.globals.loginbtn = true;
       this.globals.adminuser = false;
+      this.globals.staffuser = false;
       this.router.navigate(['']);
     }
 

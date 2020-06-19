@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiReadService } from '../../services/api.readService';
 import { ApiDeleteService } from '../../services/api.deleteService';
+import { ApiAdminService } from '../../services/api.adminService';
 
 import { App_model } from  '../../models/App_model';
 import { Org_model } from  '../../models/Org_model';
@@ -15,9 +16,7 @@ import { Fin_model } from  '../../models/Fin_model';
   styleUrls: ['./report.component.css']
 })
 
-
 export class ReportComponent implements OnInit {  
-  
   
 ngOnInit() {
   this.loadAppList();
@@ -31,11 +30,37 @@ ngOnInit() {
   Fin_models:  Fin_model[];
 
 
-  constructor(private apiService: ApiReadService, private apiDelService: ApiDeleteService) { }
+  constructor(private apiService: ApiReadService, private apiDelService: ApiDeleteService, private apiAdminService: ApiAdminService) { }
 
   // Initial load of all applications
   loadAppList() {
-    this.apiService.readAllApps().subscribe((App_models: App_model[])=>{
+//    this.apiService.readAllApps().subscribe((App_models: App_model[])=>{
+
+    // update data in data source when available
+    let token = this.apiAdminService.getToken();
+
+    // Example token = 2|A|dean_pinnock@yahoo.com|Dean Pinnock
+
+    let userId = token.split('|')[0];
+    let userType = token.split('|')[1];
+
+    var pwriter : string;
+
+    if (userType === "P") {
+      pwriter = userId;
+    }
+    else pwriter = "";
+
+    // Admin users see everything so blank the id.
+    switch (userType) {
+      case "A":
+        userId = "";
+      case "P":
+        userId = "";
+        pwriter = userId;
+      }
+
+    this.apiService.readApplications(userId, pwriter).subscribe((App_models: App_model[])=>{
       this.App_models = App_models;
       console.log(this.App_models);
       console.log('Initial Application list loaded');

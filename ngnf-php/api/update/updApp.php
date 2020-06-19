@@ -5,16 +5,22 @@
     $ApplicationId  = $_REQUEST['ApplicationId'] ?? '';
     $Status         = $_REQUEST['Status'] ?? '';
     $UserId         = $_REQUEST['UserId'] ?? '';
+    $ProposalWriter = $_REQUEST['ProposalWriter'] ?? '';
+    $SeniorApprover = $_REQUEST['SeniorApprover'] ?? '';
     $debug          = $_REQUEST['degug'];
 
-    $sql =  "UPDATE Applications SET Status ='$Status', UpdateDateTime=NOW() , UpdateBy='$UserId' 
+    $sql =  "UPDATE Applications SET Status ='$Status', UpdateDateTime=NOW() , UpdateBy='$UserId', 
+                    ProposalWriter='$ProposalWriter', SeniorApprover='$SeniorApprover' 
             WHERE ApplicationId = $ApplicationId";
 
     if ($debug) {
         echo 
             "\nApplicationId = ", $ApplicationId, 
             "\nStatus = ", $Status, "\n",
-            "UserId = ", $UserId, "\n";
+            "UserId = ", $UserId, "\n",
+            "ProposalWriter = ", $ProposalWriter, "\n",
+            "SeniorApprover = ", $SeniorApprover, "\n"
+            ;
 
         echo $sql,"\n";
     }

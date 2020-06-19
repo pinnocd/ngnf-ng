@@ -143,5 +143,17 @@ export class ApiAdminService {
             return false;
         }
     }
+
+    isStaff() {
+        const usertoken = this.getToken();
+
+        if (usertoken){
+            // Example token = 2|A|dean_pinnock@yahoo.com|Dean Pinnock
+            return usertoken.split('|')[1]!="C";
+        } else {
+            return false;
+        }
+    }
+
 }
   

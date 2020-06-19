@@ -19,20 +19,25 @@ export class ApiReadService {
   constructor(private httpClient: HttpClient) { }
 
   // ************************  START READ Functions  ************************ 
-  // Retrieve All Applications for the specific user
-  readApplications(UserId): Observable<App_model[]>{
-    let params = new HttpParams().set('UserId', UserId);
+  // Retrieve All Applications for the specific user and/or proposal writer
+  readApplications(UserId, PWriter): Observable<App_model[]>{
+    console.log(UserId);
+    console.log(PWriter);
+
+    let params = new HttpParams().set('UserId', UserId)
+                                 .set('PWriter', PWriter);
     return this.httpClient.get<App_model[]>(`${myGlobals.PHP_API_SERVER}/api/get/getApplications.php`, { params: params} );
   }
 
-  // Retrieve All Applications for the specific user
+  // Retrieve All Applications
   readAllApps(): Observable<App_model[]>{
     return this.httpClient.get<App_model[]>(`${myGlobals.PHP_API_SERVER}/api/get/getApplications.php`);
   }
 
-  // Retrieve All Applications for the specific user
-  readAllUsers(): Observable<User_model[]>{
-    return this.httpClient.get<User_model[]>(`${myGlobals.PHP_API_SERVER}/api/get/getUsers.php`);
+  // Retrieve All users
+  readAllUsers(PWriter): Observable<User_model[]>{
+    let params = new HttpParams().set('PWriter', PWriter);
+    return this.httpClient.get<User_model[]>(`${myGlobals.PHP_API_SERVER}/api/get/getUsers.php`, { params: params} );
   }
 
   // Retrieve All Organisation model data

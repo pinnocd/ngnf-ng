@@ -1,10 +1,3 @@
-// export interface DialogData {
-//     message: string;
-//     button1: string;
-//     button2: string;
-//   }
-
-  
 export interface ApplData{
     ApplicationId: number;
     User: string;
@@ -12,6 +5,8 @@ export interface ApplData{
     GenName: string;
     GenStartDate: Date;
     Status: string;
+    ProposalWriter: string;
+    SeniorApprover: string;
     InsertDateTime: Date;
   }
 
@@ -22,3 +17,13 @@ export interface UserData{
     usertype: string;
   }
 
+export interface StatusData {
+    StatusCode: string;
+    StatusDesc: string;
+  }
+  
+export interface AppActions {
+    ActionCode: string;
+    ActionDesc: string;
+  }
+  

@@ -8,6 +8,8 @@ CREATE TABLE Applications (
 	InsertDateTime		TIMESTAMP		DEFAULT CURRENT_TIMESTAMP,
 	UpdateDateTime		TIMESTAMP		NULL ON UPDATE CURRENT_TIMESTAMP,
     UserId				INT,
+	ProposalWriter		INT,
+	SeniorApprover		INT,
 	InsertBy			VARCHAR(70),
 	UpdateBy			VARCHAR(70)
 	)
@@ -133,3 +135,9 @@ CREATE TABLE Statuses (
 	)
 ;
 
+DROP TABLE IF EXISTS FundProviders;
+CREATE TABLE FundProviders (
+    FundProviderCode VARCHAR(5) PRIMARY KEY,
+    FundProviderName VARCHAR(20)
+	)
+;
