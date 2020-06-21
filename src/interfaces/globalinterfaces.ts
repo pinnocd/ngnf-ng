@@ -26,4 +26,10 @@ export interface AppActions {
     ActionCode: string;
     ActionDesc: string;
   }
+
+export interface FundProviders {
+    FundProviderCode: string;
+    FundProviderName: string;
+  }
+
   

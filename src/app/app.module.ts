@@ -31,6 +31,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { matDialogComponent } from './matDialog/matDialog.component';
+import { AppAssignComponent } from './app-assign/app-assign.component';
 
 // Project Modules
 import { TopBarComponent } from './top-bar/top-bar.component';
@@ -47,6 +48,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserAdminComponent } from './user-admin/user-admin.component';
+import { AppWorkbookComponent } from './app-workbook/app-workbook.component';
 
 // Define all routes necessary
 const appRoutes: Routes = [
@@ -55,6 +57,7 @@ const appRoutes: Routes = [
   { path: 'registration', component: RegisterComponent },
   { path: 'appReport', component: AppReportComponent, canActivate: [AuthguardGuard] },
   { path: 'userAdmin', component: UserAdminComponent, canActivate: [AuthguardGuard] },
+  { path: 'appWorkbook', component: AppWorkbookComponent, canActivate: [AuthguardGuard] },
   { path: 'myaccount', component: DashboardComponent, canActivate: [AuthguardGuard] }
 ];
 
@@ -75,7 +78,9 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
-    UserAdminComponent    
+    UserAdminComponent,
+    AppWorkbookComponent,
+    AppAssignComponent    
     ],
   imports: [
       BrowserModule,

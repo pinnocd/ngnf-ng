@@ -22,7 +22,6 @@ import { Fin_model } from  '../../models/Fin_model';
 import { Fin_class } from  '../../models/Fin_class';
 
 import { ApplData } from '../../interfaces/globalinterfaces';
-import { isNull } from 'util';
 
 /**
  * @title Basic use of `<table mat-table>`
@@ -95,15 +94,13 @@ export class DashboardComponent implements OnInit {
         break;
     }
 
-    this.readService.readApplications(userId, this.pWriter)
+    this.readService.readApplications(userId, this.pWriter, "Yes")
       .subscribe(newData => this.dataSource.data = newData)
       ;
   }
 
   // An application has been selected in the list, so refresh all data
   selectApp(app_model){
-    console.log(app_model);
-
     this.ApplicationId = app_model.ApplicationId;
     this.AppStatus = app_model.Status;
 
@@ -121,8 +118,6 @@ export class DashboardComponent implements OnInit {
       this.Org_model.OrgStartDate = this.Org_Model[0].OrgStartDate;
       this.Org_model.OrgOpen = this.Org_Model[0].OrgOpen;
       this.Org_model.OrgInfo = this.Org_Model[0].OrgInfo;
-
-      console.log(this.Org_Model);
     })
 
     this.readService.readCon_model(app_model.ApplicationId).subscribe((Con_model: Con_model[])=>{
@@ -142,8 +137,6 @@ export class DashboardComponent implements OnInit {
       this.Con_model.ConSenLandlineNo = this.Con_Model[0].ConSenLandlineNo;
       this.Con_model.ConSenOtherNo = this.Con_Model[0].ConSenOtherNo;
       this.Con_model.ConSenEmail = this.Con_Model[0].ConSenEmail;
-
-      console.log(this.Con_model);
     })
 
     this.readService.readGen_model(app_model.ApplicationId).subscribe((Gen_model: Gen_model[])=>{
@@ -155,8 +148,6 @@ export class DashboardComponent implements OnInit {
       this.Gen_model.GenProblem = this.Gen_Model[0].GenProblem;
       this.Gen_model.GenVulnerables = this.Gen_Model[0].GenVulnerables;
       this.Gen_model.GenSafeguards = this.Gen_Model[0].GenSafeguards;
-      
-      console.log(this.Gen_model);
     })
 
     this.readService.readBac_model(app_model.ApplicationId).subscribe((Bac_model: Bac_model[])=>{
@@ -167,8 +158,6 @@ export class DashboardComponent implements OnInit {
       this.Bac_model.BacActivities = this.Bac_Model[0].BacActivities;
       this.Bac_model.BacDeliver = this.Bac_Model[0].BacDeliver;
       this.Bac_model.BacUsers = this.Bac_Model[0].BacUsers;
-
-      console.log(this.Bac_model);
     })
 
     this.readService.readFin_model(app_model.ApplicationId).subscribe((Fin_model: Fin_model[])=>{
@@ -176,8 +165,6 @@ export class DashboardComponent implements OnInit {
 
       this.Fin_model.FinActivity = this.Fin_Model[0].FinActivity;
       this.Fin_model.FinCost = this.Fin_Model[0].FinCost;
-
-      console.log(this.Fin_model);
     })
   }
 
@@ -245,11 +232,11 @@ export class DashboardComponent implements OnInit {
 
               });
               this.loadAppList();
-              // this.Org_Model.length = 0;
-              // this.Con_Model.length = 0;
-              // this.Gen_Model.length = 0;
-              // this.Bac_Model.length = 0;
-              // this.Fin_Model.length = 0;        
+              this.Org_Model.length = 0;
+              this.Con_Model.length = 0;
+              this.Gen_Model.length = 0;
+              this.Bac_Model.length = 0;
+              this.Fin_Model.length = 0;        
             } 
            catch (e) {
               console.log(e);
@@ -340,7 +327,6 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-
   saveData() {
 
     const dialogConfig = new MatDialogConfig();
@@ -364,8 +350,6 @@ export class DashboardComponent implements OnInit {
                       var AppId: number;
                       AppId = ApplicationId as number;
 
-                      console.log("The ApplicationId is " + AppId.toString());
-
                       this.Org_model.ApplicationId = AppId;
                       this.Con_model.ApplicationId = AppId;
                       this.Gen_model.ApplicationId = AppId;
@@ -379,7 +363,7 @@ export class DashboardComponent implements OnInit {
                       this.createService.createFin_model(this.Fin_model).subscribe(()=>{});
 
                       dialogConfig.data = {
-                        title: 'Confirmation', description: 'Your Application was successfully created.'
+                        title: 'Confirmation', description: 'Your Application was successfully created, the Id is ' + AppId + '.'
                         , button1: 'OK', button2: '' 
                       };
                       this.dialog.open(matDialogComponent, dialogConfig);

@@ -10,6 +10,12 @@
         <td mat-cell *matCellDef="let element"> {{ element.ApplicationId }} </td>
         </ng-container>
 
+        <!-- Original Appication Identifier -->
+        <ng-container matColumnDef="OrigApplicationId">
+            <th mat-header-cell *matHeaderCellDef> Source App. Id </th>
+            <td mat-cell *matCellDef="let element"> {{ element.OrigApplicationId }} </td>
+        </ng-container>
+    
         <!-- Created by Name -->
         <ng-container matColumnDef="User">
         <th mat-header-cell *matHeaderCellDef> User Name </th>

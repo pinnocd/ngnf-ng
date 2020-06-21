@@ -6,6 +6,7 @@ import { ApiReadService } from '../../services/api.readService';
 import { ApiUpdateService } from '../../services/api.updateService';
 import { ApiAdminService } from '../../services/api.adminService';
 import { matDialogComponent } from '../matDialog/matDialog.component';
+import { AppAssignComponent } from '../app-assign/app-assign.component';
 
 import { App_model } from  '../../models/App_model';
 import { Org_model } from  '../../models/Org_model';
@@ -23,7 +24,7 @@ import { ApplData, AppActions } from '../../interfaces/globalinterfaces';
 })
 
 export class AppReportComponent implements OnInit {
-  displayedColumns: string[] = ['ApplicationId', 'User', 'OrgName', 'GenName', 'GenStartDate', 'Status', 
+  displayedColumns: string[] = ['ApplicationId', 'OrigApplicationId', 'User', 'OrgName', 'GenName', 'GenStartDate', 'Status', 
            'ProposalWriter', 'SeniorApprover', 'InsertDateTime', 'Action'];
   dataSource = new MatTableDataSource<ApplData>(ELEMENT_DATA);
  
@@ -44,8 +45,6 @@ export class AppReportComponent implements OnInit {
     this.userName = token.split('|')[3];
 
     this.appActions = [{ActionCode: 'P', ActionDesc: 'Progress'}];
-
-    console.log(this.appActions);
 
     // If the user is a proposal writer, limit their application list
     if (this.userType==="P") {
@@ -72,13 +71,12 @@ export class AppReportComponent implements OnInit {
   // Initial load of all applications
   loadAppList() {
     // update data in data source when available
-    this.readService.readApplications("", this.pWriter).subscribe(newData => this.dataSource.data = newData);
+    this.readService.readApplications("", this.pWriter, "All").subscribe(newData => this.dataSource.data = newData);
 
   }
 
   // An application has been selected in the list, so refresh all data
   selectApp(app_model){
-    console.log(app_model);
 
     // Load the action drop down with the relevant options
     if (this.userType==="P") {
@@ -115,30 +113,24 @@ export class AppReportComponent implements OnInit {
     //   // Remove all Admin specific actions (Reject, Assign, suCceed, Fail)
     //   this.statuses.splice(this.statuses.findIndex((s: StatusData) => s.StatusCode === 'R'), 1);
 
-
     this.readService.readOrg_model(app_model.ApplicationId).subscribe((Org_models: Org_model[])=>{
       this.Org_models = Org_models;
-      console.log(this.Org_models);
     })
 
     this.readService.readCon_model(app_model.ApplicationId).subscribe((Con_models: Con_model[])=>{
       this.Con_models = Con_models;
-      console.log(this.Con_models);
     })
 
     this.readService.readGen_model(app_model.ApplicationId).subscribe((Gen_models: Gen_model[])=>{
       this.Gen_models = Gen_models;
-      console.log(this.Gen_models);
     })
 
     this.readService.readBac_model(app_model.ApplicationId).subscribe((Bac_models: Bac_model[])=>{
       this.Bac_models = Bac_models;
-      console.log(this.Bac_models);
     })
 
     this.readService.readFin_model(app_model.ApplicationId).subscribe((Fin_models: Fin_model[])=>{
       this.Fin_models = Fin_models;
-      console.log(this.Fin_models);
     })
   }
 
@@ -178,10 +170,6 @@ export class AppReportComponent implements OnInit {
   }
 
   selectAction(element, action) {
-    console.log(action);
-    console.log(element);
-    console.log(action.source.value);
-
     var status: string;
 
     switch  (action.source.value) {
@@ -199,32 +187,47 @@ export class AppReportComponent implements OnInit {
         console.log("No such action exists!");
     }
 
-    let conf = this.confirmAction(element, status)
+    if (action.source.value!='A'){
+      let conf = this.confirmAction(element, status)
 
-    conf.afterClosed().subscribe(
-      data => { 
-        if (data) {
-          console.log(data);
+      conf.afterClosed().subscribe(
+        data => { 
+          if (data) {
+            console.log(data);
 
-          this.updateService.updateApplication(element.ApplicationId, action.source.value, data).subscribe(()=>{
-            const dialogConfig = new MatDialogConfig();
+            this.updateService.updateApplication(element.ApplicationId, action.source.value, data).subscribe(()=>{
+              const dialogConfig = new MatDialogConfig();
 
-            dialogConfig.disableClose = true;
-            dialogConfig.autoFocus = true;
-            dialogConfig.width = "600px";
-            dialogConfig.data = {
-              title: 'Confirmation',
-              description: 'The status was successfully changed',
-              button1: 'OK',
-              button2: ''
-            };
-        
-            this.dialog.open(matDialogComponent, dialogConfig);
-          });
-        } 
+              dialogConfig.disableClose = true;
+              dialogConfig.autoFocus = true;
+              dialogConfig.width = "600px";
+              dialogConfig.data = {
+                title: 'Confirmation',
+                description: 'The status was successfully changed',
+                button1: 'OK',
+                button2: ''
+              };
+          
+              this.dialog.open(matDialogComponent, dialogConfig);
+            });
+          } 
+        }
+      );
+      this.loadAppList();
+    }
+    else {
+      // We are assigning an app so pass control to the custom window for selection
+      const dialogConfig = new MatDialogConfig();
+  
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.width = "600px";
+      dialogConfig.data = {OrgName: element.OrgName, GenName: element.GenName, ApplicationId: element.ApplicationId};
+  
+      if (this.dialog.open(AppAssignComponent, dialogConfig)){
+        this.loadAppList();
       }
-    );
-    this.loadAppList();
+    }
   }
 }
 

@@ -29,7 +29,23 @@ export class ApiCreateService {
     return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/post/addApp_model.php`, { params: params})
     }
 
-  // Create an Org row based on the entered form data
+  // Create a copy of an app and assign to a proposal writer
+  createAssignedApp(ApplicationId, ProposalWriter, FundProvider){
+    let token = this.adminService.getToken();
+
+    // Example token = 2|A|dean_pinnock@yahoo.com|Dean Pinnock
+    let userId = token.split('|')[0];
+    let params = new HttpParams()
+        .set('UserId', userId)
+        .set('ApplicationId', ApplicationId)
+        .set('ProposalWriter', ProposalWriter)
+        .set('FundProvider', FundProvider)
+        ;
+    return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/post/addAssignedApp_model.php`, { params: params})
+    }
+
+
+    // Create an Org row based on the entered form data
   createOrg_model(Org_model: Org_model): Observable<Org_model>{
     let params = new HttpParams()
       .set('ApplicationId', Org_model.ApplicationId.toString())

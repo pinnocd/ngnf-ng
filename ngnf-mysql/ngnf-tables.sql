@@ -4,12 +4,14 @@ USE ngnf;
 DROP TABLE IF EXISTS Applications;
 CREATE TABLE Applications (
 	ApplicationId		INT 			PRIMARY KEY		AUTO_INCREMENT,
+	OrigApplicationId	INT,
     Status				VARCHAR(1),
 	InsertDateTime		TIMESTAMP		DEFAULT CURRENT_TIMESTAMP,
 	UpdateDateTime		TIMESTAMP		NULL ON UPDATE CURRENT_TIMESTAMP,
     UserId				INT,
 	ProposalWriter		INT,
 	SeniorApprover		INT,
+	FundProviderCode 	VARCHAR(5),
 	InsertBy			VARCHAR(70),
 	UpdateBy			VARCHAR(70)
 	)

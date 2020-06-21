@@ -2,6 +2,7 @@ export class App_model {
 
     constructor(
       public    ApplicationId: number,
+      public    OrigApplicationId: number,
       public    User: string,
       public    OrgName: string, 
       public    GenName: string,
@@ -9,6 +10,7 @@ export class App_model {
       public    Status: string,
       public    ProposalWriter: string,
       public    SeniorApprover: string,
+      public    FundProvider: string,
       public    InsertDateTime:Date,
     ) {}
 }

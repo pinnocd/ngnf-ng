@@ -60,7 +60,7 @@ ngOnInit() {
         pwriter = userId;
       }
 
-    this.apiService.readApplications(userId, pwriter).subscribe((App_models: App_model[])=>{
+    this.apiService.readApplications(userId, pwriter, "No").subscribe((App_models: App_model[])=>{
       this.App_models = App_models;
       console.log(this.App_models);
       console.log('Initial Application list loaded');
