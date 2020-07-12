@@ -71,6 +71,10 @@
     height: 30px !important;
   }
 
+  .row {
+    border:1px solid black; 
+  }
+  
   .selectedrow{
     height: 30px !important;
     background:var(--selectedrowcol); 
@@ -92,6 +96,12 @@
     background: var(--brandcolour);
     height: 5px; 
   }
+
+  mat-form-field.mat-form-field {
+    font-size: 13px;
+    appearance: "outline";
+  }
+
 
   body {
     margin: 100;

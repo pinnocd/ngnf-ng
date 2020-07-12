@@ -92,7 +92,7 @@ export class AppAssignComponent {
               AppId = ApplicationId as number;
 
               dialogConfig.data = {
-                title: 'Confirmation', description: 'Application successfully Assigned as Id ' + AppId.toString() + '.'
+                title: 'Confirmation', description: 'Application successfully Assigned.  The original data has been archived to Unique Reference Id ' + AppId.toString() + '.'
                 , button1: 'OK', button2: '' 
               };
   

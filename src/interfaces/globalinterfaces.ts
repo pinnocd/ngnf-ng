@@ -7,6 +7,8 @@ export interface ApplData{
     Status: string;
     ProposalWriter: string;
     SeniorApprover: string;
+    FundProvider: string;
+    OrgType: string;
     InsertDateTime: Date;
   }
 
@@ -32,4 +34,8 @@ export interface FundProviders {
     FundProviderName: string;
   }
 
+export interface OrgTypes {
+  OrgTypeCode:string;
+  OrgTypeName:string;
+}
   

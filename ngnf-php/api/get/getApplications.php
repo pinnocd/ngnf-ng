@@ -9,10 +9,11 @@
 
     $Applications = [];
     $sql = "SELECT      app.ApplicationId, org.OrgName, gen.GenName, gen.GenStartDate, s.StatusName, app.OrigApplicationId,
-                        app.UserId, u.name AS username, pw.name AS proposalwriter, sa.name AS seniorapprover, p.FundProviderName, 
+                        app.UserId, u.name AS username, pw.name AS proposalwriter, sa.name AS seniorapprover, p.FundProviderName, orgt.OrgTypeName AS OrgType,
                         app.InsertDateTime, app.UpdateDateTime, app.InsertBy, app.UpdateBy
             FROM        Applications app
             LEFT JOIN   Org_model org   ON org.ApplicationId = app.ApplicationId
+            LEFT JOIN   OrgTypes  orgt  ON orgt.OrgType = org.OrgType
             LEFT JOIN 	Gen_model gen   ON gen.ApplicationId = app.ApplicationId
             LEFT JOIN   Statuses  s     ON s.StatusCode  =  app.Status
             LEFT JOIN   FundProviders p ON p.FundProviderCode = app.FundProviderCode
@@ -48,6 +49,7 @@
         $Applications[$i]['ProposalWriter']    = $row['proposalwriter'];
         $Applications[$i]['SeniorApprover']    = $row['seniorapprover'];
         $Applications[$i]['FundProvider']      = $row['FundProviderName'];
+        $Applications[$i]['OrgType']           = $row['OrgType'];
         $Applications[$i]['InsertDateTime']    = $row['InsertDateTime'];
         $Applications[$i]['UpdateDateTime']    = $row['UpdateDateTime'];
         $Applications[$i]['InsertBy']          = $row['InsertBy'];

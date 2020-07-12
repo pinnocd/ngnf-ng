@@ -8,5 +8,7 @@ export class Fin_class {
     public      FinBankOrgAddress: string;
     public      FinActivity: string;
     public      FinCost: number;
-
+    public      FinCapital: number;
+    public      FinRevenue: number;
+    public      FinAuditedAccounts: boolean;
 }

@@ -1,0 +1,253 @@
+<mat-card>
+
+    <mat-card-title style="text-align: center;"><h3><b>{{ userName }}'s Application Report ({{ staffType }})</b></h3></mat-card-title>
+    
+    <div class="mat-elevation-z8">
+        <table mat-table style="width:100%;border:1cm" [dataSource]="dataSource">
+            <!-- Unique Appication Identifier -->
+            <ng-container matColumnDef="ApplicationId">
+            <th mat-header-cell *matHeaderCellDef> App. Id </th>
+            <td mat-cell *matCellDef="let element"> {{ element.ApplicationId }} </td>
+            </ng-container>
+    
+            <!-- Created by Name -->
+            <ng-container matColumnDef="User">
+            <th mat-header-cell *matHeaderCellDef> User Name </th>
+            <td mat-cell *matCellDef="let element"> {{ element.User }} </td>
+            </ng-container>
+    
+            <!-- Organisation Name -->
+            <ng-container matColumnDef="OrgName">
+            <th mat-header-cell *matHeaderCellDef> Organisation Name </th>
+            <td mat-cell *matCellDef="let element"> {{ element.OrgName }} </td>
+            </ng-container>
+    
+            <!-- Project Name -->
+            <ng-container matColumnDef="GenName">
+            <th mat-header-cell *matHeaderCellDef> Project Name </th>
+            <td mat-cell *matCellDef="let element"> {{ element.GenName }} </td>
+            </ng-container>
+    
+            <!-- Expected Start  Date -->
+            <ng-container matColumnDef="GenStartDate">
+            <th mat-header-cell *matHeaderCellDef> Start Date </th>
+            <td mat-cell *matCellDef="let element"> {{ element.GenStartDate }} </td>
+            </ng-container>
+    
+            <!-- Current Status -->
+            <ng-container matColumnDef="Status">
+            <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let element"> {{ element.Status }} </td>
+            </ng-container>
+    
+            <!-- Proposal Writer Column -->
+            <ng-container matColumnDef="ProposalWriter">
+            <th mat-header-cell *matHeaderCellDef> Proposal Writer </th>
+            <td mat-cell *matCellDef="let element"> {{ element.ProposalWriter }} </td>
+            </ng-container>
+        
+            <!-- Senior Approver Column -->
+            <ng-container matColumnDef="SeniorApprover">
+            <th mat-header-cell *matHeaderCellDef> Senior Approver </th>
+            <td mat-cell *matCellDef="let element"> {{ element.SeniorApprover }} </td>
+            </ng-container>
+            
+            <!-- Fund Provider Column -->
+            <ng-container matColumnDef="FundProvider">
+                <th mat-header-cell *matHeaderCellDef> Fund Provider </th>
+                <td mat-cell *matCellDef="let element"> {{ element.FundProvider }} </td>
+            </ng-container>
+
+            <!-- Insert Timestamp -->
+            <ng-container matColumnDef="InsertDateTime">
+            <th mat-header-cell *matHeaderCellDef> Inserted </th>
+            <td mat-cell *matCellDef="let element"> {{ element.InsertDateTime }} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="Action">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let element">
+                <mat-select 
+                    (selectionChange)="selectAction(element, $event)">
+                    <mat-option *ngFor="let action of appActions" [value]="action.ActionCode">{{action.ActionDesc}}
+                    </mat-option>
+                </mat-select>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row class="table-row" *matRowDef="let row; columns: displayedColumns;" 
+                        (click)="selectApp(row)"
+                        (click)="selectedRowIndex = row"
+                        [ngClass]="{'selectedrow': row === selectedRowIndex}">
+            </tr>
+                    
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+    
+        <!-- Organisational Details Section -->
+        <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Org_model of Org_models">
+            <caption><h3><b>Organisational Details</b></h3></caption>
+            <tr>
+                <td style="width: 10%;">Name of Organisation</td>            
+                <td style="width: 40%;">{{ Org_model.OrgName }}</td>
+                <td style="width: 20%;">Type of Organisation</td>            
+                <td> {{ Org_model.OrgTypeName }} </td>
+            </tr>
+            <tr>
+                <td>Registered Address</td><td> {{ Org_model.OrgAddress }} </td>
+                <td>When did your Organisation start?</td><td>{{ Org_model.OrgStartDate }}</td>
+            </tr>
+            <tr>
+                <td>Post Code</td><td> {{ Org_model.OrgPostcode }} </td>
+                <td>Charity Number</td><td>{{ Org_model.OrgCharityNo }}</td>
+            </tr>
+            <tr>
+                <td>Organisation Email</td><td>{{ Org_model.OrgEmail }}</td>
+                <td>Company Number</td><td>{{ Org_model.OrgCompanyNo }}</td>
+            </tr>
+            <tr>
+                <td>Organisation Website</td><td>{{ Org_model.OrgWebsite }}</td>
+                <td>Reason why the organisation is not open to anyone</td><td>{{ Org_model.OrgInfo }}</td>
+            </tr>
+        </table>
+        <br>
+    
+        <!-- Contact Details Section -->
+        <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Con_model of Con_models">
+            <caption><h3><b>Contact Details</b></h3></caption>
+            <tr>
+                <td style="width: 15%;">Contact Name</td>       <td style="width: 35%;">{{ Con_model.ConName }}</td>
+                <td style="width: 15%;">Position</td>           <td>{{ Con_model.ConPosition }}</td>
+            </tr>
+            <tr>
+                <td>Address</td><td> {{ Con_model.ConAddress }} </td>
+                <td>Email</td><td>{{ Con_model.ConEmail }}</td>
+            </tr>
+            <tr>
+                <td>Land line Number</td><td> {{ Con_model.ConLandlineNo }} </td>
+                <td>Previous Address</td><td> {{ Con_model.ConPreAddress }} </td>
+            </tr>
+            <tr>
+                <td>D.O.B.</td><td>{{ Con_model.ConDOB }}</td>
+                <td>Other Phone Number</td><td>{{ Con_model.ConOtherNo }}</td>
+            </tr>
+            <tr>
+                <td>2nd Contact Name</td>    <td>{{ Con_model.ConSenName }}</td>
+                <td>2nd Contact Position</td>   <td>{{ Con_model.ConSenPosition }}</td>
+            </tr>
+            <tr>
+                <td>2nd Contact Address</td><td> {{ Con_model.ConSenAddress }} </td>
+                <td>2nd Contact Email</td>           <td>{{ Con_model.ConSenEmail }}</td>
+            </tr>
+            <tr>
+                <td>2nd Contact Land line Number</td><td> {{ Con_model.ConSenLandlineNo }} </td>
+                <td>2nd Contact Previous Address</td><td> {{ Con_model.ConSenPreAddress }} </td>
+            </tr>
+            <tr>
+                <td>2nd Contact D.O.B.</td><td>{{ Con_model.ConSenDOB }}</td>
+                <td>2nd Contact Other Phone Number</td><td>{{ Con_model.ConSenOtherNo }}</td>
+            </tr>
+        </table>
+        <br>
+    
+        <!-- General Project Information Section -->
+        <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Gen_model of Gen_models">
+            <caption><h3><b>General Project Information</b></h3></caption>
+            <tr>
+                <td style="width: 10%;">Project Name</td>       <td style="width: 30%;">{{ Gen_model.GenName }}</td>
+                <td style="width: 10%;">Start Date</td>         <td>{{ Gen_model.GenStartDate }}</td>
+            </tr>
+    
+            <tr>
+                <td style="vertical-align: top;">Expected Achievements</td><td style="vertical-align: top;"> {{ Gen_model.GenAchieve }} </td>
+                <td style="vertical-align: top;">Problems Solved</td><td style="vertical-align: top;">{{ Gen_model.GenProblem }}</td>
+            </tr>
+            <tr>
+                <td>Vulnerables Involved?</td>
+                <td>
+                    <div [ngSwitch]="Gen_model.GenVulnerables">
+                        <ng-template [ngSwitchCase]="1">yes</ng-template>
+                        <ng-template ngSwitchDefault>no</ng-template>
+                    </div>                
+                </td>
+                <td>Safeguards in Place?</td>
+                <td>
+                    <div [ngSwitch]="Gen_model.GenSafeguards">
+                        <ng-template [ngSwitchCase]="1">yes</ng-template>
+                        <ng-template ngSwitchDefault>no</ng-template>
+                    </div>                
+                </td>
+            </tr>
+        </table>
+        <br>
+    
+        <!-- Background and Further Project Detail Section -->
+        <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Bac_model of Bac_models">
+            <caption><h3><b>Background and Further Project Detail</b></h3></caption>
+    
+            <tr><td><h4>• The need for the project</h4></td></tr>
+            <tr><td>{{ Bac_model.BacNeed }}</td></tr>
+            <br>
+            <tr><td><h4>• Who are being targeted</h4></td></tr>
+            <tr><td>{{ Bac_model.BacTarget }}</td></tr>
+            <br>
+            <tr><td><h4>• Activities that will be undertake as part of this project</h4></td></tr>
+            <tr><td>{{ Bac_model.BacActivities }}</td></tr>
+            <br>
+            <tr><td><h4>• Project Deliverables</h4></td></tr>
+            <tr><td>{{ Bac_model.BacDeliver }}</td></tr>
+            <br>
+            <tr><td><h4>• Project Users</h4></td></tr>
+            <tr><td>{{ Bac_model.BacUsers }}</td></tr>
+        </table>
+        <br>
+    
+        <!-- Financial Information -->
+        <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Fin_model of Fin_models">
+            <caption><h3><b>Financial Information</b></h3></caption>
+            <tr>
+                <td style="width: 10%;">Capital</td>
+                <td style="width: 10%;text-align: right;">{{ Fin_model.FinCapital }}</td>
+                <td style="width: 30%"></td>
+                <td style="width: 15%;">Do you have 2 years of audited accounts?</td>
+                <td>
+                    <div [ngSwitch]="Fin_model.FinAuditedAccounts">
+                        <ng-template [ngSwitchCase]="1">yes</ng-template>
+                        <ng-template ngSwitchDefault>no</ng-template>
+                    </div>                
+                </td>
+            </tr>
+            <tr>
+                <td>Revenue</td>
+                <td style="text-align: right;">{{ Fin_model.FinRevenue }}</td>
+            </tr>
+            <tr>
+                <td>Total</td>
+                <td style="text-align: right;">{{ +Fin_model.FinCapital + +Fin_model.FinRevenue }}</td>
+            </tr>
+            <br>
+            <tr>
+                <td>Organisation name on statements</td><td>{{ Fin_model.FinOrgName }}</td>
+            </tr>
+            <tr>
+                <td>Bank or Building Society</td><td>{{ Fin_model.FinBank }}</td>
+                <td>Bank Address</td><td>{{ Fin_model.FinBankOrgAddress }}</td>
+            </tr>
+            <tr>
+                <td>Account Number</td><td>{{ Fin_model.FinAccount }}</td>
+                <td>Sort Code</td><td>{{ Fin_model.FinSortCode }}</td>
+            </tr>
+        </table>
+
+        <!-- Additional Information -->
+        <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Gen_model of Gen_models">
+            <caption><h3><b>Additional Information</b></h3></caption>
+            <tr>
+                <td style="width: 20%;">Additional Notes</td>
+                <td style="width: 80%;">{{ Gen_model.GenNotes }}</td>
+            </tr>
+        </table>
+        
+    </mat-card>

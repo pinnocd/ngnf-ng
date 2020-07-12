@@ -28,6 +28,7 @@ CREATE TABLE Org_model (
 	OrgType				VARCHAR(1),
 	OrgCharity			BOOLEAN,
 	OrgCharityNo		INT(8),
+	OrgCompanyNo		INT(8),
 	OrgStartDate		DATE,
 	OrgOpen				BOOLEAN,
 	OrgInfo				VARCHAR(1000),
@@ -42,6 +43,7 @@ DROP TABLE IF EXISTS Con_model;
 CREATE TABLE Con_model (
 	ApplicationId		INT				PRIMARY KEY,
 	ConName				VARCHAR(50),
+	ConPosition 		VARCHAR(20),
 	ConDOB				DATE,
 	ConAddress			VARCHAR(200),
 	ConPreAddress		VARCHAR(200),
@@ -49,6 +51,7 @@ CREATE TABLE Con_model (
 	ConOtherNo			VARCHAR(15),
 	ConEmail			VARCHAR(30),
 	ConSenName			VARCHAR(50),
+	ConSenPosition 		VARCHAR(20),
 	ConSenDOB			DATE,
 	ConSenAddress		VARCHAR(200),
 	ConSenPreAddress 	VARCHAR(200),
@@ -71,6 +74,7 @@ CREATE TABLE Gen_model (
 	GenProblem			VARCHAR(3000),
 	GenVulnerables		BOOLEAN,
 	GenSafeguards		BOOLEAN,
+	GenNotes			VARCHAR(3000),
 	InsertDateTime		TIMESTAMP		DEFAULT CURRENT_TIMESTAMP,
 	UpdateDateTime		TIMESTAMP		NULL ON UPDATE CURRENT_TIMESTAMP,
 	InsertBy			VARCHAR(70),
@@ -103,6 +107,9 @@ CREATE TABLE Fin_model (
 	FinBankOrgAddress	VARCHAR(500),
     FinActivity 		VARCHAR(100), 
 	FinCost     		DECIMAL(10,2),
+    FinCapital          DECIMAL(10, 2),
+    FinRevenue          DECIMAL(10, 2),
+    FinAuditedAccounts  BOOLEAN,
     InsertDateTime		TIMESTAMP		DEFAULT CURRENT_TIMESTAMP,
 	UpdateDateTime		TIMESTAMP		NULL ON UPDATE CURRENT_TIMESTAMP,
 	InsertBy			VARCHAR(70),
@@ -140,6 +147,6 @@ CREATE TABLE Statuses (
 DROP TABLE IF EXISTS FundProviders;
 CREATE TABLE FundProviders (
     FundProviderCode VARCHAR(5) PRIMARY KEY,
-    FundProviderName VARCHAR(20)
+    FundProviderName VARCHAR(64)
 	)
 ;

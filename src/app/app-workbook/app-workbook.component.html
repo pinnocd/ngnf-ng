@@ -3,7 +3,7 @@
     
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource">
-            <!-- Position Column -->
+            <!-- Application Identifier Column -->
             <ng-container matColumnDef="ApplicationId">
                 <th mat-header-cell *matHeaderCellDef> App. Id </th>
                 <td mat-cell *matCellDef="let element"> {{ element.ApplicationId }} </td>
@@ -14,13 +14,13 @@
                 <td mat-cell *matCellDef="let element"> {{ element.OrigApplicationId }} </td>
             </ng-container>
         
-            <!-- Fund Provider -->
+            <!-- Fund Provider Column -->
             <ng-container matColumnDef="FundProvider">
                 <th mat-header-cell *matHeaderCellDef> Fund Provider </th>
                 <td mat-cell *matCellDef="let element"> {{ element.FundProvider }} </td>
             </ng-container>
 
-            <!-- Name Column -->
+            <!-- Organisation Name Column -->
             <ng-container matColumnDef="OrgName">
                 <th mat-header-cell *matHeaderCellDef> Organisation Name </th>
                 <td mat-cell *matCellDef="let element"> {{ element.OrgName }} </td>
@@ -59,8 +59,8 @@
       </div>
     </mat-card>
     <form #userForm="ngForm" class="mat-elevation-z8">
-        <mat-card>
       <mat-card-title style="text-align: center;"><h3><b>Organisation Details</b></h3></mat-card-title>
+      <mat-card>
         <div class="form-group">
                 <table width=100%>
                     <tr> 
@@ -124,9 +124,9 @@
                                 <p *ngIf="name.errors.required">Email is required</p>
                             </div>
                         </td>
-                        <td>Is your organisation open to anyone?</td>
+                        <td>Company Number</td>
                         <td>
-                            <input type="checkbox" name="Orgopen" class="form-control" [(ngModel)]="Org_model.OrgOpen" #name="ngModel">
+                            <input type="number" name="Orgcompany_no" class="form-control" [(ngModel)]="Org_model.OrgCompanyNo" #name="ngModel">
                         </td>
                     </tr>
                     <tr>
@@ -138,7 +138,7 @@
                                 <p *ngIf="name.errors.required">Website is required</p>
                             </div>
                         </td>
-                        <td style="vertical-align: top;">If you answered no then please provide more information</td>
+                        <td style="vertical-align: top;">If your organisation is not open to anyone, please provide more information</td>
                         <td>
                             <textarea id="w3mission" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Orginfo" class="form-control" [(ngModel)]="Org_model.OrgInfo" #name="ngModel">
                                 At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
@@ -148,9 +148,10 @@
                 </table>
                 <br><br>
             </div>
+        </mat-card>
+        <!-- Contact Details Tab -->
+        <mat-card-title style="text-align: center;"><h3><b>Contact Details</b></h3></mat-card-title>
         <mat-card>
-            <!-- Contact Details Tab -->
-            <mat-card-title style="text-align: center;"><h3><b>Contact Details</b></h3></mat-card-title>
             <div class="form-group">
                     <table width=100%>
                         <tr>
@@ -162,9 +163,9 @@
                                     <p *ngIf="name.errors.required">Contact Name is required</p>
                                 </div>
                             </td>
-                            <td style="width: 15%;">Email</td>
+                            <td style="width: 15%;">Position</td>
                             <td>
-                                <input type="email" name="Conemail" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConEmail" #name="ngModel">
+                                <input type="position" name="Conposition" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConPosition" #name="ngModel">
                             </td>
                         </tr>
                         <tr>
@@ -176,6 +177,16 @@
                                     <p *ngIf="name.errors.required">Contact Address is required</p>
                                 </div>
                             </td>
+                            <td style="width: 15%;">Email</td>
+                            <td>
+                                <input type="email" name="Conemail" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConEmail" #name="ngModel">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Land Line Telephone Number</td>
+                            <td>
+                                <input type="tel" name="Conlandlineno" class="form-control" [(ngModel)]="Con_model.ConLandlineNo" #name="ngModel">
+                            </td>
                             <td style="width: 10%;">Please provide Previous Address if resident less than 3 years</td>
                             <td>
                                 <input style="width: 100%;" type="text" name="Conpreaddress" class="form-control" [(ngModel)]="Con_model.ConPreAddress" #name="ngModel"
@@ -186,9 +197,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Land Line Telephone Number</td>
+                            <td>D.O.B.</td>
                             <td>
-                                <input type="tel" name="Conlandlineno" class="form-control" [(ngModel)]="Con_model.ConLandlineNo" #name="ngModel">
+                                <input type="date" name="Condob" class="form-control" [(ngModel)]="Con_model.ConDOB" #name="ngModel">
                             </td>
                             <td>Other Telephone Number</td>
                             <td>
@@ -196,33 +207,37 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>D.O.B.</td>
-                            <td>
-                                <input type="date" name="Condob" class="form-control" [(ngModel)]="Con_model.ConDOB" #name="ngModel">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Who is the senior contact? (normally someone who has the role of chair, treasurer, secretary etc)</td>
+                            <td>Who is the 2nd contact? (normally someone who has the role of chair, treasurer, secretary etc)</td>
                             <td>
                                 <input type="text" name="Consenname" class="form-control" [(ngModel)]="Con_model.ConSenName" #name="ngModel"
                                 [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
                                 <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                    <p *ngIf="name.errors.required">Senion Contact Name is required</p>
+                                    <p *ngIf="name.errors.required">2nd Contact Name is required</p>
                                 </div>
                             </td>
-                            <td>Senior Contact Email</td>
+                            <td>2nd Contact Position</td>
+                            <td>
+                                <input type="senposition" name="Consenposition" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConSenPosition" #name="ngModel">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2nd Contact Address</td>
+                            <td>
+                                <input style="width: 100%;" type="text" name="Consenaddress" class="form-control" [(ngModel)]="Con_model.ConSenAddress" #name="ngModel"
+                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                    <p *ngIf="name.errors.required">2nd Contact Address is required</p>
+                                </div>
+                            </td>
+                            <td>2nd Contact Email</td>
                             <td>
                                 <input type="email" name="Consenemail" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConSenEmail" #name="ngModel">
                             </td>
                         </tr>
                         <tr>
-                            <td>Senior Contact Address</td>
+                            <td>Land Line Telephone Number</td>
                             <td>
-                                <input style="width: 100%;" type="text" name="Consenaddress" class="form-control" [(ngModel)]="Con_model.ConSenAddress" #name="ngModel"
-                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
-                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                    <p *ngIf="name.errors.required">Senior Contact Address is required</p>
-                                </div>
+                                <input type="tel" name="Consenlandlineno" class="form-control" [(ngModel)]="Con_model.ConSenLandlineNo" #name="ngModel">
                             </td>
                             <td>Please provide Previous Address if resident less than 3 years</td>
                             <td>
@@ -234,28 +249,22 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Land Line Telephone Number</td>
+                            <td style="width: 10%;">D.O.B.</td>
                             <td>
-                                <input type="tel" name="Consenlandlineno" class="form-control" [(ngModel)]="Con_model.ConSenLandlineNo" #name="ngModel">
+                                <input type="date" name="Consendob" class="form-control" [(ngModel)]="Con_model.ConSenDOB" #name="ngModel">
                             </td>
                             <td style="width: 10%;">Other Telephone Number</td>
                             <td>
                                 <input type="tel" name="Consenotherno" class="form-control" [(ngModel)]="Con_model.ConSenOtherNo" #name="ngModel">
                             </td>
                         </tr>
-                        <tr>
-                            <td style="width: 10%;">D.O.B.</td>
-                            <td>
-                                <input type="date" name="Consendob" class="form-control" [(ngModel)]="Con_model.ConSenDOB" #name="ngModel">
-                            </td>
-                        </tr>
                     </table>
                     <br><br>
                 </div> 
         </mat-card>
-    <mat-card>
-            <!-- General Project Information Tab -->
-            <mat-card-title style="text-align: center;"><h3><b>General Project Information</b></h3></mat-card-title>
+        <!-- General Project Information Tab -->
+        <mat-card-title style="text-align: center;"><h3><b>General Project Information</b></h3></mat-card-title>
+        <mat-card>
                 <div class="form-group">
                     <table width=100%>
                         <tr>
@@ -300,8 +309,8 @@
                     <br><br>
                </div> 
     </mat-card>
+    <mat-card-title style="text-align: center;"><h3><b>Background and Further Project Detail</b></h3></mat-card-title>
     <mat-card>
-        <mat-card-title style="text-align: center;"><h3><b>Background and Further Project Detail</b></h3></mat-card-title>
         <!-- Background Details Tab -->
         <div class="form-group">
             <table>
@@ -317,7 +326,7 @@
                 </tr>
                 <tr>
                     <td>
-                        • Who are you specifically targeting?
+                        • Who are you specifically targeting to help?
                         <textarea id="Bactarget" rows="4" cols="50" style="width: 100%;height: 2cm;" name="Bactarget" class="form-control" [(ngModel)]="Bac_model.BacTarget" #name="ngModel">
                         </textarea>
                     </td>
@@ -346,26 +355,59 @@
             </table>
         </div> 
     </mat-card>
+
+    <!-- Financial Details Tab -->
+    <mat-card-title style="text-align: center;"><h3><b>Financial Information</b></h3></mat-card-title>
     <mat-card>
-        <!-- Financial Details Tab -->
-        <mat-card-title style="text-align: center;"><h3><b>Financial Information</b></h3></mat-card-title>
+        <div class="form-group">
+            <table style="width: 25%;">
+                • How much funding is needed?
+                <br>
+                <br>
+                <tr>
+                    <td style="width: 70%;" >Capital</td>
+                    <td>
+                        <input type="text" style="width: 100%;" name="Fincapital" class="form-control" [(ngModel)]="Fin_model.FinCapital" #name="ngModel">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Revenue</td>
+                    <td>
+                        <input type="text" style="width: 100%;" name="Finrevenue" class="form-control" [(ngModel)]="Fin_model.FinRevenue" #name="ngModel">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>{{ +this.Fin_model.FinCapital + +this.Fin_model.FinRevenue }}</td>
+                </tr>
+                <br>
+                <tr>
+                    <td>Do you have 2 years of audited accounts?</td>
+                    <td>
+                        <input type="checkbox" name="Finauditedaccounts" class="form-control" [(ngModel)]="Fin_model.FinAuditedAccounts" #name="ngModel">
+                    </td>
+                </tr>
+
+            </table>
+            <br>
+        </div> 
+        </mat-card>
+        
+        <!-- Additional Details Tab -->
+        <mat-card-title style="text-align: center;"><h3><b>Additional Information</b></h3></mat-card-title>
+        <mat-card>
         <table style="width: 100%;">
-            • What is the estimated cost of your project:
             <tr>
-                <td style="width: 50%;" >Activity</td>
-                <td>Cost</td>
+                <td style="width: 50%;" >Additional Notes</td>
             </tr>
             <tr>
                 <td>
-                    <input type="text" style="width: 100%;" name="Finactivity" class="form-control" [(ngModel)]="Fin_model.FinActivity" #name="ngModel">
-                </td>
-                <td>
-                    <input type="text" style="width: 10%;" name="Fincost" class="form-control" [(ngModel)]="Fin_model.FinCost" #name="ngModel">
+                    <input type="text" style="width: 100%;" name="GenNotes" class="form-control" [(ngModel)]="Gen_model.GenNotes" #name="ngModel">
                 </td>
             </tr>
         </table>
     </mat-card>
-
+</form>
     <mat-toolbar  class="mat-elevation-z8" style="background-color: var(--brandcolour);">
         <button mat-button class="mat-elevation-z8" *ngIf="this.ApplicationId!=0" this.AppStatus (click)="saveData()"
             style="background-color: white;font-size: 20px;">Save</button>

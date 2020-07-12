@@ -8,7 +8,8 @@ export class Gen_model {
         public      GenAchieve: string,
         public      GenProblem: string,
         public      GenVulnerables: boolean,
-        public      GenSafeguards: boolean
+        public      GenSafeguards: boolean,
+        public      GenNotes:string
         
         ) {}
 }

@@ -13,5 +13,10 @@ export class ApiDeleteService {
         let params = new HttpParams().set('ApplicationId', ApplicationId);
         return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/delete/delApplication.php`, { params: params} )
     }
+
+    deleteFundProvider(FundProviderCode){
+      let params = new HttpParams().set('FundProviderCode', FundProviderCode);
+      return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/delete/delFundProvider.php`, { params: params} )
+    }
 }
 

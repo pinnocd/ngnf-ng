@@ -11,6 +11,7 @@ import { Bac_model } from  '../models/Bac_model';
 import { Fin_model } from  '../models/Fin_model';
 import { User_model } from '../models/User_class';
 import { FundProviders_model } from '../models/FundProviders_model';
+import { Statuses_model } from '../models/Statuses_model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,7 @@ export class ApiReadService {
     let params = new HttpParams().set('UserId', UserId)
                                  .set('PWriter', PWriter)
                                  .set('Original', Original);
+                                 
     return this.httpClient.get<App_model[]>(`${myGlobals.PHP_API_SERVER}/api/get/getApplications.php`, { params: params} );
   }
 
@@ -42,6 +44,11 @@ export class ApiReadService {
   // Retrieve all Funding Providers
   readAllFundProviders(): Observable<FundProviders_model[]>{
     return this.httpClient.get<FundProviders_model[]>(`${myGlobals.PHP_API_SERVER}/api/get/getFundProviders.php` );
+  }
+
+  // Retrieve all Statuses
+  readStatuses(): Observable<Statuses_model[]>{
+    return this.httpClient.get<Statuses_model[]>(`${myGlobals.PHP_API_SERVER}/api/get/getStatuses.php` );
   }
 
   // Retrieve All Organisation model data

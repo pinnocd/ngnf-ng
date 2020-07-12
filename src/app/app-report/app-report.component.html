@@ -1,6 +1,71 @@
 <mat-card>
 
-<mat-card-title style="text-align: center;"><h3><b>{{ userName }}'s Application Report ({{ staffType }})</b></h3></mat-card-title>
+<mat-card-title style="text-align: center;"><h3><b>Application Report</b></h3></mat-card-title>
+
+    <!-- Filtration Section -->
+    <table style="width:100%;border:1cm" class="mat-elevation-z8">
+    <caption><h3><b>Filter</b></h3></caption>
+    <table width=100%>
+        <tr> 
+            <td>
+                <mat-label>Status   </mat-label>
+                <mat-form-field appearance="outline">
+                    <mat-select (selectionChange)="filterData('Status', $event)">
+                        <mat-option *ngFor="let Status_models of Status_models" [value]="Status_models.StatusName">
+                            {{Status_models.StatusName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint align="end">Filter by Status ^</mat-hint>
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-label>Proposal Writer  </mat-label>
+                <mat-form-field appearance="outline">
+                    <mat-select (selectionChange)="filterData('PW', $event)">
+                        <mat-option *ngFor="let User_models of User_models" [value]="User_models.name">
+                            {{User_models.name}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint align="end">Filter by Proposal Writer ^</mat-hint>
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-label>Senior Approver   </mat-label>
+                <mat-form-field  appearance="outline">
+                    <mat-select (selectionChange)="filterData('SA', $event)">
+                        <mat-option *ngFor="let SAUser_models of SAUser_models" [value]="SAUser_models.name">
+                            {{SAUser_models.name}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint align="end">Filter by Senior Approver ^</mat-hint>
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-label>Fund Provider   </mat-label>
+                <mat-form-field  appearance="outline">
+                    <mat-select (selectionChange)="filterData('FP', $event)">
+                        <mat-option *ngFor="let FundProvider_models of FundProvider_models" [value]="FundProvider_models.FundProviderName">
+                            {{FundProvider_models.FundProviderName}}
+                        </mat-option>
+                </mat-select>
+                <mat-hint align="end">Filter by Fund Provider ^</mat-hint>
+            </mat-form-field>
+            </td>
+            <td>
+                <mat-label>Type of Organisation   </mat-label>
+                <mat-form-field  appearance="outline">
+                    <mat-select (selectionChange)="filterData('OT', $event)">
+                        <mat-option *ngFor="let OrgType_models of OrgType_models" [value]="OrgType_models.OrgTypeName">
+                            {{OrgType_models.OrgTypeName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint align="end">Filter by Organisation Type ^</mat-hint>
+                </mat-form-field>
+            </td>
+        </tr>
+     </table>
+</table>
+<br>
 
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
@@ -58,33 +123,23 @@
         <td mat-cell *matCellDef="let element"> {{ element.SeniorApprover }} </td>
         </ng-container>
         
+        <!-- Fund Provider Column -->
+        <ng-container matColumnDef="FundProvider">
+            <th mat-header-cell *matHeaderCellDef> Fund Provider </th>
+            <td mat-cell *matCellDef="let element"> {{ element.FundProvider }} </td>
+        </ng-container>
+
+        <!-- Org Type Column -->
+        <ng-container matColumnDef="OrganisationType">
+            <th mat-header-cell *matHeaderCellDef> Organisation Type </th>
+            <td mat-cell *matCellDef="let element"> {{ element.OrgType }} </td>
+        </ng-container>
+            
         <!-- Insert Timestamp -->
         <ng-container matColumnDef="InsertDateTime">
-        <th mat-header-cell *matHeaderCellDef> Inserted </th>
-        <td mat-cell *matCellDef="let element"> {{ element.InsertDateTime }} </td>
+            <th mat-header-cell *matHeaderCellDef> Inserted </th>
+            <td mat-cell *matCellDef="let element"> {{ element.InsertDateTime }} </td>
         </ng-container>
-
-        <ng-container matColumnDef="Action">
-        <th mat-header-cell *matHeaderCellDef> Action </th>
-        <td mat-cell *matCellDef="let element">
-            <mat-select 
-                (selectionChange)="selectAction(element, $event)">
-                <mat-option *ngFor="let action of appActions" [value]="action.ActionCode">{{action.ActionDesc}}
-                </mat-option>
-            </mat-select>
-        </ng-container>
-
-        <!-- <ng-container matColumnDef="Action">
-            <th mat-header-cell *matHeaderCellDef> Action </th>
-            <td mat-cell *matCellDef="let element">
-                <mat-select
-                    (selectionChange)="selectAction($event)">
-                    <mat-option *ngFor="let action of actions" [value]="action.ActionCode">{{action.ActionDesc}}
-                    </mat-option>
-                </mat-select>
-            </ng-container> -->
-            
-
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row class="table-row" *matRowDef="let row; columns: displayedColumns;" 
@@ -117,57 +172,51 @@
         </tr>
         <tr>
             <td>Organisation Email</td><td>{{ Org_model.OrgEmail }}</td>
-            <td>Is your organisation open to anyone?</td>
-            <td>
-                <div [ngSwitch]="Org_model.OrgOpen">
-                    <ng-template [ngSwitchCase]="1">yes</ng-template>
-                    <ng-template ngSwitchDefault>no</ng-template>
-                </div>
-            </td>
+            <td>Company Number</td><td>{{ Org_model.OrgCompanyNo }}</td>
         </tr>
         <tr>
             <td>Organisation Website</td><td>{{ Org_model.OrgWebsite }}</td>
-            <td>If you answered no then please provide more information</td><td>{{ Org_model.OrgInfo }}</td>
+            <td>Reason why the organisation is not open to anyone</td><td>{{ Org_model.OrgInfo }}</td>
         </tr>
     </table>
     <br>
-
     <!-- Contact Details Section -->
     <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Con_model of Con_models">
         <caption><h3><b>Contact Details</b></h3></caption>
         <tr>
-            <td style="width: 10%;">Contact Name</td>       <td style="width: 40%;">{{ Con_model.ConName }}</td>
-            <td style="width: 10%;">Email</td>              <td>{{ Con_model.ConEmail }}</td>
+            <td style="width: 15%;">Contact Name</td>       <td style="width: 35%;">{{ Con_model.ConName }}</td>
+            <td style="width: 15%;">Position</td>           <td>{{ Con_model.ConPosition }}</td>
         </tr>
         <tr>
             <td>Address</td><td> {{ Con_model.ConAddress }} </td>
-            <td>Previous Address</td><td> {{ Con_model.ConPreAddress }} </td>
+            <td>Email</td><td>{{ Con_model.ConEmail }}</td>
         </tr>
         <tr>
             <td>Land line Number</td><td> {{ Con_model.ConLandlineNo }} </td>
-            <td>Other Phone Number</td><td>{{ Con_model.ConOtherNo }}</td>
+            <td>Previous Address</td><td> {{ Con_model.ConPreAddress }} </td>
         </tr>
         <tr>
             <td>D.O.B.</td><td>{{ Con_model.ConDOB }}</td>
-            <td></td><td></td>
+            <td>Other Phone Number</td><td>{{ Con_model.ConOtherNo }}</td>
         </tr>
         <tr>
-            <td>Senior Contact Name</td>    <td>{{ Con_model.ConSenName }}</td>
-            <td>Senior Email</td>           <td>{{ Con_model.ConSenEmail }}</td>
+            <td>2nd Contact Name</td>    <td>{{ Con_model.ConSenName }}</td>
+            <td>2nd Contact Position</td>   <td>{{ Con_model.ConSenPosition }}</td>
         </tr>
         <tr>
-            <td>Senior Address</td><td> {{ Con_model.ConSenAddress }} </td>
-            <td>Senior Previous Address</td><td> {{ Con_model.ConSenPreAddress }} </td>
+            <td>2nd Contact Address</td><td> {{ Con_model.ConSenAddress }} </td>
+            <td>2nd Contact Email</td>           <td>{{ Con_model.ConSenEmail }}</td>
         </tr>
         <tr>
-            <td>Senior Land line Number</td><td> {{ Con_model.ConSenLandlineNo }} </td>
-            <td>Senior Other Phone Number</td><td>{{ Con_model.ConSenOtherNo }}</td>
+            <td>2nd Contact Land line Number</td><td> {{ Con_model.ConSenLandlineNo }} </td>
+            <td>2nd Contact Previous Address</td><td> {{ Con_model.ConSenPreAddress }} </td>
         </tr>
         <tr>
-            <td>Senior D.O.B.</td><td>{{ Con_model.ConSenDOB }}</td>
-            <td></td><td></td>
+            <td>2nd Contact D.O.B.</td><td>{{ Con_model.ConSenDOB }}</td>
+            <td>2nd Contact Other Phone Number</td><td>{{ Con_model.ConSenOtherNo }}</td>
         </tr>
     </table>
+    <br>
     <br>
 
     <!-- General Project Information Section -->
@@ -226,12 +275,26 @@
     <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Fin_model of Fin_models">
         <caption><h3><b>Financial Information</b></h3></caption>
         <tr>
-            <td style="width: 15%;">Activity</td>
-            <td style="width: 35%;">{{ Fin_model.FinActivity }}</td>
-            <td style="width: 10%;">Cost</td>
-            <td>{{ Fin_model.FinCost }}</td>
+            <td style="width: 10%;">Capital</td>
+            <td style="width: 10%;text-align: right;">{{ Fin_model.FinCapital }}</td>
+            <td style="width: 30%"></td>
+            <td style="width: 15%;">Do you have 2 years of audited accounts?</td>
+            <td>
+                <div [ngSwitch]="Fin_model.FinAuditedAccounts">
+                    <ng-template [ngSwitchCase]="1">yes</ng-template>
+                    <ng-template ngSwitchDefault>no</ng-template>
+                </div>                
+            </td>
         </tr>
-        
+        <tr>
+            <td>Revenue</td>
+            <td style="text-align: right;">{{ Fin_model.FinRevenue }}</td>
+        </tr>
+        <tr>
+            <td>Total</td>
+            <td style="text-align: right;">{{ +Fin_model.FinCapital + +Fin_model.FinRevenue }}</td>
+        </tr>
+        <br>
         <tr>
             <td>Organisation name on statements</td><td>{{ Fin_model.FinOrgName }}</td>
         </tr>
@@ -242,6 +305,15 @@
         <tr>
             <td>Account Number</td><td>{{ Fin_model.FinAccount }}</td>
             <td>Sort Code</td><td>{{ Fin_model.FinSortCode }}</td>
+        </tr>
+    </table>
+    <br>
+    <!-- Additional Information -->
+    <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Gen_model of Gen_models">
+        <caption><h3><b>Additional Information</b></h3></caption>
+        <tr>
+            <td style="width: 20%;">Additional Notes</td>
+            <td style="width: 80%;">{{ Gen_model.GenNotes }}</td>
         </tr>
     </table>
 

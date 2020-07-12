@@ -11,6 +11,7 @@
     $Org_type 		= $_REQUEST['Orgtype'] ?? '';
     $Org_charity 	= $_REQUEST['Orgcharity'] ?? 'null';
     $Org_charity_no = $_REQUEST['Orgcharity_no'] ?? 'null';
+    $Org_company_no = $_REQUEST['Orgcompany_no'] ?? 'null';
     $Org_start_date	= $_REQUEST['Orgstart_date'] ?? '';
     $Org_open 		= $_REQUEST['Orgopen'] ?? 'null';
     $Org_info 		= $_REQUEST['Orginfo'] ?? '';
@@ -28,6 +29,7 @@
             Org_type = ', $Org_type, '
             Org_charity = ', $Org_charity, '
             Org_charity_no = ', $Org_charity_no, '
+            Org_company_no = ', $Org_company_no, '
             Org_start_date = ', $Org_start_date, '
             Org_open = ', $Org_open, '
             Org_info = ', $Org_info ;
@@ -42,6 +44,7 @@
                 OrgType ='$Org_type',
                 OrgCharity ='$Org_charity', 
                 OrgCharityNo =$Org_charity_no, 
+                OrgCompanyNo =$Org_company_no, 
                 OrgStartDate ='$Org_charity_no', 
                 OrgOpen ='$Org_open', 
                 OrgInfo ='$Org_info',

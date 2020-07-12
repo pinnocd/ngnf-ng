@@ -6,17 +6,29 @@
     
     <span fxFlex></span>
 
-    <button mat-button class="mat-elevation-z8"  [matMenuTriggerFor]="menu" *ngIf="globals.staffuser"
+    <button mat-button class="mat-elevation-z8"  [matMenuTriggerFor]="adminmenu" *ngIf="globals.adminuser"
         style="background-color: white; font-size: 16px; margin:5px;">Admin</button>
-        <mat-menu #menu="matMenu">
-            <button mat-menu-item routerLink="/appReport"
+        <mat-menu #adminmenu="matMenu">
+            <button mat-menu-item routerLink="/userAdmin"
+            style="background-color: white; font-size: 16px; margin:5px;">User Admin</button>
+
+            <button mat-menu-item routerLink="/FPAdmin"
+            style="background-color: white; font-size: 16px; margin:5px;">Fund Provider Admin</button>
+
+        </mat-menu>
+
+    <button mat-button class="mat-elevation-z8"  [matMenuTriggerFor]="appmenu" *ngIf="globals.staffuser"
+        style="background-color: white; font-size: 16px; margin:5px;">Applications</button>
+        <mat-menu #appmenu="matMenu">
+            <button mat-menu-item routerLink="/appAdmin"
             style="background-color: white; font-size: 16px; margin:5px;">Application Admin</button>
 
             <button mat-menu-item routerLink="/appWorkbook"
             style="background-color: white; font-size: 16px; margin:5px;">Application Workbook</button>
 
-            <button mat-menu-item routerLink="/userAdmin" *ngIf="globals.adminuser"
-            style="background-color: white; font-size: 16px; margin:5px;">User Admin</button>
+            <button mat-menu-item routerLink="/appReport"
+            style="background-color: white; font-size: 16px; margin:5px;">Proposal Library</button>
+
         </mat-menu>
 
     <button mat-button class="mat-elevation-z8" *ngIf="globals.loginbtn" routerLink="/login" routerLinkActive="active" 

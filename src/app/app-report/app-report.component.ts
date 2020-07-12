@@ -1,12 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ApiReadService } from '../../services/api.readService';
-import { ApiUpdateService } from '../../services/api.updateService';
-import { ApiAdminService } from '../../services/api.adminService';
-import { matDialogComponent } from '../matDialog/matDialog.component';
-import { AppAssignComponent } from '../app-assign/app-assign.component';
 
 import { App_model } from  '../../models/App_model';
 import { Org_model } from  '../../models/Org_model';
@@ -14,8 +9,9 @@ import { Con_model } from  '../../models/Con_model';
 import { Gen_model } from  '../../models/Gen_model';
 import { Bac_model } from  '../../models/Bac_model';
 import { Fin_model } from  '../../models/Fin_model';
-
-import { ApplData, AppActions } from '../../interfaces/globalinterfaces';
+import { User_model } from '../../models/User_class';
+import { ApplData, FundProviders, OrgTypes } from '../../interfaces/globalinterfaces';
+import { Statuses_model } from '../../models/Statuses_model';
 
 @Component({
   selector: 'app-app-report',
@@ -23,35 +19,18 @@ import { ApplData, AppActions } from '../../interfaces/globalinterfaces';
   templateUrl: 'app-report.component.html',
 })
 
+
 export class AppReportComponent implements OnInit {
   displayedColumns: string[] = ['ApplicationId', 'OrigApplicationId', 'User', 'OrgName', 'GenName', 'GenStartDate', 'Status', 
-           'ProposalWriter', 'SeniorApprover', 'InsertDateTime', 'Action'];
+           'ProposalWriter', 'SeniorApprover', 'FundProvider', 'OrganisationType', 'InsertDateTime'];
   dataSource = new MatTableDataSource<ApplData>(ELEMENT_DATA);
- 
-  appActions: AppActions[];
 
-  userName = '';
-  userId = '';
-  userType = '';
-  pWriter = '';
-  staffType = 'Senior Approver';
-
+  // Store the raw data for user later
+  rawdata = new MatTableDataSource<ApplData>(ELEMENT_DATA);
+  
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   ngOnInit() {
-    let token = this.adminService.getToken();
-    this.userId = token.split('|')[0];
-    this.userType = token.split('|')[1];
-    this.userName = token.split('|')[3];
-
-    this.appActions = [{ActionCode: 'P', ActionDesc: 'Progress'}];
-
-    // If the user is a proposal writer, limit their application list
-    if (this.userType==="P") {
-      this.pWriter = this.userId;
-      this.staffType = 'Proposal Writer';
-    }
-
     this.loadAppList();
     this.dataSource.paginator = this.paginator;
   }  
@@ -63,56 +42,114 @@ export class AppReportComponent implements OnInit {
   Bac_models:  Bac_model[];
   Fin_models:  Fin_model[];
 
+  User_models: User_model[];
+  SAUser_models: User_model[];
+  FundProvider_models: FundProviders[];
+  OrgType_models: OrgTypes[];
+  Status_models: Statuses_model[];
+
+  Status: string = '';
+  ProposalWriter: string = '';
+  SeniorApprover: string = '';
+  FundProvider: string = '';
+  OrgType: string = '';
+
   selectedRowIndex: number = -1;
 
-  constructor(private readService: ApiReadService, private adminService: ApiAdminService,
-              private updateService: ApiUpdateService, public dialog: MatDialog) { }
+  constructor(private readService: ApiReadService) { }
 
   // Initial load of all applications
   loadAppList() {
     // update data in data source when available
-    this.readService.readApplications("", this.pWriter, "All").subscribe(newData => this.dataSource.data = newData);
+    this.readService.readApplications("", "", "Yes").subscribe(newData => {
+      this.dataSource.data = newData;
+      this.rawdata.data = newData;
+      });
 
+    // Load filter data
+    this.readService.readAllUsers("StaffMember").subscribe((User_models: User_model[]) => {
+      this.User_models = User_models;
+      let blankUser =  {} as User_model;
+      blankUser.name = '';
+      blankUser.usertype = 'Admin';
+      this.User_models.push(blankUser);
+
+      this.SAUser_models = this.User_models.filter(x => x.usertype === 'Admin');
+    })
+
+    this.readService.readAllFundProviders().subscribe((FundProvider_models: FundProviders[]) => {
+      this.FundProvider_models = FundProvider_models;
+
+      let blankFP = {} as FundProviders;
+      blankFP.FundProviderCode = '';
+      blankFP.FundProviderName = '';
+      this.FundProvider_models.push(blankFP);
+    });
+
+    this.readService.readStatuses().subscribe((Status_model: Statuses_model[]) => {
+      this.Status_models = Status_model;
+
+      let blankStatus = {} as Statuses_model;
+      blankStatus.StatusCode = '';
+      blankStatus.StatusName = '';
+      this.Status_models.push(blankStatus);
+
+
+    });
+
+    this.OrgType_models = [
+      { OrgTypeCode: 'C', OrgTypeName: 'Charity'},
+      { OrgTypeCode: 'H', OrgTypeName: 'Health body'},
+      { OrgTypeCode: 'P', OrgTypeName: 'Parish or town council'},
+      { OrgTypeCode: 'S', OrgTypeName: 'School'},
+      { OrgTypeCode: 'V', OrgTypeName: 'Voluntary or Community'},
+      { OrgTypeCode: '', OrgTypeName: ''}
+    ];
+
+  }
+
+  filterData(field, value) {
+  
+    console.log(value.source.value);
+    // Filter data based on the selected criteria
+    switch (field) {
+      case 'Status':
+        this.Status = value.source.value;
+        break;
+
+      case 'PW':
+        this.ProposalWriter = value.source.value;
+        break;
+
+      case 'SA':
+        this.SeniorApprover = value.source.value;
+        break;
+
+      case 'FP':
+        this.FundProvider = value.source.value;
+        break;
+
+      case 'OT':
+        this.OrgType = value.source.value;
+        break;
+
+      default :
+        console.log("I'm confused");
+        break;
+    }
+
+    this.dataSource.data = this.rawdata.data;
+
+    // Filter data if values set
+    if (this.Status!='') {this.dataSource.data = this.dataSource.data.filter(x => x.Status === this.Status);}
+    if (this.SeniorApprover!=''){this.dataSource.data = this.dataSource.data.filter(x => x.SeniorApprover === this.SeniorApprover);}
+    if (this.ProposalWriter!=''){this.dataSource.data = this.dataSource.data.filter(x => x.ProposalWriter === this.ProposalWriter);}
+    if (this.FundProvider!=''){this.dataSource.data = this.dataSource.data.filter(x => x.FundProvider === this.FundProvider);}
+    if (this.OrgType!=''){this.dataSource.data = this.dataSource.data.filter(x => x.OrgType === this.OrgType);}
   }
 
   // An application has been selected in the list, so refresh all data
   selectApp(app_model){
-
-    // Load the action drop down with the relevant options
-    if (this.userType==="P") {
-      // if we have an Assigned app, allow to Progress, otherwise nothing
-      if (app_model.Status==="Assigned") {
-        this.appActions = [{ActionCode: 'P', ActionDesc: 'Progress'}];
-      }
-      else {
-        this.appActions = [];
-      }
-    }
-    else {
-      // Admin users have more options
-      switch (app_model.Status) {
-        case 'Submitted':
-          this.appActions = [{ActionCode: 'A', ActionDesc: 'Assign'},
-                            {ActionCode: 'R', ActionDesc: 'Reject'}];
-          break;
-
-        case 'Assigned':
-          this.appActions = [ {ActionCode: 'P', ActionDesc: 'Progress'}];
-          break;
-
-        case 'In Progress':
-          this.appActions = [ {ActionCode: 'F', ActionDesc: 'Fail'},
-                            {ActionCode: 'C', ActionDesc: 'Succeed'}];
-          break;
-
-        default :
-          this.appActions = [];
-      }
-    }
-
-    //   // Remove all Admin specific actions (Reject, Assign, suCceed, Fail)
-    //   this.statuses.splice(this.statuses.findIndex((s: StatusData) => s.StatusCode === 'R'), 1);
-
     this.readService.readOrg_model(app_model.ApplicationId).subscribe((Org_models: Org_model[])=>{
       this.Org_models = Org_models;
     })
@@ -133,103 +170,6 @@ export class AppReportComponent implements OnInit {
       this.Fin_models = Fin_models;
     })
   }
-
-
-  confirmAction(element, action: string){
-    const dialogConfig = new MatDialogConfig();
-    var description: string;
-    var title: string;
-    var button1: string;
-    var button2: string;
-  
-    if (action==="Assign"){
-      description = 'Please select a Proposal Writer to assign the "' + element.OrgName + '" application for project "' + element.GenName + '"?';
-      title = 'Please Select';
-      button1 = 'Select';
-      button2 = 'Cancel';
-    }
-    else {
-      description = 'Are you absolutely sure you want to ' + action + ' the "' + element.OrgName + '" application for project "' + element.GenName + '"?';
-      title= 'Please Confirm';
-      button1 = 'Yes';
-      button2 = 'No';
-    }
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = "600px";
-    dialogConfig.data = {
-      title: title, 
-      action: action,
-      description: description,
-      button1: button1,
-      button2: button2
-    };
-
-    return this.dialog.open(matDialogComponent, dialogConfig);
-  }
-
-  selectAction(element, action) {
-    var status: string;
-
-    switch  (action.source.value) {
-      case 'A':
-        status = 'Assign'; break;
-      case 'P': 
-        status = 'Progress'; break;
-      case 'C':
-        status = 'Succeed'; break;
-      case 'F':
-        status = 'Fail'; break;
-      case 'R':
-        status = 'Reject'; break;
-      default:
-        console.log("No such action exists!");
-    }
-
-    if (action.source.value!='A'){
-      let conf = this.confirmAction(element, status)
-
-      conf.afterClosed().subscribe(
-        data => { 
-          if (data) {
-            console.log(data);
-
-            this.updateService.updateApplication(element.ApplicationId, action.source.value, data).subscribe(()=>{
-              const dialogConfig = new MatDialogConfig();
-
-              dialogConfig.disableClose = true;
-              dialogConfig.autoFocus = true;
-              dialogConfig.width = "600px";
-              dialogConfig.data = {
-                title: 'Confirmation',
-                description: 'The status was successfully changed',
-                button1: 'OK',
-                button2: ''
-              };
-          
-              this.dialog.open(matDialogComponent, dialogConfig);
-            });
-          } 
-        }
-      );
-      this.loadAppList();
-    }
-    else {
-      // We are assigning an app so pass control to the custom window for selection
-      const dialogConfig = new MatDialogConfig();
-  
-      dialogConfig.disableClose = true;
-      dialogConfig.autoFocus = true;
-      dialogConfig.width = "600px";
-      dialogConfig.data = {OrgName: element.OrgName, GenName: element.GenName, ApplicationId: element.ApplicationId};
-  
-      if (this.dialog.open(AppAssignComponent, dialogConfig)){
-        this.loadAppList();
-      }
-    }
-  }
 }
-
 
 var ELEMENT_DATA: ApplData[];

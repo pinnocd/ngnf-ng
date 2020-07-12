@@ -9,6 +9,7 @@
     $Gen_problem        = $_REQUEST['Genproblem'] ?? '';
     $Gen_vulnerables    = $_REQUEST['Genvulnerables'] ?? '';
     $Gen_safeguards	    = $_REQUEST['Gensafeguards'] ?? '';
+    $Gen_notes	        = $_REQUEST['Gennotes'] ?? '';
     $UserId             = $_REQUEST['UserId'] ?? '';
     $debug              = $_REQUEST['debug'];
 
@@ -21,6 +22,7 @@
             Gen_problem = ', $Gen_problem, '
             Gen_vulnerables = ', $Gen_vulnerables, '
             Gen_safeguards = ', $Gen_safeguards, '
+            Gen_notes = ', $Gen_notes, '
             ';
         echo "\n\n";
     }
@@ -32,6 +34,7 @@
                 GenProblem = '$Gen_problem', 
                 GenVulnerables = $Gen_vulnerables,
                 GenSafeguards = $Gen_safeguards,
+                GenNotes = '$Gen_notes',
                 UpdateDateTime = NOW(), 
                 UpdateBy='$UserId'
             WHERE ApplicationId = $ApplicationId";

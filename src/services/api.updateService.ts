@@ -69,6 +69,7 @@ export class ApiUpdateService {
         let params = new HttpParams()
           .set('ApplicationId'      , Con_model.ApplicationId.toString())
           .set('Conname'            , Con_model.ConName)
+          .set('Conposition'        , Con_model.ConPosition)
           .set('Condob'             , Con_model.ConDOB.toString())
           .set('Conaddress'         , Con_model.ConAddress)
           .set('Conpreaddress'      , Con_model.ConPreAddress)
@@ -76,6 +77,7 @@ export class ApiUpdateService {
           .set('Conotherno'         , Con_model.ConOtherNo)
           .set('Conemail'           , Con_model.ConEmail)
           .set('Consenname'         , Con_model.ConSenName)
+          .set('Consenposition'     , Con_model.ConSenPosition)
           .set('Consendob'          , Con_model.ConSenDOB.toString())
           .set('Consenaddress'      , Con_model.ConSenAddress)
           .set('Consenpreaddress'   , Con_model.ConSenPreAddress)
@@ -99,6 +101,7 @@ export class ApiUpdateService {
           .set('Genproblem', Gen_model.GenProblem)
           .set('Genvulnerables', Gen_model.GenVulnerables.toString())
           .set('Gensafeguards', Gen_model.GenSafeguards.toString())
+          .set('Gennotes', Gen_model.GenNotes)
           .set('UserId', userId);
           
         console.log(params);
@@ -131,6 +134,9 @@ export class ApiUpdateService {
           .set('Finbankorgaddress', Fin_model.FinBankOrgAddress)
           .set('Finactivity', Fin_model.FinActivity)
           .set('Fincost', Fin_model.FinCost.toString())
+          .set('Fincapital', Fin_model.FinCapital.toString())
+          .set('Finrevenue', Fin_model.FinRevenue.toString())
+          .set('Finauditedaccounts', Fin_model.FinAuditedAccounts.toString())
           .set('UserId', userId);
 
         console.log(params);

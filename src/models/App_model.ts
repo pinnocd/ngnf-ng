@@ -11,6 +11,7 @@ export class App_model {
       public    ProposalWriter: string,
       public    SeniorApprover: string,
       public    FundProvider: string,
+      public    OrgType: string,
       public    InsertDateTime:Date,
     ) {}
 }

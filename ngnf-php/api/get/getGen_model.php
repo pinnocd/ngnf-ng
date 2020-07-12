@@ -5,7 +5,7 @@
     $ApplicationId  = $_REQUEST['ApplicationId'] ?? '';
 
     $Gen_models = [];
-    $sql = "SELECT ApplicationId, GenName, GenStartDate, GenAchieve, GenProblem, GenVulnerables, GenSafeguards
+    $sql = "SELECT ApplicationId, GenName, GenStartDate, GenAchieve, GenProblem, GenVulnerables, GenSafeguards, GenNotes
             FROM Gen_model";
     if ($ApplicationId) {
       $sql .= " WHERE  ApplicationId = $ApplicationId";
@@ -23,6 +23,7 @@
         $Gen_models[$i]['GenProblem'] 	= $row['GenProblem'];
         $Gen_models[$i]['GenVulnerables'] 	    = $row['GenVulnerables'];
         $Gen_models[$i]['GenSafeguards'] 		= $row['GenSafeguards'];
+        $Gen_models[$i]['GenNotes'] 		= $row['GenNotes'];
 
         $i++;
       }

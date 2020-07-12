@@ -89,7 +89,7 @@ export class AppWorkbookComponent implements OnInit {
         break;
     }
 
-    this.readService.readApplications(userId, this.pWriter, 'No')
+    this.readService.readApplications(userId, this.pWriter, 'Yes')
       .subscribe(newData => this.dataSource.data = newData)
       ;
   }
@@ -110,6 +110,7 @@ export class AppWorkbookComponent implements OnInit {
       this.Org_model.OrgType = this.Org_Model[0].OrgType;
       this.Org_model.OrgCharity = this.Org_Model[0].OrgCharity;
       this.Org_model.OrgCharityNo = this.Org_Model[0].OrgCharityNo;
+      this.Org_model.OrgCompanyNo = this.Org_Model[0].OrgCompanyNo;
       this.Org_model.OrgStartDate = this.Org_Model[0].OrgStartDate;
       this.Org_model.OrgOpen = this.Org_Model[0].OrgOpen;
       this.Org_model.OrgInfo = this.Org_Model[0].OrgInfo;
@@ -119,6 +120,7 @@ export class AppWorkbookComponent implements OnInit {
       this.Con_Model = Con_model;
 
       this.Con_model.ConName = this.Con_Model[0].ConName;
+      this.Con_model.ConPosition = this.Con_Model[0].ConPosition;
       this.Con_model.ConDOB = this.Con_Model[0].ConDOB;
       this.Con_model.ConAddress = this.Con_Model[0].ConAddress;
       this.Con_model.ConPreAddress = this.Con_Model[0].ConPreAddress;
@@ -126,6 +128,7 @@ export class AppWorkbookComponent implements OnInit {
       this.Con_model.ConOtherNo = this.Con_Model[0].ConOtherNo;
       this.Con_model.ConEmail = this.Con_Model[0].ConEmail;
       this.Con_model.ConSenName = this.Con_Model[0].ConSenName;
+      this.Con_model.ConSenPosition = this.Con_Model[0].ConSenPosition;
       this.Con_model.ConSenDOB = this.Con_Model[0].ConSenDOB;
       this.Con_model.ConSenAddress = this.Con_Model[0].ConSenAddress;
       this.Con_model.ConSenPreAddress = this.Con_Model[0].ConSenPreAddress;
@@ -143,6 +146,7 @@ export class AppWorkbookComponent implements OnInit {
       this.Gen_model.GenProblem = this.Gen_Model[0].GenProblem;
       this.Gen_model.GenVulnerables = this.Gen_Model[0].GenVulnerables;
       this.Gen_model.GenSafeguards = this.Gen_Model[0].GenSafeguards;
+      this.Gen_model.GenNotes = this.Gen_Model[0].GenNotes;
     })
 
     this.readService.readBac_model(app_model.ApplicationId).subscribe((Bac_model: Bac_model[])=>{
@@ -160,6 +164,11 @@ export class AppWorkbookComponent implements OnInit {
 
       this.Fin_model.FinActivity = this.Fin_Model[0].FinActivity;
       this.Fin_model.FinCost = this.Fin_Model[0].FinCost;
+      this.Fin_model.FinCapital = this.Fin_Model[0].FinCapital;
+      this.Fin_model.FinRevenue = this.Fin_Model[0].FinRevenue;
+      this.Fin_model.FinAuditedAccounts = this.Fin_Model[0].FinAuditedAccounts;
+
+      console.log(this.Fin_model);
     })
   }
 

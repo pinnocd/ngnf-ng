@@ -12,15 +12,19 @@ CREATE PROCEDURE add_AssignedApp(
 	IN 		iFundProvider	VARCHAR(5),
 	OUT		oApplicationId 	INT)
 BEGIN
-	INSERT INTO Applications (Status, UserId, InsertBy, ProposalWriter, SeniorApprover, FundProviderCode, OrigApplicationId)
-	SELECT  'A', iUserId, iUserId, iProposalWriter, iUserId, iFundProvider, iApplicationId
+	INSERT INTO Applications (Status, UserId, OrigApplicationId, InsertBy)
+	SELECT  'A', iUserId, iApplicationId, iUserId
 	FROM	Applications
 	WHERE 	ApplicationId = iApplicationId;
 
 	SELECT LAST_INSERT_ID() INTO oApplicationId;
 
 	UPDATE 	Applications
-	SET 	Status = 'A', UpdateBy = iUserid
+	SET 	Status = 'A'
+	, 		UpdateBy = iUserid
+	,		ProposalWriter = iProposalWriter
+	, 		SeniorApprover = iUserId
+	, 		FundProviderCode = iFundProvider
 	WHERE 	ApplicationId = iApplicationId;
     
   	INSERT INTO Org_model (ApplicationId, OrgName, OrgAddress, OrgPostcode, OrgEmail, OrgWebsite, OrgType,
@@ -41,7 +45,6 @@ BEGIN
  	SELECT  oApplicationId, GenName, GenStartDate, GenAchieve, GenProblem, GenVulnerables, GenSafeguards, iUserId
     FROM	Gen_model
 	WHERE 	ApplicationId = iApplicationId;
-
 
 	INSERT INTO Bac_model (ApplicationId, BacNeed, BacTarget, BacActivities, BacDeliver, BacUsers, InsertBy)
 	SELECT 	oApplicationId, BacNeed, BacTarget, BacActivities, BacDeliver, BacUsers, iUserId

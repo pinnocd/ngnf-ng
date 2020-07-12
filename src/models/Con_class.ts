@@ -2,6 +2,7 @@ export class Con_class {
 
     public      ApplicationId: number;
     public      ConName: string;
+    public      ConPosition: string;
     public      ConDOB: Date;
     public      ConAddress: string;
     public      ConPreAddress: string;
@@ -9,6 +10,7 @@ export class Con_class {
     public      ConOtherNo: string;
     public      ConEmail: string;
     public      ConSenName: string;
+    public      ConSenPosition: string;
     public      ConSenDOB: Date;
     public      ConSenAddress: string;
     public      ConSenPreAddress: string;

@@ -49,16 +49,20 @@ import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserAdminComponent } from './user-admin/user-admin.component';
 import { AppWorkbookComponent } from './app-workbook/app-workbook.component';
+import { AppAdminComponent } from './app-admin/app-admin.component';
+import { FundproviderAdminComponent } from './fundprovider-admin/fundprovider-admin.component';
 
 // Define all routes necessary
 const appRoutes: Routes = [
   { path: '', component: NgnfComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegisterComponent },
+  { path: 'appAdmin', component: AppAdminComponent, canActivate: [AuthguardGuard] },
   { path: 'appReport', component: AppReportComponent, canActivate: [AuthguardGuard] },
   { path: 'userAdmin', component: UserAdminComponent, canActivate: [AuthguardGuard] },
   { path: 'appWorkbook', component: AppWorkbookComponent, canActivate: [AuthguardGuard] },
-  { path: 'myaccount', component: DashboardComponent, canActivate: [AuthguardGuard] }
+  { path: 'myaccount', component: DashboardComponent, canActivate: [AuthguardGuard] },
+  { path: 'FPAdmin', component: FundproviderAdminComponent, canActivate: [AuthguardGuard] }
 ];
 
 @NgModule({
@@ -80,7 +84,9 @@ const appRoutes: Routes = [
     DashboardComponent,
     UserAdminComponent,
     AppWorkbookComponent,
-    AppAssignComponent    
+    AppAssignComponent,
+    AppAdminComponent,
+    FundproviderAdminComponent    
     ],
   imports: [
       BrowserModule,

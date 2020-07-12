@@ -10,6 +10,7 @@ export class Org_class {
     public    OrgTypeName: string;
     public    OrgCharity: boolean;
     public    OrgCharityNo: number;
+    public    OrgCompanyNo: number;
     public    OrgStartDate: Date;
     public    OrgOpen: boolean;
     public    OrgInfo: string;

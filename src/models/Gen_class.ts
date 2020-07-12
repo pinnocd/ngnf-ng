@@ -7,5 +7,6 @@ export class Gen_class {
     public      GenProblem: string;
     public      GenVulnerables: boolean;
     public      GenSafeguards: boolean;
+    public      GenNotes:string;
 
 }

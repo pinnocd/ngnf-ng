@@ -6,7 +6,7 @@
 
     $Org_models = [];
     $sql = "SELECT o.ApplicationId, o.OrgName, o.OrgAddress, o.OrgPostcode, o.OrgEmail, o.OrgWebsite, o.OrgType,
-                    o.OrgCharity, o.OrgCharityNo, o.OrgStartDate, o.OrgOpen, o.OrgInfo, t.OrgTypeName 
+                    o.OrgCharity, o.OrgCharityNo, o.OrgCompanyNo, o.OrgStartDate, o.OrgOpen, o.OrgInfo, t.OrgTypeName 
             FROM   Org_model o
             LEFT JOIN  OrgTypes t ON t.OrgType = o.OrgType";
     if ($ApplicationId) {
@@ -28,6 +28,7 @@
         $Org_models[$i]['OrgTypeName']   = $row['OrgTypeName'];
         $Org_models[$i]['OrgCharity'] 	 = $row['OrgCharity'];
         $Org_models[$i]['OrgCharityNo']  = $row['OrgCharityNo'];
+        $Org_models[$i]['OrgCompanyNo']  = $row['OrgCompanyNo'];
         $Org_models[$i]['OrgStartDate']  = $row['OrgStartDate'];
         $Org_models[$i]['OrgOpen'] 		   = $row['OrgOpen'];
         $Org_models[$i]['OrgInfo'] 		   = $row['OrgInfo'];

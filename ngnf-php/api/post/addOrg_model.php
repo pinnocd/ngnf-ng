@@ -11,6 +11,7 @@
     $Org_type 		= $_REQUEST['Orgtype'] ?? '';
     $Org_charity 	= $_REQUEST['Orgcharity'] ?? 'null';
     $Org_charity_no = $_REQUEST['Orgcharity_no'] ?? 'null';
+    $Org_company_no = $_REQUEST['Orgcompany_no'] ?? 'null';
     $Org_start_date	= $_REQUEST['Orgstart_date'] ?? '';
     $Org_open 		= $_REQUEST['Orgopen'] ?? 'null';
     $Org_info 		= $_REQUEST['Orginfo'] ?? '';
@@ -27,6 +28,7 @@
             Org_type = ', $Org_type, '
             Org_charity = ', $Org_charity, '
             Org_charity_no = ', $Org_charity_no, '
+            Org_company_no = ', $Org_company_no, '
             Org_start_date = ', $Org_start_date, '
             Org_open = ', $Org_open, '
             Org_info = ', $Org_info ;
@@ -34,9 +36,9 @@
         }
 
     $sql =  "INSERT INTO Org_model (ApplicationId, OrgName, OrgAddress, OrgPostcode, OrgEmail, OrgWebsite, OrgType,
-                                    OrgCharity, OrgCharityNo, OrgStartDate, OrgOpen, OrgInfo, InsertBy) 
+                                    OrgCharity, OrgCharityNo, OrgCompanyNo, OrgStartDate, OrgOpen, OrgInfo, InsertBy) 
             VALUES ( $ApplicationId, '$Org_name', '$Org_address', '$Org_postcode', '$Org_email', '$Org_website', '$Org_type', 
-                                    $Org_charity, $Org_charity_no, '$Org_start_date', $Org_open, '$Org_info', USER())";
+                                    $Org_charity, $Org_charity_no, , $Org_company_no, '$Org_start_date', $Org_open, '$Org_info', USER())";
 
     if(!mysqli_query($con, $sql))
     {

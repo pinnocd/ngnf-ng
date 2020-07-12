@@ -5,7 +5,8 @@
     $ApplicationId  = $_REQUEST['ApplicationId'] ?? '';
 
     $Fin_models = [];
-    $sql = "SELECT ApplicationId, FinOrgName, FinBank, FinAccount, FinSortCode, FinBankOrgAddress, FinActivity, FinCost
+    $sql = "SELECT ApplicationId, FinOrgName, FinBank, FinAccount, FinSortCode, FinBankOrgAddress, 
+                   FinActivity, FinCost, FinCapital, FinRevenue, FinAuditedAccounts
             FROM Fin_model";
     if ($ApplicationId) {
       $sql .= " WHERE  ApplicationId = $ApplicationId";
@@ -24,6 +25,9 @@
         $Fin_models[$i]['FinBankOrgAddress'] 	  = $row['FinBankOrgAddress'];
         $Fin_models[$i]['FinActivity'] 	        = $row['FinActivity'];
         $Fin_models[$i]['FinCost'] 	            = $row['FinCost'];
+        $Fin_models[$i]['FinCapital'] 	        = $row['FinCapital'];
+        $Fin_models[$i]['FinRevenue'] 	        = $row['FinRevenue'];
+        $Fin_models[$i]['FinAuditedAccounts']   = $row['FinAuditedAccounts'];
 
         $i++;
       }

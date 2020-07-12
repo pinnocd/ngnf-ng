@@ -29,6 +29,7 @@ export class ApiCreateService {
     return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/post/addApp_model.php`, { params: params})
     }
 
+
   // Create a copy of an app and assign to a proposal writer
   createAssignedApp(ApplicationId, ProposalWriter, FundProvider){
     let token = this.adminService.getToken();
@@ -45,7 +46,7 @@ export class ApiCreateService {
     }
 
 
-    // Create an Org row based on the entered form data
+  // Create an Org row based on the entered form data
   createOrg_model(Org_model: Org_model): Observable<Org_model>{
     let params = new HttpParams()
       .set('ApplicationId', Org_model.ApplicationId.toString())
@@ -57,6 +58,7 @@ export class ApiCreateService {
       .set('Orgtype', Org_model.OrgType)
       .set('Orgcharity', '' + Org_model.OrgCharity.toString())
       .set('Orgcharity_no', '' + Org_model.OrgCharityNo.toString())
+      .set('Orgcompany_no', '' + Org_model.OrgCompanyNo.toString())
       .set('Orgstart_date', '' + Org_model.OrgStartDate.toString())
       .set('Orgopen', '' + Org_model.OrgOpen.toString())
       .set('Orginfo', Org_model.OrgInfo);
@@ -71,6 +73,7 @@ export class ApiCreateService {
     let params = new HttpParams()
       .set('ApplicationId'      , Con_model.ApplicationId.toString())
       .set('Conname'            , Con_model.ConName)
+      .set('Conposition'        , Con_model.ConPosition)
       .set('Condob'             , Con_model.ConDOB.toString())
       .set('Conaddress'         , Con_model.ConAddress)
       .set('Conpreaddress'      , Con_model.ConPreAddress)
@@ -78,6 +81,7 @@ export class ApiCreateService {
       .set('Conotherno'         , Con_model.ConOtherNo)
       .set('Conemail'           , Con_model.ConEmail)
       .set('Consenname'         , Con_model.ConSenName)
+      .set('Consenposition'     , Con_model.ConSenPosition)
       .set('Consendob'          , Con_model.ConSenDOB.toString())
       .set('Consenaddress'      , Con_model.ConSenAddress)
       .set('Consenpreaddress'   , Con_model.ConSenPreAddress)
@@ -99,7 +103,8 @@ export class ApiCreateService {
       .set('Genachieve', Gen_model.GenAchieve)
       .set('Genproblem', Gen_model.GenProblem)
       .set('Genvulnerables', Gen_model.GenVulnerables.toString())
-      .set('Gensafeguards', Gen_model.GenSafeguards.toString());
+      .set('Gensafeguards', Gen_model.GenSafeguards.toString())
+      .set('GenNotes', Gen_model.GenNotes);
       
     console.log(params);
 
@@ -130,9 +135,19 @@ export class ApiCreateService {
       .set('Finbankorgaddress', Fin_model.FinBankOrgAddress)
       .set('Finactivity', Fin_model.FinActivity)
       .set('Fincost', Fin_model.FinCost.toString())
-
+      .set('Fincapital', Fin_model.FinCapital.toString())
+      .set('Finrevenue', Fin_model.FinRevenue.toString())
+      .set('Finauditedaccounts', Fin_model.FinAuditedAccounts.toString())
+  
     console.log(params);
 
     return this.httpClient.get<Fin_model>(`${myGlobals.PHP_API_SERVER}/api/post/addFin_model.php`, { params: params} );
   }
+
+  createFundProvider(FundProviderCode, FundProviderName){
+    let params = new HttpParams().set('FundProviderCode', FundProviderCode)
+                                 .set('FundProviderName', FundProviderName);
+
+    return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/post/addFundProvider.php`, { params: params})
+}
 }

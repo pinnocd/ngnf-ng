@@ -169,9 +169,9 @@
                                     <p *ngIf="name.errors.required">Email is required</p>
                                 </div>
                             </td>
-                            <td>Is your organisation open to anyone?</td>
+                            <td>Company Number</td>
                             <td>
-                                <input type="checkbox" name="Orgopen" class="form-control" [(ngModel)]="Org_model.OrgOpen" #name="ngModel">
+                                <input type="number" name="Orgcompan_no" class="form-control" [(ngModel)]="Org_model.OrgCompanyNo" #name="ngModel">
                             </td>
                         </tr>
                         <tr>
@@ -183,10 +183,9 @@
                                     <p *ngIf="name.errors.required">Website is required</p>
                                 </div>
                             </td>
-                            <td style="vertical-align: top;">If you answered no then please provide more information</td>
+                            <td style="vertical-align: top;">If your organisation is not open to anyone, please provide more information</td>
                             <td>
                                 <textarea id="w3mission" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Orginfo" class="form-control" [(ngModel)]="Org_model.OrgInfo" #name="ngModel">
-                                    At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
                                 </textarea>
                             </td>
                         </tr>
@@ -213,9 +212,9 @@
                                     <p *ngIf="name.errors.required">Contact Name is required</p>
                                 </div>
                             </td>
-                            <td style="width: 15%;">Email</td>
+                            <td style="width: 15%;">Position in Organisation</td>
                             <td>
-                                <input type="email" name="Conemail" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConEmail" #name="ngModel">
+                                <input type="email" name="Conposition" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConPosition" #name="ngModel">
                             </td>
                         </tr>
                         <tr>
@@ -227,6 +226,16 @@
                                     <p *ngIf="name.errors.required">Contact Address is required</p>
                                 </div>
                             </td>
+                            <td style="width: 15%;">Email</td>
+                            <td>
+                                <input type="email" name="Conemail" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConEmail" #name="ngModel">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Land Line Telephone Number</td>
+                            <td>
+                                <input type="tel" name="Conlandlineno" class="form-control" [(ngModel)]="Con_model.ConLandlineNo" #name="ngModel">
+                            </td>
                             <td style="width: 10%;">Please provide Previous Address if resident less than 3 years</td>
                             <td>
                                 <input style="width: 100%;" type="text" name="Conpreaddress" class="form-control" [(ngModel)]="Con_model.ConPreAddress" #name="ngModel"
@@ -237,51 +246,43 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Land Line Telephone Number</td>
+                            <td>D.O.B.</td>
                             <td>
-                                <input type="tel" name="Conlandlineno" class="form-control" [(ngModel)]="Con_model.ConLandlineNo" #name="ngModel">
+                                <input type="date" name="Condob" class="form-control" [(ngModel)]="Con_model.ConDOB" #name="ngModel">
                             </td>
                             <td>Other Telephone Number</td>
                             <td>
                                 <input type="tel" name="Conotherno" class="form-control" [(ngModel)]="Con_model.ConOtherNo" #name="ngModel">
                             </td>
                         </tr>
+                        <br>
+                        <br>
                         <tr>
-                            <td>D.O.B.</td>
-                            <td>
-                                <input type="date" name="Condob" class="form-control" [(ngModel)]="Con_model.ConDOB" #name="ngModel">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Who is the senior contact? (normally someone who has the role of chair, treasurer, secretary etc)</td>
+                            <td>Who is the 2nd contact? (normally someone who has the role of chair, treasurer, secretary etc)</td>
                             <td>
                                 <input type="text" name="Consenname" class="form-control" [(ngModel)]="Con_model.ConSenName" #name="ngModel"
                                 [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
                                 <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                    <p *ngIf="name.errors.required">Senion Contact Name is required</p>
+                                    <p *ngIf="name.errors.required">2nd Contact Name is required</p>
                                 </div>
                             </td>
-                            <td>Senior Contact Email</td>
+                            <td>2nd Contact Position</td>
                             <td>
-                                <input type="email" name="Consenemail" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConSenEmail" #name="ngModel">
+                                <input type="text" name="Consenposition" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConSenPosition" #name="ngModel">
                             </td>
                         </tr>
                         <tr>
-                            <td>Senior Contact Address</td>
+                            <td>2nd Contact Address</td>
                             <td>
                                 <input style="width: 100%;" type="text" name="Consenaddress" class="form-control" [(ngModel)]="Con_model.ConSenAddress" #name="ngModel"
                                 [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
                                 <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                    <p *ngIf="name.errors.required">Senior Contact Address is required</p>
+                                    <p *ngIf="name.errors.required">2nd Contact Address is required</p>
                                 </div>
                             </td>
-                            <td>Please provide Previous Address if resident less than 3 years</td>
+                            <td>2nd Contact Email</td>
                             <td>
-                                <input style="width: 100%;" type="text" name="Consenpreaddress" class="form-control" [(ngModel)]="Con_model.ConSenPreAddress" #name="ngModel"
-                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
-                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                    <p *ngIf="name.errors.required">Senior Contact Previous Address is required</p>
-                                </div>
+                                <input type="email" name="Consenemail" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConSenEmail" #name="ngModel">
                             </td>
                         </tr>
                         <tr>
@@ -289,15 +290,23 @@
                             <td>
                                 <input type="tel" name="Consenlandlineno" class="form-control" [(ngModel)]="Con_model.ConSenLandlineNo" #name="ngModel">
                             </td>
-                            <td style="width: 10%;">Other Telephone Number</td>
+                            <td>Please provide Previous Address if resident less than 3 years</td>
                             <td>
-                                <input type="tel" name="Consenotherno" class="form-control" [(ngModel)]="Con_model.ConSenOtherNo" #name="ngModel">
+                                <input style="width: 100%;" type="text" name="Consenpreaddress" class="form-control" [(ngModel)]="Con_model.ConSenPreAddress" #name="ngModel"
+                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
+                                    <p *ngIf="name.errors.required">2nd Contact Previous Address is required</p>
+                                </div>
                             </td>
                         </tr>
                         <tr>
                             <td style="width: 10%;">D.O.B.</td>
                             <td>
                                 <input type="date" name="Consendob" class="form-control" [(ngModel)]="Con_model.ConSenDOB" #name="ngModel">
+                            </td>
+                            <td style="width: 10%;">Other Telephone Number</td>
+                            <td>
+                                <input type="tel" name="Consenotherno" class="form-control" [(ngModel)]="Con_model.ConSenOtherNo" #name="ngModel">
                             </td>
                         </tr>
                     </table>
@@ -386,7 +395,7 @@
                         </tr>
                         <tr>
                             <td>
-                                • Who are you specifically targeting?
+                                • Who are you specifically targeting to help?
                                 <textarea id="Bactarget" rows="4" cols="50" style="width: 100%;height: 2cm;" name="Bactarget" class="form-control" [(ngModel)]="Bac_model.BacTarget" #name="ngModel">
                                 </textarea>
                             </td>
@@ -425,31 +434,69 @@
                     </mat-toolbar>
                 </div> 
             </mat-tab>
-    
+
             <!-- Financial Details Tab -->
             <mat-tab label="Financial Information">
                 <div class="form-group">
-                    <table style="width: 100%;">
-                        • What is the estimated cost of your project:
+                    <table style="width: 25%;">
+                        • How much funding is needed?
                         <br>
                         <br>
                         <tr>
-                            <td style="width: 50%;" >Activity</td>
-                            <td>Cost</td>
+                            <td style="width: 70%;" >Capital</td>
+                            <td>
+                                <input type="text" style="width: 100%;" name="Fincapital" class="form-control" [(ngModel)]="Fin_model.FinCapital" #name="ngModel">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Revenue</td>
+                            <td>
+                                <input type="text" style="width: 100%;" name="Finrevenue" class="form-control" [(ngModel)]="Fin_model.FinRevenue" #name="ngModel">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Total</td>
+                            <td>{{ +this.Fin_model.FinCapital + +this.Fin_model.FinRevenue }}</td>
+                        </tr>
+                        <br>
+                        <tr>
+                            <td>Do you have 2 years of audited accounts?</td>
+                            <td>
+                                <input type="checkbox" name="Finauditedaccounts" class="form-control" [(ngModel)]="Fin_model.FinAuditedAccounts" #name="ngModel">
+                            </td>
+                         </tr>
+
+                    </table>
+                    <br>
+                    <mat-toolbar  class="mat-elevation-z8" style="background-color: var(--brandcolour);">
+                        <span>
+                            <button mat-button class="mat-elevation-z8" (click)="selectedIndex = 3"
+                                style="background-color: white;font-size: 16px;"><<< Prev</button>
+                        </span>
+                        <span fxFlex></span>
+                        <button mat-button class="mat-elevation-z8" (click)="selectedIndex = 5"
+                            style="background-color: white;font-size: 16px;">Next >>></button>
+                    </mat-toolbar>
+                </div> 
+            </mat-tab>
+            
+            <!-- Additional Information Tab -->
+            <mat-tab label="Additional Information">
+                <div class="form-group">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 50%;" >Additional Notes</td>
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" style="width: 100%;" name="Finactivity" class="form-control" [(ngModel)]="Fin_model.FinActivity" #name="ngModel">
-                            </td>
-                            <td>
-                                <input type="text" style="width: 10%;" name="Fincost" class="form-control" [(ngModel)]="Fin_model.FinCost" #name="ngModel">
+                                <input type="text" style="width: 100%;" name="GenNotes" class="form-control" [(ngModel)]="Gen_model.GenNotes" #name="ngModel">
                             </td>
                         </tr>
                     </table>
                     <br>
                     <mat-toolbar  class="mat-elevation-z8" style="background-color: var(--brandcolour);">
                         <span>
-                            <button mat-button class="mat-elevation-z8" (click)="selectedIndex = 3"
+                            <button mat-button class="mat-elevation-z8" (click)="selectedIndex = 4"
                                 style="background-color: white;font-size: 16px;"><<< Prev</button>
                         </span>
                         <span fxFlex></span>

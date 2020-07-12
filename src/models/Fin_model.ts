@@ -9,7 +9,10 @@ export class Fin_model {
         public      FinSortCode: string,
         public      FinBankOrgAddress: string,
         public      FinActivity: string,
-        public      FinCost: number
-
+        public      FinCost: number,
+        public      FinCapital: number,
+        public      FinRevenue: number,
+        public      FinAuditedAccounts: boolean
+    
     ) {}
 }
