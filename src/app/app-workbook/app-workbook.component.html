@@ -69,20 +69,20 @@
                             <input type="text" style="width: 80%" name="Orgname" class="form-control" [(ngModel)]="Org_model.OrgName" #name="ngModel">
                         </td>
                         <td style="width: 15%;">Type of Organisation</td>
-                        <td>
-                            <select name="Orgtype" class="form-control" [(ngModel)]="Org_model.OrgType" #name="ngModel">
-                                <option value="C">Charity</option>
-                                <option value="H">Health body</option>
-                                <option value="P">Parish or town council</option>
-                                <option value="S">School</option>    
-                                <option value="V">Voluntary or Community</option>
-                            </select>
+                        <td style="width: 20%"> 
+                            <mat-form-field style="width: 100%">
+                                <mat-select name="Orgtype"  class="form-control" [(ngModel)]="Org_model.OrgType" #name="ngModel">
+                                    <mat-option *ngFor="let OrgType of OrgTypes" [value]="OrgType.OrgType">
+                                    {{OrgType.OrgTypeName}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
                         </td>
                     </tr>
                     <tr>
                         <td>Registered Address</td>
                         <td>
-                            <input type="textarea" style="width: 100%" name="Orgaddress" class="form-control" [(ngModel)]="Org_model.OrgAddress" #name="ngModel"
+                            <input type="textarea" style="width: 90%" name="Orgaddress" class="form-control" [(ngModel)]="Org_model.OrgAddress" #name="ngModel"
                             [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
                             <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
                                 <p *ngIf="name.errors.required">Organisation Address is required</p>
@@ -132,7 +132,7 @@
                     <tr>
                         <td>Organisation Website</td>
                         <td>
-                            <input type="url" style="width: 100%" name="Orgwebsite" class="form-control" [(ngModel)]="Org_model.OrgWebsite" #name="ngModel"
+                            <input type="url" style="width: 90%" name="Orgwebsite" class="form-control" [(ngModel)]="Org_model.OrgWebsite" #name="ngModel"
                             [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
                             <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
                                 <p *ngIf="name.errors.required">Website is required</p>

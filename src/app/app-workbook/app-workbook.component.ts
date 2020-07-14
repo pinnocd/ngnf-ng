@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 import { ApiReadService } from '../../services/api.readService';
 import { ApiUpdateService } from '../../services/api.updateService';
 import { ApiAdminService } from '../../services/api.adminService';
@@ -19,7 +20,7 @@ import { Bac_class } from  '../../models/Bac_class';
 import { Fin_model } from  '../../models/Fin_model';
 import { Fin_class } from  '../../models/Fin_class';
 
-import { ApplData } from '../../interfaces/globalinterfaces';
+import { ApplData, OrgTypes } from '../../interfaces/globalinterfaces';
 
 /**
  * @title Basic use of `<table mat-table>`
@@ -52,6 +53,7 @@ export class AppWorkbookComponent implements OnInit {
   Bac_model = new Bac_class();  
   Fin_Model:  Fin_model[];
   Fin_model = new Fin_class();
+  OrgTypes: OrgTypes[];
 
   selectedRowIndex: number = -1;
   selectedIndex = 0;
@@ -61,7 +63,7 @@ export class AppWorkbookComponent implements OnInit {
   pWriter = "";
 
   constructor(private readService: ApiReadService,  private adminService: ApiAdminService, 
-              private updateService: ApiUpdateService, public dialog: MatDialog) { }
+              private updateService: ApiUpdateService, public dialog: MatDialog, public Matselect: MatSelectModule ) { }
 
   // Initial load of all applications
   loadAppList() {
@@ -90,8 +92,10 @@ export class AppWorkbookComponent implements OnInit {
     }
 
     this.readService.readApplications(userId, this.pWriter, 'Yes')
-      .subscribe(newData => this.dataSource.data = newData)
-      ;
+      .subscribe(newData => this.dataSource.data = newData);
+
+      this.readService.readOrgTypes().subscribe(OrgTypes => this.OrgTypes = OrgTypes);
+
   }
 
   // An application has been selected in the list, so refresh all data
@@ -168,7 +172,6 @@ export class AppWorkbookComponent implements OnInit {
       this.Fin_model.FinRevenue = this.Fin_Model[0].FinRevenue;
       this.Fin_model.FinAuditedAccounts = this.Fin_Model[0].FinAuditedAccounts;
 
-      console.log(this.Fin_model);
     })
   }
 

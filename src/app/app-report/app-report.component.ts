@@ -93,18 +93,17 @@ export class AppReportComponent implements OnInit {
       blankStatus.StatusCode = '';
       blankStatus.StatusName = '';
       this.Status_models.push(blankStatus);
-
-
     });
 
-    this.OrgType_models = [
-      { OrgTypeCode: 'C', OrgTypeName: 'Charity'},
-      { OrgTypeCode: 'H', OrgTypeName: 'Health body'},
-      { OrgTypeCode: 'P', OrgTypeName: 'Parish or town council'},
-      { OrgTypeCode: 'S', OrgTypeName: 'School'},
-      { OrgTypeCode: 'V', OrgTypeName: 'Voluntary or Community'},
-      { OrgTypeCode: '', OrgTypeName: ''}
-    ];
+
+    this.readService.readOrgTypes().subscribe((OrgType_models: OrgTypes[]) => {
+      this.OrgType_models = OrgType_models;
+
+      let blankOrgType = {} as OrgTypes;
+      blankOrgType.OrgTypeCode = '';
+      blankOrgType.OrgTypeName = '';
+      this.OrgType_models.push(blankOrgType);
+     });
 
   }
 

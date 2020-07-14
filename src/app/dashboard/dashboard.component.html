@@ -115,13 +115,13 @@
                             </td>
                             <td style="width: 15%;">Type of Organisation</td>
                             <td>
-                                <select name="Orgtype" class="form-control" [(ngModel)]="Org_model.OrgType" #name="ngModel">
-                                    <option value="C">Charity</option>
-                                    <option value="H">Health body</option>
-                                    <option value="P">Parish or town council</option>
-                                    <option value="S">School</option>    
-                                    <option value="V">Voluntary or Community</option>
-                                </select>
+                                <mat-form-field>
+                                    <mat-select name="Orgtype" class="form-control" [(ngModel)]="Org_model.OrgType" #name="ngModel">
+                                        <mat-option *ngFor="let OrgType of OrgTypes" [value]="OrgType.OrgType">
+                                        {{OrgType.OrgTypeName}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
                             </td>
                         </tr>
                         <tr>
@@ -145,11 +145,7 @@
                         <tr>
                             <td>Post Code</td>
                             <td>
-                                <input type="text" name="Orgpostcode" class="form-control" [(ngModel)]="Org_model.OrgPostcode" #name="ngModel"
-                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
-                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                    <p *ngIf="name.errors.required">The Post Code is required</p>
-                                </div>
+                                <input type="text" name="Orgpostcode" class="form-control" [(ngModel)]="Org_model.OrgPostcode" #name="ngModel">
                             </td>
                             <td>When did your Organisation start?</td>
                             <td>
@@ -204,109 +200,54 @@
                 <div class="form-group">
                     <table width=100%>
                         <tr>
-                            <td style="width: 15%;">Who will be the main contact for the application?</td>
-                            <td style="width: 35%;">
-                                <input type="text" name="Conname" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConName" #name="ngModel"
+                            <td style="width: 25%;">Who will be the main contact for the application?</td>
+                            <td style="width: 15%;">
+                                <input type="text" name="Conname" style="width: 90%" class="form-control" [(ngModel)]="Con_model.ConName" #name="ngModel"
                                 [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
-                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                    <p *ngIf="name.errors.required">Contact Name is required</p>
-                                </div>
                             </td>
                             <td style="width: 15%;">Position in Organisation</td>
                             <td>
-                                <input type="email" name="Conposition" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConPosition" #name="ngModel">
+                                <input type="email" name="Conposition" style="width: 90%" class="form-control" [(ngModel)]="Con_model.ConPosition" #name="ngModel">
+                            </td>
+                            <td style="width: 10%;">Email</td>
+                            <td>
+                                <input type="email" name="Conemail" style="width: 90%" class="form-control" [(ngModel)]="Con_model.ConEmail" #name="ngModel">
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 10%;">Address</td>
+                            <td>Telephone Number</td>
                             <td>
-                                <input style="width: 100%;" type="text" name="Conaddress" class="form-control" [(ngModel)]="Con_model.ConAddress" #name="ngModel"
-                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
-                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                    <p *ngIf="name.errors.required">Contact Address is required</p>
-                                </div>
+                                <input type="tel" name="Conlandlineno" style="width: 90%" class="form-control" [(ngModel)]="Con_model.ConLandlineNo" #name="ngModel">
                             </td>
-                            <td style="width: 15%;">Email</td>
+                            <td>Alternative Telephone Number</td>
                             <td>
-                                <input type="email" name="Conemail" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConEmail" #name="ngModel">
+                                <input type="tel" name="Conotherno" style="width: 90%" class="form-control" [(ngModel)]="Con_model.ConOtherNo" #name="ngModel">
                             </td>
                         </tr>
-                        <tr>
-                            <td>Land Line Telephone Number</td>
-                            <td>
-                                <input type="tel" name="Conlandlineno" class="form-control" [(ngModel)]="Con_model.ConLandlineNo" #name="ngModel">
-                            </td>
-                            <td style="width: 10%;">Please provide Previous Address if resident less than 3 years</td>
-                            <td>
-                                <input style="width: 100%;" type="text" name="Conpreaddress" class="form-control" [(ngModel)]="Con_model.ConPreAddress" #name="ngModel"
-                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
-                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                    <p *ngIf="name.errors.required">Contact Previous Address is required</p>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>D.O.B.</td>
-                            <td>
-                                <input type="date" name="Condob" class="form-control" [(ngModel)]="Con_model.ConDOB" #name="ngModel">
-                            </td>
-                            <td>Other Telephone Number</td>
-                            <td>
-                                <input type="tel" name="Conotherno" class="form-control" [(ngModel)]="Con_model.ConOtherNo" #name="ngModel">
-                            </td>
-                        </tr>
-                        <br>
                         <br>
                         <tr>
                             <td>Who is the 2nd contact? (normally someone who has the role of chair, treasurer, secretary etc)</td>
                             <td>
-                                <input type="text" name="Consenname" class="form-control" [(ngModel)]="Con_model.ConSenName" #name="ngModel"
+                                <input type="text" name="Consenname" style="width: 90%" class="form-control" [(ngModel)]="Con_model.ConSenName" #name="ngModel"
                                 [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
-                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                    <p *ngIf="name.errors.required">2nd Contact Name is required</p>
-                                </div>
                             </td>
-                            <td>2nd Contact Position</td>
+                            <td>Position in Organisation</td>
                             <td>
-                                <input type="text" name="Consenposition" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConSenPosition" #name="ngModel">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2nd Contact Address</td>
-                            <td>
-                                <input style="width: 100%;" type="text" name="Consenaddress" class="form-control" [(ngModel)]="Con_model.ConSenAddress" #name="ngModel"
-                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
-                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                    <p *ngIf="name.errors.required">2nd Contact Address is required</p>
-                                </div>
+                                <input type="text" name="Consenposition" style="width: 90%" class="form-control" [(ngModel)]="Con_model.ConSenPosition" #name="ngModel">
                             </td>
                             <td>2nd Contact Email</td>
                             <td>
-                                <input type="email" name="Consenemail" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConSenEmail" #name="ngModel">
+                                <input type="email" name="Consenemail" style="width: 90%" class="form-control" [(ngModel)]="Con_model.ConSenEmail" #name="ngModel">
                             </td>
                         </tr>
                         <tr>
-                            <td>Land Line Telephone Number</td>
+                            <td>Telephone Number</td>
                             <td>
-                                <input type="tel" name="Consenlandlineno" class="form-control" [(ngModel)]="Con_model.ConSenLandlineNo" #name="ngModel">
+                                <input type="tel" name="Consenlandlineno" style="width: 90%" class="form-control" [(ngModel)]="Con_model.ConSenLandlineNo" #name="ngModel">
                             </td>
-                            <td>Please provide Previous Address if resident less than 3 years</td>
+                            <td>Alternative Telephone Number</td>
                             <td>
-                                <input style="width: 100%;" type="text" name="Consenpreaddress" class="form-control" [(ngModel)]="Con_model.ConSenPreAddress" #name="ngModel"
-                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
-                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                    <p *ngIf="name.errors.required">2nd Contact Previous Address is required</p>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 10%;">D.O.B.</td>
-                            <td>
-                                <input type="date" name="Consendob" class="form-control" [(ngModel)]="Con_model.ConSenDOB" #name="ngModel">
-                            </td>
-                            <td style="width: 10%;">Other Telephone Number</td>
-                            <td>
-                                <input type="tel" name="Consenotherno" class="form-control" [(ngModel)]="Con_model.ConSenOtherNo" #name="ngModel">
+                                <input type="tel" name="Consenotherno" style="width: 90%" class="form-control" [(ngModel)]="Con_model.ConSenOtherNo" #name="ngModel">
                             </td>
                         </tr>
                     </table>

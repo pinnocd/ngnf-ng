@@ -63,8 +63,6 @@ export class ApiCreateService {
       .set('Orgopen', '' + Org_model.OrgOpen.toString())
       .set('Orginfo', Org_model.OrgInfo);
 
-    console.log(params);
-
     return this.httpClient.get<Org_model>(`${myGlobals.PHP_API_SERVER}/api/post/addOrg_model.php`, { params: params} );
   }
 
@@ -89,8 +87,6 @@ export class ApiCreateService {
       .set('Consenotherno'      , Con_model.ConSenOtherNo)
       .set('Consenemail' 		    , Con_model.ConSenEmail);
 
-    console.log(params);
-
     return this.httpClient.get<Con_model>(`${myGlobals.PHP_API_SERVER}/api/post/addCon_model.php`, { params: params} );
   }
 
@@ -106,8 +102,6 @@ export class ApiCreateService {
       .set('Gensafeguards', Gen_model.GenSafeguards.toString())
       .set('GenNotes', Gen_model.GenNotes);
       
-    console.log(params);
-
     return this.httpClient.get<Gen_model>(`${myGlobals.PHP_API_SERVER}/api/post/addGen_model.php`, { params: params} );
   }
 
@@ -119,8 +113,6 @@ export class ApiCreateService {
       .set('Bacactivities', Bac_model.BacActivities)
       .set('Bacdeliver', Bac_model.BacDeliver)
       .set('Bacusers', Bac_model.BacUsers);
-
-    console.log(params);
 
     return this.httpClient.get<Bac_model>(`${myGlobals.PHP_API_SERVER}/api/post/addBac_model.php`, { params: params} );
   }
@@ -139,8 +131,6 @@ export class ApiCreateService {
       .set('Finrevenue', Fin_model.FinRevenue.toString())
       .set('Finauditedaccounts', Fin_model.FinAuditedAccounts.toString())
   
-    console.log(params);
-
     return this.httpClient.get<Fin_model>(`${myGlobals.PHP_API_SERVER}/api/post/addFin_model.php`, { params: params} );
   }
 

@@ -12,6 +12,7 @@ import { Fin_model } from  '../models/Fin_model';
 import { User_model } from '../models/User_class';
 import { FundProviders_model } from '../models/FundProviders_model';
 import { Statuses_model } from '../models/Statuses_model';
+import { OrgTypes_model} from '../models/OrgTypes_model';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +52,11 @@ export class ApiReadService {
     return this.httpClient.get<Statuses_model[]>(`${myGlobals.PHP_API_SERVER}/api/get/getStatuses.php` );
   }
 
+  // Retrieve all Org Types
+  readOrgTypes(): Observable<OrgTypes_model[]>{
+    return this.httpClient.get<OrgTypes_model[]>(`${myGlobals.PHP_API_SERVER}/api/get/getOrgTypes.php` );
+  }
+  
   // Retrieve All Organisation model data
   readOrg_models(): Observable<Org_model[]>{
     return this.httpClient.get<Org_model[]>(`${myGlobals.PHP_API_SERVER}/api/get/getOrg_model.php`);

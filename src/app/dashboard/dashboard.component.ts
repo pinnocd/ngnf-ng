@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 import { ApiReadService } from '../../services/api.readService';
 import { ApiDeleteService } from '../../services/api.deleteService';
 import { ApiCreateService } from '../../services/api.createService';
@@ -21,7 +22,7 @@ import { Bac_class } from  '../../models/Bac_class';
 import { Fin_model } from  '../../models/Fin_model';
 import { Fin_class } from  '../../models/Fin_class';
 
-import { ApplData } from '../../interfaces/globalinterfaces';
+import { ApplData, OrgTypes } from '../../interfaces/globalinterfaces';
 
 /**
  * @title Basic use of `<table mat-table>`
@@ -56,10 +57,12 @@ export class DashboardComponent implements OnInit {
   Bac_model = new Bac_class();  
   Fin_Model:  Fin_model[];
   Fin_model = new Fin_class();
+  OrgTypes: OrgTypes[];
 
   selectedRowIndex: number = -1;
   selectedIndex = 0;
   username = '';
+  userId = '';
   ApplicationId = 0;
   AppStatus:string = "";
   pWriter = "";
@@ -67,44 +70,51 @@ export class DashboardComponent implements OnInit {
 
   constructor(private readService: ApiReadService,  private deleteService: ApiDeleteService,
               private adminService: ApiAdminService, private createService: ApiCreateService,
-              private updateService: ApiUpdateService, public dialog: MatDialog) { }
+              private updateService: ApiUpdateService, public dialog: MatDialog, public Matselect: MatSelectModule) {
+                    // update data in data source when available
+                  let token = this.adminService.getToken();
+
+                  // Example token = 2|A|dean_pinnock@yahoo.com|Dean Pinnock
+                  this.username = token.split('|')[3];
+                  this.userId = token.split('|')[0];
+                  let userType = token.split('|')[1];
+              
+                  switch (userType) {
+                    case 'A':
+                      // Admin users see everything so blank the id.
+                      this.userId = ""; 
+                      break;
+                    case 'P': 
+                      // Proposal Writer so set the value
+                      this.pWriter = this.userId;
+                      this.userId = ""; 
+                      break;
+                  }
+                  this.readService.readOrgTypes().subscribe(OrgTypes => this.OrgTypes = OrgTypes);
+                }
 
   // Initial load of all applications
   loadAppList() {
     this.ApplicationId = 0;
+    this.selectedIndex = 0;
     this.AppStatus = "";
-
-    // update data in data source when available
-    let token = this.adminService.getToken();
-
-    // Example token = 2|A|dean_pinnock@yahoo.com|Dean Pinnock
-    this.username = token.split('|')[3];
-
-    let userId = token.split('|')[0];
-    let userType = token.split('|')[1];
-
-    switch (userType) {
-      case 'A':
-        // Admin users see everything so blank the id.
-        userId = ""; 
-        break;
-      case 'P': 
-        // Proposal Writer so set the value
-        this.pWriter = userId;
-        userId = ""; 
-        break;
-    }
-
-    this.readService.readApplications(userId, this.pWriter, "Yes")
+    
+    this.readService.readApplications(this.userId, this.pWriter, "Yes")
       .subscribe(newData => this.dataSource.data = newData);
+  }
+
+  appReset(){
+    this.Org_Model.length = 0;
+    this.Con_Model.length = 0;
+    this.Gen_Model.length = 0;
+    this.Bac_Model.length = 0;
+    this.Fin_Model.length = 0;        
   }
 
   // An application has been selected in the list, so refresh all data
   selectApp(app_model){
     this.ApplicationId = app_model.ApplicationId;
     this.AppStatus = app_model.Status;
-
-    console.log(app_model);
 
     this.readService.readOrg_model(app_model.ApplicationId).subscribe((Org_model: Org_model[])=>{
       this.Org_Model = Org_model;
@@ -204,6 +214,7 @@ export class DashboardComponent implements OnInit {
             };
 
             this.dialog.open(matDialogComponent, dialogConfig);
+            this.appReset();
             this.loadAppList();
           });
         } 
@@ -240,12 +251,8 @@ export class DashboardComponent implements OnInit {
                   this.dialog.open(matDialogComponent, dialogConfig);
 
               });
+              this.appReset();
               this.loadAppList();
-              this.Org_Model.length = 0;
-              this.Con_Model.length = 0;
-              this.Gen_Model.length = 0;
-              this.Bac_Model.length = 0;
-              this.Fin_Model.length = 0;        
             } 
            catch (e) {
               console.log(e);
@@ -314,16 +321,10 @@ export class DashboardComponent implements OnInit {
             this.Org_model.OrgInfo = "n/a";
         
             this.Con_model.ConName = "Garza Cullors Tometi";
-            this.Con_model.ConDOB = new Date("");
-            this.Con_model.ConAddress = "12 Fulham Street, London, NW8 2QS";
-            this.Con_model.ConPreAddress = "";
             this.Con_model.ConLandlineNo = "";
             this.Con_model.ConOtherNo = "07710 000000";
             this.Con_model.ConEmail = "contact@blm.com";
             this.Con_model.ConSenName = "";
-            this.Con_model.ConSenDOB = new Date("");
-            this.Con_model.ConSenAddress = "";
-            this.Con_model.ConSenPreAddress = "";
             this.Con_model.ConSenLandlineNo = "";
             this.Con_model.ConSenOtherNo = "";
             this.Con_model.ConSenEmail = "";
@@ -400,7 +401,7 @@ export class DashboardComponent implements OnInit {
                         , button1: 'OK', button2: '' 
                       };
                       this.dialog.open(matDialogComponent, dialogConfig);
-                      this.selectedIndex = 0;
+                      this.appReset();
                       this.loadAppList();
                   })
                 } catch (e) {
@@ -409,7 +410,6 @@ export class DashboardComponent implements OnInit {
               }
               } else {
                 try{
-                  console.log(this.Org_model);
                     this.Org_model.ApplicationId = this.ApplicationId;
                     this.Con_model.ApplicationId = this.ApplicationId;
                     this.Gen_model.ApplicationId = this.ApplicationId;
@@ -430,7 +430,7 @@ export class DashboardComponent implements OnInit {
                       , button1: 'OK', button2: '' 
                     };
                     this.dialog.open(matDialogComponent, dialogConfig);
-                    this.selectedIndex = 0;
+                    this.appReset();
                     this.loadAppList();
                 } catch (e) {
                     console.log(e);
