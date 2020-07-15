@@ -51,6 +51,8 @@ import { UserAdminComponent } from './user-admin/user-admin.component';
 import { AppWorkbookComponent } from './app-workbook/app-workbook.component';
 import { AppAdminComponent } from './app-admin/app-admin.component';
 import { FundproviderAdminComponent } from './fundprovider-admin/fundprovider-admin.component';
+import { StatusAdminComponent } from './status-admin/status-admin.component';
+import { OrgtypeAdminComponent } from './orgtype-admin/orgtype-admin.component';
 
 // Define all routes necessary
 const appRoutes: Routes = [
@@ -62,7 +64,9 @@ const appRoutes: Routes = [
   { path: 'userAdmin', component: UserAdminComponent, canActivate: [AuthguardGuard] },
   { path: 'appWorkbook', component: AppWorkbookComponent, canActivate: [AuthguardGuard] },
   { path: 'myaccount', component: DashboardComponent, canActivate: [AuthguardGuard] },
-  { path: 'FPAdmin', component: FundproviderAdminComponent, canActivate: [AuthguardGuard] }
+  { path: 'FPAdmin', component: FundproviderAdminComponent, canActivate: [AuthguardGuard] },
+  { path: 'orgTypeAdmin', component: OrgtypeAdminComponent, canActivate: [AuthguardGuard] },
+  { path: 'statusAdmin', component: StatusAdminComponent, canActivate: [AuthguardGuard] }
 ];
 
 @NgModule({
@@ -86,7 +90,9 @@ const appRoutes: Routes = [
     AppWorkbookComponent,
     AppAssignComponent,
     AppAdminComponent,
-    FundproviderAdminComponent    
+    FundproviderAdminComponent,
+    StatusAdminComponent,
+    OrgtypeAdminComponent    
     ],
   imports: [
       BrowserModule,

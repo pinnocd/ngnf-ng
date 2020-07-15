@@ -1,0 +1,24 @@
+<mat-card>
+    <mat-card-title style="text-align: center;"><h3><b>Org Type Admin</b></h3></mat-card-title>
+    <div class="mat-elevation-z8">
+        <table id="table1" mat-table [dataSource]="OTData">
+            <ng-container matColumnDef="OrgTypeCode">
+            <th mat-header-cell *matHeaderCellDef style="width: 5%;">Code </th>
+            <td mat-cell *matCellDef="let element"> {{ element.OrgType }} </td>
+            </ng-container>
+    
+            <!-- Name -->
+            <ng-container matColumnDef="OrgTypeName">
+            <th mat-header-cell *matHeaderCellDef style="width: 20%;">Name</th>
+            <td mat-cell *matCellDef="let element"> {{ element.OrgTypeName }} </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="OTColumns"></tr>
+            <tr mat-row class="table-row" *matRowDef="let row; columns: OTColumns;"
+                        (click)="selectedOT = row"
+                        [ngClass]="{'selectedrow': row === selectedOT}">
+            </tr>
+        </table>
+     </div>
+    <br>
+</mat-card>
