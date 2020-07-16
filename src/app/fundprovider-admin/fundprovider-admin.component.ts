@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ApiReadService } from '../../services/api.readService';
-import { ApiCreateService } from '../../services/api.createService';
 import { ApiDeleteService } from '../../services/api.deleteService';
 import { matDialogComponent } from '../matDialog/matDialog.component';
+import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 
 import { FundProviders } from '../../interfaces/globalinterfaces';
 
@@ -18,7 +18,8 @@ export class FundproviderAdminComponent implements OnInit {
   FPColumns: string[] = ['FundProviderCode', 'FundProviderName', 'Delete'];
   FPData = new MatTableDataSource<FundProviders>(FP_DATA);
 
-  constructor(private readService: ApiReadService, private createService: ApiCreateService, private deleteService: ApiDeleteService, public dialog: MatDialog) { }
+  constructor(private readService: ApiReadService, private deleteService: ApiDeleteService
+    , public matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.loadFPList();
@@ -43,7 +44,7 @@ export class FundproviderAdminComponent implements OnInit {
       button2: 'No'
     };
 
-    return this.dialog.open(matDialogComponent, dialogConfig);
+    return this.matDialog.open(matDialogComponent, dialogConfig);
   }
 
   deleteFP(element) {
@@ -65,7 +66,7 @@ export class FundproviderAdminComponent implements OnInit {
               button2: ''
             };
         
-            this.dialog.open(matDialogComponent, dialogConfig);
+            this.matDialog.open(matDialogComponent, dialogConfig);
             this.loadFPList();
           });
         } 
@@ -74,12 +75,17 @@ export class FundproviderAdminComponent implements OnInit {
   }
 
   addFundProvider(){
-    let blankFP = {} as FundProviders;
-    blankFP.FundProviderCode = 'New';
-    blankFP.FundProviderName = '';
-    this.FPData.data.push(blankFP);
+    // We are adding so pass control to the custom window for creation
+    const dialogConfig = new MatDialogConfig();
+  
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "600px";
+    dialogConfig.data = {title: 'Enter New Fund Provider Details', model: 'FundProviders'};
 
-    console.log(this.FPData);
+    if (this.matDialog.open(AddDialogComponent, dialogConfig)){
+      this.loadFPList();
+    }
   }
 }
 

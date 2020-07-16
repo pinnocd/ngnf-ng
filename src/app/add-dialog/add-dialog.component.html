@@ -1,0 +1,24 @@
+<mat-card class="mat-elevation-z8">
+    <mat-card-title style="text-align: center;"><h3><b>{{ title }}</b></h3></mat-card-title>
+    
+    <form #userForm="ngForm" class="mat-elevation-z8">
+        <table width=100%>
+            <tr> 
+                <td style="width: 10%;">Code</td>
+                <td style="width: 10%;">
+                    <input type="text" style="width: 100%;" name="code" class="form-control" [(ngModel)]="code">
+                </td>
+                <td style="width: 10%;">Name</td>
+                <td style="width: 90%;">
+                    <input type="text" style="width: 100%;" name="name" class="form-control" [(ngModel)]="name">
+                </td>
+            </tr>
+        </table>
+   </form>
+
+    <br>
+    <div style="text-align: center;">
+        <button style="margin:5px;" class="mat-raised-button"(click)="b1click()">Save</button>
+        <button style="margin:5px;" class="mat-raised-button mat-primary"(click)="b2click()">Cancel</button>
+    </div>
+</mat-card>

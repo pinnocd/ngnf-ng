@@ -18,5 +18,10 @@ export class ApiDeleteService {
       let params = new HttpParams().set('FundProviderCode', FundProviderCode);
       return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/delete/delFundProvider.php`, { params: params} )
     }
-}
+
+    deleteOrgType(OrgTypeCode){
+      let params = new HttpParams().set('OrgTypeCode', OrgTypeCode);
+      return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/delete/delOrgType.php`, { params: params} )
+    }
+  }
 

@@ -53,6 +53,7 @@ import { AppAdminComponent } from './app-admin/app-admin.component';
 import { FundproviderAdminComponent } from './fundprovider-admin/fundprovider-admin.component';
 import { StatusAdminComponent } from './status-admin/status-admin.component';
 import { OrgtypeAdminComponent } from './orgtype-admin/orgtype-admin.component';
+import { AddDialogComponent } from './add-dialog/add-dialog.component';
 
 // Define all routes necessary
 const appRoutes: Routes = [
@@ -92,7 +93,8 @@ const appRoutes: Routes = [
     AppAdminComponent,
     FundproviderAdminComponent,
     StatusAdminComponent,
-    OrgtypeAdminComponent    
+    OrgtypeAdminComponent,
+    AddDialogComponent    
     ],
   imports: [
       BrowserModule,

@@ -157,11 +157,7 @@
                         <tr>
                             <td style="width: 15%;">Who will be the main contact for the application?</td>
                             <td style="width: 35%;">
-                                <input type="text" name="Conname" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConName" #name="ngModel"
-                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
-                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                    <p *ngIf="name.errors.required">Contact Name is required</p>
-                                </div>
+                                <input type="text" name="Conname" style="width: 80%" class="form-control" [(ngModel)]="Con_model.ConName" #name="ngModel">
                             </td>
                             <td style="width: 15%;">Position</td>
                             <td>
@@ -189,11 +185,7 @@
                             </td>
                             <td style="width: 10%;">Please provide Previous Address if resident less than 3 years</td>
                             <td>
-                                <input style="width: 100%;" type="text" name="Conpreaddress" class="form-control" [(ngModel)]="Con_model.ConPreAddress" #name="ngModel"
-                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
-                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                    <p *ngIf="name.errors.required">Contact Previous Address is required</p>
-                                </div>
+                                <input style="width: 100%;" type="text" name="Conpreaddress" class="form-control" [(ngModel)]="Con_model.ConPreAddress" #name="ngModel">
                             </td>
                         </tr>
                         <tr>
@@ -207,7 +199,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Who is the 2nd contact? (normally someone who has the role of chair, treasurer, secretary etc)</td>
+                            <td>Who will be the 2nd contact for the application?</td>
                             <td>
                                 <input type="text" name="Consenname" class="form-control" [(ngModel)]="Con_model.ConSenName" #name="ngModel"
                                 [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>

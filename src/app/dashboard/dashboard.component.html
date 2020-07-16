@@ -109,11 +109,11 @@
                 <div class="form-group">
                     <table width=100%>
                         <tr> 
-                            <td style="width: 10%;">Name of Organisation</td>
-                            <td style="width: 30%;">
+                            <td style="width: 20%;">Name of Organisation</td>
+                            <td style="width: 40%;">
                                 <input type="text" style="width: 80%" name="Orgname" class="form-control" [(ngModel)]="Org_model.OrgName" #name="ngModel">
                             </td>
-                            <td style="width: 15%;">Type of Organisation</td>
+                            <td style="width: 10%;">Type of Organisation</td>
                             <td>
                                 <mat-form-field>
                                     <mat-select name="Orgtype" class="form-control" [(ngModel)]="Org_model.OrgType" #name="ngModel">
@@ -127,19 +127,11 @@
                         <tr>
                             <td>Registered Address</td>
                             <td>
-                                <input type="textarea" style="width: 100%" name="Orgaddress" class="form-control" [(ngModel)]="Org_model.OrgAddress" #name="ngModel"
-                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
-                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                    <p *ngIf="name.errors.required">Organisation Address is required</p>
-                                </div>
+                                <input type="textarea" style="width: 90%" name="Orgaddress" class="form-control" [(ngModel)]="Org_model.OrgAddress" #name="ngModel">
                             </td>
-                            <td>If you are a charity, please provide your charity number</td>
-                            <input type="number" name="Orgcharity_no" class="form-control" [(ngModel)]="Org_model.OrgCharityNo" #name="ngModel"
-                            [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
-                            <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                <p *ngIf="name.errors.required">Org Charity number is required</p>
-                            </div>
-                        <td>
+                            <td>Organisation Email</td>
+                            <td>
+                                <input type="email" style="width: 80%" name="Orgemail" class="form-control" [(ngModel)]="Org_model.OrgEmail" #name="ngModel">
                             </td>
                         </tr>
                         <tr>
@@ -147,42 +139,25 @@
                             <td>
                                 <input type="text" name="Orgpostcode" class="form-control" [(ngModel)]="Org_model.OrgPostcode" #name="ngModel">
                             </td>
-                            <td>When did your Organisation start?</td>
+                            <td>Organisation Website</td>
                             <td>
-                                <input type="date" name="Orgstart_date" class="form-control" [(ngModel)]="Org_model.OrgStartDate" #name="ngModel"
-                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
-                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                    <p *ngIf="name.errors.required">Org start date is required</p>
-                                </div>
+                                <input type="url" style="width: 80%" name="Orgwebsite" class="form-control" [(ngModel)]="Org_model.OrgWebsite" #name="ngModel">
                             </td>
                         </tr>
                         <tr>
-                            <td>Organisation Email</td>
+                            <td>When did your Organisation start?</td>
                             <td>
-                                <input type="email" style="width: 80%" name="Orgemail" class="form-control" [(ngModel)]="Org_model.OrgEmail" #name="ngModel"
-                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
-                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                    <p *ngIf="name.errors.required">Email is required</p>
-                                </div>
+                                <input type="date" name="Orgstart_date" class="form-control" [(ngModel)]="Org_model.OrgStartDate" #name="ngModel">
+                            </td>
+                        </tr>
+                        <tr>    
+                            <td>If you are a charity, please provide your charity number</td>
+                            <td>
+                                <input type="number" name="Orgcharity_no" class="form-control" [(ngModel)]="Org_model.OrgCharityNo" #name="ngModel">
                             </td>
                             <td>Company Number</td>
                             <td>
                                 <input type="number" name="Orgcompan_no" class="form-control" [(ngModel)]="Org_model.OrgCompanyNo" #name="ngModel">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Organisation Website</td>
-                            <td>
-                                <input type="url" style="width: 100%" name="Orgwebsite" class="form-control" [(ngModel)]="Org_model.OrgWebsite" #name="ngModel"
-                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
-                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                    <p *ngIf="name.errors.required">Website is required</p>
-                                </div>
-                            </td>
-                            <td style="vertical-align: top;">If your organisation is not open to anyone, please provide more information</td>
-                            <td>
-                                <textarea id="w3mission" rows="4" cols="50" style="width: 100%;height: 3cm;" name="Orginfo" class="form-control" [(ngModel)]="Org_model.OrgInfo" #name="ngModel">
-                                </textarea>
                             </td>
                         </tr>
                     </table>
@@ -224,18 +199,16 @@
                                 <input type="tel" name="Conotherno" style="width: 90%" class="form-control" [(ngModel)]="Con_model.ConOtherNo" #name="ngModel">
                             </td>
                         </tr>
-                        <br>
                         <tr>
-                            <td>Who is the 2nd contact? (normally someone who has the role of chair, treasurer, secretary etc)</td>
+                            <td>Who will be the 2nd contact for the application?</td>
                             <td>
-                                <input type="text" name="Consenname" style="width: 90%" class="form-control" [(ngModel)]="Con_model.ConSenName" #name="ngModel"
-                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
+                                <input type="text" name="Consenname" style="width: 90%" class="form-control" [(ngModel)]="Con_model.ConSenName" #name="ngModel">
                             </td>
                             <td>Position in Organisation</td>
                             <td>
                                 <input type="text" name="Consenposition" style="width: 90%" class="form-control" [(ngModel)]="Con_model.ConSenPosition" #name="ngModel">
                             </td>
-                            <td>2nd Contact Email</td>
+                            <td>Email</td>
                             <td>
                                 <input type="email" name="Consenemail" style="width: 90%" class="form-control" [(ngModel)]="Con_model.ConSenEmail" #name="ngModel">
                             </td>
@@ -271,11 +244,7 @@
                         <tr>
                             <td style="width: 15%;">What is the name of your project?</td>
                             <td style="width: 30%;">
-                                <input type="text" name="Genname" style="width: 90%;" class="form-control" [(ngModel)]="Gen_model.GenName" #name="ngModel"
-                                [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" required>
-                                <div class="invalid-feedback" *ngIf="userForm.submitted && name.invalid">
-                                    <p *ngIf="name.errors.required">Project Name is required</p>
-                                </div>
+                                <input type="text" name="Genname" style="width: 90%;" class="form-control" [(ngModel)]="Gen_model.GenName" #name="ngModel">
                             </td>
                             <td style="width: 25%;">When do you think the start date of you project would be?</td>
                             <td>

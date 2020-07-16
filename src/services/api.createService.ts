@@ -139,5 +139,12 @@ export class ApiCreateService {
                                  .set('FundProviderName', FundProviderName);
 
     return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/post/addFundProvider.php`, { params: params})
-}
+  }
+
+  createOrgType(OrgTypeCode, OrgTypeName){
+    let params = new HttpParams().set('OrgTypeCode', OrgTypeCode)
+                                 .set('OrgTypeName', OrgTypeName);
+
+    return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/post/addOrgType.php`, { params: params})
+  }
 }
