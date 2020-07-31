@@ -146,7 +146,8 @@ CREATE TABLE Statuses (
 
 DROP TABLE IF EXISTS FundProviders;
 CREATE TABLE FundProviders (
-    FundProviderCode VARCHAR(5) PRIMARY KEY,
-    FundProviderName VARCHAR(64)
+    FundProviderCode  VARCHAR(5) PRIMARY KEY,
+    FundProviderName  VARCHAR(64),
+	ApplyURL          VARCHAR(2083)
 	)
 ;

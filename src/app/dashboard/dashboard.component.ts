@@ -65,6 +65,7 @@ export class DashboardComponent implements OnInit {
   userId = '';
   ApplicationId = 0;
   AppStatus:string = "";
+  ShowDetail:boolean = false;
   pWriter = "";
   totalCost: number = 0;
 
@@ -108,11 +109,13 @@ export class DashboardComponent implements OnInit {
     this.Con_Model.length = 0;
     this.Gen_Model.length = 0;
     this.Bac_Model.length = 0;
-    this.Fin_Model.length = 0;        
+    this.Fin_Model.length = 0;
+    this.ShowDetail = false;
   }
 
   // An application has been selected in the list, so refresh all data
   selectApp(app_model){
+    this.ShowDetail = true;
     this.ApplicationId = app_model.ApplicationId;
     this.AppStatus = app_model.Status;
 
@@ -266,6 +269,7 @@ export class DashboardComponent implements OnInit {
   insertApp(){
     this.ApplicationId = 0;
     this.AppStatus = "New";
+    this.ShowDetail = true;
 
     this.Org_model = new Org_class();
     this.Con_model = new Con_class();
