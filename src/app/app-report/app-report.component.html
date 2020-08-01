@@ -30,7 +30,7 @@
                 </mat-form-field>
             </td>
             <td>
-                <mat-label>Senior Approver   </mat-label>
+                <mat-label>Senior Approver</mat-label>
                 <mat-form-field  appearance="outline">
                     <mat-select (selectionChange)="filterData('SA', $event)">
                         <mat-option *ngFor="let SAUser_models of SAUser_models" [value]="SAUser_models.name">
