@@ -10,7 +10,7 @@
     $Applications = [];
     $sql = "SELECT      app.ApplicationId, org.OrgName, gen.GenName, gen.GenStartDate, s.StatusName, app.OrigApplicationId,
                         app.UserId, u.name AS username, pw.name AS proposalwriter, sa.name AS seniorapprover, p.FundProviderName, orgt.OrgTypeName AS OrgType,
-                        app.InsertDateTime, app.UpdateDateTime, app.InsertBy, app.UpdateBy
+                        DATE(app.InsertDateTime) AS InsertDateTime, app.UpdateDateTime, app.InsertBy, app.UpdateBy
             FROM        Applications app
             LEFT JOIN   Org_model org   ON org.ApplicationId = app.ApplicationId
             LEFT JOIN   OrgTypes  orgt  ON orgt.OrgType = org.OrgType

@@ -21,7 +21,7 @@ import { Statuses_model } from '../../models/Statuses_model';
 
 
 export class AppReportComponent implements OnInit {
-  displayedColumns: string[] = ['ApplicationId', 'OrigApplicationId', 'User', 'OrgName', 'GenName', 'GenStartDate', 'Status', 
+  displayedColumns: string[] = ['ApplicationId', 'User', 'OrgName', 'GenName', 'Status', 
            'ProposalWriter', 'SeniorApprover', 'FundProvider', 'OrganisationType', 'InsertDateTime'];
   dataSource = new MatTableDataSource<ApplData>(ELEMENT_DATA);
 

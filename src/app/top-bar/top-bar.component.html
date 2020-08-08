@@ -1,7 +1,7 @@
 <mat-toolbar  class="mat-elevation-z8" style="background-color: var(--brandcolour);">
     <span>
         <button mat-button class="mat-elevation-z8" routerLink="/" 
-            style="background-color: white; font-size: 16px; margin:5px;">Applications</button>
+            style="background-color: white; font-size: 16px; margin:5px;">Info</button>
     </span>
     
     <span fxFlex></span>
@@ -24,13 +24,13 @@
         </mat-menu>
 
     <button mat-button class="mat-elevation-z8"  [matMenuTriggerFor]="appmenu" *ngIf="globals.staffuser"
-        style="background-color: white; font-size: 16px; margin:5px;">Applications</button>
+        style="background-color: white; font-size: 16px; margin:5px;">Proposals</button>
         <mat-menu #appmenu="matMenu">
             <button mat-menu-item routerLink="/appAdmin"
-            style="background-color: white; font-size: 16px; margin:5px;">Application Admin</button>
+            style="background-color: white; font-size: 16px; margin:5px;">Proposal Admin</button>
 
             <button mat-menu-item routerLink="/appWorkbook"
-            style="background-color: white; font-size: 16px; margin:5px;">Application Workbook</button>
+            style="background-color: white; font-size: 16px; margin:5px;">Proposal Workbook</button>
 
             <button mat-menu-item routerLink="/appReport"
             style="background-color: white; font-size: 16px; margin:5px;">Proposal Library</button>

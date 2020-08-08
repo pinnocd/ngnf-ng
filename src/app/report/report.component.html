@@ -1,5 +1,5 @@
 <mat-card>
-    <mat-card-title style="text-align: center;"><h2><b>Application Report</b></h2></mat-card-title>
+    <mat-card-title style="text-align: center;"><h2>Application Report</h2></mat-card-title>
     <table name="AppTable" style="padding: 1px;width: 100%;"  class="mat-elevation-z8">
         <tr style="text-align: left;padding: 5px;">
             <th>Appid</th>
@@ -25,7 +25,7 @@
 
     <!-- Organisational Details Section -->
     <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Org_model of Org_models">
-        <caption><h3><b>Organisational Details</b></h3></caption>
+        <caption><h2>Organisational Details</h2></caption>
         <tr>
             <td style="width: 10%;">Name of Organisation</td>            <td style="width: 40%;">{{ Org_model.OrgName }}</td>
             <td style="width: 20%;">Type of Organisation</td>            <td>{{ Org_model.OrgType }}</td>
@@ -54,7 +54,7 @@
 
     <!-- Contact Details Section -->
     <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Con_model of Con_models">
-        <caption><h3><b>Contact Details</b></h3></caption>
+        <caption><h2>Contact Details</h2></caption>
         <tr>
             <td style="width: 10%;">Contact Name</td>       <td style="width: 40%;">{{ Con_model.ConName }}</td>
             <td style="width: 10%;">Email</td>              <td>{{ Con_model.ConEmail }}</td>
@@ -92,7 +92,7 @@
 
     <!-- General Project Information Section -->
     <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Gen_model of Gen_models">
-        <caption><h3><b>General Project Information</b></h3></caption>
+        <caption><h2>General Project Information</h2></caption>
         <tr>
             <td style="width: 10%;">Project Name</td>       <td style="width: 30%;">{{ Gen_model.GenName }}</td>
             <td style="width: 10%;">Start Date</td>         <td>{{ Gen_model.GenStartDate }}</td>
@@ -111,7 +111,7 @@
 
     <!-- Background and Further Project Detail Section -->
     <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Bac_model of Bac_models">
-        <caption><h3><b>Background and Further Project Detail</b></h3></caption>
+        <caption><h2>Background and Further Project Detail</h2></caption>
 
         <tr><td><h4>• The need for the project</h4></td></tr>
         <tr><td>{{ Bac_model.BacNeed }}</td></tr>
@@ -132,7 +132,7 @@
 
     <!-- Financial Information -->
     <table style="width:100%;border:1cm" class="mat-elevation-z8" *ngFor="let Fin_model of Fin_models">
-        <caption><h3><b>Financial Information</b></h3></caption>
+        <caption><h2>Financial Information</h2></caption>
 
         <tr>
             <td>Organisation name on statements</td><td>{{ Fin_model.FinOrgName }}</td>

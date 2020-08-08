@@ -29,11 +29,11 @@ export class AppAssignComponent {
       public dialog: MatDialog, private dialogRef: MatDialogRef<AppAssignComponent>,
       @Inject(MAT_DIALOG_DATA) data) {
 
-      this.title = data.title;
+      this.title = "Assign Application";
       this.orgName = data.OrgName;
       this.projectName = data.GenName;
       this.description = 'Please select a Proposal Writer and Funding Provider to assign the "' + data.OrgName + 
-      '" application for project "' + data.GenName + '"?';
+      '" application for project "' + data.GenName + '"';
       this.applicationId = data.ApplicationId;
   }
 

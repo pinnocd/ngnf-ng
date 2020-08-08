@@ -36,7 +36,7 @@ import { ApplData, OrgTypes } from '../../interfaces/globalinterfaces';
 })
 
 export class DashboardComponent implements OnInit {
-  displayedColumns: string[] = ['ApplicationId', 'User', 'OrgName', 'GenName', 'GenStartDate', 'Status', 'InsertDateTime', 'Submit', 'Delete'];
+  displayedColumns: string[] = ['ApplicationId', 'User', 'OrgName', 'GenName', 'Status', 'InsertDateTime', 'Submit', 'Delete'];
   dataSource = new MatTableDataSource<ApplData>(ELEMENT_DATA);
   
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -101,7 +101,8 @@ export class DashboardComponent implements OnInit {
     this.AppStatus = "";
     
     this.readService.readApplications(this.userId, this.pWriter, "Yes")
-      .subscribe(newData => this.dataSource.data = newData);
+      .subscribe((AppData: App_model[]) => {
+        this.dataSource.data = AppData});
   }
 
   appReset(){
