@@ -5,51 +5,33 @@
     <mat-dialog-content style="text-align: center;">
         <h3>{{ description }}</h3>
     </mat-dialog-content>
-    
-    <div class="table-responsive" style="height: 150px;">
-        <table id="pwriters" mat-table [dataSource]="userData">
-            <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef style="width: 10%;">Id </th>
-                <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
-            </ng-container>
-        
-            <!-- Name -->
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef style="width: 30%;">Name</th>
-                <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
-            </ng-container>
-    
-            <!-- Name -->
-            <ng-container matColumnDef="usertype">
-                <th mat-header-cell *matHeaderCellDef style="width: 10%;">User Type</th>
-                <td mat-cell *matCellDef="let element"> {{ element.usertype }} </td>
-            </ng-container>
-    
-            <tr mat-header-row *matHeaderRowDef="userColumns"></tr>
-            <tr mat-row class="table-row" *matRowDef="let row; columns: userColumns;"
-                        (click)="selectUser(row)"
-                        [ngClass]="{'selectedrow': row === userRow}">
-            </tr>
-        </table>
-    </div>
     <br>
-    <div class="table-responsive" style="height: 180px;">
-        <table id="fundp" mat-table [dataSource]="FundProviderData">
-            <ng-container matColumnDef="FundProviderCode">
-                <th mat-header-cell *matHeaderCellDef style="width: 10%;">Code </th>
-                <td mat-cell *matCellDef="let element"> {{ element.FundProviderCode }} </td>
-            </ng-container>
-        
-            <!-- Name -->
-            <ng-container matColumnDef="FundProviderName">
-                <th mat-header-cell *matHeaderCellDef style="width: 50%;">Fund Provider Name</th>
-                <td mat-cell *matCellDef="let element"> {{ element.FundProviderName }} </td>
-            </ng-container>
- 
-            <tr mat-header-row *matHeaderRowDef="FundProviderColumns"></tr>
-            <tr mat-row class="table-row" *matRowDef="let row; columns: FundProviderColumns;"
-                (click)="selectFundProvider(row)"
-                [ngClass]="{'selectedrow': row === fundProviderRow}">
+    <div style="width:100%;">
+        <table>
+            <tr>
+                <td style="width: 30%;">
+                    <mat-label>Proposal Writer</mat-label>
+                </td>
+                <td>
+                    <mat-select  (selectionChange)="selectPW($event)">
+                        <mat-option *ngFor="let User_models of User_models" [value]="User_models.id">
+                            {{User_models.name}}
+                        </mat-option>
+                    </mat-select>
+                </td>
+            </tr>
+            <br>
+            <tr>
+                <td>
+                    <mat-label>Fund Provider</mat-label>
+                </td>
+                <td>
+                    <mat-select  (selectionChange)="selectFP($event)">
+                        <mat-option *ngFor="let FundProvider_models of FundProvider_models" [value]="FundProvider_models.FundProviderCode">
+                            {{FundProvider_models.FundProviderName}}
+                        </mat-option>
+                    </mat-select>
+                </td>
             </tr>
         </table>
     </div>

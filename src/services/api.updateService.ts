@@ -25,24 +25,24 @@ export class ApiUpdateService {
 
     updateApplication(ApplicationId, Status, ProposalWriter){
         let params = new HttpParams()
-                          .set('ApplicationId', ApplicationId)
-                          .set('Status', Status)
-                          .set('UserId', userId)
-                          .set('ProposalWriter', ProposalWriter )
-                          .set('SeniorApprover', userId );
+          .set('ApplicationId', ApplicationId)
+          .set('Status', Status)
+          .set('UserId', userId)
+          .set('ProposalWriter', ProposalWriter )
+          .set('SeniorApprover', userId );
 
         return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/update/updApp.php`, { params: params} )
     }
 
     updateUser(UserId, UserType){
-      let params = new HttpParams()
-                        .set('UserId', UserId)
-                        .set('UserType', UserType);
+        let params = new HttpParams()
+          .set('UserId', UserId)
+          .set('UserType', UserType);
 
-      return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/update/updUser.php`, { params: params} )
-  }
+        return this.httpClient.get(`${myGlobals.PHP_API_SERVER}/api/update/updUser.php`, { params: params} )
+    }
 
-  // update an Org row based on the entered form data
+    // update an Org row based on the entered form data
     updateOrg_model(Org_model: Org_model): Observable<Org_model>{
         let params = new HttpParams()
           .set('ApplicationId', Org_model.ApplicationId.toString())
@@ -58,8 +58,6 @@ export class ApiUpdateService {
           .set('Orgopen', '' + Org_model.OrgOpen.toString())
           .set('Orginfo', Org_model.OrgInfo)
           .set('UserId', userId);
-
-        console.log(params);
 
         return this.httpClient.get<Org_model>(`${myGlobals.PHP_API_SERVER}/api/update/updOrg_model.php`, { params: params} );
     }
@@ -86,8 +84,6 @@ export class ApiUpdateService {
           .set('Consenemail' 		    , Con_model.ConSenEmail)
           .set('UserId'             , userId);
 
-        console.log(params);
-
         return this.httpClient.get<Con_model>(`${myGlobals.PHP_API_SERVER}/api/update/updCon_model.php`, { params: params} );
     }
 
@@ -104,8 +100,6 @@ export class ApiUpdateService {
           .set('Gennotes', Gen_model.GenNotes)
           .set('UserId', userId);
           
-        console.log(params);
-
         return this.httpClient.get<Gen_model>(`${myGlobals.PHP_API_SERVER}/api/update/updGen_model.php`, { params: params} );
     }
 
@@ -118,8 +112,6 @@ export class ApiUpdateService {
           .set('Bacdeliver', Bac_model.BacDeliver)
           .set('Bacusers', Bac_model.BacUsers)
           .set('UserId', userId);
-
-        console.log(params);
 
         return this.httpClient.get<Bac_model>(`${myGlobals.PHP_API_SERVER}/api/update/updBac_model.php`, { params: params} );
     }
@@ -138,8 +130,6 @@ export class ApiUpdateService {
           .set('Finrevenue', Fin_model.FinRevenue.toString())
           .set('Finauditedaccounts', Fin_model.FinAuditedAccounts.toString())
           .set('UserId', userId);
-
-        console.log(params);
 
         return this.httpClient.get<Fin_model>(`${myGlobals.PHP_API_SERVER}/api/update/updFin_model.php`, { params: params} );
     }

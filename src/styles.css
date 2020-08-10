@@ -87,6 +87,11 @@
     color: white;
   }
 
+  mat-label, mat-select {
+    padding: 5px;
+    font-size: 16px;
+  }
+
   .mat-tab-labels, .mat-tab-label, .mat-tab-link {
     background-color: transparent;
     font-size: 16px;
@@ -178,7 +183,7 @@
   }
   
   label {
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bold;
     display: block;
     text-transform: uppercase;

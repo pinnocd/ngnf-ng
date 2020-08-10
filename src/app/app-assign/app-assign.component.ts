@@ -1,23 +1,18 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
 import { ApiReadService } from '../../services/api.readService';
 import { ApiCreateService } from '../../services/api.createService';
-import { UserData, FundProviders } from '../../interfaces/globalinterfaces';
+import { FundProviders } from '../../interfaces/globalinterfaces';
 import { matDialogComponent } from '../matDialog/matDialog.component';
+import { User_model } from '../../models/User_class';
 
 @Component({
   selector: 'app-app-assign',
   templateUrl: './app-assign.component.html',
   styleUrls: ['./app-assign.component.css']
 })
+
 export class AppAssignComponent {
-
-  userColumns: string[] = ['id', 'name', 'usertype'];
-  userData = new MatTableDataSource<UserData>(USER_DATA);
-
-  FundProviderColumns: string[] = ['FundProviderCode', 'FundProviderName'];
-  FundProviderData = new MatTableDataSource<FundProviders>(FUNDP_DATA);
 
   title: string;
   description: string;
@@ -32,33 +27,33 @@ export class AppAssignComponent {
       this.title = "Assign Application";
       this.orgName = data.OrgName;
       this.projectName = data.GenName;
-      this.description = 'Please select a Proposal Writer and Funding Provider to assign the "' + data.OrgName + 
-      '" application for project "' + data.GenName + '"';
+      this.description = 'Please select a Proposal Writer and Funding Providers';
       this.applicationId = data.ApplicationId;
   }
 
   ngOnInit(): void {
-    this.readService.readAllUsers(true).subscribe(nData => this.userData.data = nData);
-    this.readService.readAllFundProviders().subscribe(fpData => this.FundProviderData.data = fpData);
+    this.readService.readAllUsers("StaffMember").subscribe((User_models: User_model[]) => {
+      this.User_models = User_models;
+    })
+
+    this.readService.readAllFundProviders().subscribe((FundProvider_models: FundProviders[]) => {
+      this.FundProvider_models = FundProvider_models;
+    });
+
   }
 
-  userRow: number = -1;
+  User_models: User_model[];
+  FundProvider_models: FundProviders[];
+
   selectedUser: number = -1;
-  pwName: string;
-  fundProviderRow: number = -1;
   selectedFundProvider: string = "";
-  fpName: string;
 
-  selectUser(row){
-    this.userRow = row;
-    this.selectedUser = row.id;
-    this.pwName = row.name;
+  selectPW(value){
+    this.selectedUser = value.source.value;
   }
 
-  selectFundProvider(row){
-    this.fundProviderRow = row;
-    this.selectedFundProvider = row.FundProviderCode;
-    this.fpName = row.FundProviderName;
+  selectFP(value){
+    this.selectedFundProvider = value.source.value;
   }
 
   b1click() {
@@ -68,42 +63,39 @@ export class AppAssignComponent {
     dialogConfig.width = "600px";
 
     if (this.selectedUser===-1 || this.selectedFundProvider ===""){
-
-
-      dialogConfig.data = {
-        title: 'Warning', button1: 'OK', button2: '',
-        description: 'Please select a Proposal Writer and Funding Provider or click Cancel'
-      };
-    
-      this.dialog.open(matDialogComponent, dialogConfig);
+        dialogConfig.data = {
+            title: 'Warning', button1: 'OK', button2: '',
+            description: 'Please select a Proposal Writer and Funding Provider or click Cancel'
+        };
+        
+        this.dialog.open(matDialogComponent, dialogConfig);
     }
-    else {
-      let conf = this.confirmAction()
+      else {
+        let conf = this.confirmAction()
 
-      conf.afterClosed().subscribe(
-        data => { 
-          if (data) {
-            // All data present to call the create function
-            this.createService.createAssignedApp(
-                this.applicationId, 	
-                this.selectedUser, 
-                this.selectedFundProvider).subscribe(ApplicationId => {
-              var AppId: number;
-              AppId = ApplicationId as number;
+        conf.afterClosed().subscribe(
+          data => { 
+            if (data) {
+              // All data present to call the create function
+              this.createService.createAssignedApp(
+                  this.applicationId, 	
+                  this.selectedUser, 
+                  this.selectedFundProvider).subscribe(ApplicationId => {
+                    var AppId: number;
+                    AppId = ApplicationId as number;
 
-              dialogConfig.data = {
-                title: 'Confirmation', description: 'Application successfully Assigned.  The original data has been archived to Unique Reference Id ' + AppId.toString() + '.'
-                , button1: 'OK', button2: '' 
-              };
-  
-              this.dialog.open(matDialogComponent, dialogConfig);
-  
-            })
-            this.dialogRef.close(this.selectedUser);
+                    dialogConfig.data = {
+                      title: 'Confirmation', description: 'Application successfully Assigned.  The original data has been archived to Unique Reference Id ' + AppId.toString() + '.'
+                      , button1: 'OK', button2: '' 
+                    };
+        
+                    this.dialog.open(matDialogComponent, dialogConfig);
+                    this.dialogRef.close(this.selectedUser);        
+              })
+            }
           }
-        }
-      )
-     }
+        )
+      }
   }
 
   b2click() {
@@ -118,8 +110,7 @@ export class AppAssignComponent {
     var button1: string;
     var button2: string;
   
-    description = 'Are you absolutely sure you want to assign ' + this.pwName + ' the "' + this.orgName + '" application for project "' 
-      + this.projectName + ' using the ' + this.fpName +' template?';
+    description = 'Are you absolutely sure you want to assign the "' + this.orgName + '" application?';
     title= 'Please Confirm';
     button1 = 'Yes';
     button2 = 'No';
@@ -137,6 +128,3 @@ export class AppAssignComponent {
     return this.dialog.open(matDialogComponent, dialogConfig);
   }
 }
-
-var USER_DATA: UserData[];
-var FUNDP_DATA: FundProviders[];

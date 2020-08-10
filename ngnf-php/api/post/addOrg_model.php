@@ -38,7 +38,7 @@
     $sql =  "INSERT INTO Org_model (ApplicationId, OrgName, OrgAddress, OrgPostcode, OrgEmail, OrgWebsite, OrgType,
                                     OrgCharity, OrgCharityNo, OrgCompanyNo, OrgStartDate, OrgOpen, OrgInfo, InsertBy) 
             VALUES ( $ApplicationId, '$Org_name', '$Org_address', '$Org_postcode', '$Org_email', '$Org_website', '$Org_type', 
-                                    $Org_charity, $Org_charity_no, , $Org_company_no, '$Org_start_date', $Org_open, '$Org_info', USER())";
+                                    $Org_charity, $Org_charity_no, $Org_company_no, '$Org_start_date', $Org_open, '$Org_info', USER())";
 
     if(!mysqli_query($con, $sql))
     {

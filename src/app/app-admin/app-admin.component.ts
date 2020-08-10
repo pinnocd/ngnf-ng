@@ -193,8 +193,6 @@ export class AppAdminComponent implements OnInit {
       conf.afterClosed().subscribe(
         data => { 
           if (data) {
-            console.log(data);
-
             this.updateService.updateApplication(element.ApplicationId, action.source.value, data).subscribe(()=>{
               const dialogConfig = new MatDialogConfig();
 
@@ -209,11 +207,11 @@ export class AppAdminComponent implements OnInit {
               };
           
               this.dialog.open(matDialogComponent, dialogConfig);
+              this.loadAppList();
             });
           } 
         }
       );
-      this.loadAppList();
     }
     else {
       // We are assigning an app so pass control to the custom window for selection

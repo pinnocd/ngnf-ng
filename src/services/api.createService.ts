@@ -119,6 +119,7 @@ export class ApiCreateService {
 
   // Create a Fin row based on the entered form data
   createFin_model(Fin_model: Fin_model): Observable<Fin_model>{
+
     let params = new HttpParams()
       .set('ApplicationId', Fin_model.ApplicationId.toString())
       .set('Finorgname', Fin_model.FinOrgName)
@@ -130,7 +131,7 @@ export class ApiCreateService {
       .set('Fincapital', Fin_model.FinCapital.toString())
       .set('Finrevenue', Fin_model.FinRevenue.toString())
       .set('Finauditedaccounts', Fin_model.FinAuditedAccounts.toString())
-  
+
     return this.httpClient.get<Fin_model>(`${myGlobals.PHP_API_SERVER}/api/post/addFin_model.php`, { params: params} );
   }
 

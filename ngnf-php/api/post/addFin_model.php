@@ -18,9 +18,6 @@
 
     // Check numbers for emptyness
     if (empty($Fin_account)){$Fin_account='null';}
-    if (empty($Fin_cost)){$Fin_cost='null';}
-    if (empty($Fin_capital)){$Fin_capital='null';}
-    if (empty($Fin_revenue)){$Fin_revenue='null';}
  
     if ($debug){
         echo 
