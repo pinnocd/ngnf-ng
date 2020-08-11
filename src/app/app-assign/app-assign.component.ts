@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { ApiReadService } from '../../services/api.readService';
 import { ApiCreateService } from '../../services/api.createService';
 import { FundProviders } from '../../interfaces/globalinterfaces';
@@ -11,10 +12,10 @@ import { User_model } from '../../models/User_class';
   templateUrl: './app-assign.component.html',
   styleUrls: ['./app-assign.component.css']
 })
-
 export class AppAssignComponent {
+  FundProviderColumns: string[] = ['FundProviderCode', 'FundProviderName'];
+  FundProviderData = new MatTableDataSource<FundProviders>(FUNDP_DATA);
 
-  title: string;
   description: string;
   applicationId: number;
   orgName: string;
@@ -24,7 +25,6 @@ export class AppAssignComponent {
       public dialog: MatDialog, private dialogRef: MatDialogRef<AppAssignComponent>,
       @Inject(MAT_DIALOG_DATA) data) {
 
-      this.title = "Assign Application";
       this.orgName = data.OrgName;
       this.projectName = data.GenName;
       this.description = 'Please select a Proposal Writer and Funding Providers';
@@ -35,25 +35,27 @@ export class AppAssignComponent {
     this.readService.readAllUsers("StaffMember").subscribe((User_models: User_model[]) => {
       this.User_models = User_models;
     })
-
-    this.readService.readAllFundProviders().subscribe((FundProvider_models: FundProviders[]) => {
-      this.FundProvider_models = FundProvider_models;
-    });
-
+    this.readService.readAllFundProviders().subscribe(fpData => this.FundProviderData.data = fpData);
   }
 
   User_models: User_model[];
-  FundProvider_models: FundProviders[];
-
+  userRow: number = -1;
   selectedUser: number = -1;
+  fundProviderRow: number = -1;
   selectedFundProvider: string = "";
+  fpName: string;
 
   selectPW(value){
     this.selectedUser = value.source.value;
   }
 
-  selectFP(value){
-    this.selectedFundProvider = value.source.value;
+  selectFundProvider(row){
+    this.fundProviderRow = row;
+    this.selectedFundProvider = row.FundProviderCode;
+  }
+
+  highlight(element: Element) {
+    element.highlighted = !element.highlighted;
   }
 
   b1click() {
@@ -63,39 +65,41 @@ export class AppAssignComponent {
     dialogConfig.width = "600px";
 
     if (this.selectedUser===-1 || this.selectedFundProvider ===""){
-        dialogConfig.data = {
-            title: 'Warning', button1: 'OK', button2: '',
-            description: 'Please select a Proposal Writer and Funding Provider or click Cancel'
-        };
-        
-        this.dialog.open(matDialogComponent, dialogConfig);
+
+      dialogConfig.data = {
+        title: 'Warning', button1: 'OK', button2: '',
+        description: 'Please select a Proposal Writer and Funding Provider or click Cancel'
+      };
+    
+      this.dialog.open(matDialogComponent, dialogConfig);
     }
-      else {
-        let conf = this.confirmAction()
+    else {
+      let conf = this.confirmAction()
 
-        conf.afterClosed().subscribe(
-          data => { 
-            if (data) {
-              // All data present to call the create function
-              this.createService.createAssignedApp(
-                  this.applicationId, 	
-                  this.selectedUser, 
-                  this.selectedFundProvider).subscribe(ApplicationId => {
-                    var AppId: number;
-                    AppId = ApplicationId as number;
+      conf.afterClosed().subscribe(
+        data => { 
+          if (data) {
+            // All data present to call the create function
+            this.createService.createAssignedApp(
+                this.applicationId, 	
+                this.selectedUser, 
+                this.selectedFundProvider).subscribe(ApplicationId => {
+              var AppId: number;
+              AppId = ApplicationId as number;
 
-                    dialogConfig.data = {
-                      title: 'Confirmation', description: 'Application successfully Assigned.  The original data has been archived to Unique Reference Id ' + AppId.toString() + '.'
-                      , button1: 'OK', button2: '' 
-                    };
-        
-                    this.dialog.open(matDialogComponent, dialogConfig);
-                    this.dialogRef.close(this.selectedUser);        
-              })
-            }
+              dialogConfig.data = {
+                title: 'Confirmation', description: 'Application successfully Assigned.  The original data has been archived to Unique Reference Id ' + AppId.toString() + '.'
+                , button1: 'OK', button2: '' 
+              };
+  
+              this.dialog.open(matDialogComponent, dialogConfig);
+              this.dialogRef.close(this.selectedUser);
+  
+            })
           }
-        )
-      }
+        }
+      )
+     }
   }
 
   b2click() {
@@ -128,3 +132,15 @@ export class AppAssignComponent {
     return this.dialog.open(matDialogComponent, dialogConfig);
   }
 }
+
+export interface Element {
+  checked: boolean;
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+  highlighted?: boolean;
+  hovered?: boolean;
+}
+
+var FUNDP_DATA: FundProviders[];

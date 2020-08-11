@@ -222,9 +222,15 @@ export class AppAdminComponent implements OnInit {
       dialogConfig.width = "600px";
       dialogConfig.data = {OrgName: element.OrgName, GenName: element.GenName, ApplicationId: element.ApplicationId};
   
-      if (this.dialog.open(AppAssignComponent, dialogConfig)){
-        this.loadAppList();
-      }
+      const diaret = this.dialog.open(AppAssignComponent, dialogConfig);
+
+      diaret.afterClosed().subscribe(
+        data => { 
+          if (data) {
+              this.loadAppList();
+            };
+          } 
+      );
     }
   }
 }

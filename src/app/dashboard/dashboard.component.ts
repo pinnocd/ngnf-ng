@@ -107,11 +107,6 @@ export class DashboardComponent implements OnInit {
   }
 
   appReset(){
-    this.Org_Model.length = 0;
-    this.Con_Model.length = 0;
-    this.Gen_Model.length = 0;
-    this.Bac_Model.length = 0;
-    this.Fin_Model.length = 0;
     this.ShowDetail = false;
   }
 
