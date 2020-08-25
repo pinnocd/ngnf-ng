@@ -1,4 +1,4 @@
-export class FundProviders_class {
+export class Statuses_class {
 
     public  code: string;
     public  name: string;
@@ -10,3 +10,4 @@ export class Statuses_model {
         public  StatusName: string
     ) {}
 }
+

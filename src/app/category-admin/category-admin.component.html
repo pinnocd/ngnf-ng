@@ -1,0 +1,24 @@
+<mat-card>
+    <mat-card-title style="text-align: center;"><h2>Category Admin</h2></mat-card-title>
+    <div class="mat-elevation-z8">
+        <table id="table1" mat-table [dataSource]="CategoryData">
+            <ng-container matColumnDef="CategoryCode">
+            <th mat-header-cell *matHeaderCellDef style="width: 5%;">Code </th>
+            <td mat-cell *matCellDef="let element"> {{ element.CategoryCode }} </td>
+            </ng-container>
+    
+            <!-- Name -->
+            <ng-container matColumnDef="CategoryName">
+            <th mat-header-cell *matHeaderCellDef style="width: 20%;">Name</th>
+            <td mat-cell *matCellDef="let element"> {{ element.CategoryName }} </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="CategoryColumns"></tr>
+            <tr mat-row class="table-row" *matRowDef="let row; columns: CategoryColumns;"
+                        (click)="selectedCategory = row"
+                        [ngClass]="{'selectedrow': row === selectedCategory}">
+            </tr>
+        </table>
+     </div>
+    <br>
+</mat-card>

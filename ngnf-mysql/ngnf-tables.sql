@@ -12,6 +12,7 @@ CREATE TABLE Applications (
 	ProposalWriter		INT,
 	SeniorApprover		INT,
 	FundProviderCode 	VARCHAR(5),
+	CategoryCode     	VARCHAR(5),
 	InsertBy			VARCHAR(70),
 	UpdateBy			VARCHAR(70)
 	)
@@ -149,5 +150,12 @@ CREATE TABLE FundProviders (
     FundProviderCode  VARCHAR(5) PRIMARY KEY,
     FundProviderName  VARCHAR(64),
 	ApplyURL          VARCHAR(2083)
+	)
+;
+
+DROP TABLE IF EXISTS Categories;
+CREATE TABLE Categories (
+    CategoryCode  VARCHAR(5) PRIMARY KEY,
+    CategoryName  VARCHAR(64)
 	)
 ;

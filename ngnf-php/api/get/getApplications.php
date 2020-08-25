@@ -8,7 +8,10 @@
     $Original       = $_REQUEST['Original'] ?? '';
 
     $Applications = [];
-    $sql = "SELECT      app.ApplicationId, org.OrgName, gen.GenName, gen.GenStartDate, s.StatusName, app.OrigApplicationId,
+    $sql = "SELECT      app.ApplicationId,
+                        concat(left(org.OrgName, 30), if(length(org.OrgName) < 30, '', '...')) AS OrgName,
+                        concat(left(gen.GenName, 30), if(length(gen.GenName) < 30, '', '...')) AS GenName,
+                        gen.GenStartDate, s.StatusName, app.OrigApplicationId,
                         app.UserId, u.name AS username, pw.name AS proposalwriter, sa.name AS seniorapprover, p.FundProviderName, orgt.OrgTypeName AS OrgType,
                         DATE(app.InsertDateTime) AS InsertDateTime, app.UpdateDateTime, app.InsertBy, app.UpdateBy
             FROM        Applications app
@@ -25,8 +28,6 @@
             $sql .= " AND  app.ApplicationId = $ApplicationId";}
     if ($UserId) {
             $sql .= " AND  app.UserId = $UserId";}
-    if ($PWriter) {
-            $sql .= " AND  app.ProposalWriter = $PWriter";}
     if ($Original==='Yes') {
         $sql .= " AND  app.OrigApplicationId IS NULL";}
     if ($Original==='No') {

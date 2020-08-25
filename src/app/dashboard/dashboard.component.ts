@@ -67,7 +67,7 @@ export class DashboardComponent implements OnInit {
   AppStatus:string = "";
   ShowDetail:boolean = false;
   pWriter = "";
-  totalCost: number = 0;
+  // totalCost: number = 0;
 
   constructor(private readService: ApiReadService,  private deleteService: ApiDeleteService,
               private adminService: ApiAdminService, private createService: ApiCreateService,
@@ -125,11 +125,11 @@ export class DashboardComponent implements OnInit {
       this.Org_model.OrgEmail = this.Org_Model[0].OrgEmail;
       this.Org_model.OrgWebsite = this.Org_Model[0].OrgWebsite;
       this.Org_model.OrgType = this.Org_Model[0].OrgType;
-      this.Org_model.OrgCharity = this.Org_Model[0].OrgCharity;
+//      this.Org_model.OrgCharity = this.Org_Model[0].OrgCharity;
       this.Org_model.OrgCharityNo = this.Org_Model[0].OrgCharityNo;
       this.Org_model.OrgCompanyNo = this.Org_Model[0].OrgCompanyNo;
       this.Org_model.OrgStartDate = this.Org_Model[0].OrgStartDate;
-      this.Org_model.OrgOpen = this.Org_Model[0].OrgOpen;
+//      this.Org_model.OrgOpen = this.Org_Model[0].OrgOpen;
       this.Org_model.OrgInfo = this.Org_Model[0].OrgInfo;
     })
 
@@ -169,6 +169,8 @@ export class DashboardComponent implements OnInit {
     this.readService.readBac_model(app_model.ApplicationId).subscribe((Bac_model: Bac_model[])=>{
       this.Bac_Model = Bac_model;
 
+console.log(Bac_model);
+
       this.Bac_model.BacNeed = this.Bac_Model[0].BacNeed;
       this.Bac_model.BacTarget = this.Bac_Model[0].BacTarget;
       this.Bac_model.BacActivities = this.Bac_Model[0].BacActivities;
@@ -180,7 +182,7 @@ export class DashboardComponent implements OnInit {
       this.Fin_Model = Fin_model;
 
       this.Fin_model.FinActivity = this.Fin_Model[0].FinActivity;
-      this.Fin_model.FinCost = this.Fin_Model[0].FinCost;
+//      this.Fin_model.FinCost = this.Fin_Model[0].FinCost;
       this.Fin_model.FinCapital = this.Fin_Model[0].FinCapital;
       this.Fin_model.FinRevenue = this.Fin_Model[0].FinRevenue;
       this.Fin_model.FinAuditedAccounts = this.Fin_Model[0].FinAuditedAccounts;
@@ -287,7 +289,7 @@ export class DashboardComponent implements OnInit {
     this.Gen_model.GenSafeguards = false;
     this.Gen_model.GenStartDate = new Date("");
 
-    this.Fin_model.FinCost = 0;
+//    this.Fin_model.FinCost = 0;
     this.Fin_model.FinRevenue = 0;
     this.Fin_model.FinCapital = 0;
     this.Fin_model.FinAuditedAccounts = false;
@@ -357,7 +359,8 @@ export class DashboardComponent implements OnInit {
                     this.Fin_model.ApplicationId = this.ApplicationId;
 
                     // Further tweeks
-                    if (!this.Fin_model.FinCost){this.Fin_model.FinCost = 0;}
+                    if (!this.Fin_model.FinCapital){this.Fin_model.FinCapital = 0;}
+                    if (!this.Fin_model.FinRevenue){this.Fin_model.FinRevenue = 0;}
 
                     this.updateService.updateOrg_model(this.Org_model).subscribe(OrgId => {
                       this.updateService.updateCon_model(this.Con_model).subscribe(ConId => {

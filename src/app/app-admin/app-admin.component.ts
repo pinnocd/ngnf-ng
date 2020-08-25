@@ -71,7 +71,8 @@ export class AppAdminComponent implements OnInit {
   // Initial load of all applications
   loadAppList() {
     // update data in data source when available
-    this.readService.readApplications("", this.pWriter, "Yes").subscribe(newData => this.dataSource.data = newData);
+    this.readService.readApplications('', this.pWriter, 'Yes')
+      .subscribe(newData => this.dataSource.data = newData);
 
   }
 

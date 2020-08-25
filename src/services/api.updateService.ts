@@ -44,6 +44,9 @@ export class ApiUpdateService {
 
     // update an Org row based on the entered form data
     updateOrg_model(Org_model: Org_model): Observable<Org_model>{
+
+      console.log(Org_model);
+
         let params = new HttpParams()
           .set('ApplicationId', Org_model.ApplicationId.toString())
           .set('Orgname', Org_model.OrgName)
@@ -52,10 +55,8 @@ export class ApiUpdateService {
           .set('Orgemail', Org_model.OrgEmail)
           .set('Orgwebsite', Org_model.OrgWebsite)
           .set('Orgtype', Org_model.OrgType)
-          .set('Orgcharity', '' + Org_model.OrgCharity.toString())
           .set('Orgcharity_no', '' + Org_model.OrgCharityNo.toString())
           .set('Orgstart_date', '' + Org_model.OrgStartDate.toString())
-          .set('Orgopen', '' + Org_model.OrgOpen.toString())
           .set('Orginfo', Org_model.OrgInfo)
           .set('UserId', userId);
 
@@ -105,9 +106,13 @@ export class ApiUpdateService {
 
     // update a Bac row based on the entered form data
     updateBac_model(Bac_model: Bac_model): Observable<Bac_model>{
+
+      console.log(Bac_model);
+
         let params = new HttpParams()
           .set('ApplicationId', Bac_model.ApplicationId.toString())
           .set('Bacneed', Bac_model.BacNeed)
+          .set('Bactarget', Bac_model.BacTarget)
           .set('Bacactivities', Bac_model.BacActivities)
           .set('Bacdeliver', Bac_model.BacDeliver)
           .set('Bacusers', Bac_model.BacUsers)
@@ -118,14 +123,16 @@ export class ApiUpdateService {
 
     // update a Fin row based on the entered form data
     updateFin_model(Fin_model: Fin_model): Observable<Fin_model>{
-        let params = new HttpParams()
+
+      console.log(Fin_model);
+
+      let params = new HttpParams()
           .set('ApplicationId', Fin_model.ApplicationId.toString())
           .set('Finorgname', Fin_model.FinOrgName)
           .set('Finbank', Fin_model.FinBank)
           .set('Finsortcode', Fin_model.FinSortCode)
           .set('Finbankorgaddress', Fin_model.FinBankOrgAddress)
           .set('Finactivity', Fin_model.FinActivity)
-          .set('Fincost', Fin_model.FinCost.toString())
           .set('Fincapital', Fin_model.FinCapital.toString())
           .set('Finrevenue', Fin_model.FinRevenue.toString())
           .set('Finauditedaccounts', Fin_model.FinAuditedAccounts.toString())

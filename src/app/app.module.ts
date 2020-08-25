@@ -54,6 +54,7 @@ import { FundproviderAdminComponent } from './fundprovider-admin/fundprovider-ad
 import { StatusAdminComponent } from './status-admin/status-admin.component';
 import { OrgtypeAdminComponent } from './orgtype-admin/orgtype-admin.component';
 import { AddDialogComponent } from './add-dialog/add-dialog.component';
+import { CategoryAdminComponent } from './category-admin/category-admin.component';
 
 // Define all routes necessary
 const appRoutes: Routes = [
@@ -67,7 +68,8 @@ const appRoutes: Routes = [
   { path: 'myaccount', component: DashboardComponent, canActivate: [AuthguardGuard] },
   { path: 'FPAdmin', component: FundproviderAdminComponent, canActivate: [AuthguardGuard] },
   { path: 'orgTypeAdmin', component: OrgtypeAdminComponent, canActivate: [AuthguardGuard] },
-  { path: 'statusAdmin', component: StatusAdminComponent, canActivate: [AuthguardGuard] }
+  { path: 'statusAdmin', component: StatusAdminComponent, canActivate: [AuthguardGuard] },
+  { path: 'categoryAdmin', component: CategoryAdminComponent, canActivate: [AuthguardGuard] }
 ];
 
 @NgModule({
@@ -94,7 +96,8 @@ const appRoutes: Routes = [
     FundproviderAdminComponent,
     StatusAdminComponent,
     OrgtypeAdminComponent,
-    AddDialogComponent    
+    AddDialogComponent,
+    CategoryAdminComponent    
     ],
   imports: [
       BrowserModule,

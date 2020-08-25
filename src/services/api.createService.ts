@@ -56,13 +56,13 @@ export class ApiCreateService {
       .set('Orgemail', Org_model.OrgEmail)
       .set('Orgwebsite', Org_model.OrgWebsite)
       .set('Orgtype', Org_model.OrgType)
-      .set('Orgcharity', '' + Org_model.OrgCharity.toString())
       .set('Orgcharity_no', '' + Org_model.OrgCharityNo.toString())
       .set('Orgcompany_no', '' + Org_model.OrgCompanyNo.toString())
       .set('Orgstart_date', '' + Org_model.OrgStartDate.toString())
-      .set('Orgopen', '' + Org_model.OrgOpen.toString())
       .set('Orginfo', Org_model.OrgInfo);
 
+      console.log(params);
+      
     return this.httpClient.get<Org_model>(`${myGlobals.PHP_API_SERVER}/api/post/addOrg_model.php`, { params: params} );
   }
 
@@ -87,6 +87,8 @@ export class ApiCreateService {
       .set('Consenotherno'      , Con_model.ConSenOtherNo)
       .set('Consenemail' 		    , Con_model.ConSenEmail);
 
+      console.log(params);
+
     return this.httpClient.get<Con_model>(`${myGlobals.PHP_API_SERVER}/api/post/addCon_model.php`, { params: params} );
   }
 
@@ -101,6 +103,8 @@ export class ApiCreateService {
       .set('Genvulnerables', Gen_model.GenVulnerables.toString())
       .set('Gensafeguards', Gen_model.GenSafeguards.toString())
       .set('GenNotes', Gen_model.GenNotes);
+
+      console.log(params);
       
     return this.httpClient.get<Gen_model>(`${myGlobals.PHP_API_SERVER}/api/post/addGen_model.php`, { params: params} );
   }
@@ -110,11 +114,14 @@ export class ApiCreateService {
     let params = new HttpParams()
       .set('ApplicationId', Bac_model.ApplicationId.toString())
       .set('Bacneed', Bac_model.BacNeed)
+      .set('Bactarget', Bac_model.BacTarget)
       .set('Bacactivities', Bac_model.BacActivities)
       .set('Bacdeliver', Bac_model.BacDeliver)
       .set('Bacusers', Bac_model.BacUsers);
 
-    return this.httpClient.get<Bac_model>(`${myGlobals.PHP_API_SERVER}/api/post/addBac_model.php`, { params: params} );
+      console.log(params);
+
+      return this.httpClient.get<Bac_model>(`${myGlobals.PHP_API_SERVER}/api/post/addBac_model.php`, { params: params} );
   }
 
   // Create a Fin row based on the entered form data
@@ -127,12 +134,13 @@ export class ApiCreateService {
       .set('Finsortcode', Fin_model.FinSortCode)
       .set('Finbankorgaddress', Fin_model.FinBankOrgAddress)
       .set('Finactivity', Fin_model.FinActivity)
-      .set('Fincost', Fin_model.FinCost.toString())
       .set('Fincapital', Fin_model.FinCapital.toString())
       .set('Finrevenue', Fin_model.FinRevenue.toString())
       .set('Finauditedaccounts', Fin_model.FinAuditedAccounts.toString())
 
-    return this.httpClient.get<Fin_model>(`${myGlobals.PHP_API_SERVER}/api/post/addFin_model.php`, { params: params} );
+      console.log(params);
+
+      return this.httpClient.get<Fin_model>(`${myGlobals.PHP_API_SERVER}/api/post/addFin_model.php`, { params: params} );
   }
 
   createFundProvider(FundProviderCode, FundProviderName){
