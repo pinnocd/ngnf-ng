@@ -12,7 +12,9 @@
                         concat(left(org.OrgName, 30), if(length(org.OrgName) < 30, '', '...')) AS OrgName,
                         concat(left(gen.GenName, 30), if(length(gen.GenName) < 30, '', '...')) AS GenName,
                         gen.GenStartDate, s.StatusName, app.OrigApplicationId,
-                        app.UserId, u.name AS username, pw.name AS proposalwriter, sa.name AS seniorapprover, p.FundProviderName, orgt.OrgTypeName AS OrgType,
+                        app.UserId, u.name AS username, pw.name AS proposalwriter, sa.name AS seniorapprover,
+                        concat(p.FundProviderCode, ' - ', left(p.FundProviderName, 25), if(length(p.FundProviderName) < 25, '', '...')) AS FundProviderName, 
+                        orgt.OrgTypeName AS OrgType,
                         DATE(app.InsertDateTime) AS InsertDateTime, app.UpdateDateTime, app.InsertBy, app.UpdateBy
             FROM        Applications app
             LEFT JOIN   Org_model org   ON org.ApplicationId = app.ApplicationId

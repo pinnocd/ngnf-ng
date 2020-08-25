@@ -32,7 +32,7 @@ import { ApplData, OrgTypes } from '../../interfaces/globalinterfaces';
   styleUrls: ['./app-workbook.component.css']
 })
 export class AppWorkbookComponent implements OnInit {
-  displayedColumns: string[] = ['ApplicationId', 'OrigApplicationId', 'FundProvider', 'OrgName', 'SeniorApprover', 'Status', 'InsertDateTime'];
+  displayedColumns: string[] = ['ApplicationId', 'FundProvider', 'OrgName', 'SeniorApprover', 'Status', 'InsertDateTime'];
   dataSource = new MatTableDataSource<ApplData>(ELEMENT_DATA);
   
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
